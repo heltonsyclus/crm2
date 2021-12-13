@@ -24,6 +24,18 @@
               style="margin-right: 8px"
               @click.prevent="atividadeBnt()"
             />
+<<<<<<< HEAD
+=======
+            <q-btn
+              class="capitalize"
+              :color="ativoLembrete"
+              text-color="dark"
+              label="Lembrete"
+              size="12px"
+              style="margin-right: 8px"
+              @click.prevent="lembreteBnt()"
+            />
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
           </div>
         </q-card-section>
         <q-separator inset />
@@ -49,7 +61,11 @@
             <q-select
               v-model="this.arrayAgenda.bgcolor"
               dense
+<<<<<<< HEAD
               label="Cor do evento"
+=======
+              label="Cor tags"
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
               :options="cores"
               style="width: 260px;padding-left:5px"
             />
@@ -65,7 +81,11 @@
               v-model="this.arrayAgenda.colaborar"
               multiple
               dense
+<<<<<<< HEAD
               label="Colaboradores"
+=======
+              label="Adicionar colaboradores"
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
               :options="colaborador"
               style="width: 260px;padding-left:5px"
             />
@@ -77,6 +97,7 @@
               class="text-primary"
               style="font-size: 20px;"
             />
+<<<<<<< HEAD
             <q-input
               label="Observações"
               dense
@@ -84,6 +105,26 @@
               style="width: 260px;padding-left:5px"
             />
           </div>
+=======
+            <q-btn
+              color="primary"
+              text-color="white"
+              class="capitalize"
+              label="Adicionar descrições"
+              size="12px"
+              style="margin:8px"
+              @click.prevent="abrirEditor()"
+            />
+          </div>
+
+          <q-input
+            v-show="editor"
+            v-model="this.arrayAgenda.details"
+            filled
+            type="textarea"
+            style="margin:10px"
+          />
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
         </q-card-actions>
 
         <q-card-actions vertical v-show="atividade">
@@ -104,18 +145,26 @@
               class="text-primary"
               style="font-size: 20px;"
             />
+<<<<<<< HEAD
 
             <q-input
               v-model="this.timeEscolhida"
               type="time"
               dense
               label="Horário"
+=======
+            <q-input
+              v-model="this.arrayAgenda.time"
+              type="time"
+              dense
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
               style="width: 100px;margin-left:5px;margin-right:20px"
             />
             <q-input
               v-model.number="this.arrayAgenda.duration"
               type="number"
               dense
+<<<<<<< HEAD
               label="Previsão"
               Style="width: 120px;"
             />
@@ -137,18 +186,81 @@
           <div class="flex items-center">
             <q-icon
               name="history"
+=======
+              label="Duração, Min"
+              Style="width: 120px;"
+            />
+          </div>
+          <div class="flex items-center" style="margin-top:8px">
+            <q-icon
+              name="subject"
+              class="text-primary"
+              style="font-size: 20px;"
+            />
+            <q-btn
+              color="primary"
+              text-color="white"
+              class="capitalize"
+              label="Adicionar descrições"
+              size="12px"
+              style="margin-left:5px"
+              @click.prevent="abrirEditor()"
+            />
+          </div>
+
+          <q-input
+            v-show="editor"
+            v-model="this.arrayAgenda.atividades"
+            filled
+            type="textarea"
+            style="margin:10px"
+          />
+        </q-card-actions>
+
+        <q-card-actions vertical v-show="lembrete">
+          <div class="flex items-center">
+            <q-icon
+              name="schedule"
+              class="text-primary"
+              style="font-size: 20px;"
+            />
+            <div class="text-h7" style="margin-left:6px">
+              {{ dataEventual }}
+            </div>
+          </div>
+
+          <div class="flex items-center" style="margin-top:10px">
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="this.arrayAgenda.checked"
+              style="margin-left:2px"
+            />
+            <label for="checkbox" style="margin-left:12px">Dia inteiro</label>
+          </div>
+          <div class="flex items-center">
+            <q-icon
+              name="subject"
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
               class="text-primary"
               style="font-size: 20px;"
             />
             <q-select
+<<<<<<< HEAD
               v-model="this.arrayAgenda.model"
+=======
+              v-model="model"
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
               :options="options"
               style="width: 270px;padding-left:8px"
               dense
             />
           </div>
         </q-card-actions>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
         <div class="flex justify-end">
           <q-btn
             text-color="dark"
@@ -175,11 +287,16 @@
 </template>
 <script>
 export default {
+<<<<<<< HEAD
   props: ["dataEventual", "dataEscolhido", "horarioEscolhido"],
+=======
+  props: ["dataEventual"],
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
   emits: ["close"],
   data() {
     return {
       colaborador: ["Helton", "Henrique", "Danilo"],
+<<<<<<< HEAD
       evento: true,
       atividade: false,
       lembrete: false,
@@ -187,6 +304,16 @@ export default {
       timesOff: false,
       ativoEvent: "white",
       ativoatividade: "white",
+=======
+      editor: false,
+      evento: true,
+      atividade: false,
+      lembrete: false,
+      ativoEvent: "white",
+      ativoLembrete: "white",
+      ativoatividade: "white",
+      model: "Não se repete",
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
       options: [
         "Não se repete",
         "Todos os dias",
@@ -208,19 +335,34 @@ export default {
         "Cinza"
       ],
       arrayAgenda: {
+<<<<<<< HEAD
         time: null,
         model: "Não se repete",
         duration: 30,
         title: null,
         details: null,
+=======
+        id: 1,
+        start: null,
+        end: null,
+        time: null,
+        duration: null,
+        title: null,
+        details: null,
+        checked: null,
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
         atividades: null,
         colaborar: null,
         descricao: null,
         date: null,
+<<<<<<< HEAD
         start: null,
         end: null,
         bgcolor: "Azul",
         icon: null
+=======
+        bgcolor: "Azul"
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
       }
     };
   },
@@ -228,22 +370,46 @@ export default {
     eventoBnt() {
       this.evento = true;
       this.atividade = false;
+<<<<<<< HEAD
       this.ativoEvent = "primary";
+=======
+      this.lembrete = false;
+      this.ativoEvent = "primary";
+      this.ativoLembrete = " white";
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
       this.ativoatividade = " white";
     },
     atividadeBnt() {
       this.ativoEvent = "white";
       this.ativoatividade = "primary";
+<<<<<<< HEAD
       this.evento = false;
       this.atividade = true;
+=======
+      this.ativoLembrete = "white";
+      this.evento = false;
+      this.atividade = true;
+      this.lembrete = false;
+    },
+    lembreteBnt() {
+      this.evento = false;
+      this.atividade = false;
+      this.lembrete = true;
+      this.ativoEvent = "white";
+      this.ativoLembrete = "primary";
+      this.ativoatividade = "white";
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
     },
     abrirEditor() {
       this.editor = !this.editor;
     },
     salvarAgenda() {
+<<<<<<< HEAD
       if (this.arrayAgenda.time === null) {
         this.arrayAgenda.time = this.timeEscolhida;
       }
+=======
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
       if (this.arrayAgenda.bgcolor === "Amarelo") {
         this.arrayAgenda.bgcolor = "yellow";
       }
@@ -271,6 +437,7 @@ export default {
       if (this.arrayAgenda.bgcolor === "Cinza") {
         this.arrayAgenda.bgcolor = "grey";
       }
+<<<<<<< HEAD
       if (this.arrayAgenda.date === null || this.arrayAgenda.start === null) {
         this.arrayAgenda.date = this.dataEscolhida;
         this.arrayAgenda.start = this.dataEscolhida;
@@ -300,10 +467,17 @@ export default {
       this.atividade = false;
       this.ativoEvent = "primary";
       this.ativoatividade = " white";
+=======
+      this.$emit("arrayAgenda", this.arrayAgenda);
+      this.$emit("close");
+      this.editor = false;
+      this.arrayAgenda = [];
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
     }
   },
   created() {
     this.ativoEvent = "primary";
+<<<<<<< HEAD
   },
   computed: {
     dataEscolhida() {
@@ -312,6 +486,8 @@ export default {
     timeEscolhida() {
       return this.horarioEscolhido;
     }
+=======
+>>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
   }
 };
 </script>

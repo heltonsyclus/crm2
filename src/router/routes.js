@@ -1,6 +1,6 @@
 import { loginAutenticado } from "app/src/commands/autenticacao";
 
-/*const validaAutenticacao = function(to, from, next) {
+const validaAutenticacao = function(to, from, next) {
   if (loginAutenticado()) {
     console.log("autenticado");
     next();
@@ -8,7 +8,7 @@ import { loginAutenticado } from "app/src/commands/autenticacao";
     console.log("nao autenticado");
     window.location.href = "/Login";
   }
-};*/
+};
 
 const routes = [
   {
@@ -18,10 +18,10 @@ const routes = [
       {
         path: "",
         name: "dashboard",
-        component: () => import("pages/Index.vue")
-        /*  beforeEnter: (to, from, next) => {
+        component: () => import("pages/Index.vue"),
+        beforeEnter: (to, from, next) => {
           validaAutenticacao(to, from, next);
-        }*/
+        }
       }
     ]
   },

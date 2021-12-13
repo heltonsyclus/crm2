@@ -13,7 +13,8 @@ export default {
   }
 };
 export function loginAutenticado() {
-  //console.log(this.login);
+  const $store = useStore();
+  console.log($store.state.showcase.login);
   if (this.login !== []) {
     return true;
   } else {

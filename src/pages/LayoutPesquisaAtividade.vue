@@ -6,7 +6,6 @@
     :ConteudoBtn="Grupos"
     Aplicacao="AplicativosPesquisa"
   />
-
   <q-layout container style="height: 90vh">
     <q-drawer
       v-model="drawer"

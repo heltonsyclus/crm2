@@ -328,6 +328,7 @@ export default defineComponent({
     BarraLayout
   },
   name: "Agenda",
+
   data() {
     return {
       ObjDashboard: [],
