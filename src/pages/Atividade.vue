@@ -6,7 +6,6 @@
     Aplicacao="AplicativosPadrao"
   />
   <div class="row">
-    {{ this.login }}
     <CardBase
       class="q-ma-xs"
       v-for="(ObjCard, index) in GrupoCards"
@@ -51,6 +50,15 @@ export default defineComponent({
         this.$router.push({ name: "pesquisa-atividade" });
       }
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   },
   setup() {
     const $store = useStore();

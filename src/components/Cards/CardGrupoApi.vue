@@ -62,6 +62,7 @@
                   <a
                     @click.prevent="abrirItem(indexGrupo, indexItem)"
                     class="q-pt-md pl text-class"
+                    style="max-width:260px"
                   >
                     <strong class="capitalize">{{ itens.item }}</strong>
                   </a>

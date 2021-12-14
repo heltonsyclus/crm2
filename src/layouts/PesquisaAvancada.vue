@@ -47,9 +47,14 @@
           />
         </div>
         <div class="text-center">
-          <q-btn unelevated type="submit" <<<<<<< HEAD class="capitalize
-          q-mt-md" label="Avançar" ======= class="capitalize" label="Buscar"
-          >>>>>>> 663d18ecf27b06ed2325358d29206643f058516b color="green" />
+          <q-btn
+            unelevated
+            type="submit"
+            class="capitalize
+          q-mt-md"
+            label="Buscar"
+            color="green"
+          />
         </div>
       </q-form>
     </q-card-section>
@@ -72,10 +77,6 @@ export default {
     const miniState = ref(false);
     return {
       arrModels,
-<<<<<<< HEAD
-=======
-      OP: ref(["E", "OU"]),
->>>>>>> 663d18ecf27b06ed2325358d29206643f058516b
       Campo: ref(["Situação"]),
       criterio: ref(["Contendo"]),
       drawer: ref(false),

@@ -25,7 +25,6 @@
         :informacoesCardCalendario="arrayCardAtividade"
         @close="fecharCardEvento"
       />
-      {{ this.login }}
       <div class="flex justify-between items-center">
         <div
           style="display: flex;width: 100%;"
@@ -750,6 +749,15 @@ export default defineComponent({
       '{"id_dashboard":6,"dashboard":"Agenda","grupos":[{"id_grupo":1,"grupo":"Calendário","icone":"edit_calendar"}]}';
     this.ObjDashboard = JSON.parse(json);
     this.Grupos = this.ObjDashboard["grupos"];
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   },
   setup() {
     const $store = useStore();

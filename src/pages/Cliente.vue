@@ -33,7 +33,6 @@
           </div>
         </q-card>
       </div>
-      {{ this.telaWidth }}
       <q-dialog
         v-model="exibeSelecaoCliente"
         persistent
@@ -202,7 +201,6 @@
       />
 
       <div class="row">
-        {{ this.login }}
         <CardGrupoApi
           class="q-mt-xs card-responsivo"
           style="margin:5px;margin-bottom:5px"
@@ -313,7 +311,6 @@ export default defineComponent({
       }
       this.nomeFantasia = null;
     },
-
     carregarDadosCliente() {
       if (this.dadosCliente.id_cliente === null) {
         return false;
@@ -360,6 +357,14 @@ export default defineComponent({
     return {
       login
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    let login = JSON.parse(localStorage.getItem("login"));
+    const token = login["token"];
+    if (!token) {
+      next("Login");
+    }
+    next();
   },
   created() {
     this.ObjDashboard = layoutDashBoardCliente();

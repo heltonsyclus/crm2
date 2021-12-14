@@ -2,12 +2,34 @@ export function senhaLogin() {
   const json = {
     login: [
       {
+        usuario: "d",
+        senha: "d",
+        recursos: {
+          area_trabalho: { id_layout_dashboard: 1 },
+          atividade: { id_layout_atividade: 1 },
+          projetos: { id_layout_projetos: 1 },
+          cliente: { id_layout_cliente: 1 },
+          ocorrencia: { id_layout_ocorrencia: 1 },
+          agenda: { id_layout_agenda: 1 },
+          workflow: { id_layout_workflow: 1 },
+          notificacao: { id_layout_notificacao: 1 }
+        },
+        token: "108697"
+      },
+      {
         usuario: "renan",
         senha: "renansyclus",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
-          cliente: { id_layout_dashboard: 5 }
-        }
+          atividade: { id_layout_atividade: 1 },
+          projetos: { id_layout_projetos: 1 },
+          cliente: { id_layout_cliente: 1 },
+          ocorrencia: { id_layout_ocorrencia: 1 },
+          agenda: { id_layout_agenda: 1 },
+          workflow: { id_layout_workflow: 1 },
+          notificacao: { id_layout_notificacao: 1 }
+        },
+        token: ""
       },
       {
         usuario: "joaopedro",
@@ -45,7 +67,7 @@ export function senhaLogin() {
         usuario: "danilo",
         senha: "0",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
+          area_trabalho: { id_layout_dashboard: 0 },
           cliente: { id_layout_dashboard: 5 }
         }
       },
@@ -70,7 +92,8 @@ export function senhaLogin() {
         senha: "heltonsyclus",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
-          cliente: { id_layout_dashboard: 5 }
+          cliente: { id_layout_dashboard: 5 },
+          atividade: { id_layout_atividade: 0 }
         }
       },
       {

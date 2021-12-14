@@ -17,6 +17,6 @@ export default function() {
     arrWorkflow: [],
     calendarioAtual: "Mensal",
     calendarioEventos: "Todos",
-    login: []
+    login: null
   };
 }

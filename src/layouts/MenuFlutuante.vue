@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    class="bg-primary text-white no-scroll black"
+    class="bg-primary text-grey-5 no-scroll black"
     :width="58"
     :breakpoint="500"
     behavior="desktop"
@@ -15,11 +15,7 @@
         style="margin:10px 0px 50px"
         @click="open('left')"
       />
-      <q-dialog
-        v-model="dialog"
-        :position="position"
-        persistent
-      >
+      <q-dialog v-model="dialog" :position="position" persistent>
         <MenuCompleto @close="dialog = false" />
       </q-dialog>
     </q-toolbar>
@@ -45,7 +41,7 @@ import { defineComponent, ref } from "vue";
 import MenuCompleto from "./MenuCompleto.vue";
 export default defineComponent({
   name: "MenuFlutuante",
-  components:{MenuCompleto},
+  components: { MenuCompleto },
   setup() {
     const dialog = ref(false);
     const position = ref("top");

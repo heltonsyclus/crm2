@@ -25,7 +25,6 @@
         :conteudo_cards="ObjCard.conteudo_card"
         :formato_card="ObjCard.formato_card"
       />
-      {{ this.login }}
       <q-page-sticky position="bottom-right" :offset="fabPos">
         <q-fab
           icon="add"
@@ -95,6 +94,11 @@ export default defineComponent({
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    alert("Você não possue autorização!");
+    next({ name: "login" });
   },
   created() {
     this.ObjDashboardPrincipal = layoutDashBoardPrincipal();

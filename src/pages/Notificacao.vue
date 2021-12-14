@@ -40,6 +40,15 @@ export default defineComponent({
       this.GrupoCardsRetangular = this.Grupo["cards_retangulo"];
     }
   },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
+  },
   computed: {
     valorNotificacao() {
       return this.GrupoCardsRetangular.length;

@@ -6,7 +6,6 @@
     Aplicacao="AplicativosPadrao"
   />
   <div class="flex">
-    {{ this.login }}
     <CardBase
       class="q-ma-xs"
       v-for="(ObjCard, index) in GrupoCards"
@@ -48,6 +47,15 @@ export default defineComponent({
       this.GrupoCards = this.Grupo["cards"];
       this.GrupoCardsOpcionais = this.Grupo["cards_opcionais"];
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   },
   setup() {
     const $store = useStore();

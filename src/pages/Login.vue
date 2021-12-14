@@ -1,21 +1,26 @@
 <template>
   <q-page class="flex flex-center">
-    <div>
+    <q-form @submit="Logar">
       <q-card class="my-card-login">
         <img
           src="../assets/logo-syclus2.png"
-          style="width:50%;text-aligth:center;margin:0 auto;padding:30px 20px 5px"
+          style="width:50%;text-aligth:center;margin:0 auto;padding:25px 20px 0px"
         />
-
-        <div class="q-pt-none" style="width:90%;margin:0 auto">
-          <q-input v-model="vlogin" dense class="full-width" label="Login" />
+        <div style="width:90%;margin:0 auto">
           <q-input
-            class="full-width"
+            v-model="vlogin"
+            dense
+            label="Login"
+            :rules="[val => (val && val.length > 0) || 'Preencha o campo!']"
+          />
+          <q-input
             v-model="password"
             dense
             label="Password"
             :type="isPwd ? 'password' : 'text'"
-            @keyup.enter="Logar"
+            :rules="[
+              val => (val !== null && val !== '') || 'Preencha o campo!'
+            ]"
           >
             <template v-slot:append>
               <q-icon
@@ -25,18 +30,19 @@
               />
             </template>
           </q-input>
-          <div class="q-py-lg full-width">
+          <div>
             <q-btn
               color="primary full-width capitalize"
+              label="Logar"
+              type="submit"
+              style="padding:8px 0"
               dense
               rounded
-              @click.prevent="Logar"
-              >Logar
-            </q-btn>
+            />
           </div>
         </div>
       </q-card>
-    </div>
+    </q-form>
   </q-page>
 </template>
 <script>
@@ -54,33 +60,39 @@ export default {
   },
   methods: {
     Logar() {
-      if (this.login === "" || this.password === "") {
-        this.$q.notify({
-          color: "red-5",
-          textColor: "white",
-          icon: "warning",
-          message: "Preencha os campos!"
-        });
-      } else {
-        let objSenhaLogin = senhaLogin();
-        for (let i = 0; i < objSenhaLogin.login.length; i++) {
-          if (
-            objSenhaLogin.login[i].usuario === this.vlogin &&
-            objSenhaLogin.login[i].senha === this.password
-          ) {
-            this.login = objSenhaLogin.login[i];
-            this.$router.push({ name: "dashboard" });
-          } else {
-            this.$q.notify({
-              color: "red-5",
-              textColor: "white",
-              icon: "warning",
-              message: "Usuário não existe!"
-            });
+      let objSenhaLogin = senhaLogin();
+      for (let i = 0; i < objSenhaLogin.login.length; i++) {
+        console.log(objSenhaLogin.login[i].usuario === this.vlogin);
+        if (
+          objSenhaLogin.login[i].usuario === this.vlogin &&
+          objSenhaLogin.login[i].senha === this.password
+        ) {
+          this.login = objSenhaLogin.login[i];
+          localStorage.setItem("login", JSON.stringify(this.login));
+          console.log(this.login.token);
+
+          if (this.login.token) {
+            this.confirmacaoLogin();
           }
+          return true;
+        } else {
+          this.$q.notify({
+            color: "red-5",
+            textColor: "white",
+            icon: "warning",
+            message: "Usuário não existe!"
+          });
         }
       }
+    },
+    confirmacaoLogin() {
+      this.$router.push({ name: "cliente" });
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    next(vm => {
+      vm.confirmacaoLogin();
+    });
   },
   setup() {
     const $store = useStore();
@@ -101,8 +113,7 @@ export default {
 .my-card-login {
   width: 100%;
   width: 310px;
-  height: 340px;
+  height: 360px;
   padding: 10px;
-  margin: 10px 2px;
 }
 </style>

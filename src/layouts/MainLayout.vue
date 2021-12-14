@@ -41,7 +41,7 @@
             <q-tooltip>Colaborador</q-tooltip>
             <q-menu>
               <q-list dense>
-                <q-item clickable class="GL__menu-link">
+                <!--     <q-item clickable class="GL__menu-link">
                   <q-item-section @click="darkDialog = true"
                     >Perfil</q-item-section
                   >
@@ -53,14 +53,16 @@
                   >
                     <PerfilUsuario />
                   </q-dialog>
-                </q-item>
+                </q-item>-->
 
                 <q-item
                   clickable
                   class="GL__menu-link"
                   @click="$router.push({ name: 'Login' })"
                 >
-                  <q-item-section>Sair</q-item-section>
+                  <q-item-section @click.prevent="limparToken()"
+                    >Sair</q-item-section
+                  >
                 </q-item>
               </q-list>
             </q-menu>
@@ -74,20 +76,24 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import PerfilUsuario from "./PerfilUsuario.vue";
+//import PerfilUsuario from "./PerfilUsuario.vue";
 import MenuFlutuante from "./MenuFlutuante.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
-  components: { MenuFlutuante, PerfilUsuario },
+  components: { MenuFlutuante },
   name: "MainLayout",
   setup() {
     const $store = useStore();
+    const login = computed({
+      get: () => $store.state.showcase.login
+    });
     const notificacao = computed({
       get: () => $store.state.showcase.notificacao
     });
 
     return {
+      login,
       notificacao,
       Ocorrencia: 250,
       MenuFlutuante: false,
@@ -123,6 +129,13 @@ export default defineComponent({
         }
       ]
     };
+  },
+  methods: {
+    limparToken() {
+      window.localStorage.clear();
+      this.login = [];
+      //this.$router.push({ name: "Login" });
+    }
   }
 });
 </script>

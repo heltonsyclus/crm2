@@ -1,14 +1,4 @@
-import { loginAutenticado } from "app/src/commands/autenticacao";
-
-const validaAutenticacao = function(to, from, next) {
-  if (loginAutenticado()) {
-    console.log("autenticado");
-    next();
-  } else {
-    console.log("nao autenticado");
-    window.location.href = "/Login";
-  }
-};
+import Store from "app/src/commands/autenticacao";
 
 const routes = [
   {
@@ -18,10 +8,7 @@ const routes = [
       {
         path: "",
         name: "dashboard",
-        component: () => import("pages/Index.vue"),
-        beforeEnter: (to, from, next) => {
-          validaAutenticacao(to, from, next);
-        }
+        component: () => import("pages/Index.vue")
       }
     ]
   },
@@ -104,6 +91,7 @@ const routes = [
 
   {
     path: "/cliente",
+    beforeEnter: Store.auth,
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
@@ -117,7 +105,11 @@ const routes = [
     path: "/agenda",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", name: "agenda", component: () => import("pages/Agenda.vue") }
+      {
+        path: "",
+        name: "agenda",
+        component: () => import("pages/Agenda.vue")
+      }
     ]
   },
   {

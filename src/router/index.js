@@ -34,6 +34,13 @@ export default route(function(/* { store, ssrContext } */) {
       process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
     )
   });
+  Router.beforeEach((to, from, next) => {
+    let login = JSON.parse(localStorage.getItem("login"));
+    if (to.fullPath !== "/Login" && login === null) {
+      next({ name: "Login" });
+    }
+    next();
+  });
 
   return Router;
 });

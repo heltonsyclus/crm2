@@ -55,7 +55,6 @@
       </div>
     </div>
     <div class="column ContainerCardRetangular">
-      {{ this.login }}
       <CardRetangulo
         v-for="(ObjCardRetangulo, index) in GrupoCardsRetangular"
         :key="index"
@@ -150,7 +149,6 @@ export default defineComponent({
           this.valorFiltro.valorInput = itemArray.valor;
         }
       }
-      console.log(this.valorFiltro);
       this.arrModels = this.valorFiltro;
       this.showDrawer = !this.showDrawer;
     },
@@ -267,6 +265,15 @@ export default defineComponent({
       '{"id_dashboard":4,"dashboard":"Ocorrências","grupos":[{"id_grupo":1,"grupo":"Filtro","icone":"filter_list","cards_retangulo":[{"id_card":1,"card":"Atividade1","tipo_card_retangulo":"RetanguloOcorrencia"},{"id_card":2,"card":"Atividade2","tipo_card_retangulo":"RetanguloOcorrencia"},{"id_card":3,"card":"Atividade3","tipo_card_retangulo":"RetanguloOcorrencia"}]}]}';
     this.ObjDashboard = JSON.parse(json);
     this.Grupos = this.ObjDashboard["grupos"];
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   },
   setup() {
     const login = computed({
