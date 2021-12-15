@@ -38,13 +38,13 @@
           transition-show="flip-down"
           transition-hide="flip-up"
         >
-          <q-card style="min-width:550px">
-            <q-card-section
-              class="items-center q-pb-sm topo-fixo flex justify-between"
-            >
-              <div class="text-h6 color-titulo">Selecione a cliente</div>
-              <q-space />
-              <q-btn icon="close" flat round dense v-close-popup />
+          <q-card style="width:60%">
+            <q-card-section class="items-center q-pb-sm topo-fixo ">
+              <div class="flex justify-between items-center" style="width:100%">
+                <div class="text-h6 color-titulo">Selecione a cliente</div>
+                <q-space />
+                <q-btn icon="close" flat round dense v-close-popup />
+              </div>
             </q-card-section>
             <div class="margin-top">
               <q-card-section
@@ -450,7 +450,6 @@ p {
 .topo-fixo {
   position: fixed;
   z-index: 2;
-  width: 550px;
   background-color: #fdfdfd;
 }
 .margin-top {
@@ -482,9 +481,6 @@ p {
     width: 32%;
     height: 87px;
     padding: 12px 5px 0px 5px;
-  }
-  .topo-fixo {
-    min-width: 550px;
   }
 }
 </style>
