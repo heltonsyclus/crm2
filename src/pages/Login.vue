@@ -62,9 +62,11 @@ export default {
     Logar() {
       let objSenhaLogin = senhaLogin();
       for (let i = 0; i < objSenhaLogin.login.length; i++) {
+        var login = this.vlogin.toLowerCase();
+        var password = this.password.toLowerCase();
         if (
-          objSenhaLogin.login[i].usuario === this.vlogin &&
-          objSenhaLogin.login[i].senha === this.password
+          objSenhaLogin.login[i].usuario === login &&
+          objSenhaLogin.login[i].senha === password
         ) {
           this.login = objSenhaLogin.login[i];
           localStorage.setItem("login", JSON.stringify(this.login));
@@ -80,9 +82,11 @@ export default {
         }
       }
       for (let i = 0; i < objSenhaLogin.login.length; i++) {
+        var login = this.vlogin.toLowerCase();
+        var password = this.password.toLowerCase();
         if (
-          objSenhaLogin.login[i].usuario != this.vlogin &&
-          objSenhaLogin.login[i].senha != this.password
+          objSenhaLogin.login[i].usuario != login &&
+          objSenhaLogin.login[i].senha != password
         ) {
           this.$q.notify({
             color: "red-5",
