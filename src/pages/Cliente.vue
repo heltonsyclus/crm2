@@ -477,7 +477,7 @@ p {
     padding: 12px 5px 0px 5px;
   }
   .card-pesquisa {
-    width: 70%;
+    width: 90%;
   }
 }
 </style>
