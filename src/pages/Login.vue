@@ -62,25 +62,33 @@ export default {
     Logar() {
       let objSenhaLogin = senhaLogin();
       for (let i = 0; i < objSenhaLogin.login.length; i++) {
-        console.log(objSenhaLogin.login[i].usuario === this.vlogin);
         if (
           objSenhaLogin.login[i].usuario === this.vlogin &&
           objSenhaLogin.login[i].senha === this.password
         ) {
           this.login = objSenhaLogin.login[i];
           localStorage.setItem("login", JSON.stringify(this.login));
-          console.log(this.login.token);
-
           if (this.login.token) {
             this.confirmacaoLogin();
+            this.$q.notify({
+              color: "green-7",
+              textColor: "white",
+              message: "Seja Bem vindo!"
+            });
+            breack;
           }
-          return true;
-        } else {
+        }
+      }
+      for (let i = 0; i < objSenhaLogin.login.length; i++) {
+        if (
+          objSenhaLogin.login[i].usuario != this.vlogin &&
+          objSenhaLogin.login[i].senha != this.password
+        ) {
           this.$q.notify({
             color: "red-5",
             textColor: "white",
             icon: "warning",
-            message: "Usuário não existe!"
+            message: "Login ou Senha não existente!"
           });
         }
       }
@@ -88,11 +96,6 @@ export default {
     confirmacaoLogin() {
       this.$router.push({ name: "cliente" });
     }
-  },
-  beforeRouteLeave(to, from, next) {
-    next(vm => {
-      vm.confirmacaoLogin();
-    });
   },
   setup() {
     const $store = useStore();

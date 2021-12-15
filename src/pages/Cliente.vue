@@ -1,6 +1,6 @@
 <template window-height>
   <div class="flex" style="max-width:100%">
-    <div class="col1 flex">
+    <div class="col1">
       <div>
         <q-card class="my-card">
           <q-card-section>
@@ -17,7 +17,6 @@
               </template>
             </q-input>
           </q-card-section>
-
           <div style="text-align:center">
             <q-btn
               rounded
@@ -32,114 +31,113 @@
             />
           </div>
         </q-card>
-      </div>
-      <q-dialog
-        v-model="exibeSelecaoCliente"
-        persistent
-        transition-show="flip-down"
-        transition-hide="flip-up"
-      >
-        <q-card style="width:550px">
-          <q-card-section class="row items-center q-pb-sm topo-fixo">
-            <div class="text-h6 color-titulo">Selecione a cliente</div>
-            <q-space />
-            <q-btn icon="close" flat round dense v-close-popup />
-          </q-card-section>
-          <div class="margin-top">
-            <q-card-section
-              class="card-primary flex"
-              style="margin:0px 10px 5px"
-              v-for="(cliente, index) in this.dadosCliente"
-              :key="cliente"
-              @click="selecionarCliente(index)"
-            >
-              <p>{{ cliente.nome_fantasia }}</p>
+
+        <q-dialog
+          v-model="exibeSelecaoCliente"
+          persistent
+          transition-show="flip-down"
+          transition-hide="flip-up"
+        >
+          <q-card style="width:550px">
+            <q-card-section class="row items-center q-pb-sm topo-fixo">
+              <div class="text-h6 color-titulo">Selecione a cliente</div>
+              <q-space />
+              <q-btn icon="close" flat round dense v-close-popup />
             </q-card-section>
+            <div class="margin-top">
+              <q-card-section
+                class="card-primary flex"
+                style="margin:0px 10px 5px"
+                v-for="(cliente, index) in this.dadosCliente"
+                :key="cliente"
+                @click="selecionarCliente(index)"
+              >
+                <p>{{ cliente.nome_fantasia }}</p>
+              </q-card-section>
+            </div>
+          </q-card>
+        </q-dialog>
+      </div>
+      <q-card
+        class="my-card bg-light-blue-9"
+        style="color:#fff"
+        v-show="clienteAtivo"
+      >
+        <q-card-section>
+          <div class="flex justify-between items-center">
+            <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
+            <q-btn
+              round
+              flat
+              dense
+              text-color="white"
+              icon="autorenew"
+              @click.prevent="carregarDadosCliente"
+              style="margin-bottom:5px"
+            >
+            </q-btn>
           </div>
-        </q-card>
-      </q-dialog>
+          <q-separator color="white" class="q-mb-sm" />
+          <div
+            v-for="cliente in this.objCliente"
+            :key="cliente"
+            class="column"
+            style="font-style:italic;"
+          >
+            <div style="width:100%">
+              <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
+                cliente.id_cliente
+              }}</span>
+            </div>
+            <div style="width:100%">
+              <q-icon size="18px" name="business" class="q-pr-sm" /><span>{{
+                cliente.nome_fantasia
+              }}</span>
+            </div>
+            <div style="width:100%">
+              <q-icon size="18px" name="business" class="q-pr-sm" /><span>
+                {{ cliente.razao_social }}
+              </span>
+            </div>
+            <div style="width:100%">
+              <q-icon size="18px" name="pin" class="q-pr-sm" />
+              <span>{{ cliente.cpf_cnpj }}</span>
+            </div>
+            <div
+              style="width:100%"
+              v-for="telefones in this.telefone"
+              :key="telefones"
+            >
+              <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
+              <span>{{ telefones }}</span>
+            </div>
+            <div v-for="emails in this.email" :key="emails">
+              <q-icon size="18px" name="email" class="q-pr-sm" />
+              <span style="width:100%">{{ emails }}</span>
+            </div>
+            <div
+              style="width:100%"
+              v-for="bairros in this.bairro"
+              :key="bairros"
+            >
+              <q-icon size="18px" name="share_location" class="q-pr-sm" />
+              <span>{{ bairros }}</span>
+            </div>
+            <div>
+              <q-icon size="18px" name="done" class="q-pr-sm" />
+              <span
+                class="bg-positive"
+                style="margin-bottom:5px;padding:1px 5px 1px 0px"
+              >
+                Ativo
+              </span>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
 
       <div>
-        <q-card
-          class="my-card bg-light-blue-9"
-          style="color:#fff"
-          v-show="clienteAtivo"
-        >
-          <q-card-section>
-            <div class="flex justify-between items-center">
-              <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
-              <q-btn
-                round
-                flat
-                dense
-                text-color="white"
-                icon="autorenew"
-                @click.prevent="carregarDadosCliente"
-                style="margin-bottom:5px"
-              >
-              </q-btn>
-            </div>
-            <q-separator color="white" class="q-mb-sm" />
-            <div
-              v-for="cliente in this.objCliente"
-              :key="cliente"
-              class="column"
-              style="font-style:italic;"
-            >
-              <div style="width:100%">
-                <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
-                  cliente.id_cliente
-                }}</span>
-              </div>
-              <div style="width:100%">
-                <q-icon size="18px" name="business" class="q-pr-sm" /><span>{{
-                  cliente.nome_fantasia
-                }}</span>
-              </div>
-              <div style="width:100%">
-                <q-icon size="18px" name="business" class="q-pr-sm" /><span>
-                  {{ cliente.razao_social }}
-                </span>
-              </div>
-              <div style="width:100%">
-                <q-icon size="18px" name="pin" class="q-pr-sm" />
-                <span>{{ cliente.cpf_cnpj }}</span>
-              </div>
-              <div
-                style="width:100%"
-                v-for="telefones in this.telefone"
-                :key="telefones"
-              >
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ telefones }}</span>
-              </div>
-              <div v-for="emails in this.email" :key="emails">
-                <q-icon size="18px" name="email" class="q-pr-sm" />
-                <span style="width:100%">{{ emails }}</span>
-              </div>
-              <div
-                style="width:100%"
-                v-for="bairros in this.bairro"
-                :key="bairros"
-              >
-                <q-icon size="18px" name="share_location" class="q-pr-sm" />
-                <span>{{ bairros }}</span>
-              </div>
-              <div>
-                <q-icon size="18px" name="done" class="q-pr-sm" />
-                <span
-                  class="bg-positive"
-                  style="margin-bottom:5px;padding:1px 5px 1px 0px"
-                >
-                  Ativo
-                </span>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
-      </div>
-      <div>
-        <q-card class="my-card" v-show="clienteAtivo">
+        <q-card class="my-card" v-show="clienteAtivos">
           <q-card-section>
             <p style="font-weight:500;font-size:16px">Estatísticas</p>
             <q-separator class="q-mb-sm" />
@@ -345,7 +343,17 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      if (window.innerWidth) {
+      // console.log(window.innerWidth);
+      if (window.innerWidth <= 926) {
+        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
+            "100%";
+        }
       }
     }
   },
@@ -395,7 +403,7 @@ p {
 .card-secundario {
   background-color: #447dee;
   width: 32%;
-  height: 87px;
+  min-height: 87px;
   text-align: center;
   margin: 1px;
   padding: 12px 2px 0px 2px;

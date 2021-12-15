@@ -57,7 +57,7 @@
                 :key="indexItem"
               >
                 <div
-                  class="text-light-blue-10 flex justify-between items-center"
+                  class="text-light-blue-9 flex justify-between items-center"
                 >
                   <a
                     @click.prevent="abrirItem(indexGrupo, indexItem)"
@@ -124,21 +124,7 @@ export default {
       value: 71,
       carregarKnob: false,
       carregarText: false,
-      ObjConteudo: {
-        grupos: [
-          {
-            id: 1,
-            grupo: "grupo 1",
-            qtde: 0,
-            itens: [
-              {
-                id: 1,
-                item: "item 1"
-              }
-            ]
-          }
-        ]
-      }
+      ObjConteudo: {}
     };
   },
   methods: {
@@ -147,7 +133,6 @@ export default {
         "<id_item>",
         this.ObjConteudo.grupos[pIndexGrupo].itens[pIndexItem].id
       );
-
       return url;
     },
     abrirItem(pIndexGrupo, pIndexItem) {
@@ -177,7 +162,6 @@ export default {
     showItem(pIndex) {
       this.atualizarConteudoItens(pIndex);
     },
-
     getBody(pNomeBody, pIdGrupo) {
       let filtros = this.conteudo_card.filtro_sql_grupo.replace(
         "<id_principal>",
@@ -293,6 +277,10 @@ export default {
   padding-left: 15px;
   width: 90%;
   cursor: pointer;
+}
+.text-class:hover {
+  color: rgb(11, 187, 218);
+  transition: 0.5s;
 }
 .spin {
   text-align: center;

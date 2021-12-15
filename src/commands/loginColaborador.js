@@ -2,21 +2,6 @@ export function senhaLogin() {
   const json = {
     login: [
       {
-        usuario: "d",
-        senha: "d",
-        recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
-        },
-        token: "108697"
-      },
-      {
         usuario: "renan",
         senha: "renansyclus",
         recursos: {
@@ -78,7 +63,7 @@ export function senhaLogin() {
       },
       {
         usuario: "maciel",
-        senha: "macielsyclus",
+        senha: "maciel321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
@@ -104,7 +89,7 @@ export function senhaLogin() {
           workflow: { id_layout_workflow: 1 },
           notificacao: { id_layout_notificacao: 1 }
         },
-        token: "108333333697"
+        token: "1086222297"
       },
       {
         usuario: "adelmo",
@@ -138,7 +123,7 @@ export function senhaLogin() {
       },
       {
         usuario: "helton",
-        senha: "heltonsyclus",
+        senha: "helton321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
@@ -168,7 +153,7 @@ export function senhaLogin() {
       },
       {
         usuario: "ewerton",
-        senha: "ewertonsyclus",
+        senha: "ewerton321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
@@ -183,7 +168,7 @@ export function senhaLogin() {
       },
       {
         usuario: "henrique",
-        senha: "henriquesyclus",
+        senha: "henrique321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
@@ -198,7 +183,7 @@ export function senhaLogin() {
       },
       {
         usuario: "jullyadson",
-        senha: "jullyadsonsyclus",
+        senha: "jullyadson321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
@@ -227,8 +212,8 @@ export function senhaLogin() {
         token: "103218697"
       },
       {
-        usuario: "clederson",
-        senha: "cledersonsyclus",
+        usuario: "wagner",
+        senha: "wagner321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           atividade: { id_layout_atividade: 1 },
