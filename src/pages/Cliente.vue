@@ -106,10 +106,11 @@
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-              <span v-for="telefone in this.arrayTelefone" :key="telefone"
-                >{{ telefone }},
-              </span>
               <span>{{ this.telefone[0] }}</span>
+              <div v-for="telefone in this.arrayTelefone" :key="telefone">
+                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
+                <span>{{ telefone }}, </span>
+              </div>
               <span
                 class="btn-v-mais"
                 v-show="btnVejaMais"
