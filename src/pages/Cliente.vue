@@ -103,13 +103,19 @@
               <q-icon size="18px" name="pin" class="q-pr-sm" />
               <span>{{ cliente.cpf_cnpj }}</span>
             </div>
-            <div
-              style="width:100%"
-              v-for="telefones in this.telefone"
-              :key="telefones"
-            >
+            <div style="width:100%">
               <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-              <span>{{ telefones }}</span>
+              <span v-for="telefone in this.arrayTelefone" :key="telefone"
+                >{{ telefone }},
+              </span>
+              <span>{{ this.telefone[0] }}</span>
+              <span
+                class="btn-v-mais"
+                v-show="btnVejaMais"
+                @click.prevent="btnVmais()"
+              >
+                veja mais
+              </span>
             </div>
             <div v-for="emails in this.email" :key="emails">
               <q-icon size="18px" name="email" class="q-pr-sm" />
@@ -194,10 +200,7 @@
       <BarraLayout
         @OnClick="OnClickBarraLayout"
         :ConteudoBtn="this.ObjDashboard['grupos']"
-        :ConteudoApp="GrupoCardsOpcionais"
-        Aplicacao="AplicativosPadrao"
       />
-
       <div class="row">
         <CardGrupoApi
           class="q-mt-xs card-responsivo"
@@ -256,13 +259,21 @@ export default defineComponent({
       telaWidth: "",
       msgCard: "",
       bairro: "",
-      telefone: "",
-      email: ""
+      telefone: [],
+      arrayTelefone: [],
+      email: "",
+      btnVejaMais: false
     };
   },
   methods: {
     parar() {
       this.msgCard = null;
+    },
+    btnVmais() {
+      for (let i = 1; i < this.telefone.length; i++) {
+        this.arrayTelefone.unshift(this.telefone[i]);
+        this.btnVejaMais = false;
+      }
     },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
@@ -277,6 +288,7 @@ export default defineComponent({
 
     ProcurarCliente() {
       this.objCliente = "";
+      this.arrayTelefone = [];
       if (this.nomeFantasia === null) {
         this.$q.notify({
           color: "red-5",
@@ -325,6 +337,9 @@ export default defineComponent({
         this.bairro = this.objCliente[0]["bairro"].split(",");
         this.email = this.objCliente[0]["email"].split(";");
         this.telefone = this.objCliente[0]["telefone"].split(";");
+        if (this.telefone.length >= 2) {
+          this.btnVejaMais = true;
+        }
       });
 
       //atualizar conteudo dos cards do grupo/dashboard atual
@@ -409,6 +424,13 @@ p {
   padding: 12px 2px 0px 2px;
   font-size: 12px;
   color: rgb(255, 255, 255);
+}
+.btn-v-mais {
+  color: #8fc9f0;
+  font-weight: 500;
+}
+.btn-v-mais:hover {
+  color: #949494;
 }
 .card-span {
   font-size: 18px;

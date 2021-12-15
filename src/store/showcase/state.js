@@ -1,6 +1,6 @@
 export default function() {
   return {
-    notificacao: 3,
+    notificacao: 0,
     arrModels: [
       {
         vAvaliar: "",
