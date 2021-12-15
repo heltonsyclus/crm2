@@ -38,7 +38,7 @@
           transition-show="flip-down"
           transition-hide="flip-up"
         >
-          <q-card style="width:550px">
+          <q-card class="card-pesquisa">
             <q-card-section
               class="items-center flex justify-between items-center topo-fixo"
             >
@@ -416,6 +416,9 @@ p {
 .my-card {
   margin: 10px 0px 0px 10px;
 }
+.card-pesquisa {
+  width: 100%;
+}
 .card-secundario {
   background-color: #447dee;
   width: 32%;
@@ -472,6 +475,9 @@ p {
     width: 32%;
     height: 87px;
     padding: 12px 5px 0px 5px;
+  }
+  .card-pesquisa {
+    width: 50%;
   }
 }
 </style>
