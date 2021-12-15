@@ -38,7 +38,7 @@
           transition-show="flip-down"
           transition-hide="flip-up"
         >
-          <q-card style="width:60%">
+          <q-card style="width:550px">
             <q-card-section
               class="items-center flex justify-between items-center topo-fixo"
             >
