@@ -81,6 +81,10 @@ export default defineComponent({
         {
           icon: "account_tree",
           rota: "/Workflow"
+        },
+        {
+          icon: "engineering",
+          rota: "/Colaborador"
         }
       ]
     };

@@ -124,6 +124,18 @@ const routes = [
     ]
   },
   {
+    path: "/colaborador",
+    beforeEnter: Store.auth,
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "colaborador",
+        component: () => import("pages/Colaborador.vue")
+      }
+    ]
+  },
+  {
     path: "/notificacao",
     component: () => import("layouts/MainLayout.vue"),
     children: [

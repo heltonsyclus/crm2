@@ -4,12 +4,14 @@
       <div>
         <q-card class="my-card">
           <q-card-section>
-            <p style="font-weight:500;font-size:16px">Pesquisa de cliente</p>
+            <p style="font-weight:500;font-size:16px">
+              Pesquisa de colaborador
+            </p>
             <q-separator class="q-mb-sm" />
             <q-input
               v-model="nomeFantasia"
               dense
-              label="Digite o nome ou CNPJ"
+              label="Digite o nome do colaborador"
               @keyup.enter="ProcurarCliente()"
             >
               <template v-slot:prepend>
@@ -105,27 +107,19 @@
               <span>{{ cliente.cpf_cnpj }}</span>
             </div>
             <div style="width:100%">
-              <div>
+              <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
+              <span>{{ this.telefone[0] }}</span>
+              <div v-for="telefone in this.arrayTelefone" :key="telefone">
                 <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ this.telefone[0] }}</span>
-                <q-badge
-                  color="purple"
-                  @click.prevent="btnVmais()"
-                  class="q-ml-sm"
-                  style="cursor:pointer"
-                >
-                  <q-icon name="visibility" color="white" />
-                  Veja mais
-                </q-badge>
+                <span>{{ telefone }}</span>
               </div>
-              <div
+              <span
+                class="btn-v-mais"
                 v-show="btnVejaMais"
-                v-for="telefones in this.telefone"
-                :key="telefones"
+                @click.prevent="btnVmais()"
               >
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ telefones }}</span>
-              </div>
+                veja mais
+              </span>
             </div>
             <div v-for="emails in this.email" :key="emails">
               <q-icon size="18px" name="email" class="q-pr-sm" />
@@ -211,9 +205,10 @@
         @OnClick="OnClickBarraLayout"
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
+
       <div class="row">
         <CardGrupoApi
-          class="q-ma-xs"
+          class="q-mt-xs card-responsivo"
           style="margin:5px;margin-bottom:5px"
           v-for="(ObjCard, index) in this.ObjDashboard.grupos[
             this.IndexGrupoAtual
@@ -240,7 +235,7 @@
 </template>
 
 <script>
-import { layoutDashBoardCliente } from "src/commands/layoutDashboard.js";
+import { layoutDashBoardColaborador } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import {
@@ -280,10 +275,10 @@ export default defineComponent({
       this.msgCard = null;
     },
     btnVmais() {
-      for (let i = 0; i < this.telefone.length; i++) {
+      for (let i = 1; i < this.telefone.length; i++) {
         this.arrayTelefone.unshift(this.telefone[i]);
+        this.btnVejaMais = false;
       }
-      this.btnVejaMais = !this.btnVejaMais;
     },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
@@ -336,7 +331,6 @@ export default defineComponent({
         return false;
       }
       //Setando cliente ativo
-      this.telefone = [];
       this.clienteAtivo = true;
       this.idClienteAtivo = this.dadosCliente.id_cliente;
 
@@ -348,11 +342,19 @@ export default defineComponent({
         this.bairro = this.objCliente[0]["bairro"].split(",");
         this.email = this.objCliente[0]["email"].split(";");
         this.telefone = this.objCliente[0]["telefone"].split(";");
+        if (this.telefone.length >= 2) {
+          this.btnVejaMais = true;
+        }
       });
 
       //atualizar conteudo dos cards do grupo/dashboard atual
       this.AtualizarCardsGrupoAtual();
-      this.btnVejaMais = false;
+      /*
+      this.msgCard = "atualizar_conteudo";
+      setTimeout(() => {
+        this.msgCard = "";
+      }, 2000);
+      */
     },
     selecionarCliente(index) {
       this.exibeSelecaoCliente = false;
@@ -393,7 +395,7 @@ export default defineComponent({
     next();
   },
   created() {
-    this.ObjDashboard = layoutDashBoardCliente();
+    this.ObjDashboard = layoutDashBoardColaborador();
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
@@ -463,7 +465,7 @@ p {
   .col1 {
     width: 100%;
     background-color: #e6e6e6;
-    min-height: 20vh;
+    min-height: 40vh;
   }
   .col2 {
     width: 100%;
