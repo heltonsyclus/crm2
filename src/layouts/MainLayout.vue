@@ -79,7 +79,7 @@
             flat
             round
             color="primary"
-            size="12px"
+            size="14px"
             icon="menu"
             @click="toggleLeftDrawer"
           />
