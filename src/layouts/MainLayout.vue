@@ -99,7 +99,13 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+            <q-item
+              v-for="link in links1"
+              :key="link.text"
+              :to="link.rota"
+              v-ripple
+              clickable
+            >
               <q-item-section avatar>
                 <q-icon color="grey" :name="link.icon" />
               </q-item-section>
