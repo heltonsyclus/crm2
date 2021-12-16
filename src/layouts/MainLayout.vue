@@ -31,14 +31,22 @@
             </q-badge>
             <q-tooltip>Syclus Notificação</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="text-grey-7" icon="apps">
+          <q-btn
+            round
+            dense
+            flat
+            color="text-grey-7"
+            icon="apps"
+            class="q-ml-sm"
+          >
             <q-tooltip>Syclus Apps</q-tooltip>
           </q-btn>
           <q-btn round flat no-wrap>
-            <q-avatar size="26px">
+            <q-avatar size="30px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
             <q-tooltip>Colaborador</q-tooltip>
+
             <q-menu>
               <q-list dense>
                 <!--     <q-item clickable class="GL__menu-link">
@@ -54,7 +62,6 @@
                     <PerfilUsuario />
                   </q-dialog>
                 </q-item>-->
-
                 <q-item
                   clickable
                   class="GL__menu-link"
@@ -67,10 +74,43 @@
               </q-list>
             </q-menu>
           </q-btn>
+          <q-btn
+            v-show="menuMobile"
+            flat
+            round
+            color="primary"
+            size="12px"
+            icon="menu"
+            @click="toggleLeftDrawer"
+          />
         </div>
       </q-toolbar>
     </q-header>
-    <MenuFlutuante />
+    <MenuFlutuante v-if="menuMobile === false" />
+    <div v-if="menuMobile === true">
+      <q-drawer
+        v-model="leftDrawerOpen"
+        bordered
+        class="bg-grey-2"
+        :width="240"
+      >
+        <q-scroll-area class="fit">
+          <q-list padding>
+            <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+              <q-item-section avatar>
+                <q-icon color="grey" :name="link.icon" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-scroll-area>
+      </q-drawer>
+    </div>
+    <q-page-container>
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
 
@@ -84,48 +124,61 @@ export default defineComponent({
   components: { MenuFlutuante },
   name: "MainLayout",
   setup() {
+    const leftDrawerOpen = ref(false);
+    function toggleLeftDrawer() {
+      leftDrawerOpen.value = !leftDrawerOpen.value;
+    }
     const $store = useStore();
-    const login = computed({
-      get: () => $store.state.showcase.login
-    });
     const notificacao = computed({
       get: () => $store.state.showcase.notificacao
     });
 
     return {
-      login,
+      menuDesktop: ref(true),
+      menuMobile: ref(false),
       notificacao,
-      Ocorrencia: 250,
-      MenuFlutuante: false,
-      darkDialog: ref(false),
-      linksList: [
+      toggleLeftDrawer,
+      leftDrawerOpen,
+      links1: [
         {
           icon: "dashboard",
-          rota: "/"
+          rota: "/",
+          text: "Dashboard"
         },
         {
           icon: "description",
-          rota: "/atividade"
+          rota: "/atividade",
+          text: "Atividade"
         },
         {
           icon: "assignment",
-          rota: "/projeto"
+          rota: "/Projeto",
+          text: "Projeto"
         },
         {
           icon: "supervisor_account",
-          rota: "/cliente"
+          rota: "/Cliente",
+          text: "Cliente"
         },
         {
           icon: "done_all",
-          rota: "/ocorrencia"
+          rota: "/Ocorrencia",
+          text: "Ocorrência"
         },
         {
           icon: "event",
-          rota: "/agenda"
+          rota: "/Agenda",
+          text: "Agenda"
         },
         {
           icon: "account_tree",
-          rota: "/workflow"
+          rota: "/Workflow",
+          text: "Workflow"
+        },
+        {
+          icon: "engineering",
+          rota: "/Colaborador",
+          text: "Colaborador"
         }
       ]
     };
@@ -135,7 +188,24 @@ export default defineComponent({
       window.localStorage.clear();
       this.login = [];
       //this.$router.push({ name: "Login" });
+    },
+    handleResize() {
+      if (window.innerWidth <= 800) {
+        this.menuDesktop = false;
+        this.menuMobile = true;
+        this.leftDrawerOpen = false;
+      }
+      if (window.innerWidth >= 800) {
+        this.menuDesktop = true;
+        this.menuMobile = false;
+        this.leftDrawerOpen = false;
+      }
     }
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+    console.log(this.menuDesktop);
   }
 });
 </script>
