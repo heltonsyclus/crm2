@@ -469,7 +469,7 @@ p {
     width: 100%;
   }
   .my-card {
-    max-width: 100%;
+    width: 96%;
     min-width: 330px;
     margin: 10px 10px 10px 10px;
   }

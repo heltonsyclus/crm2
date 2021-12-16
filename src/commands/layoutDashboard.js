@@ -838,11 +838,11 @@ export function layoutDashBoardColaborador() {
         cards: [
           {
             id_card: 1,
-            card: "Tipo Atividade",
+            card: "Por responśavel",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "98%",
+            width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -855,7 +855,7 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Responsável",
+            card: "Finalizada",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -872,7 +872,7 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Situação",
+            card: "Por tags",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -889,8 +889,8 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Workflow",
-            ordem: 2,
+            card: "Atrasadas",
+            ordem: 3,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "32%",
@@ -906,7 +906,23 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Tag",
+            card: "Tempo por tipo de atividade",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "32%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorTag",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            id_card: 1,
+            card: "Por empresa",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -925,16 +941,16 @@ export function layoutDashBoardColaborador() {
       },
       {
         id_grupo: 2,
-        grupo: "Desenvolvimento",
+        grupo: "Projetos",
         icone: "assignment_turned_in",
         cards: [
           {
             id_card: 1,
-            card: "Tipo Atividade",
+            card: "Atividades por projeto",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "98%",
+            width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -947,7 +963,7 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Responsável",
+            card: "Projetos vinculados",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -964,52 +980,19 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Situação",
+            card: "Projetos atrasados",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeClientePorSituacao",
+              body_grupo: "bodyAtividadeClientePorResponsavel",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
-            }
-          },
-          {
-            id_card: 1,
-            card: "Workflow",
-            ordem: 2,
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "32%",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeClientePorWorkflow",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
-              body_item: "bodyAtividadeCliente",
-              filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
-            }
-          },
-          {
-            id_card: 1,
-            card: "Tag",
-            ordem: 2,
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "32%",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeClientePorTag",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
-              body_item: "",
-              filtro_sql_item: ""
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_responsavel = <id_grupo>"
             }
           }
         ],
@@ -1017,12 +1000,12 @@ export function layoutDashBoardColaborador() {
       },
       {
         id_grupo: 3,
-        grupo: "Finalizadas",
+        grupo: "Gráficos",
         icone: "assignment_turned_in",
         cards: [
           {
             id_card: 1,
-            card: "Tipo Atividade (30 dias)",
+            card: "Atividade semanal",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -1040,11 +1023,29 @@ export function layoutDashBoardColaborador() {
           },
           {
             id_card: 1,
-            card: "Workflow (30 dias)",
+            card: "Atividades em atraso",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "48%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorWorkflow",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
+            }
+          },
+          {
+            id_card: 1,
+            card: "Ocorrência por atividade",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "48%",
             heigth: "600px",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {

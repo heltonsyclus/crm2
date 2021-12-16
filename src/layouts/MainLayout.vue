@@ -86,7 +86,10 @@
         </div>
       </q-toolbar>
     </q-header>
-    <MenuFlutuante v-if="menuMobile === false" />
+    <div v-if="menuMobile === false">
+      <MenuFlutuante />
+    </div>
+
     <div v-if="menuMobile === true">
       <q-drawer
         v-model="leftDrawerOpen"
@@ -107,10 +110,10 @@
           </q-list>
         </q-scroll-area>
       </q-drawer>
+      <q-page-container>
+        <router-view />
+      </q-page-container>
     </div>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
   </q-layout>
 </template>
 
