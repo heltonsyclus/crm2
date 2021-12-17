@@ -248,7 +248,7 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   components: { BarraLayout, CardGrupoApi },
-  name: "Cliente",
+  name: "Colaborador",
   data() {
     return {
       ObjDashboard: [],
@@ -364,6 +364,7 @@ export default defineComponent({
     handleResize() {
       this.telaWidth = window.innerWidth;
       // console.log(window.innerWidth);
+
       if (window.innerWidth <= 926) {
         // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
         for (
@@ -387,12 +388,9 @@ export default defineComponent({
     };
   },
   beforeRouteEnter(to, from, next) {
-    let login = JSON.parse(localStorage.getItem("login"));
-    const token = login["token"];
-    if (!token) {
-      next("Login");
-    }
-    next();
+    //let login = JSON.parse(localStorage.getItem("login"));
+    alert("Você não possue autorização!");
+    next({ name: "login" });
   },
   created() {
     this.ObjDashboard = layoutDashBoardColaborador();
@@ -465,7 +463,7 @@ p {
   .col1 {
     width: 100%;
     background-color: #e6e6e6;
-    min-height: 40vh;
+    min-height: 20vh;
   }
   .col2 {
     width: 100%;

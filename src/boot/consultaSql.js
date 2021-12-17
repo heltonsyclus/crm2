@@ -26,9 +26,17 @@ export function bodyDadosCliente(pIdCliente) {
   return body;
 }
 
-/*
 //Retorna atividades pendente por IdColarador
 export function bodyAtividesPendentes(pIdColaborador) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'E' and a. cd_responsavel = '${pIdColaborador}`
+  };
+
+  return body;
+}
+//Retorna atividades pendente por IdColarador
+export function bodyAtividesExecucao(pIdColaborador) {
   const body = {
     tipo_retorno: "",
     instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = '${pIdColaborador}`
@@ -37,6 +45,7 @@ export function bodyAtividesPendentes(pIdColaborador) {
   return body;
 }
 
+/*
 //Retorna atividades pendentes cliente por IdCliente
 export function bodyAtividesPendentesclientes(pIdCliente) {
   const body = {
@@ -88,7 +97,7 @@ export function bodyProjetosAtivosPorTipo(pIdCliente) {
   return body;
 }
 
-//Retorna projetos ativos (tipo )
+//Retorna projetos ativos (tipo)
 export function bodyProjetosAtivosPorClienteTipo(pIdCliente, pidTipo) {
   const body = {
     tipo_retorno: "",
