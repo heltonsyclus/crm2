@@ -44,7 +44,7 @@ export default defineComponent({
     //let login = JSON.parse(localStorage.getItem("login"));
     const token = "";
     if (!token) {
-      alert("Você não possue autorização!");
+      alert("Você não possui autorização!");
       next("");
     }
     next();

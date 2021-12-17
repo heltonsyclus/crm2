@@ -97,7 +97,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     //let login = JSON.parse(localStorage.getItem("login"));
-    alert("Você não possue autorização!");
+    alert("Você não possui autorização!");
     next({ name: "login" });
   },
   created() {
