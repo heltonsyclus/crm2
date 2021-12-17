@@ -1,121 +1,130 @@
 <template>
   <div>
     <q-tabs v-model="this.Tab" inline-label class="bg-grey-3 text-blue-8">
-      <q-tab
-        v-for="(btn, index) in ConteudoBtn"
-        :key="index"
-        :label="btn.grupo"
-        :name="btn.grupo"
-        :icon="btn.icone"
-        :id_grupo="btn.id_grupo"
-        class="capitalize"
-        @click.prevent="onclickGrupo(index)"
-      />
-      <div class="flex items-center" v-if="Aplicacao === 'Agenda'">
-        <span class="capitalize q-ml-md" style="font-size:15px;color:#000000">
-          {{ this.nomeMes }}</span
-        >
-        <q-btn flat class="capitalize  q-ml-md" @click="$emit('hoje')">
-          Hoje
-        </q-btn>
-        <q-btn unelevated style="margin: 2px;" @click="$emit('voltar')">
-          &lt;
-        </q-btn>
-        <q-btn unelevated style="margin: 2px;" @click="$emit('adiantar')">
-          &gt;
-        </q-btn>
-      </div>
-      <q-space />
-      <div v-if="Aplicacao === 'AplicativosPadrao'">
-        <q-btn flat dense>
-          <q-icon name="settings" />
-          <q-menu auto-close class="flex" style="width: 345px">
-            <q-item
-              class="rounded-borders"
-              clickable
-              v-ripple.center
-              style="width: 115px"
-              v-for="(box, index) in ConteudoApp"
-              :key="index"
+      <div class="barra">
+        <div class="responsive-esquerda">
+          <q-tab
+            v-for="(btn, index) in ConteudoBtn"
+            :key="index"
+            :label="btn.grupo"
+            :name="btn.grupo"
+            :icon="btn.icone"
+            :id_grupo="btn.id_grupo"
+            class="capitalize"
+            @click.prevent="onclickGrupo(index)"
+          />
+          <div class="flex items-center" v-if="Aplicacao === 'Agenda'">
+            <span
+              class="capitalize q-ml-md text-blue-8"
+              style="font-size:15px;font-weight:500"
             >
-              <q-item-section style="text-align:center;margin:0 auto">
-                <q-avatar
-                  style="text-align:center;margin:0 auto"
-                  :icon="box.icone"
-                  :color="box.cor"
-                  text-color="white"
-                />
-                <q-item-label class="q-mt-sm">{{ box.card }} </q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-menu>
-        </q-btn>
-        <q-btn flat dense>
-          <q-icon name="help_outline" class="q-mx-md" />
-        </q-btn>
-      </div>
-      <div
-        class="flex items-center"
-        style="paddding:10px 0px"
-        v-if="Aplicacao === 'AplicativosPesquisa'"
-      >
-        <q-input
-          v-model="pesquisaInput"
-          style="width:150px"
-          dense
-          label="Pesquisa"
-          v-show="pesquisa"
-          @keyup.enter="InputValor"
-        />
-        <q-btn
-          unelevated
-          round
-          color="primary"
-          icon="search"
-          class="q-mx-md"
-          @click="pesquisa = true"
-        />
-        <q-btn
-          unelevated
-          round
-          color="primary"
-          icon="filter_list"
-          class="q-mr-md"
-          @click="$emit('onClickFiltros')"
-        />
-      </div>
-      <div v-if="Aplicacao === 'AplicativosSalvar'">
-        <q-btn
-          unelevated
-          round
-          color="red"
-          icon="close"
-          class="q-mr-md"
-          size="12px"
-          to="/atividade"
-        />
-        <q-btn
-          unelevated
-          round
-          color="primary"
-          icon="save"
-          class="q-mr-md"
-          size="12px"
-        />
-      </div>
-      <div class="flex items-center " v-if="Aplicacao === 'Agenda'">
-        <q-select
-          v-model="calendarioEventos"
-          dense
-          class="q-mr-md"
-          :options="statusEventos"
-        />
-        <q-select
-          v-model="calendarioAtual"
-          dense
-          :options="calendario"
-          class="q-mr-md"
-        />
+              {{ this.nomeMes }}</span
+            >
+            <q-btn flat class="capitalize  q-ml-md" @click="$emit('hoje')">
+              Hoje
+            </q-btn>
+            <q-btn unelevated style="margin: 2px;" @click="$emit('voltar')">
+              &lt;
+            </q-btn>
+            <q-btn unelevated style="margin: 2px;" @click="$emit('adiantar')">
+              &gt;
+            </q-btn>
+          </div>
+        </div>
+        <q-space />
+        <div class="responsive-direita">
+          <div v-if="Aplicacao === 'AplicativosPadrao'">
+            <q-btn flat dense>
+              <q-icon name="settings" />
+              <q-menu auto-close class="flex" style="width: 345px">
+                <q-item
+                  class="rounded-borders"
+                  clickable
+                  v-ripple.center
+                  style="width: 115px"
+                  v-for="(box, index) in ConteudoApp"
+                  :key="index"
+                >
+                  <q-item-section style="text-align:center;margin:0 auto">
+                    <q-avatar
+                      style="text-align:center;margin:0 auto"
+                      :icon="box.icone"
+                      :color="box.cor"
+                      text-color="white"
+                    />
+                    <q-item-label class="q-mt-sm">{{ box.card }} </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-menu>
+            </q-btn>
+            <q-btn flat dense>
+              <q-icon name="help_outline" class="q-mx-md" />
+            </q-btn>
+          </div>
+          <div
+            class="flex items-center"
+            style="paddding:10px 0px"
+            v-if="Aplicacao === 'AplicativosPesquisa'"
+          >
+            <q-input
+              v-model="pesquisaInput"
+              style="width:150px"
+              dense
+              label="Pesquisa"
+              v-show="pesquisa"
+              @keyup.enter="InputValor"
+            />
+            <q-btn
+              unelevated
+              round
+              color="primary"
+              icon="search"
+              class="q-mx-md"
+              @click="pesquisa = true"
+            />
+            <q-btn
+              unelevated
+              round
+              color="primary"
+              icon="filter_list"
+              class="q-mr-md"
+              @click="$emit('onClickFiltros')"
+            />
+          </div>
+          <div v-if="Aplicacao === 'AplicativosSalvar'">
+            <q-btn
+              unelevated
+              round
+              color="red"
+              icon="close"
+              class="q-mr-md"
+              size="12px"
+              to="/atividade"
+            />
+            <q-btn
+              unelevated
+              round
+              color="primary"
+              icon="save"
+              class="q-mr-md"
+              size="12px"
+            />
+          </div>
+          <div class="flex items-center wrap" v-if="Aplicacao === 'Agenda'">
+            <q-select
+              v-model="calendarioEventos"
+              dense
+              class="q-mr-md"
+              :options="statusEventos"
+            />
+            <q-select
+              v-model="calendarioAtual"
+              dense
+              :options="calendario"
+              class="q-mr-md"
+            />
+          </div>
+        </div>
       </div>
     </q-tabs>
   </div>
@@ -190,3 +199,27 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.barra {
+  width: 100%;
+  display: flex;
+}
+.responsive-esquerda {
+  display: flex;
+}
+@media only screen and (max-width: 632px) {
+  .barra {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .responsive-esquerda {
+    width: 100%;
+  }
+  .responsive-direita {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+}
+</style>

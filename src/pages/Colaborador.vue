@@ -389,8 +389,12 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     //let login = JSON.parse(localStorage.getItem("login"));
-    alert("Você não possue autorização!");
-    next({ name: "login" });
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   },
   created() {
     this.ObjDashboard = layoutDashBoardColaborador();

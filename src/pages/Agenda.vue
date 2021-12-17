@@ -715,6 +715,9 @@ export default defineComponent({
     },
     onClickHeadIntervals(data) {
       //   console.log("onClickHeadIntervals", data);
+    },
+    handleResize() {
+      console.log(window.innerWidth);
     }
   },
   computed: {
@@ -749,6 +752,8 @@ export default defineComponent({
       '{"id_dashboard":6,"dashboard":"Agenda","grupos":[{"id_grupo":1,"grupo":"Calendário","icone":"edit_calendar"}]}';
     this.ObjDashboard = JSON.parse(json);
     this.Grupos = this.ObjDashboard["grupos"];
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   },
   beforeRouteEnter(to, from, next) {
     //let login = JSON.parse(localStorage.getItem("login"));
