@@ -32,7 +32,7 @@
           </div>
         </div>
         <q-space />
-        <div class="responsive-direita">
+        <div class="responsive-direita q-pt-xs">
           <div v-if="Aplicacao === 'AplicativosPadrao'">
             <q-btn flat dense>
               <q-icon name="settings" />
@@ -70,6 +70,7 @@
               v-model="pesquisaInput"
               style="width:150px"
               dense
+              class="q-ml-md"
               label="Pesquisa"
               v-show="pesquisa"
               @keyup.enter="InputValor"
@@ -219,6 +220,8 @@ export default defineComponent({
   }
   .responsive-direita {
     width: 100%;
+    display: flex;
+    justify-content: center;
     padding-bottom: 10px;
   }
 }

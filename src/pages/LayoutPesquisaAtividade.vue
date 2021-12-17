@@ -76,7 +76,7 @@
       :tipo_card_tabela="ObjCardTabela.tipo_card_tabela"
     />
 
-    <div class="row">
+    <div class="flex">
       <div
         :class="CorCardLista"
         style="height:100vh;width:320px;margin:2px;border-radius:10px"

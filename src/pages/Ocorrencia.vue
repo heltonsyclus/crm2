@@ -266,7 +266,7 @@ export default defineComponent({
     this.ObjDashboard = JSON.parse(json);
     this.Grupos = this.ObjDashboard["grupos"];
   },
-  beforeRouteEnter(to, from, next) {
+  /*beforeRouteEnter(to, from, next) {
     //let login = JSON.parse(localStorage.getItem("login"));
     const token = "";
     if (!token) {
@@ -274,7 +274,7 @@ export default defineComponent({
       next("");
     }
     next();
-  },
+  },*/
   setup() {
     const login = computed({
       get: () => $store.state.showcase.login
@@ -300,6 +300,15 @@ export default defineComponent({
         }
       }
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    //let login = JSON.parse(localStorage.getItem("login"));
+    const token = "";
+    if (!token) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
   }
 });
 </script>
@@ -316,5 +325,8 @@ export default defineComponent({
   margin: 5px;
   background-color: #808080;
   padding: 5px 8px;
+}
+
+@media only screen and (max-width: 632px) {
 }
 </style>

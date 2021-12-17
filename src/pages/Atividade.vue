@@ -17,7 +17,7 @@
       :btn_comando="ObjCard.btn_comando"
       :tipo_card="ObjCard.tipo_card"
       :sub_tipo="ObjCard.sub_tipo"
-      :conteudo_card="ObjCard.conteudo_card"
+      :conteudo_cards="ObjCard.conteudo_card"
     />
   </div>
 </template>
