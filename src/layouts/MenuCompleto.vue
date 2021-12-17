@@ -20,7 +20,7 @@
       <q-item-section avatar>
         <q-icon :name="list.icon" size="25px" />
       </q-item-section>
-      <q-item-section>{{ list.name }}</q-item-section>
+      <q-item-section>{{ list.text }}</q-item-section>
       <q-icon name="expand_more" size="25px" />
     </q-item>
   </q-list>
@@ -39,37 +39,42 @@ export default {
         {
           icon: "dashboard",
           rota: "/",
-          name: "Dashboard"
+          text: "Dashboard"
         },
         {
           icon: "description",
           rota: "/atividade",
-          name: "Atividade"
+          text: "Atividade"
         },
         {
           icon: "assignment",
           rota: "/Projeto",
-          name: "Projeto"
+          text: "Projeto"
         },
         {
           icon: "supervisor_account",
           rota: "/Cliente",
-          name: "Cliente"
+          text: "Cliente"
         },
         {
           icon: "done_all",
           rota: "/Ocorrencia",
-          name: "Ocorrência"
+          text: "Ocorrência"
         },
         {
           icon: "event",
           rota: "/Agenda",
-          name: "Agenda"
+          text: "Agenda"
         },
         {
           icon: "account_tree",
           rota: "/Workflow",
-          name: "Workflow"
+          text: "Workflow"
+        },
+        {
+          icon: "engineering",
+          rota: "/Colaborador",
+          text: "Colaborador"
         }
       ]
     };
@@ -101,7 +106,6 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
   overflow: auto;
   width: 304px;
   height: 100vh;

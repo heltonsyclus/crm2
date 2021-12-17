@@ -5,7 +5,7 @@
     bordered
     :style="{ width: `${width}`, height: `${height}` }"
   >
-    <q-item class="items-center" :class="cor_header" dense="dense">
+    <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
       >
@@ -270,6 +270,8 @@ export default {
 .corpo {
   padding: 0;
   margin: 0px auto;
+  max-height: 190px;
+  overflow: auto;
 }
 .text-class {
   font-weight: 400;
@@ -287,6 +289,7 @@ export default {
   margin: 30px auto;
   animation: spins 1s infinite;
 }
+
 @keyframes spins {
   to {
     transform: rotate(360deg);
