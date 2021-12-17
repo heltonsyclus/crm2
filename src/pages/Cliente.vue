@@ -104,20 +104,18 @@
               <q-icon size="18px" name="pin" class="q-pr-sm" />
               <span>{{ cliente.cpf_cnpj }}</span>
             </div>
-            <div style="width:100%">
-              <div>
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ this.telefone[0] }}</span>
-                <q-badge
-                  color="purple"
-                  @click.prevent="btnVmais()"
-                  class="q-ml-sm"
-                  style="cursor:pointer"
-                >
-                  <q-icon name="visibility" color="white" />
-                  Veja mais
-                </q-badge>
-              </div>
+            <div style="width:100%" v-if="this.telefone.length >= 1">
+              <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
+              <span>{{ this.telefone[0] }}</span>
+              <q-badge
+                color="purple"
+                @click.prevent="btnVmais()"
+                class="q-ml-sm"
+                style="cursor:pointer"
+              >
+                <q-icon name="visibility" color="white" />
+                Veja mais
+              </q-badge>
               <div
                 v-show="btnVejaMais"
                 v-for="telefones in this.telefone"
@@ -127,6 +125,7 @@
                 <span>{{ telefones }}</span>
               </div>
             </div>
+
             <div v-for="emails in this.email" :key="emails">
               <q-icon size="18px" name="email" class="q-pr-sm" />
               <span style="width:100%">{{ emails }}</span>
