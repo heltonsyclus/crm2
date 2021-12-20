@@ -214,7 +214,6 @@ export default defineComponent({
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
-    console.log(this.menuDesktop);
   }
 });
 </script>

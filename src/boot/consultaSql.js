@@ -11,7 +11,7 @@ export function bodyProcuraIdCliente(pValor) {
 export function bodyCliente(pIdCliente) {
   const body = {
     tipo_retorno: "",
-    instrucao_sql: `select c.cd_cliente "id_cliente", c.ds_fantasia "nome_fantasia", c.ds_cpf_cnpj "cpf_cnpj" , c.ds_status "status" from cliente c where c.cd_cliente = ${pIdCliente}`
+    instrucao_sql: `select c.cd_cliente "id_cliente", c.ds_fantasia "nome_fantasia", c.ds_cpf_cnpj "cpf_cnpj", c.ds_status "status" from cliente c where c.cd_cliente = ${pIdCliente}`
   };
 
   return body;
@@ -26,88 +26,6 @@ export function bodyDadosCliente(pIdCliente) {
   return body;
 }
 
-//Retorna atividades pendente por IdColarador
-export function bodyAtividesPendentes(pIdColaborador) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'E' and a. cd_responsavel = '${pIdColaborador}`
-  };
-
-  return body;
-}
-//Retorna atividades pendente por IdColarador
-export function bodyAtividesExecucao(pIdColaborador) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = '${pIdColaborador}`
-  };
-
-  return body;
-}
-
-/*
-//Retorna atividades pendentes cliente por IdCliente
-export function bodyAtividesPendentesclientes(pIdCliente) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao", tv.ds_tipo_atividade "tipo_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade where a.ds_status = \'P\' and a.dt_previsao < current_date and ac.cd_cliente = ${pIdCliente} order by a.dt_previsao`
-  };
-
-  return body;
-}
-
-//Retorna atividades pendentes (qtde - tipo atividade) pIdCliente
-export function bodyAtividesPendentesPorTipo(pIdCliente) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade where a.ds_status = \'P\' and a.dt_previsao < current_date and ac.cd_cliente = ${pIdCliente} group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`
-  };
-
-  return body;
-}
-
-//Retorna atividades pendentes (qtde - tipo atividade) pIdCliente
-export function bodyAtividesPendentesPorClienteTipo(
-  pIdCliente,
-  pIdTipoAtividade
-) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade where a.ds_status = \'P\' and a.dt_previsao < current_date and ac.cd_cliente = ${pIdCliente} and a.cd_tipo_atividade = ${pIdTipoAtividade} order by a.dt_previsao`
-  };
-
-  return body;
-}
-
-//Retorna atividades pendentes cliente pIdCliente
-export function bodyAtividesPendentesId(pIdCliente, pIdTipoAtividade) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao", tv.ds_tipo_atividade "tipo_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade where a.ds_status = \'P\' and a.dt_previsao < current_date and ac.cd_cliente = ${pIdCliente} and a.cd_tipo_atividade = ${pIdTipoAtividade} order by a.dt_previsao`
-  };
-  return body;
-}
-
-//Retorna projetos ativos (tipo <qtde>) pIdCliente
-export function bodyProjetosAtivosPorTipo(pIdCliente) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select tp.cd_tipo_projeto "id_tipo_projeto", tp.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto" from projeto p inner join tipo_projeto tp on tp.cd_tipo_projeto = p.cd_tipo_projeto where p.ds_status = \'A\' and p.cd_cliente = ${pIdCliente} group by tp.cd_tipo_projeto, tp.ds_tipo_projeto order by tp.ds_tipo_projeto`
-  };
-  return body;
-}
-
-//Retorna projetos ativos (tipo)
-export function bodyProjetosAtivosPorClienteTipo(pIdCliente, pidTipo) {
-  const body = {
-    tipo_retorno: "",
-    instrucao_sql: `select p.cd_projeto \"id_projeto\", p.ds_projeto \"projeto\", p.dt_previsao \"data_previsao\" from projeto p where p.ds_status = 'A' and p.cd_cliente = ${pIdCliente} and p.cd_tipo_projeto = ${pidTipo} order by p.dt_previsao`
-  };
-  return body;
-}
-
-*/
-
 //Retorna execuções gerais
 export function bodyExecucaoGeral() {
   const body = {
@@ -117,21 +35,6 @@ export function bodyExecucaoGeral() {
   };
   return body;
 }
-
-/*
-export function montaFiltroSql(pInstrucaoSql, pFiltros) {
-  let filtroSql = pFiltros;
-  console.log("xx>" + filtroSql);
-
-  let instrucao_sql = pInstrucaoSql;
-  console.log("xxxx>" + instrucao_sql);
-
-  instrucao_sql = instrucao_sql.replace("<filtros>", filtroSql);
-  console.log("xxxxxx>" + instrucao_sql);
-
-  return instrucao_sql;
-}
-*/
 
 export function montaBody(pInstrucaoSql, pFiltros) {
   if (pFiltros.substr(0, 6) !== "where ") {
@@ -149,7 +52,7 @@ export function montaBody(pInstrucaoSql, pFiltros) {
   return body;
 }
 
-/* Atividade geral */
+//----------------------atividade ----------------------//
 
 export function bodyAtividade(pFiltros) {
   let instrucao_sql =
@@ -159,7 +62,48 @@ export function bodyAtividade(pFiltros) {
   return body;
 }
 
-/* Atividade filtro por cliente */
+export function bodyAtividadePorTipoAtividade(pFiltros) {
+  let instrucao_sql =
+    'select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyAtividadePorCliente(pFiltros) {
+  let instrucao_sql =
+    'select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(a.cd_atividade) "qtde_atividade" from atividade a inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade inner join cliente cl on cl.cd_cliente = ac.cd_cliente <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyAtividadePorWorkflow(pFiltros) {
+  let instrucao_sql =
+    'select wf.cd_workflow "id_workflow", wf.ds_workflow "workflow", count(a.cd_atividade) "qtde_atividade" from atividade a inner join workflow wf on wf.cd_workflow = a.cd_workflow <filtros> group by wf.cd_workflow, wf.ds_workflow order by wf.ds_workflow';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyAtividadePorTag(pFiltros) {
+  let instrucao_sql =
+    'select tg.cd_tag "id_tag", tg.ds_tag "tag", count(a.cd_atividade) "qtde_atividade" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> group by tg.cd_tag, tg.ds_tag order by tg.ds_tag';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//----------------------atividade tag ----------------------//
+export function bodyAtividadeTag(pFiltros) {
+  let instrucao_sql =
+    'select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> order by a.dt_previsao';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//----------------------atividade cliente ----------------------//
 
 export function bodyAtividadeCliente(pFiltros) {
   let instrucao_sql =
@@ -219,4 +163,80 @@ export function bodyAtividadeInteressado(pFiltros) {
   return body;
 }
 
-/* Atividade filtro por tag */
+//Retorna atividades pendente por IdColarador
+export function bodyAtividesExecucaoColaborador(pIdColaborador) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = ${pIdColaborador}`
+  };
+
+  return body;
+}
+
+//Retorna atividades finalizadas por IdColarador
+export function bodyAtividesFinalizadaColaborador(pIdColaborador) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'F' and a. cd_responsavel = ${pIdColaborador}`
+  };
+
+  return body;
+}
+
+//----------------------colaborador ----------------------//
+//Retorna dados do colaborador pIdColaborador
+export function bodyProcuraIdColaborador(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select c.cd_colaborador "id_colaborador", c.ds_colaborador "colaborador", c.ds_cpf_cnpj "cpf_cnpj", c.ds_status "status" from colaborador c where c.ds_status = \'A\' and ((c.ds_colaborador like ('%${pValor}%')) or (c.ds_cpf_cnpj like ('${pValor}%')))`
+  };
+
+  return body;
+}
+//Retorna dados do colaborador pIdColaborador
+export function bodyProcuraIdColaboradorTotal(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select c.cd_colaborador "id_colaborador", c.ds_colaborador "colaborador", c.ds_cpf_cnpj "cpf_cnpj", c.ds_status "status" from colaborador c where c.ds_status = \'A\' and ((c.ds_colaborador like ('%${pValor}%')) or (c.ds_fantasia like ('%${pValor}%')) or (c.ds_cpf_cnpj like ('${pValor}%')))`
+  };
+
+  return body;
+}
+
+//Retorna dados do colaborador em execucao pIdColaborador
+export function bodyAtividadePendenteColaborador(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = ${pValor}`
+  };
+
+  return body;
+}
+
+//Retorna dados do colaborador em finalizado pIdColaborador
+export function bodyFinalizadoColaborador(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'F' and a. cd_responsavel =${pValor}`
+  };
+
+  return body;
+}
+
+//----------------------ocorrencia ----------------------//
+export function bodyOcorrencia(pFiltros) {
+  let instrucao_sql =
+    'select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyOcorrenciaPorTipoAtividade(pFiltros) {
+  let instrucao_sql =
+    'select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(o.cd_ocorrencia) "qtde" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  console.log(body);
+  return body;
+}

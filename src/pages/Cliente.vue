@@ -294,7 +294,6 @@ export default defineComponent({
         this.msgCard = "";
       }, 1000);
     },
-
     ProcurarCliente() {
       this.objCliente = "";
       this.arrayTelefone = [];
@@ -385,7 +384,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const token = login["token"];
+    const token = login.recursos.cliente;
     if (!token) {
       next("Login");
     }

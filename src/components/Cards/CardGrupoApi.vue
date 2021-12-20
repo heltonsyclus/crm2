@@ -99,12 +99,19 @@
 
 <script>
 import {
+  bodyAtividade,
   bodyAtividadeCliente,
+  bodyAtividadeTag,
   bodyAtividadeClientePorTipoAtividade,
   bodyAtividadeClientePorResponsavel,
   bodyAtividadeClientePorTag,
   bodyAtividadeClientePorSituacao,
-  bodyAtividadeClientePorWorkflow
+  bodyAtividadeClientePorWorkflow,
+  bodyAtividadePorTipoAtividade,
+  bodyAtividadePorCliente,
+  bodyAtividadePorTag,
+  bodyAtividadePorWorkflow,
+  bodyOcorrenciaPorTipoAtividade
 } from "src/boot/consultaSql.js";
 export default {
   props: [
@@ -168,17 +175,27 @@ export default {
         this.idPrincipal
       );
 
-      if (pNomeBody === "bodyAtividadeCliente") {
+      if (
+        pNomeBody === "bodyAtividade" ||
+        pNomeBody === "bodyAtividadeCliente" ||
+        pNomeBody === "bodyAtividadeTag"
+      ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
           "<id_principal>",
           this.idPrincipal
         );
       }
       filtros = filtros.replace("<id_grupo>", pIdGrupo);
-
+      if (pNomeBody === "bodyAtividade") {
+        return bodyAtividade(filtros);
+      }
       if (pNomeBody === "bodyAtividadeCliente") {
         return bodyAtividadeCliente(filtros);
       }
+      if (pNomeBody === "bodyAtividadeTag") {
+        return bodyAtividadeTag(filtros);
+      }
+
       if (pNomeBody === "bodyAtividadeClientePorTipoAtividade") {
         return bodyAtividadeClientePorTipoAtividade(filtros);
       }
@@ -193,6 +210,21 @@ export default {
       }
       if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
         return bodyAtividadeClientePorWorkflow(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorTipoAtividade") {
+        return bodyAtividadePorTipoAtividade(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorCliente") {
+        return bodyAtividadePorCliente(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorTag") {
+        return bodyAtividadePorTag(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorWorkflow") {
+        return bodyAtividadePorWorkflow(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
+        return bodyOcorrenciaPorTipoAtividade(filtros);
       }
     },
 

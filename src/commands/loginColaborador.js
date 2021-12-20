@@ -87,7 +87,8 @@ export function senhaLogin() {
           ocorrencia: { id_layout_ocorrencia: 1 },
           agenda: { id_layout_agenda: 1 },
           workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          notificacao: { id_layout_notificacao: 1 },
+          colaborador: { id_layout_colaborador: 1 }
         },
         token: "1086222297"
       },
@@ -147,7 +148,8 @@ export function senhaLogin() {
           ocorrencia: { id_layout_ocorrencia: 1 },
           agenda: { id_layout_agenda: 1 },
           workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          notificacao: { id_layout_notificacao: 1 },
+          colaborador: { id_layout_colaborador: 1 }
         },
         token: "108697"
       },
@@ -192,7 +194,8 @@ export function senhaLogin() {
           ocorrencia: { id_layout_ocorrencia: 1 },
           agenda: { id_layout_agenda: 1 },
           workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          notificacao: { id_layout_notificacao: 1 },
+          colaborador: { id_layout_colaborador: 1 }
         },
         token: "108697321"
       },
@@ -237,7 +240,8 @@ export function senhaLogin() {
           ocorrencia: { id_layout_ocorrencia: 1 },
           agenda: { id_layout_agenda: 1 },
           workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          notificacao: { id_layout_notificacao: 1 },
+          colaborador: { id_layout_colaborador: 1 }
         },
         token: "1321308697"
       }

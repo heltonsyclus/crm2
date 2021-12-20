@@ -9,10 +9,10 @@
             </p>
             <q-separator class="q-mb-sm" />
             <q-input
-              v-model="nomeFantasia"
+              v-model="nomeColaborador"
               dense
               label="Digite o nome do colaborador"
-              @keyup.enter="ProcurarCliente()"
+              @keyup.enter="procurarColaborador()"
             >
               <template v-slot:prepend>
                 <q-icon size="18px" name="search" />
@@ -29,11 +29,11 @@
               class="capitalize q-mb-md"
               color="primary"
               label="Buscar"
-              @click="ProcurarCliente()"
+              @click="procurarColaborador()"
             />
           </div>
         </q-card>
-
+        <!--
         <q-dialog
           v-model="exibeSelecaoCliente"
           persistent
@@ -61,6 +61,7 @@
           </q-card>
         </q-dialog>
       </div>
+
       <q-card
         class="my-card bg-light-blue-9"
         style="color:#fff"
@@ -106,21 +107,28 @@
               <q-icon size="18px" name="pin" class="q-pr-sm" />
               <span>{{ cliente.cpf_cnpj }}</span>
             </div>
-            <div style="width:100%">
+            <div style="width:100%" v-if="this.telefone.length >= 1">
               <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
               <span>{{ this.telefone[0] }}</span>
-              <div v-for="telefone in this.arrayTelefone" :key="telefone">
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ telefone }}</span>
-              </div>
-              <span
-                class="btn-v-mais"
-                v-show="btnVejaMais"
+              <q-badge
+                color="purple"
                 @click.prevent="btnVmais()"
+                class="q-ml-sm"
+                style="cursor:pointer"
               >
-                veja mais
-              </span>
+                <q-icon name="visibility" color="white" />
+                Veja mais
+              </q-badge>
+              <div
+                v-show="btnVejaMais"
+                v-for="telefones in this.telefone"
+                :key="telefones"
+              >
+                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
+                <span>{{ telefones }}</span>
+              </div>
             </div>
+
             <div v-for="emails in this.email" :key="emails">
               <q-icon size="18px" name="email" class="q-pr-sm" />
               <span style="width:100%">{{ emails }}</span>
@@ -196,7 +204,7 @@
               </q-card>
             </div>
           </q-card-section>
-        </q-card>
+        </q-card>-->
       </div>
     </div>
 
@@ -205,10 +213,9 @@
         @OnClick="OnClickBarraLayout"
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
-
       <div class="row">
         <CardGrupoApi
-          class="q-mt-xs card-responsivo"
+          class="q-ma-xs"
           style="margin:5px;margin-bottom:5px"
           v-for="(ObjCard, index) in this.ObjDashboard.grupos[
             this.IndexGrupoAtual
@@ -238,47 +245,30 @@
 import { layoutDashBoardColaborador } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
-import {
-  bodyProcuraIdCliente,
-  bodyDadosCliente
-} from "src/boot/consultaSql.js";
+import { bodyProcuraIdColaborador } from "src/boot/consultaSql.js";
 import { defineComponent } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
   components: { BarraLayout, CardGrupoApi },
-  name: "Colaborador",
+  name: "Cliente",
   data() {
     return {
       ObjDashboard: [],
       IndexGrupoAtual: 0,
       GrupoCards: [],
       GrupoCardsOpcionais: [],
-      nomeFantasia: null,
+      nomeColaborador: null,
       idClienteAtivo: null,
-      clienteAtivo: false,
-      objCliente: [],
       dadosCliente: null,
-      exibeSelecaoCliente: false,
       telaWidth: "",
-      msgCard: "",
-      bairro: "",
-      telefone: [],
-      arrayTelefone: [],
-      email: "",
-      btnVejaMais: false
+      msgCard: ""
     };
   },
   methods: {
     parar() {
       this.msgCard = null;
-    },
-    btnVmais() {
-      for (let i = 1; i < this.telefone.length; i++) {
-        this.arrayTelefone.unshift(this.telefone[i]);
-        this.btnVejaMais = false;
-      }
     },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
@@ -290,11 +280,8 @@ export default defineComponent({
         this.msgCard = "";
       }, 1000);
     },
-
-    ProcurarCliente() {
-      this.objCliente = "";
-      this.arrayTelefone = [];
-      if (this.nomeFantasia === null) {
+    procurarColaborador() {
+      if (this.nomeColaborador === null) {
         this.$q.notify({
           color: "red-5",
           textColor: "white",
@@ -303,7 +290,7 @@ export default defineComponent({
         });
       } else {
         this.clienteAtivo = false;
-        let body = bodyProcuraIdCliente(this.nomeFantasia.toUpperCase());
+        let body = bodyProcuraIdColaborador(this.nomeColaborador.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
           if (arrRetorno.length <= 0) {
@@ -311,7 +298,7 @@ export default defineComponent({
               color: "red-5",
               textColor: "white",
               icon: "warning",
-              message: "Esse cliente não existe ou está inativo!"
+              message: "Esse colaborador está inativo!"
             });
             return false;
           }
@@ -319,54 +306,26 @@ export default defineComponent({
           if (this.dadosCliente.length <= 1) {
             this.dadosCliente = this.dadosCliente[0];
             this.carregarDadosCliente();
-          } else {
-            this.exibeSelecaoCliente = true;
           }
         });
       }
-      this.nomeFantasia = null;
+      this.nomeColaborador = null;
     },
     carregarDadosCliente() {
-      if (this.dadosCliente.id_cliente === null) {
+      if (this.dadosCliente.colaborador === null) {
         return false;
       }
-      //Setando cliente ativo
-      this.clienteAtivo = true;
-      this.idClienteAtivo = this.dadosCliente.id_cliente;
-
-      //carregando dados Cliente
-      let body = bodyDadosCliente(this.idClienteAtivo);
-      this.$api.post("consultasql", body).then(res => {
-        let arrRetorno = res.data;
-        this.objCliente = arrRetorno;
-        this.bairro = this.objCliente[0]["bairro"].split(",");
-        this.email = this.objCliente[0]["email"].split(";");
-        this.telefone = this.objCliente[0]["telefone"].split(";");
-        if (this.telefone.length >= 2) {
-          this.btnVejaMais = true;
-        }
-      });
-
+      this.idClienteAtivo = this.dadosCliente.id_colaborador;
       //atualizar conteudo dos cards do grupo/dashboard atual
       this.AtualizarCardsGrupoAtual();
-      /*
-      this.msgCard = "atualizar_conteudo";
-      setTimeout(() => {
-        this.msgCard = "";
-      }, 2000);
-      */
     },
     selecionarCliente(index) {
-      this.exibeSelecaoCliente = false;
       this.dadosCliente = this.dadosCliente[index];
       this.carregarDadosCliente();
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      // console.log(window.innerWidth);
-
       if (window.innerWidth <= 926) {
-        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -388,8 +347,8 @@ export default defineComponent({
     };
   },
   beforeRouteEnter(to, from, next) {
-    //let login = JSON.parse(localStorage.getItem("login"));
-    const token = "";
+    let login = JSON.parse(localStorage.getItem("login"));
+    const token = login.recursos.colaborador;
     if (!token) {
       alert("Você não possui autorização!");
       next("");
