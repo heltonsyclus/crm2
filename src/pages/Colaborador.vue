@@ -2,209 +2,112 @@
   <div class="flex" style="max-width:100%">
     <div class="col1">
       <div>
-        <q-card class="my-card">
-          <q-card-section>
-            <p style="font-weight:500;font-size:16px">
-              Pesquisa de colaborador
-            </p>
-            <q-separator class="q-mb-sm" />
-            <q-input
-              v-model="nomeColaborador"
-              dense
-              label="Digite o nome do colaborador"
-              @keyup.enter="procurarColaborador()"
-            >
-              <template v-slot:prepend>
-                <q-icon size="18px" name="search" />
-              </template>
-            </q-input>
-          </q-card-section>
-          <div style="text-align:center">
-            <q-btn
-              rounded
-              dense
-              unelevated
-              size="14px"
-              style="padding:0px 15px"
-              class="capitalize q-mb-md"
-              color="primary"
-              label="Buscar"
-              @click="procurarColaborador()"
-            />
-          </div>
-        </q-card>
-        <!--
-        <q-dialog
-          v-model="exibeSelecaoCliente"
-          persistent
-          transition-show="flip-down"
-          transition-hide="flip-up"
-        >
-          <q-card class="card-pesquisa">
-            <q-card-section
-              class="items-center flex justify-between items-center topo-fixo"
-            >
-              <div class="text-h6 color-titulo">Selecione a cliente</div>
-              <q-btn icon="close" flat round dense v-close-popup />
-            </q-card-section>
-            <div>
-              <q-card-section
-                class="card-primary flex"
-                style="margin:0px 10px 5px"
-                v-for="(cliente, index) in this.dadosCliente"
-                :key="cliente"
-                @click="selecionarCliente(index)"
+        <div>
+          <q-card class="my-card">
+            <q-card-section>
+              <p style="font-weight:500;font-size:16px">
+                Pesquisa de colaborador
+              </p>
+              <q-separator class="q-mb-sm" />
+              <q-input
+                v-model="nomeColaborador"
+                dense
+                label="Digite o nome do colaborador"
+                @keyup.enter="procurarColaborador()"
               >
-                <p>{{ cliente.nome_fantasia }}</p>
-              </q-card-section>
+                <template v-slot:prepend>
+                  <q-icon size="18px" name="search" />
+                </template>
+              </q-input>
+            </q-card-section>
+            <div style="text-align:center">
+              <q-btn
+                rounded
+                dense
+                unelevated
+                size="14px"
+                style="padding:0px 15px"
+                class="capitalize q-mb-md"
+                color="primary"
+                label="Buscar"
+                @click="procurarColaborador()"
+              />
             </div>
           </q-card>
-        </q-dialog>
-      </div>
-
-      <q-card
-        class="my-card bg-light-blue-9"
-        style="color:#fff"
-        v-show="clienteAtivo"
-      >
-        <q-card-section>
-          <div class="flex justify-between items-center">
-            <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
-            <q-btn
-              round
-              flat
-              dense
-              text-color="white"
-              icon="autorenew"
-              @click.prevent="carregarDadosCliente"
-              style="margin-bottom:5px"
-            >
-            </q-btn>
-          </div>
-          <q-separator color="white" class="q-mb-sm" />
-          <div
-            v-for="cliente in this.objCliente"
-            :key="cliente"
-            class="column"
-            style="font-style:italic;"
+          <q-dialog
+            v-model="exibeSelecaoColaborador"
+            persistent
+            transition-show="flip-down"
+            transition-hide="flip-up"
           >
-            <div style="width:100%">
-              <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
-                cliente.id_cliente
-              }}</span>
-            </div>
-            <div style="width:100%">
-              <q-icon size="18px" name="business" class="q-pr-sm" /><span>{{
-                cliente.nome_fantasia
-              }}</span>
-            </div>
-            <div style="width:100%">
-              <q-icon size="18px" name="business" class="q-pr-sm" /><span>
-                {{ cliente.razao_social }}
-              </span>
-            </div>
-            <div style="width:100%">
-              <q-icon size="18px" name="pin" class="q-pr-sm" />
-              <span>{{ cliente.cpf_cnpj }}</span>
-            </div>
-            <div style="width:100%" v-if="this.telefone.length >= 1">
-              <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-              <span>{{ this.telefone[0] }}</span>
-              <q-badge
-                color="purple"
-                @click.prevent="btnVmais()"
-                class="q-ml-sm"
-                style="cursor:pointer"
+            <q-card class="card-pesquisa">
+              <q-card-section
+                class="items-center flex justify-between items-center topo-fixo"
               >
-                <q-icon name="visibility" color="white" />
-                Veja mais
-              </q-badge>
-              <div
-                v-show="btnVejaMais"
-                v-for="telefones in this.telefone"
-                :key="telefones"
+                <div class="text-h6 color-titulo">Selecione a cliente</div>
+                <q-btn icon="close" flat round dense v-close-popup />
+              </q-card-section>
+              <div>
+                <q-card-section
+                  class="card-primary flex"
+                  style="margin:0px 10px 5px"
+                  v-for="(cliente, index) in this.dadosCliente"
+                  :key="cliente"
+                  @click="selecionarCliente(index)"
+                >
+                  <p>{{ cliente.colaborador }}</p>
+                </q-card-section>
+              </div>
+            </q-card>
+          </q-dialog>
+        </div>
+
+        <q-card
+          class="my-card bg-light-blue-9"
+          style="color:#fff"
+          v-show="clienteAtivo"
+        >
+          <q-card-section>
+            <div class="flex justify-between items-center">
+              <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
+              <q-btn
+                round
+                flat
+                dense
+                text-color="white"
+                icon="autorenew"
+                @click.prevent="carregarDadosCliente"
+                style="margin-bottom:5px"
               >
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ telefones }}</span>
+              </q-btn>
+            </div>
+            <q-separator color="white" class="q-mb-sm" />
+
+            <div class="column" style="font-style:italic;">
+              <div style="width:100%">
+                <q-icon size="18px" name="money" class="q-pr-sm" />
+                <span> {{ this.dadosCliente.id_colaborador }}</span>
+              </div>
+              <div style="width:100%">
+                <q-icon size="18px" name="account_circle" class="q-pr-sm" />
+                <span> {{ this.dadosCliente.colaborador }}</span>
+              </div>
+              <div style="width:100%" v-if="this.dadosCliente.cpf_cnpj != null">
+                <q-icon size="18px" name="lock" class="q-pr-sm" />
+                <span> {{ this.dadosCliente.cpf_cnpj }}</span>
+              </div>
+              <div style="width:100%">
+                <q-icon size="18px" name="done" class="q-pr-sm" />
+                <span
+                  class="bg-positive"
+                  style="margin-bottom:5px;padding:1px 5px 1px 0px"
+                >
+                  Ativo
+                </span>
               </div>
             </div>
-
-            <div v-for="emails in this.email" :key="emails">
-              <q-icon size="18px" name="email" class="q-pr-sm" />
-              <span style="width:100%">{{ emails }}</span>
-            </div>
-            <div
-              style="width:100%"
-              v-for="bairros in this.bairro"
-              :key="bairros"
-            >
-              <q-icon size="18px" name="share_location" class="q-pr-sm" />
-              <span>{{ bairros }}</span>
-            </div>
-            <div>
-              <q-icon size="18px" name="done" class="q-pr-sm" />
-              <span
-                class="bg-positive"
-                style="margin-bottom:5px;padding:1px 5px 1px 0px"
-              >
-                Ativo
-              </span>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
-
-      <div>
-        <q-card class="my-card" v-show="clienteAtivos">
-          <q-card-section>
-            <p style="font-weight:500;font-size:16px">Estatísticas</p>
-            <q-separator class="q-mb-sm" />
-            <div class="flex">
-              <q-card class="card-secundario">
-                <div>
-                  <p>Atividade pendentes</p>
-                  <span class="card-span">{{ "1" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p>Projetos ativos</p>
-                  <span class="card-span">{{ "1" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p>Últimos 30 dias</p>
-                  <span class="card-span">{{ "8" }}</span>
-                </div>
-              </q-card>
-            </div>
-            <div class="flex">
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:5px">Suporte</p>
-                  <span class="card-span">{{ "30" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:10px">Segmento</p>
-                  <span class="card-span" style="font-size:13px">{{
-                    "Tecnológica"
-                  }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:5px">Regime</p>
-                  <span class="card-span" style="font-size:13px">{{
-                    "Simples nacional"
-                  }}</span>
-                </div>
-              </q-card>
-            </div>
           </q-card-section>
-        </q-card>-->
+        </q-card>
       </div>
     </div>
 
@@ -213,29 +116,67 @@
         @OnClick="OnClickBarraLayout"
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
-      <div class="row">
-        <CardGrupoApi
-          class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px"
-          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-            this.IndexGrupoAtual
-          ].cards"
-          :key="index"
-          :id="ObjCard.id_card"
-          :card="ObjCard.card"
-          :ordem="ObjCard.ordem"
-          cor_header="bg-primary"
-          topo_fixo="topo_fixo"
-          :width="ObjCard.width"
-          :height="ObjCard.height"
-          :btn_comando="ObjCard.btn_comando"
-          :tipo_card="ObjCard.tipo_card"
-          :sub_tipo="ObjCard.sub_tipo"
-          :conteudo_card="ObjCard.conteudo_card"
-          :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
-          :msg="this.msgCard"
-        />
+      <div>
+        <div
+          class="row"
+          v-if="
+            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
+              .tipo_card === 'CardGrupoApi'
+          "
+        >
+          <CardGrupoApi
+            class="q-ma-xs"
+            style="margin:5px;margin-bottom:5px"
+            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+              this.IndexGrupoAtual
+            ].cards"
+            :key="index"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :width="ObjCard.width"
+            :height="ObjCard.height"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+        </div>
+        <div
+          class="row"
+          v-if="
+            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
+              .tipo_card === 'CardGraficoApi'
+          "
+        >
+          <CardGraficoApi
+            class="q-ma-xs"
+            style="margin:5px;margin-bottom:5px"
+            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+              this.IndexGrupoAtual
+            ].cards"
+            :key="index"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :width="ObjCard.width"
+            :height="ObjCard.height"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -245,13 +186,14 @@
 import { layoutDashBoardColaborador } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
+import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
 import { bodyProcuraIdColaborador } from "src/boot/consultaSql.js";
 import { defineComponent } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi },
+  components: { BarraLayout, CardGrupoApi, CardGraficoApi },
   name: "Cliente",
   data() {
     return {
@@ -260,8 +202,11 @@ export default defineComponent({
       GrupoCards: [],
       GrupoCardsOpcionais: [],
       nomeColaborador: null,
+      exibeSelecaoColaborador: false,
+      clienteAtivo: false,
+      objCliente: [],
+      dadosCliente: [],
       idClienteAtivo: null,
-      dadosCliente: null,
       telaWidth: "",
       msgCard: ""
     };
@@ -302,10 +247,13 @@ export default defineComponent({
             });
             return false;
           }
+
           this.dadosCliente = arrRetorno;
           if (this.dadosCliente.length <= 1) {
             this.dadosCliente = this.dadosCliente[0];
             this.carregarDadosCliente();
+          } else {
+            this.exibeSelecaoColaborador = true;
           }
         });
       }
@@ -316,10 +264,12 @@ export default defineComponent({
         return false;
       }
       this.idClienteAtivo = this.dadosCliente.id_colaborador;
+      this.clienteAtivo = true;
       //atualizar conteudo dos cards do grupo/dashboard atual
       this.AtualizarCardsGrupoAtual();
     },
     selecionarCliente(index) {
+      this.exibeSelecaoColaborador = false;
       this.dadosCliente = this.dadosCliente[index];
       this.carregarDadosCliente();
     },

@@ -82,9 +82,7 @@ export default {
       const newData = this.series[0].data.map(() => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       });
-
       const colors = ["#00E396", "#008FFB", "#FEB019", "#FF4560", "#775DD0"];
-
       // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
       this.chartOptions = {
         colors: [colors[Math.floor(Math.random() * colors.length)]]

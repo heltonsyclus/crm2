@@ -9,7 +9,7 @@
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
       >
-        {{ card }}
+        {{ card }}{{ height }}
       </q-item-section>
 
       <q-btn
@@ -23,81 +23,40 @@
       </q-btn>
     </q-item>
     <q-card-section class="corpo">
-      <div class="text-dark">
-        <div class="spin" style="width:230px" v-show="carregarKnob">
-          <q-knob
-            v-model="value"
-            size="30px"
-            :thickness="0.4"
-            color="primary"
-            track-color="cyan-3"
-          />
-        </div>
-        <div
-          v-show="carregarText"
-          style="margin:0 auto;text-align:center;padding-top:20px;color:red"
-        >
-          <span>Não possui grupos...</span>
-        </div>
-        <q-list class="rounded-borders bg-grey-1 q-mb-md q-my-none margin-bot">
-          <q-expansion-item
-            dense-toggle
-            expand-separator
-            v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
-            :key="indexGrupo"
-            @before-show="showItem(indexGrupo)"
-            :label="grupos.grupo"
-            :caption="this.formataCaptionGrupo(grupos.qtde, grupos.duracao)"
-            :caption-lines="1"
-          >
-            <q-card>
-              <q-card-section
-                v-for="(itens, indexItem) in this.ObjConteudo.grupos[indexGrupo]
-                  .itens"
-                :key="indexItem"
-              >
-                <div
-                  class="text-light-blue-9 flex justify-between items-center"
-                >
-                  <a
-                    @click.prevent="abrirItem(indexGrupo, indexItem)"
-                    class="q-pt-md pl text-class"
-                    style="max-width:260px"
-                  >
-                    <strong class="capitalize">{{ itens.item }}</strong>
-                  </a>
-                  <q-btn
-                    color="dark"
-                    round
-                    flat
-                    icon="more_vert"
-                    class="items-center"
-                  >
-                    <q-menu cover auto-close style="pading:0px 5px">
-                      <q-list>
-                        <q-item clickable>
-                          <q-item-section
-                            @click.prevent="abrirItem(indexGrupo, indexItem)"
-                            >Abrir</q-item-section
-                          >
-                        </q-item>
-                      </q-list>
-                    </q-menu>
-                  </q-btn>
-                </div>
-                <div style="width:95%;margin-left:15px">
-                  <q-separator />
-                </div>
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-list>
+      <div v-if="sub_tipo === 'grafico_linha'">
+        <apexchart type="line" :options="chartOptions" :series="series">
+        </apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_padrao'">
+        <apexchart type="area" :options="chartOptions" :series="series">
+        </apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_pontos'">
+        <apexchart type="scatter" :options="chartOptions" :series="series">
+        </apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_cores'">
+        <apexchart type="heatmap" :options="chartOptions" :series="series">
+        </apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_pizza'">
+        <apexchart type="pie" :options="chartOptions" :series="series">
+        </apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_update'">
+        <button @click="mudarGrafico">Mudar</button>
+        <apexchart
+          type="bar"
+          :options="chartOptions2"
+          :series="series"
+        ></apexchart>
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
+import VueApexCharts from "vue3-apexcharts";
 import {
   bodyAtividade,
   bodyAtividadeCliente,
@@ -111,14 +70,14 @@ import {
   bodyAtividadePorCliente,
   bodyAtividadePorTag,
   bodyAtividadePorWorkflow,
-  bodyOcorrenciaPorTipoAtividade,
-  bodyOcorrenciaPorWorkflow
+  bodyOcorrenciaPorTipoAtividade
 } from "src/boot/consultaSql.js";
 export default {
   props: [
     "idPrincipal",
     "conteudo_card",
     "card",
+    "sub_tipo",
     "btn_comando",
     "cor_header",
     "formato_card",
@@ -127,12 +86,48 @@ export default {
     "width",
     "height"
   ],
+  components: {
+    apexchart: VueApexCharts
+  },
   data() {
     return {
       value: 71,
       carregarKnob: false,
       carregarText: false,
-      ObjConteudo: {}
+      ObjConteudo: {},
+      chartOptions: {
+        chart: {
+          id: "Atividades"
+        },
+        xaxis: {
+          categories: ["Mar", "Abr", "Mai", "Jun", "Ago", "Out", "Nov", "Dez"]
+        },
+        series: [30, 40, 35, 50, 49, 60, 70, 91],
+        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"]
+      },
+      chartOptions2: {
+        chart: {
+          id: "Projetos"
+        },
+        xaxis: {
+          categories: [
+            "Pedro",
+            "Jullyadson",
+            "João P",
+            "Helton",
+            "Henrique",
+            "Danilo",
+            "Eron",
+            "Weverton"
+          ]
+        }
+      },
+      series: [
+        {
+          name: "Atividades",
+          data: [30, 40, 35, 50, 49, 60, 70, 91]
+        }
+      ]
     };
   },
   methods: {
@@ -227,9 +222,6 @@ export default {
       if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
         return bodyOcorrenciaPorTipoAtividade(filtros);
       }
-      if (pNomeBody === "bodyOcorrenciaPorWorkflow") {
-        return bodyOcorrenciaPorWorkflow(filtros);
-      }
     },
 
     atualizarConteudo() {
@@ -247,8 +239,7 @@ export default {
             let item = {
               id: Object.values(arrRetorno[i])[0],
               grupo: Object.values(arrRetorno[i])[1],
-              qtde: Object.values(arrRetorno[i])[2],
-              duracao: Object.values(arrRetorno[i])[3]
+              qtde: Object.values(arrRetorno[i])[2]
             };
 
             this.carregarKnob = false;
@@ -269,23 +260,6 @@ export default {
     },
     limparConteudo() {
       this.ObjConteudo.grupos = [];
-    },
-    formataCaptionGrupo(pQtde, pDuracao) {
-      let texto = "";
-
-      if (pQtde > 0) {
-        texto = pQtde + " itens";
-        if (pDuracao > 0) {
-          texto =
-            texto +
-            " (" +
-            pDuracao +
-            " mim - " +
-            Math.round(pDuracao / pQtde) +
-            " med)";
-        }
-      }
-      return texto;
     }
   },
   computed: {
