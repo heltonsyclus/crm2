@@ -147,6 +147,7 @@
             :msg="this.msgCard"
           />
         </div>
+
         <div
           class="row"
           v-if="
@@ -155,6 +156,36 @@
           "
         >
           <CardGraficoApi
+            class="q-ma-xs"
+            style="margin:5px;margin-bottom:5px"
+            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+              this.IndexGrupoAtual
+            ].cards"
+            :key="index"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :width="ObjCard.width"
+            :height="ObjCard.height"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+        </div>
+        <div
+          class="row"
+          v-if="
+            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
+              .tipo_card === 'CardListaApi'
+          "
+        >
+          <CardListaApi
             class="q-ma-xs"
             style="margin:5px;margin-bottom:5px"
             v-for="(ObjCard, index) in this.ObjDashboard.grupos[
@@ -187,13 +218,14 @@ import { layoutDashBoardColaborador } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
+import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import { bodyProcuraIdColaborador } from "src/boot/consultaSql.js";
 import { defineComponent } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi, CardGraficoApi },
+  components: { BarraLayout, CardGrupoApi, CardGraficoApi, CardListaApi },
   name: "Cliente",
   data() {
     return {

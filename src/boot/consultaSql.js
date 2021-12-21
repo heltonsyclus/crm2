@@ -225,23 +225,25 @@ export function bodyFinalizadoColaborador(pValor) {
 
 //----------------------ocorrencia ----------------------//
 export function bodyOcorrencia(pFiltros) {
-  let instrucao_sql =
-    'select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao';
-
+  let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
 
 export function bodyOcorrenciaPorTipoAtividade(pFiltros) {
   let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`;
-
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
 
 export function bodyOcorrenciaPorWorkflow(pFiltros) {
   let instrucao_sql = `select wf.cd_workflow "id_workflow", wf.ds_workflow "workflow", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join workflow wf on wf.cd_workflow = a.cd_workflow <filtros> group by wf.cd_workflow, wf.ds_workflow order by wf.ds_workflow`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
+export function bodyOcorrenciaPorData(pFiltros) {
+  let instrucao_sql = `select cast(o.dt_ocorrencia as date) "id_sequencial", cast(o.dt_ocorrencia as date) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by cast(o.dt_ocorrencia as date) order by 2`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

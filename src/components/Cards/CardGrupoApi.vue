@@ -250,7 +250,6 @@ export default {
               qtde: Object.values(arrRetorno[i])[2],
               duracao: Object.values(arrRetorno[i])[3]
             };
-
             this.carregarKnob = false;
             this.ObjConteudo.grupos.push(item);
           }

@@ -23,50 +23,45 @@
       </q-btn>
     </q-item>
     <q-card-section class="corpo">
-      <div v-if="sub_tipo === 'grafico_linha'">
-        <apexchart type="line" :options="chartOptions" :series="series">
-        </apexchart>
-      </div>
-      <div v-if="sub_tipo === 'grafico_padrao'" class="flex">
-        <div>
-          {{ this.ObjConteudo.grupos }}
-          <hr />
-          {{ this.chartOptions.xaxis.categories }}
-          <hr />
-          {{ this.series.data }}
-          <hr />
+      <div
+        v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
+        :key="indexGrupo"
+      >
+        <div class="spin" style="width:230px" v-show="carregarKnob">
+          <q-knob
+            v-model="value"
+            size="30px"
+            :thickness="0.4"
+            color="primary"
+            track-color="cyan-3"
+          />
         </div>
-        <div>
-          <apexchart type="area" :options="chartOptions" :series="series">
-          </apexchart>
+        <div
+          v-show="carregarText"
+          style="margin:0 auto;text-align:center;padding-top:20px;color:red"
+        >
+          <span>Não possui grupos...</span>
         </div>
-      </div>
-      <div v-if="sub_tipo === 'grafico_pontos'">
-        <apexchart type="scatter" :options="chartOptions" :series="series">
-        </apexchart>
-      </div>
-      <div v-if="sub_tipo === 'grafico_cores'">
-        <apexchart type="heatmap" :options="chartOptions" :series="series">
-        </apexchart>
-      </div>
-      <div v-if="sub_tipo === 'grafico_pizza'">
-        <apexchart type="pie" :options="chartOptions" :series="series">
-        </apexchart>
-      </div>
-      <div v-if="sub_tipo === 'grafico_update'">
-        <button @click="mudarGrafico">Mudar</button>
-        <apexchart
-          type="bar"
-          :options="chartOptions2"
-          :series="series"
-        ></apexchart>
+        <div
+          class="flex justify-between items-center q-my-none"
+          style="padding:10px"
+        >
+          <p>
+            {{ grupos.grupo }}
+          </p>
+          <p>
+            {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
+          </p>
+        </div>
+        <div style="width:95%;margin-left:15px">
+          <q-separator />
+        </div>
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
-import VueApexCharts from "vue3-apexcharts";
 import {
   bodyAtividade,
   bodyAtividadeCliente,
@@ -89,7 +84,6 @@ export default {
     "idPrincipal",
     "conteudo_card",
     "card",
-    "sub_tipo",
     "btn_comando",
     "cor_header",
     "formato_card",
@@ -98,26 +92,12 @@ export default {
     "width",
     "height"
   ],
-  components: {
-    apexchart: VueApexCharts
-  },
   data() {
     return {
       value: 71,
       carregarKnob: false,
       carregarText: false,
-      ObjConteudo: {},
-      chartOptions: {
-        xaxis: {
-          categories: []
-        }
-      },
-      series: [
-        {
-          name: "Atividades",
-          data: ["30", "20", "10", "50"]
-        }
-      ]
+      ObjConteudo: {}
     };
   },
   methods: {
@@ -160,7 +140,6 @@ export default {
         "<id_principal>",
         this.idPrincipal
       );
-
       if (
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
@@ -232,9 +211,6 @@ export default {
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
           for (let i = 0; i < arrRetorno.length; i++) {
-            this.chartOptions.xaxis.categories.push(
-              Object.values(arrRetorno[i])[1]
-            );
             let item = {
               id: Object.values(arrRetorno[i])[0],
               grupo: Object.values(arrRetorno[i])[1],
@@ -301,9 +277,6 @@ export default {
 </script>
 
 <style scoped>
-.my-card-s {
-  min-height: 400px;
-}
 * {
   padding: 0;
   margin: 0;
@@ -315,10 +288,9 @@ export default {
   padding-left: 5px;
 }
 .corpo {
-  width: 70%;
-  padding: 10px 15px;
+  padding: 0;
   margin: 0px auto;
-  max-height: 300px;
+  max-height: 190px;
   overflow: auto;
 }
 .text-class {
