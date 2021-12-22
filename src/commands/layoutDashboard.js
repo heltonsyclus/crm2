@@ -1262,7 +1262,7 @@ function layoutDashBoard3() {
           },
           {
             id_card: 1,
-            card: "Mês atual (Dia)",
+            card: "Diário",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
@@ -1278,7 +1278,7 @@ function layoutDashBoard3() {
           },
           {
             id_card: 1,
-            card: "Mês atual (Semana)",
+            card: "Semanal",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
@@ -1288,6 +1288,22 @@ function layoutDashBoard3() {
               body_grupo: "bodyOcorrenciaPorSemana",
               filtro_sql_grupo:
                 "where o.ds_status <> 'C' and o.cd_tipo_ocorrencia = 1 and (extract(month from o.dt_ocorrencia) = extract(month from current_date)) and (extract(year from o.dt_ocorrencia) = extract(year from current_date)) and o.cd_colaborador = <id_principal>",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            id_card: 1,
+            card: "Anual",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardListaApi",
+            width: "47%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyOcorrenciaPorMesAno",
+              filtro_sql_grupo:
+                "where o.ds_status <> 'C' and o.cd_tipo_ocorrencia = 1 and (extract(year from o.dt_ocorrencia) = extract(year from current_date)) and o.cd_colaborador = <id_principal>",
               body_item: "",
               filtro_sql_item: ""
             }

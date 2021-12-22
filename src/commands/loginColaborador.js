@@ -48,7 +48,11 @@ export function senhaLogin() {
         recursos: {
           area_trabalho: { id_layout_dashboard: 4 },
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: {
+            id_layout_dashboard: 3,
+            permissao_colaborador: ["*"]
+          },
+          bi: { permissao_layout_dashboard: [1, 2, 3, 4, 5] }
         },
         token: "1086222297"
       },
@@ -65,7 +69,7 @@ export function senhaLogin() {
         senha: "joaopaulo321",
         recursos: {
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "108693217"
       },
@@ -74,7 +78,7 @@ export function senhaLogin() {
         senha: "jonatan321",
         recursos: {
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "108693217"
       },
@@ -84,7 +88,7 @@ export function senhaLogin() {
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "108697"
       },
@@ -110,7 +114,7 @@ export function senhaLogin() {
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "108697321"
       },
@@ -120,7 +124,7 @@ export function senhaLogin() {
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "108632197"
       },
@@ -138,7 +142,7 @@ export function senhaLogin() {
         recursos: {
           area_trabalho: { id_layout_dashboard: 4 },
           cliente: { id_layout_dashboard: 2 },
-          colaborador: { id_layout_dashboard: 3 }
+          colaborador: { id_layout_dashboard: 3, permissao_colaborador: ["*"] }
         },
         token: "1321308697"
       }

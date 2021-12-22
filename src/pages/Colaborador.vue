@@ -267,6 +267,9 @@ export default defineComponent({
         });
       } else {
         this.clienteAtivo = false;
+        this.dadosCliente = [];
+        this.idClienteAtivo = null;
+        this.msgCard = "limpar_conteudo";
         let body = bodyProcuraIdColaborador(this.nomeColaborador.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
@@ -277,6 +280,11 @@ export default defineComponent({
               icon: "warning",
               message: "Esse colaborador está inativo!"
             });
+            return false;
+          }
+
+          if (!this.PermissaoDadosColaborador(arrRetorno[0].id_colaborador)) {
+            alert("Sem permissão!");
             return false;
           }
 
@@ -291,10 +299,21 @@ export default defineComponent({
       }
       this.nomeColaborador = null;
     },
+    PermissaoDadosColaborador(pIdColaborador) {
+      let permissao = false;
+      let login = JSON.parse(localStorage.getItem("login"));
+      permissao = login.recursos.colaborador.permissao_colaborador[0] === "*";
+      if (!permissao) {
+        permissao =
+          pIdColaborador in login.recursos.colaborador.permissao_colaborador;
+      }
+      return permissao;
+    },
     carregarDadosCliente() {
       if (this.dadosCliente.colaborador === null) {
         return false;
       }
+
       this.idClienteAtivo = this.dadosCliente.id_colaborador;
       this.clienteAtivo = true;
       //atualizar conteudo dos cards do grupo/dashboard atual
@@ -342,7 +361,6 @@ export default defineComponent({
     this.ObjDashboard = GeLayoutDashBoard(
       login.recursos.colaborador.id_layout_dashboard
     );
-    //this.ObjDashboard = GeLayoutDashBoard(3);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();

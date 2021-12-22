@@ -90,7 +90,6 @@ export default {
       if (pNomeBody === "bodyAtividadeTag") {
         return bodyAtividadeTag(filtros);
       }
-
       if (pNomeBody === "bodyAtividadeClientePorTipoAtividade") {
         return bodyAtividadeClientePorTipoAtividade(filtros);
       }

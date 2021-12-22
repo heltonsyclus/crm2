@@ -170,27 +170,22 @@ export function bodyAtividadeInteressado(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 //Retorna atividades pendente por IdColarador
 export function bodyAtividesExecucaoColaborador(pIdColaborador) {
   const body = {
     tipo_retorno: "",
     instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = ${pIdColaborador}`
   };
-
   return body;
 }
-
 //Retorna atividades finalizadas por IdColaborador
 export function bodyAtividesFinalizadaColaborador(pIdColaborador) {
   const body = {
     tipo_retorno: "",
     instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'F' and a. cd_responsavel = ${pIdColaborador}`
   };
-
   return body;
 }
-
 //----------------------colaborador ----------------------//
 //Retorna dados do colaborador pIdColaborador
 export function bodyProcuraIdColaborador(pValor) {
@@ -198,7 +193,6 @@ export function bodyProcuraIdColaborador(pValor) {
     tipo_retorno: "",
     instrucao_sql: `select c.cd_colaborador "id_colaborador", c.ds_colaborador "colaborador", c.ds_cpf_cnpj "cpf_cnpj", c.ds_status "status" from colaborador c where c.ds_status = \'A\' and ((c.ds_colaborador like ('%${pValor}%')) or (c.ds_cpf_cnpj like ('${pValor}%')))`
   };
-
   return body;
 }
 //Retorna dados do colaborador pIdColaborador
@@ -207,68 +201,55 @@ export function bodyProcuraIdColaboradorTotal(pValor) {
     tipo_retorno: "",
     instrucao_sql: `select c.cd_colaborador "id_colaborador", c.ds_colaborador "colaborador", c.ds_cpf_cnpj "cpf_cnpj", c.ds_status "status" from colaborador c where c.ds_status = \'A\' and ((c.ds_colaborador like ('%${pValor}%')) or (c.ds_fantasia like ('%${pValor}%')) or (c.ds_cpf_cnpj like ('${pValor}%')))`
   };
-
   return body;
 }
-
 //Retorna dados do colaborador em execucao pIdColaborador
 export function bodyAtividadePendenteColaborador(pValor) {
   const body = {
     tipo_retorno: "",
     instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = ${pValor}`
   };
-
   return body;
 }
-
 //Retorna dados do colaborador em finalizado pIdColaborador
 export function bodyFinalizadoColaborador(pValor) {
   const body = {
     tipo_retorno: "",
     instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'F' and a. cd_responsavel =${pValor}`
   };
-
   return body;
 }
-
 //----------------------ocorrencia ----------------------//
 export function bodyOcorrencia(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyOcorrenciaPorTipoAtividade(pFiltros) {
   let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`;
   let body = montaBody(instrucao_sql, pFiltros);
-  console.log(body);
   return body;
 }
-
 export function bodyOcorrenciaPorWorkflow(pFiltros) {
   let instrucao_sql = `select wf.cd_workflow "id_workflow", wf.ds_workflow "workflow", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join workflow wf on wf.cd_workflow = a.cd_workflow <filtros> group by wf.cd_workflow, wf.ds_workflow order by wf.ds_workflow`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyOcorrenciaPorColaborador(pFiltros) {
   let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join colaborador cb on cb.cd_colaborador = o.cd_colaborador <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyOcorrenciaPorData(pFiltros) {
-  let instrucao_sql = `select cast(o.dt_ocorrencia as date) "id_sequencial", extract(day from o.dt_ocorrencia)||'/'||extract(month from o.dt_ocorrencia)||'/'||extract(year from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by cast(o.dt_ocorrencia as date), extract(day from o.dt_ocorrencia)||'/'||extract(month from o.dt_ocorrencia)||'/'||extract(year from o.dt_ocorrencia) order by 1`;
+  let instrucao_sql = `select cast(o.dt_ocorrencia as date) "id_sequencial", lpad(extract(day from o.dt_ocorrencia), 2, '0')||'/'||lpad(extract(month from o.dt_ocorrencia), 2, '0')||'/'||extract(year from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by cast(o.dt_ocorrencia as date), lpad(extract(day from o.dt_ocorrencia), 2, '0')||'/'||lpad(extract(month from o.dt_ocorrencia), 2, '0')||'/'||extract(year from o.dt_ocorrencia) order by 1`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyOcorrenciaPorMesAno(pFiltros) {
-  let instrucao_sql = `select extract(year from o.dt_ocorrencia)||extract(month from o.dt_ocorrencia) "id_sequencial", extract(month from o.dt_ocorrencia)||'/'||extract(year from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(year from o.dt_ocorrencia)||extract(month from o.dt_ocorrencia), extract(month from o.dt_ocorrencia)||'/'||extract(year from o.dt_ocorrencia) order by 1`;
+  let instrucao_sql = `select extract(year from o.dt_ocorrencia)||lpad(extract(month from o.dt_ocorrencia), 2, '0') "id_sequencial", lpad(extract(month from o.dt_ocorrencia), 2, '0')||'/'||extract(year from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(year from o.dt_ocorrencia)||lpad(extract(month from o.dt_ocorrencia), 2, '0'), lpad(extract(month from o.dt_ocorrencia), 2, '0')||'/'||extract(year from o.dt_ocorrencia) order by 1`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyOcorrenciaPorSemana(pFiltros) {
   let instrucao_sql = `select extract(week from o.dt_ocorrencia) "id_sequencial", 'SEMANA '||extract(week from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(week from o.dt_ocorrencia), 'SEMANA '||extract(week from o.dt_ocorrencia) order by 1`;
   let body = montaBody(instrucao_sql, pFiltros);
