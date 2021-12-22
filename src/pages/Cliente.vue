@@ -239,7 +239,7 @@
 </template>
 
 <script>
-import { layoutDashBoardCliente } from "src/commands/layoutDashboard.js";
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import {
@@ -384,14 +384,18 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const token = login.recursos.cliente;
-    if (!token) {
+    const permissao = login.recursos.cliente;
+    if (!permissao) {
       next("Login");
     }
     next();
   },
   created() {
-    this.ObjDashboard = layoutDashBoardCliente();
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.ObjDashboard = GeLayoutDashBoard(
+      login.recursos.cliente.id_layout_dashboard
+    );
+    //this.ObjDashboard = GeLayoutDashBoard(2);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();

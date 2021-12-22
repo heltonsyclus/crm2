@@ -214,7 +214,7 @@
 </template>
 
 <script>
-import { layoutDashBoardColaborador } from "src/commands/layoutDashboard.js";
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
@@ -330,15 +330,19 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const token = login.recursos.colaborador;
-    if (!token) {
+    const permissao = login.recursos.colaborador;
+    if (!permissao) {
       alert("Você não possui autorização!");
       next("");
     }
     next();
   },
   created() {
-    this.ObjDashboard = layoutDashBoardColaborador();
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.ObjDashboard = GeLayoutDashBoard(
+      login.recursos.colaborador.id_layout_dashboard
+    );
+    //this.ObjDashboard = GeLayoutDashBoard(3);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();

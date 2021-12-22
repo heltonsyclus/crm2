@@ -1,65 +1,118 @@
 <template>
-  <div>
+  <div class="col2">
     <BarraLayout
       @OnClick="OnClickBarraLayout"
-      :ConteudoBtn="this.ObjDashboardPrincipal['grupos']"
-      :ConteudoApp="GrupoCardsOpcionais"
-      Aplicacao="AplicativosPadrao"
+      :ConteudoBtn="this.ObjDashboard['grupos']"
     />
-    <div class="row">
-      <CardBase
-        class="q-ma-xs"
-        v-for="(ObjCard, index) in ObjDashboardPrincipal.grupos[
-          this.IndexGrupoAtual
-        ].cards"
-        :key="index"
-        :id="ObjCard.id_card"
-        :card="ObjCard.card"
-        :ordem="ObjCard.ordem"
-        cor_header="bg-primary"
-        :btn_comando="ObjCard.btn_comando"
-        :tipo_card="ObjCard.tipo_card"
-        :sub_tipo="ObjCard.sub_tipo"
-        :layout_lin_col="ObjCard.layout_lin_col"
-        :link_item="ObjCard.link_item"
-        :conteudo_cards="ObjCard.conteudo_card"
-        :formato_card="ObjCard.formato_card"
-      />
-      <q-page-sticky position="bottom-right" :offset="fabPos">
-        <q-fab
-          icon="add"
-          direction="up"
-          color="primary"
-          :disable="draggingFab"
-          v-touch-pan.prevent.mouse="moveFab"
-        >
-          <q-fab-action
-            color="blue-14"
-            @click="$router.push({ name: 'projeto' })"
-            icon="description"
-          />
-          <q-fab-action
-            color="green-14"
-            @click="$router.push({ name: 'atividade' })"
-            icon="assignment"
-          />
-        </q-fab>
-      </q-page-sticky>
+    <div>
+      <div
+        class="row"
+        v-if="
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0].tipo_card ===
+            'CardGrupoApi'
+        "
+      >
+        <CardGrupoApi
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px"
+          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+            this.IndexGrupoAtual
+          ].cards"
+          :key="index"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :width="ObjCard.width"
+          :height="ObjCard.height"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idClienteAtivo"
+          :msg="this.msgCard"
+        />
+      </div>
+
+      <div
+        class="row"
+        v-if="
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0].tipo_card ===
+            'CardGraficoApi'
+        "
+      >
+        <CardGraficoApi
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px"
+          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+            this.IndexGrupoAtual
+          ].cards"
+          :key="index"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :width="ObjCard.width"
+          :height="ObjCard.height"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idClienteAtivo"
+          :msg="this.msgCard"
+        />
+      </div>
+      <div
+        class="row"
+        v-if="
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0].tipo_card ===
+            'CardListaApi'
+        "
+      >
+        <CardListaApi
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px"
+          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
+            this.IndexGrupoAtual
+          ].cards"
+          :key="index"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :width="ObjCard.width"
+          :height="ObjCard.height"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idClienteAtivo"
+          :msg="this.msgCard"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { layoutDashBoardPrincipal } from "src/commands/layoutDashboard.js";
-import CardBase from "src/components/CardBase.vue";
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
+import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
+import CardListaApi from "src/components/Cards/CardListaApi.vue";
+import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardBase },
+  components: { BarraLayout, CardGrupoApi, CardListaApi, CardGraficoApi },
   name: "dashboard",
   setup() {
     const $store = useStore();
@@ -92,16 +145,33 @@ export default defineComponent({
   },
   methods: {
     OnClickBarraLayout(IndexGrupo) {
+      console.log(IndexGrupo);
       this.IndexGrupoAtual = IndexGrupo;
+      this.AtualizarCardsGrupoAtual();
+    },
+    AtualizarCardsGrupoAtual() {
+      this.msgCard = "atualizar_conteudo";
+      setTimeout(() => {
+        this.msgCard = "";
+      }, 1000);
     }
   },
   beforeRouteEnter(to, from, next) {
-    //let login = JSON.parse(localStorage.getItem("login"));
-    alert("Você não possui autorização!");
-    next({ name: "login" });
+    let login = JSON.parse(localStorage.getItem("login"));
+    const permissao = login.recursos.area_trabalho;
+    if (!permissao) {
+      alert("Você não possui autorização!");
+      next("");
+    }
+    next();
   },
   created() {
-    this.ObjDashboardPrincipal = layoutDashBoardPrincipal();
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.ObjDashboard = GeLayoutDashBoard(
+      login.recursos.area_trabalho.id_layout_dashboard
+    );
+    this.msgCard = "limpar_conteudo";
+    this.AtualizarCardsGrupoAtual();
   }
 });
 </script>

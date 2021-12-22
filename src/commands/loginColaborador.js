@@ -5,14 +5,7 @@ export function senhaLogin() {
         usuario: "renan",
         senha: "renan321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "108697"
       },
@@ -20,14 +13,7 @@ export function senhaLogin() {
         usuario: "joaopedro",
         senha: "joaopedroyclus",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "10869227"
       },
@@ -35,14 +21,7 @@ export function senhaLogin() {
         usuario: "abner",
         senha: "abnersyclus",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "10328697"
       },
@@ -50,14 +29,7 @@ export function senhaLogin() {
         usuario: "pedro",
         senha: "pedrosa",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "10863297"
       },
@@ -65,14 +37,8 @@ export function senhaLogin() {
         usuario: "maciel",
         senha: "maciel321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "10821697"
       },
@@ -80,15 +46,9 @@ export function senhaLogin() {
         usuario: "danilo",
         senha: "0",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 },
-          colaborador: { id_layout_colaborador: 1 }
+          area_trabalho: { id_layout_dashboard: 4 },
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "1086222297"
       },
@@ -96,14 +56,7 @@ export function senhaLogin() {
         usuario: "adelmo",
         senha: "adelmo321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "1086222297"
       },
@@ -111,14 +64,8 @@ export function senhaLogin() {
         usuario: "joaopaulo",
         senha: "joaopaulo321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "108693217"
       },
@@ -126,14 +73,8 @@ export function senhaLogin() {
         usuario: "jonatan",
         senha: "jonatan321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "108693217"
       },
@@ -142,14 +83,8 @@ export function senhaLogin() {
         senha: "helton321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 },
-          colaborador: { id_layout_colaborador: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "108697"
       },
@@ -157,14 +92,7 @@ export function senhaLogin() {
         usuario: "rodrigo",
         senha: "rodrigo321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "108321697"
       },
@@ -172,14 +100,7 @@ export function senhaLogin() {
         usuario: "ewerton",
         senha: "ewerton321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "13108697"
       },
@@ -188,14 +109,8 @@ export function senhaLogin() {
         senha: "henrique321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 },
-          colaborador: { id_layout_colaborador: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "108697321"
       },
@@ -204,13 +119,8 @@ export function senhaLogin() {
         senha: "jullyadson321",
         recursos: {
           area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "108632197"
       },
@@ -218,14 +128,7 @@ export function senhaLogin() {
         usuario: "eron",
         senha: "eronsyclus",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 }
+          cliente: { id_layout_dashboard: 2 }
         },
         token: "103218697"
       },
@@ -233,15 +136,9 @@ export function senhaLogin() {
         usuario: "wagner",
         senha: "wagner321",
         recursos: {
-          area_trabalho: { id_layout_dashboard: 1 },
-          atividade: { id_layout_atividade: 1 },
-          projetos: { id_layout_projetos: 1 },
-          cliente: { id_layout_cliente: 1 },
-          ocorrencia: { id_layout_ocorrencia: 1 },
-          agenda: { id_layout_agenda: 1 },
-          workflow: { id_layout_workflow: 1 },
-          notificacao: { id_layout_notificacao: 1 },
-          colaborador: { id_layout_colaborador: 1 }
+          area_trabalho: { id_layout_dashboard: 4 },
+          cliente: { id_layout_dashboard: 2 },
+          colaborador: { id_layout_dashboard: 3 }
         },
         token: "1321308697"
       }
