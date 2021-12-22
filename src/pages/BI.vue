@@ -4,7 +4,6 @@
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"
     />
-
     <div class="row">
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
@@ -21,7 +20,6 @@
           cor_header="bg-primary"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
-          :width="ObjCard.width"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
           :sub_tipo="ObjCard.sub_tipo"
@@ -40,7 +38,6 @@
           cor_header="bg-primary"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
-          :width="ObjCard.width"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
           :sub_tipo="ObjCard.sub_tipo"
@@ -59,7 +56,6 @@
           cor_header="bg-primary"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
-          :width="ObjCard.width"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
           :sub_tipo="ObjCard.sub_tipo"
@@ -146,7 +142,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_area_trabalho;
+    const permissao = login.recursos.dashboard_bi;
     if (!permissao) {
       alert("Você não possui autorização!");
       next("");
@@ -156,7 +152,7 @@ export default defineComponent({
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.dashboard_area_trabalho.id_layout_dashboard
+      login.recursos.dashboard_bi.permissao_layout_dashboard
     );
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();

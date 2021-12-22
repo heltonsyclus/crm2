@@ -188,6 +188,11 @@ export default defineComponent({
           icon: "engineering",
           rota: "/Colaborador",
           text: "Colaborador"
+        },
+        {
+          icon: "manage_accounts",
+          rota: "/BI",
+          text: "BI"
         }
       ]
     };

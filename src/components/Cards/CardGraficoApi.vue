@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="my-card-s"
+    class="my-card-syclus"
     flat
     bordered
     :style="{ width: `${width}`, height: `${height}` }"
@@ -300,6 +300,7 @@ export default {
   margin: 0;
 }
 .my-card-s {
+  width: 450px;
   max-height: 80vh;
 }
 .margin-bot {
@@ -335,7 +336,7 @@ export default {
   }
 }
 @media only screen and (max-width: 1320px) {
-  .my-card-s {
+  .my-card-syclus {
     width: 350px;
   }
 }

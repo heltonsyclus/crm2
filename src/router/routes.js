@@ -146,6 +146,18 @@ const routes = [
       }
     ]
   },
+  {
+    path: "/BI",
+    beforeEnter: Store.auth,
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "bi",
+        component: () => import("pages/BI.vue")
+      }
+    ]
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

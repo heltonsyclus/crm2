@@ -384,7 +384,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.cliente;
+    const permissao = login.recursos.dashboard_cliente;
     if (!permissao) {
       next("Login");
     }
@@ -393,7 +393,7 @@ export default defineComponent({
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.cliente.id_layout_dashboard
+      login.recursos.dashboard_cliente.id_layout_dashboard
     );
     //this.ObjDashboard = GeLayoutDashBoard(2);
     this.msgCard = "limpar_conteudo";

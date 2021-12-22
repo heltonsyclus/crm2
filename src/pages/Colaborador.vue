@@ -44,14 +44,14 @@
               <q-card-section
                 class="items-center flex justify-between items-center topo-fixo"
               >
-                <div class="text-h6 color-titulo">Selecione a cliente</div>
+                <div class="text-h6 color-titulo">Selecione o colaborador</div>
                 <q-btn icon="close" flat round dense v-close-popup />
               </q-card-section>
               <div>
                 <q-card-section
                   class="card-primary flex"
                   style="margin:0px 10px 5px"
-                  v-for="(cliente, index) in this.dadosCliente"
+                  v-for="(cliente, index) in this.dadosColaborador"
                   :key="cliente"
                   @click="selecionarCliente(index)"
                 >
@@ -76,7 +76,7 @@
                 dense
                 text-color="white"
                 icon="autorenew"
-                @click.prevent="carregarDadosCliente"
+                @click.prevent="carregardadosColaborador"
                 style="margin-bottom:5px"
               >
               </q-btn>
@@ -86,15 +86,18 @@
             <div class="column" style="font-style:italic;">
               <div style="width:100%">
                 <q-icon size="18px" name="money" class="q-pr-sm" />
-                <span> {{ this.dadosCliente.id_colaborador }}</span>
+                <span> {{ this.dadosColaborador.id_colaborador }}</span>
               </div>
               <div style="width:100%">
                 <q-icon size="18px" name="account_circle" class="q-pr-sm" />
-                <span> {{ this.dadosCliente.colaborador }}</span>
+                <span> {{ this.dadosColaborador.colaborador }}</span>
               </div>
-              <div style="width:100%" v-if="this.dadosCliente.cpf_cnpj != null">
+              <div
+                style="width:100%"
+                v-if="this.dadosColaborador.cpf_cnpj != null"
+              >
                 <q-icon size="18px" name="lock" class="q-pr-sm" />
-                <span> {{ this.dadosCliente.cpf_cnpj }}</span>
+                <span> {{ this.dadosColaborador.cpf_cnpj }}</span>
               </div>
               <div style="width:100%">
                 <q-icon size="18px" name="done" class="q-pr-sm" />
@@ -116,28 +119,24 @@
         @OnClick="OnClickBarraLayout"
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
-      <div>
+      <div class="row">
         <div
+          v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual]
+            .cards"
+          :key="ObjCard"
           class="row"
-          v-if="
-            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
-              .tipo_card === 'CardGrupoApi'
-          "
         >
           <CardGrupoApi
+            v-if="ObjCard.tipo_card === 'CardGrupoApi'"
             class="q-ma-xs"
-            style="margin:5px;margin-bottom:5px"
-            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-              this.IndexGrupoAtual
-            ].cards"
-            :key="index"
+            style="margin:5px;margin-bottom:5px;"
             :id="ObjCard.id_card"
             :card="ObjCard.card"
             :ordem="ObjCard.ordem"
             cor_header="bg-primary"
             topo_fixo="topo_fixo"
-            :width="ObjCard.width"
             :height="ObjCard.height"
+            :width="ObjCard.width"
             :btn_comando="ObjCard.btn_comando"
             :tipo_card="ObjCard.tipo_card"
             :sub_tipo="ObjCard.sub_tipo"
@@ -146,29 +145,17 @@
             :idPrincipal="this.idClienteAtivo"
             :msg="this.msgCard"
           />
-        </div>
-
-        <div
-          class="row"
-          v-if="
-            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
-              .tipo_card === 'CardGraficoApi'
-          "
-        >
           <CardGraficoApi
+            v-if="ObjCard.tipo_card === 'CardGraficoApi'"
             class="q-ma-xs"
             style="margin:5px;margin-bottom:5px"
-            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-              this.IndexGrupoAtual
-            ].cards"
-            :key="index"
             :id="ObjCard.id_card"
             :card="ObjCard.card"
             :ordem="ObjCard.ordem"
             cor_header="bg-primary"
             topo_fixo="topo_fixo"
-            :width="ObjCard.width"
             :height="ObjCard.height"
+            :width="ObjCard.width"
             :btn_comando="ObjCard.btn_comando"
             :tipo_card="ObjCard.tipo_card"
             :sub_tipo="ObjCard.sub_tipo"
@@ -177,28 +164,17 @@
             :idPrincipal="this.idClienteAtivo"
             :msg="this.msgCard"
           />
-        </div>
-        <div
-          class="row"
-          v-if="
-            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[0]
-              .tipo_card === 'CardListaApi'
-          "
-        >
           <CardListaApi
+            v-if="ObjCard.tipo_card === 'CardListaApi'"
             class="q-ma-xs"
             style="margin:5px;margin-bottom:5px"
-            v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-              this.IndexGrupoAtual
-            ].cards"
-            :key="index"
             :id="ObjCard.id_card"
             :card="ObjCard.card"
             :ordem="ObjCard.ordem"
             cor_header="bg-primary"
             topo_fixo="topo_fixo"
-            :width="ObjCard.width"
             :height="ObjCard.height"
+            :width="ObjCard.width"
             :btn_comando="ObjCard.btn_comando"
             :tipo_card="ObjCard.tipo_card"
             :sub_tipo="ObjCard.sub_tipo"
@@ -226,7 +202,7 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   components: { BarraLayout, CardGrupoApi, CardGraficoApi, CardListaApi },
-  name: "Cliente",
+  name: "Colaborador",
   data() {
     return {
       ObjDashboard: [],
@@ -237,10 +213,11 @@ export default defineComponent({
       exibeSelecaoColaborador: false,
       clienteAtivo: false,
       objCliente: [],
-      dadosCliente: [],
+      dadosColaborador: [],
       idClienteAtivo: null,
       telaWidth: "",
-      msgCard: ""
+      msgCard: "",
+      teste: "row"
     };
   },
   methods: {
@@ -267,7 +244,7 @@ export default defineComponent({
         });
       } else {
         this.clienteAtivo = false;
-        this.dadosCliente = [];
+        this.dadosColaborador = [];
         this.idClienteAtivo = null;
         this.msgCard = "limpar_conteudo";
         let body = bodyProcuraIdColaborador(this.nomeColaborador.toUpperCase());
@@ -288,10 +265,10 @@ export default defineComponent({
             return false;
           }
 
-          this.dadosCliente = arrRetorno;
-          if (this.dadosCliente.length <= 1) {
-            this.dadosCliente = this.dadosCliente[0];
-            this.carregarDadosCliente();
+          this.dadosColaborador = arrRetorno;
+          if (this.dadosColaborador.length <= 1) {
+            this.dadosColaborador = this.dadosColaborador[0];
+            this.carregardadosColaborador();
           } else {
             this.exibeSelecaoColaborador = true;
           }
@@ -302,27 +279,29 @@ export default defineComponent({
     PermissaoDadosColaborador(pIdColaborador) {
       let permissao = false;
       let login = JSON.parse(localStorage.getItem("login"));
-      permissao = login.recursos.colaborador.permissao_colaborador[0] === "*";
+      permissao =
+        login.recursos.dashboard_colaborador.permissao_colaborador[0] === "*";
       if (!permissao) {
         permissao =
-          pIdColaborador in login.recursos.colaborador.permissao_colaborador;
+          pIdColaborador in
+          login.recursos.dashboard_colaborador.permissao_colaborador;
       }
       return permissao;
     },
-    carregarDadosCliente() {
-      if (this.dadosCliente.colaborador === null) {
+    carregardadosColaborador() {
+      if (this.dadosColaborador.colaborador === null) {
         return false;
       }
 
-      this.idClienteAtivo = this.dadosCliente.id_colaborador;
+      this.idClienteAtivo = this.dadosColaborador.id_colaborador;
       this.clienteAtivo = true;
       //atualizar conteudo dos cards do grupo/dashboard atual
       this.AtualizarCardsGrupoAtual();
     },
     selecionarCliente(index) {
       this.exibeSelecaoColaborador = false;
-      this.dadosCliente = this.dadosCliente[index];
-      this.carregarDadosCliente();
+      this.dadosColaborador = this.dadosColaborador[index];
+      this.carregardadosColaborador();
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
@@ -349,7 +328,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.colaborador;
+    const permissao = login.recursos.dashboard_colaborador;
     if (!permissao) {
       alert("Você não possui autorização!");
       next("");
@@ -359,7 +338,7 @@ export default defineComponent({
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.colaborador.id_layout_dashboard
+      login.recursos.dashboard_colaborador.id_layout_dashboard
     );
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);

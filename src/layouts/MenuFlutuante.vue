@@ -85,6 +85,10 @@ export default defineComponent({
         {
           icon: "engineering",
           rota: "/Colaborador"
+        },
+        {
+          icon: "manage_accounts",
+          rota: "/BI"
         }
       ]
     };

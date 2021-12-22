@@ -75,6 +75,11 @@ export default {
           icon: "engineering",
           rota: "/Colaborador",
           text: "Colaborador"
+        },
+        {
+          icon: "manage_accounts",
+          rota: "/BI",
+          text: "BI"
         }
       ]
     };

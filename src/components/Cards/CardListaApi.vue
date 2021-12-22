@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="my-card-s"
+    class="my-card-syclus"
     flat
     bordered
     :style="{ width: `${width}`, height: `${height}` }"
@@ -46,10 +46,10 @@
           class="flex justify-between items-center q-my-none"
           style="padding:10px"
         >
-          <p>
+          <p class="text-dark">
             {{ grupos.grupo }}
           </p>
-          <p>
+          <p class="text-blue-grey-7" style="font-size:12.5px">
             {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
           </p>
         </div>
@@ -91,6 +91,9 @@ export default {
 .pl {
   padding-left: 5px;
 }
+.my-card-s {
+  width: 450px;
+}
 .corpo {
   padding: 0;
   margin: 0px auto;
@@ -120,7 +123,7 @@ export default {
   }
 }
 @media only screen and (max-width: 1320px) {
-  .my-card-s {
+  .my-card-syclus {
     width: 350px;
   }
 }
