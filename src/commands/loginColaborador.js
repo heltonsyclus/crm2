@@ -6,7 +6,14 @@ export function senhaLogin() {
         senha: "1= 210124",
         id_colaborador: 51,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "10328697"
       },
@@ -15,7 +22,14 @@ export function senhaLogin() {
         senha: "adelmo321",
         id_colaborador: 57,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "1086222297"
       },
@@ -24,8 +38,14 @@ export function senhaLogin() {
         senha: "0",
         id_colaborador: 4,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4, 5]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: [6, 7]
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -39,7 +59,14 @@ export function senhaLogin() {
         senha: "eronsyclus",
         id_colaborador: 49,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "103218697"
       },
@@ -48,7 +75,14 @@ export function senhaLogin() {
         senha: "ewerton321",
         id_colaborador: 46,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "13108697"
       },
@@ -57,8 +91,14 @@ export function senhaLogin() {
         senha: "k2yk",
         id_colaborador: 42,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -71,8 +111,14 @@ export function senhaLogin() {
         senha: "helton321",
         id_colaborador: 47,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -85,8 +131,14 @@ export function senhaLogin() {
         senha: "140290Syclus",
         id_colaborador: 12,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: [6, 7]
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -99,8 +151,14 @@ export function senhaLogin() {
         senha: "joaopaulo321",
         id_colaborador: 21,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: [6]
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -110,10 +168,17 @@ export function senhaLogin() {
       },
       {
         usuario: "joaopedro",
-        senha: "joaopedroyclus",
+        senha: "joao1905",
         id_colaborador: 52,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "10869227"
       },
@@ -122,7 +187,14 @@ export function senhaLogin() {
         senha: "82374338",
         id_colaborador: 56,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -135,8 +207,14 @@ export function senhaLogin() {
         senha: "jullyadson321",
         id_colaborador: 15,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -149,8 +227,14 @@ export function senhaLogin() {
         senha: "29915052",
         id_colaborador: 20,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: [7]
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]
@@ -163,7 +247,14 @@ export function senhaLogin() {
         senha: "pedrosa",
         id_colaborador: 41,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "10863297"
       },
@@ -172,7 +263,14 @@ export function senhaLogin() {
         senha: "renan321",
         id_colaborador: 55,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "108697"
       },
@@ -181,7 +279,14 @@ export function senhaLogin() {
         senha: "Cradle66",
         id_colaborador: 58,
         recursos: {
-          dashboard_cliente: { id_layout_dashboard: 2 }
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
         },
         token: "108321697"
       },
@@ -190,8 +295,14 @@ export function senhaLogin() {
         senha: "wagner321",
         id_colaborador: 53,
         recursos: {
-          dashboard_area_trabalho: { id_layout_dashboard: 4 },
-          dashboard_cliente: { id_layout_dashboard: 2 },
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
             permissao_colaborador: ["*"]

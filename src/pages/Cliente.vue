@@ -395,6 +395,21 @@ export default defineComponent({
     this.ObjDashboard = GeLayoutDashBoard(
       login.recursos.dashboard_cliente.id_layout_dashboard
     );
+
+    for (
+      let i = 0;
+      i < login.recursos.dashboard_cliente.dashboard_complementar.length;
+      i++
+    ) {
+      let ObjDashboardTemp = GeLayoutDashBoard(
+        login.recursos.dashboard_cliente.dashboard_complementar[i]
+      );
+
+      for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
+        this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
+      }
+    }
+
     //this.ObjDashboard = GeLayoutDashBoard(2);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);

@@ -27,7 +27,7 @@
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
+          :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
         <CardGraficoApi
@@ -46,7 +46,7 @@
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
+          :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
         <CardListaApi
@@ -65,7 +65,7 @@
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
+          :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
       </div>
@@ -113,7 +113,8 @@ export default defineComponent({
       IndexGrupoAtual: 0,
       Grupos: [],
       GrupoCards: [],
-      GrupoCardsOpcionais: []
+      GrupoCardsOpcionais: [],
+      idColaboradorAtivo: 0
     };
   },
   methods: {
@@ -155,9 +156,24 @@ export default defineComponent({
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
+    this.idColaboradorAtivo = login.id_colaborador;
     this.ObjDashboard = GeLayoutDashBoard(
       login.recursos.dashboard_area_trabalho.id_layout_dashboard
     );
+
+    for (
+      let i = 0;
+      i < login.recursos.dashboard_area_trabalho.dashboard_complementar.length;
+      i++
+    ) {
+      let ObjDashboardTemp = GeLayoutDashBoard(
+        login.recursos.dashboard_area_trabalho.dashboard_complementar[i]
+      );
+
+      for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
+        this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
+      }
+    }
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);

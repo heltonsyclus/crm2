@@ -1,6 +1,6 @@
 export function GeLayoutDashBoard(pIdLayout) {
   let jLayout;
-  console.log("1> " + pIdLayout);
+
   switch (pIdLayout) {
     case 1:
       jLayout = layoutDashBoard1();
@@ -17,13 +17,19 @@ export function GeLayoutDashBoard(pIdLayout) {
     case 5:
       jLayout = layoutDashBoard5();
       break;
+    case 6:
+      jLayout = layoutDashBoard6();
+      break;
+    case 7:
+      jLayout = layoutDashBoard7();
+      break;
   }
 
   return jLayout;
 }
 
-//area trabalho modelo
-function layoutDashBoard1() {
+//area trabalho - modelo
+function layoutDashBoard0() {
   console.log("3> xx1");
   const json = {
     id_dashboard: 1,
@@ -852,7 +858,90 @@ function layoutDashBoard1() {
   return json;
 }
 
-//tela cliente padrao
+//area trabalho - padrao
+function layoutDashBoard1() {
+  const json = {
+    id_dashboard: 1,
+    dashboard: "layout dashboard 1",
+    grupos: [
+      {
+        grupo: "Atividades",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            card: "Atividades do dia",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTipoAtividade",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+            }
+          },
+          {
+            card: "Atividades Atrasadas",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTipoAtividade",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) < current_date and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) < current_date and a.cd_responsavel = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+            }
+          },
+          {
+            card: "Atividades Futuras",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTipoAtividade",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) > current_date and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and cast(dt_previsao as date) > current_date and a.cd_responsavel = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+            }
+          },
+          {
+            id_card: 1,
+            card: "Ocorrências do dia",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardListaApi",
+            width: "47%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyOcorrenciaPorTipoAtividade",
+              filtro_sql_grupo:
+                "where o.ds_status <> 'C' and o.cd_tipo_ocorrencia = 1 and cast(o.dt_ocorrencia as date) = (current_date) and o.cd_colaborador = <id_principal>",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
+  };
+
+  return json;
+}
+
+//cliente - padrao
 function layoutDashBoard2() {
   const json = {
     id_dashboard: 1,
@@ -874,10 +963,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and a.dt_previsao <= current_date and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao <= current_date and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and a.dt_previsao <= current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao <= current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
             }
           },
           {
@@ -891,10 +980,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal> and a.cd_responsavel = <id_grupo>"
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal> and a.cd_responsavel = <id_grupo>"
             }
           },
           {
@@ -908,10 +997,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorSituacao",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
             }
           },
           {
@@ -925,10 +1014,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorWorkflow",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
             }
           },
           {
@@ -942,7 +1031,7 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTag",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (4) and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'P' and a.cd_tipo_atividade not in (1,4,6) and ac.cd_cliente = <id_principal>",
               body_item: "",
               filtro_sql_item: ""
             }
@@ -1059,10 +1148,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
             }
           },
           {
@@ -1077,10 +1166,10 @@ function layoutDashBoard2() {
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorWorkflow",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal>",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'F' and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade not in (1,4,6) and a.dt_previsao >= current_date - 30 and ac.cd_cliente = <id_principal> and a.cd_workflow = <id_grupo>"
             }
           }
         ],
@@ -1092,7 +1181,7 @@ function layoutDashBoard2() {
   return json;
 }
 
-//tela colaborador padrao
+//colaborador - padrao
 function layoutDashBoard3() {
   const json = {
     id_dashboard: 1,
@@ -1398,7 +1487,7 @@ function layoutDashBoard3() {
   return json;
 }
 
-//area trabalho gestao area tecnica
+//area trabalho - gestao area tecnica
 function layoutDashBoard4() {
   const json = {
     id_dashboard: 4,
@@ -1591,11 +1680,124 @@ function layoutDashBoard4() {
   return json;
 }
 
+//area trabalho - danilo
 function layoutDashBoard5() {
   const json = {
     id_dashboard: 5,
     dashboard: "layout dashboard 5",
     grupos: []
+  };
+
+  return json;
+}
+
+//cliente - cobranca
+function layoutDashBoard6() {
+  const json = {
+    id_dashboard: 6,
+    dashboard: "layout dashboard 6",
+    grupos: [
+      {
+        id_grupo: 3,
+        grupo: "Cobrança",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            id_card: 1,
+            card: "Pendentes",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+            }
+          },
+          {
+            id_card: 1,
+            card: "Finalizadas",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+            }
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
+  };
+
+  return json;
+}
+
+//cliente - comercial
+function layoutDashBoard7() {
+  const json = {
+    id_dashboard: 7,
+    dashboard: "layout dashboard 7",
+    grupos: [
+      {
+        id_grupo: 3,
+        grupo: "Comercial",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            id_card: 1,
+            card: "Pendentes",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 1 and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 1 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+            }
+          },
+          {
+            id_card: 1,
+            card: "Finalizadas",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "47%",
+            heigth: "600px",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeClientePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+            }
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
   };
 
   return json;
