@@ -125,14 +125,15 @@
               class="q-mr-md"
             />
           </div>
-          <div class="flex items-center wrap" v-if="Aplicacao === 'Select'">
+          <div
+            class="flex items-center wrap q-mr-md"
+            v-if="Aplicacao === 'Select'"
+          >
             <q-select
-              v-model="model"
+              v-model="this.valorRecurso"
               dense
-              :options="valoresRecurso"
-              label="Standard"
+              :options="this.valoresRecurso"
             />
-            {{ this.valoresRecurso }}
           </div>
         </div>
       </div>
@@ -169,9 +170,16 @@ export default defineComponent({
         $store.commit("showcase/selectStatusAgenda", val);
       }
     });
+    const valorRecurso = computed({
+      get: () => $store.state.showcase.valorRecurso,
+      set: val => {
+        $store.commit("showcase/infRecursos", val);
+      }
+    });
     return {
       calendarioAtual,
       calendarioEventos,
+      valorRecurso,
       pesquisa: ref(false),
       ResultWorkflow: ref([]),
       darkDialog: ref(false),
@@ -184,8 +192,7 @@ export default defineComponent({
   data() {
     return {
       date: [],
-      Valor: [],
-      model: ""
+      Valor: []
     };
   },
   methods: {

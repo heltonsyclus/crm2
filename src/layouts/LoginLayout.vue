@@ -1,18 +1,9 @@
-<template >
-  <q-layout view="lHh Lpr lFf" >
-    <q-header>
-      <q-toolbar>
-        <q-toolbar-title>
-          Syclus 2.0
-        </q-toolbar-title>
-        <div>versão 0.0.1</div>
-      </q-toolbar>
-    </q-header>
+<template>
+  <q-layout view="lHh Lpr lFf">
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-</script>
+<script></script>

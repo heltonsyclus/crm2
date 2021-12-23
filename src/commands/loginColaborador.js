@@ -15,6 +15,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "10328697"
       },
       {
@@ -31,6 +32,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "1086222297"
       },
       {
@@ -53,6 +55,7 @@ export function senhaLogin() {
           },
           dashboard_bi: { permissao_layout_dashboard: [1, 2, 3, 4, 5] }
         },
+        img: "../assets/comum.png",
         token: "1086222297"
       },
       {
@@ -69,6 +72,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "103218697"
       },
       {
@@ -85,6 +89,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "13108697"
       },
       {
@@ -106,6 +111,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/fabricio.png",
         token: "108697"
       },
       {
@@ -127,6 +133,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/helton.png",
         token: "108697"
       },
       {
@@ -148,6 +155,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/comum.png",
         token: "108697321"
       },
       {
@@ -169,6 +177,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/jpaulo.png",
         token: "108693217"
       },
       {
@@ -185,6 +194,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/jpedro.png",
         token: "10869227"
       },
       {
@@ -206,6 +216,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/comum.png",
         token: "108693217"
       },
       {
@@ -227,6 +238,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/jully.png",
         token: "108632197"
       },
       {
@@ -248,6 +260,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/comum.png",
         token: "10821697"
       },
       {
@@ -264,6 +277,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "10863297"
       },
       {
@@ -280,6 +294,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "108697"
       },
       {
@@ -296,6 +311,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
+        img: "../assets/comum.png",
         token: "108321697"
       },
       {
@@ -317,6 +333,7 @@ export function senhaLogin() {
             permissao_colaborador: ["*"]
           }
         },
+        img: "../assets/wagner.png",
         token: "1321308697"
       }
     ]

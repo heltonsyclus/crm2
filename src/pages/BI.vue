@@ -8,6 +8,7 @@
     />
 
     <div class="row">
+      <!--{{ this.valorRecurso }}-->
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
@@ -94,9 +95,16 @@ export default defineComponent({
     const login = computed({
       get: () => $store.state.showcase.login
     });
+    const valorRecurso = computed({
+      get: () => $store.state.showcase.valorRecurso,
+      set: val => {
+        $store.commit("showcase/infRecursos", val);
+      }
+    });
     const fabPos = ref([18, 18]);
     const draggingFab = ref(false);
     return {
+      valorRecurso,
       login,
       fabPos,
       draggingFab,
@@ -117,12 +125,15 @@ export default defineComponent({
       GrupoCards: [],
       GrupoCardsOpcionais: [],
       idColaboradorAtivo: 0,
-      idColaboradorRecursos: []
+      idColaboradorRecursos: [
+        "dashboard_area_trabalho",
+        "dashboard_cliente",
+        "dashboard_colaborador"
+      ]
     };
   },
   methods: {
     OnClickBarraLayout(IndexGrupo) {
-      console.log(IndexGrupo);
       this.IndexGrupoAtual = IndexGrupo;
       this.AtualizarCardsGrupoAtual();
     },
@@ -134,9 +145,7 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      // console.log(window.innerWidth);
       if (window.innerWidth <= 926) {
-        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -149,26 +158,37 @@ export default defineComponent({
     }
   },
   beforeRouteEnter(to, from, next) {
-    alert("Você não possui autorização!");
     let login = JSON.parse(localStorage.getItem("login"));
-    //const permissao = login.recursos.dashboard_bi;
+    const permissao = login.recursos.dashboard_bi;
     if (!permissao) {
       alert("Você não possui autorização!");
       next("");
     }
     next();
   },
+
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.idColaboradorAtivo = login.id_colaborador;
-    this.idColaboradorRecursos = login.recursos;
-    this.ObjDashboard = GeLayoutDashBoard(login.recursos.dashboard_bi);
-    /*for (let i = 0; i < login.recursos.dashboard_bi.length; i++) {
-      let ObjDashboardTemp = GeLayoutDashBoard(login.recursos.dashboard_bi[i]);
+    console.log(login.recursos[this.valorRecurso].id_layout_dashboard);
+    console.log(login.recursos[this.valorRecurso].dashboard_complementar);
+    console.log(login.recursos[this.valorRecurso].dashboard_complementar[0]);
+    this.ObjDashboard = GeLayoutDashBoard(
+      login.recursos[this.valorRecurso].id_layout_dashboard
+    );
+    for (
+      let i = 0;
+      i < login.recursos.dashboard_area_trabalho.dashboard_complementar.length;
+      i++
+    ) {
+      let ObjDashboardTemp = GeLayoutDashBoard(
+        login.recursos[this.valorRecurso].dashboard_complementar[i]
+      );
+
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
         this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
       }
-    }*/
+    }
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);

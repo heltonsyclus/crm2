@@ -46,7 +46,7 @@
           }}</span>
           <q-btn round flat no-wrap>
             <q-avatar size="30px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              <img src="../assets/helton.png" />
             </q-avatar>
             <q-tooltip>Colaborador</q-tooltip>
 
@@ -149,6 +149,7 @@ export default defineComponent({
       menuDesktop: ref(true),
       menuMobile: ref(false),
       nomeUsuario: ref(""),
+      imgColaborador: ref(""),
       notificacao,
       toggleLeftDrawer,
       leftDrawerOpen,
@@ -223,6 +224,7 @@ export default defineComponent({
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.nomeUsuario = login.usuario;
+    this.imgColaborador = login.img;
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   }

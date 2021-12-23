@@ -1,21 +1,34 @@
 <template>
-  <q-page class="flex flex-center">
-    <q-form @submit="Logar">
-      <q-card class="my-card-login">
-        <img
-          src="../assets/logo-syclus2.png"
-          style="width:50%;text-aligth:center;margin:0 auto;padding:25px 20px 0px"
-        />
-        <div style="width:90%;margin:0 auto">
+  <div class="flex">
+    <div class="fundo-syclus">
+      <img
+        src="../assets/syclus_login.png"
+        style="text-aligth:center;margin:0 auto;padding:20px 20px 0px"
+      />
+      <div style="padding:5px 20px">
+        <h4>Controle todo o seu negócio em uma única plataforma.</h4>
+        <p style="font-size:18px">Gestão empresarial eficiente e completa.</p>
+      </div>
+    </div>
+    <div class="fundo-syclus bg-blue-10">
+      <q-form @submit="Logar">
+        <div style="width:70%;margin:100px auto;color:#fff">
+          <h4>Login</h4>
           <q-input
+            dark
             v-model="vlogin"
             dense
+            color="grey-3"
+            label-color="grey-3"
             label="Login"
             :rules="[val => (val && val.length > 0) || 'Preencha o campo!']"
           />
           <q-input
+            dark
             v-model="password"
             dense
+            color="grey-3"
+            label-color="grey-3"
             label="Password"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
@@ -24,6 +37,7 @@
           >
             <template v-slot:append>
               <q-icon
+                color="grey-3"
                 :name="isPwd ? 'visibility_off' : 'visibility'"
                 class="cursor-pointer"
                 @click="isPwd = !isPwd"
@@ -41,9 +55,9 @@
             />
           </div>
         </div>
-      </q-card>
-    </q-form>
-  </q-page>
+      </q-form>
+    </div>
+  </div>
 </template>
 <script>
 import { senhaLogin } from "../commands/loginColaborador";
@@ -117,10 +131,22 @@ export default {
 </script>
 
 <style scope>
-.my-card-login {
+h4 {
+  padding: 0;
+  margin: 5px;
+}
+/*.my-card-login {
+  padding: 20px 0px;
   width: 100%;
   width: 310px;
-  height: 360px;
-  padding: 10px;
+  height: 200px;
+ padding: 10px;
+}*/
+.fundo-syclus {
+  width: 50%;
+  height: 100vh;
+  padding-top: 20px;
+  margin: 0 auto;
+  text-align: center;
 }
 </style>
