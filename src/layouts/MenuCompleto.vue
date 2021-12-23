@@ -41,7 +41,7 @@ export default {
           rota: "/",
           text: "Dashboard"
         },
-        {
+        /* {
           icon: "description",
           rota: "/atividade",
           text: "Atividade"
@@ -50,13 +50,13 @@ export default {
           icon: "assignment",
           rota: "/Projeto",
           text: "Projeto"
-        },
+        },*/
         {
           icon: "supervisor_account",
           rota: "/Cliente",
           text: "Cliente"
         },
-        {
+        /* {
           icon: "done_all",
           rota: "/Ocorrencia",
           text: "Ocorrência"
@@ -70,7 +70,7 @@ export default {
           icon: "account_tree",
           rota: "/Workflow",
           text: "Workflow"
-        },
+        },*/
         {
           icon: "engineering",
           rota: "/Colaborador",

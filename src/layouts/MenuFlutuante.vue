@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    class="bg-primary text-grey-5 no-scroll black"
+    class="bg-primary text-grey-1 no-scroll black"
     :width="58"
     :breakpoint="500"
     behavior="desktop"
@@ -56,39 +56,48 @@ export default defineComponent({
       linksList: [
         {
           icon: "dashboard",
-          rota: "/"
+          rota: "/",
+          text: "Dashboard"
         },
-        {
+        /* {
           icon: "description",
-          rota: "/atividade"
+          rota: "/atividade",
+          text: "Atividade"
         },
         {
           icon: "assignment",
-          rota: "/Projeto"
-        },
+          rota: "/Projeto",
+          text: "Projeto"
+        },*/
         {
           icon: "supervisor_account",
-          rota: "/Cliente"
+          rota: "/Cliente",
+          text: "Cliente"
         },
-        {
+        /* {
           icon: "done_all",
-          rota: "/Ocorrencia"
+          rota: "/Ocorrencia",
+          text: "Ocorrência"
         },
         {
           icon: "event",
-          rota: "/Agenda"
+          rota: "/Agenda",
+          text: "Agenda"
         },
         {
           icon: "account_tree",
-          rota: "/Workflow"
-        },
+          rota: "/Workflow",
+          text: "Workflow"
+        },*/
         {
           icon: "engineering",
-          rota: "/Colaborador"
+          rota: "/Colaborador",
+          text: "Colaborador"
         },
         {
           icon: "manage_accounts",
-          rota: "/BI"
+          rota: "/BI",
+          text: "BI"
         }
       ]
     };
@@ -100,7 +109,7 @@ export default defineComponent({
 .menu {
   width: 450px;
   height: 100vh;
-  background-color: #c5c5c5;
+  background-color: #fff;
   position: absolute;
   top: 0;
   left: 0;

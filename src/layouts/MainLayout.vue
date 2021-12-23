@@ -41,6 +41,9 @@
           >
             <q-tooltip>Syclus Apps</q-tooltip>
           </q-btn>
+          <span style="font-weight:500" class="capitalize text-grey-8">{{
+            this.nomeUsuario
+          }}</span>
           <q-btn round flat no-wrap>
             <q-avatar size="30px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -145,6 +148,7 @@ export default defineComponent({
     return {
       menuDesktop: ref(true),
       menuMobile: ref(false),
+      nomeUsuario: ref(""),
       notificacao,
       toggleLeftDrawer,
       leftDrawerOpen,
@@ -154,7 +158,7 @@ export default defineComponent({
           rota: "/",
           text: "Dashboard"
         },
-        {
+        /* {
           icon: "description",
           rota: "/atividade",
           text: "Atividade"
@@ -163,13 +167,13 @@ export default defineComponent({
           icon: "assignment",
           rota: "/Projeto",
           text: "Projeto"
-        },
+        },*/
         {
           icon: "supervisor_account",
           rota: "/Cliente",
           text: "Cliente"
         },
-        {
+        /* {
           icon: "done_all",
           rota: "/Ocorrencia",
           text: "Ocorrência"
@@ -183,7 +187,7 @@ export default defineComponent({
           icon: "account_tree",
           rota: "/Workflow",
           text: "Workflow"
-        },
+        },*/
         {
           icon: "engineering",
           rota: "/Colaborador",
@@ -217,6 +221,8 @@ export default defineComponent({
     }
   },
   created() {
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.nomeUsuario = login.usuario;
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   }
