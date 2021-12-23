@@ -140,7 +140,7 @@ export function senhaLogin() {
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
-            dashboard_complementar: [6, 7]
+            dashboard_complementar: []
           },
           dashboard_colaborador: {
             id_layout_dashboard: 3,
