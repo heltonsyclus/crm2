@@ -95,7 +95,7 @@ export default defineComponent({
           text: "Colaborador"
         },
         {
-          icon: "manage_accounts",
+          icon: "insert_chart_outlined",
           rota: "/BI",
           text: "BI"
         }

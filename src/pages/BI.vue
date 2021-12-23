@@ -1,332 +1,178 @@
 <template>
-  <BarraLayout
-    @OnClick="OnClickBarra"
-    @onClickFiltros="EsconderCardInputs"
-    @valorInputPesquisa="modelArray"
-    :ConteudoBtn="Grupos"
-    Aplicacao="AplicativosPesquisa"
-  />
+  <div class="col2">
+    <BarraLayout
+      @OnClick="OnClickBarraLayout"
+      :ConteudoBtn="this.ObjDashboard['grupos']"
+      Aplicacao="Select"
+      :valoresRecurso="idColaboradorRecursos"
+    />
 
-  <q-layout container style="height: 100vh">
-    <q-drawer
-      v-model="drawer"
-      show-if-above
-      :mini="!drawer || miniState"
-      @click.capture="drawerClick"
-      :width="340"
-      :breakpoint="500"
-      bordered
-      class="bg-grey-5"
-      v-show="showDrawer"
-    >
-      <q-scroll-area class="fit">
-        <q-list padding>
-          <CardPesquisa
-            style="margin-left:15px"
-            @arrModels="onClickValorInput"
-          />
-        </q-list>
-      </q-scroll-area>
-
-      <div class="absolute" style="top: 15px; right: -17px">
-        <q-btn
-          dense
-          round
-          unelevated
-          color="accent"
-          icon="chevron_left"
-          @click="EsconderCardInputs"
-        />
-      </div>
-    </q-drawer>
-    <div class="flex q-mr-sm">
+    <div class="row">
       <div
-        class="flex btn-chip"
-        v-for="(objFiltro, i) in GetTextoChipItemFiltro"
-        :key="i"
+        v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
+        :key="ObjCard"
+        class="row"
       >
-        <span>{{ objFiltro }}</span>
-        <q-icon
-          name="highlight_off"
-          size="20px"
-          style="cursor:pointer"
-          @click="removerChip(i)"
+        <CardGrupoApi
+          v-if="ObjCard.tipo_card === 'CardGrupoApi'"
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px;"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :width="ObjCard.width"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
+        />
+        <CardGraficoApi
+          v-if="ObjCard.tipo_card === 'CardGraficoApi'"
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :width="ObjCard.width"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
+        />
+        <CardListaApi
+          v-if="ObjCard.tipo_card === 'CardListaApi'"
+          class="q-ma-xs"
+          style="margin:5px;margin-bottom:5px"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :width="ObjCard.width"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
         />
       </div>
     </div>
-    <div class="column ContainerCardRetangular">
-      <CardRetangulo
-        v-for="(ObjCardRetangulo, index) in GrupoCardsRetangular"
-        :key="index"
-        :card="ObjCardRetangulo.card"
-        :tipo_card_retangulo="ObjCardRetangulo.tipo_card_retangulo"
-        :sub_tipo="ObjCardRetangulo.sub_tipo"
-      />
-    </div>
-  </q-layout>
+  </div>
 </template>
 
 <script>
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
-import CardPesquisa from "src/components/Cards/CardPesquisa.vue";
-import CardRetangulo from "src/components/Cards/CardRetangulo.vue";
+import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
+import CardListaApi from "src/components/Cards/CardListaApi.vue";
+import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardRetangulo, CardPesquisa },
-  name: "Ocorrencia",
+  components: { BarraLayout, CardGrupoApi, CardListaApi, CardGraficoApi },
+  name: "dashboard",
+  setup() {
+    const $store = useStore();
+    const login = computed({
+      get: () => $store.state.showcase.login
+    });
+    const fabPos = ref([18, 18]);
+    const draggingFab = ref(false);
+    return {
+      login,
+      fabPos,
+      draggingFab,
+      moveFab(ev) {
+        draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
+        fabPos.value = [
+          fabPos.value[0] - ev.delta.x,
+          fabPos.value[1] - ev.delta.y
+        ];
+      }
+    };
+  },
   data() {
     return {
       ObjDashboard: [],
       IndexGrupoAtual: 0,
-      Grupo: [],
       Grupos: [],
-      GrupoCardsRetangular: [],
-      MostrarTitulo: false,
-      showDrawer: false,
-      filtroAvancado: false,
-      valorFiltro: [],
-      btnAdicionarCampoAvancado: false,
-      arrayFiltros: [],
-      GetTextoChipItemFiltro: []
+      GrupoCards: [],
+      GrupoCardsOpcionais: [],
+      idColaboradorAtivo: 0,
+      idColaboradorRecursos: []
     };
   },
   methods: {
-    OnClickBarra(IndexGrupo) {
+    OnClickBarraLayout(IndexGrupo) {
+      console.log(IndexGrupo);
       this.IndexGrupoAtual = IndexGrupo;
-      this.Grupo = this.ObjDashboard["grupos"][IndexGrupo];
-      this.GrupoCardsRetangular = this.Grupo["cards_retangulo"];
+      this.AtualizarCardsGrupoAtual();
     },
-
-    EsconderCardInputs() {
-      this.valorFiltro = [];
-      console.log(this.arrayFiltros);
-      for (let i = 0; i < this.arrayFiltros.length; i++) {
-        let itemArray = this.arrayFiltros[i];
-        if (
-          itemArray.campo === "Emissão" ||
-          itemArray.campo === "Previsão" ||
-          itemArray.campo === "Finalização"
+    AtualizarCardsGrupoAtual() {
+      this.msgCard = "atualizar_conteudo";
+      setTimeout(() => {
+        this.msgCard = "";
+      }, 1000);
+    },
+    handleResize() {
+      this.telaWidth = window.innerWidth;
+      // console.log(window.innerWidth);
+      if (window.innerWidth <= 926) {
+        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
         ) {
-          this.valorFiltro.vAvaliar = itemArray.campo;
-          if (itemArray.criterio === "maior_igual") {
-            this.valorFiltro.vDataInicial = itemArray.valor
-              .replace(">", "")
-              .split("/")
-              .reverse()
-              .join("-");
-          }
-          if (itemArray.criterio === "menor_igual") {
-            this.valorFiltro.vDataFinal = itemArray.valor
-              .replace("<", "")
-              .split("/")
-              .reverse()
-              .join("-");
-          }
-        }
-        if (itemArray.campo === "Situação") {
-          this.valorFiltro.vSituacao = itemArray.valor;
-        }
-        if (itemArray.campo === "Tags") {
-          this.valorFiltro.vTags = itemArray.valor;
-        }
-        if (itemArray.campo === "Colaborador") {
-          this.valorFiltro.vColaborador = itemArray.valor;
-        }
-        if (itemArray.campo === "Operacao") {
-          this.valorFiltro.vOP = itemArray.valor;
-        }
-        if (itemArray.campo === "Campo") {
-          this.valorFiltro.vCampo = itemArray.valor;
-        }
-        if (itemArray.campo === "Criterio") {
-          this.valorFiltro.vCriterio = itemArray.valor;
-        }
-        if (itemArray.campo === "Valor") {
-          this.valorFiltro.valorInput = itemArray.valor;
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
+            "100%";
         }
       }
-      this.arrModels = this.valorFiltro;
-      this.showDrawer = !this.showDrawer;
-    },
-    removerChip(i) {
-      this.GetTextoChipItemFiltro.splice(i, 1);
-      this.arrayFiltros.splice(i, 1);
-    },
-    modelArray(pesquisaInput) {
-      this.GetTextoChipItemFiltro.push("pesquisa: " + pesquisaInput);
-    },
-    GetitemFiltro(pCampo, pCriterio, pValor) {
-      return JSON.parse(
-        '{"campo":"' +
-          pCampo +
-          '",' +
-          '"criterio":"' +
-          pCriterio +
-          '",' +
-          '"valor":"' +
-          pValor +
-          '"}'
-      );
-    },
-    onClickValorInput(arrModels) {
-      this.arrayFiltros = [];
-      this.valorFiltro = arrModels;
-      let itemFiltro;
-      if (this.valorFiltro.vAvaliar != null) {
-        if (this.valorFiltro.vDataInicial != null) {
-          itemFiltro = this.GetitemFiltro(
-            this.valorFiltro.vAvaliar,
-            "maior_igual",
-            this.valorFiltro.vDataInicial
-              .split("-")
-              .reverse()
-              .join("/")
-          );
-          this.arrayFiltros.push(itemFiltro);
-        }
-        if (this.valorFiltro.vDataFinal != null) {
-          itemFiltro = this.GetitemFiltro(
-            this.valorFiltro.vAvaliar,
-            "menor_igual",
-            this.valorFiltro.vDataFinal
-              .split("-")
-              .reverse()
-              .join("/")
-          );
-          this.arrayFiltros.push(itemFiltro);
-        }
-      }
-      if (this.valorFiltro.vSituacao != null) {
-        itemFiltro = this.GetitemFiltro(
-          "Situação",
-          "contendo",
-          this.valorFiltro.vSituacao
-        );
-        this.arrayFiltros.push(itemFiltro);
-      }
-      if (this.valorFiltro.vTags != null) {
-        itemFiltro = this.GetitemFiltro(
-          "Tags",
-          "contendo",
-          this.valorFiltro.vTags
-        );
-        this.arrayFiltros.push(itemFiltro);
-      }
-      if (this.valorFiltro.vColaborador != null) {
-        itemFiltro = this.GetitemFiltro(
-          "Colaborador",
-          "contendo",
-          this.valorFiltro.vColaborador
-        );
-        this.arrayFiltros.push(itemFiltro);
-      }
-      if (
-        this.valorFiltro.vOP != null ||
-        this.valorFiltro.vCriterio != null ||
-        this.valorFiltro.vCampo != null ||
-        this.valorFiltro.valorInput != null
-      ) {
-        itemFiltro = this.GetitemFiltro(
-          "Avançado",
-          "contendo",
-          this.valorFiltro.vOP +
-            ", " +
-            this.valorFiltro.vCriterio +
-            ", " +
-            this.valorFiltro.vCampo +
-            ", " +
-            this.valorFiltro.valorInput
-        );
-        this.arrayFiltros.push(itemFiltro);
-      }
-      this.GetTextoChipItemFiltro = [];
-      for (let i = 0; i < this.arrayFiltros.length; i++) {
-        this.GetTextoChipItemFiltro.push(
-          this.arrayFiltros[i]["campo"] +
-            " " +
-            this.arrayFiltros[i]["criterio"]
-              .replace("maior_igual", "> ")
-              .replace("menor_igual", "< ") +
-            " " +
-            this.arrayFiltros[i]["valor"]
-        );
-      }
-      this.btnAdicionarCampoAvancado = !this.btnAdicionarCampoAvancado;
-      this.showDrawer = false;
-      this.filtroAvancado = true;
     }
-  },
-  created() {
-    const json =
-      '{"id_dashboard":4,"dashboard":"Ocorrências","grupos":[{"id_grupo":1,"grupo":"Filtro","icone":"filter_list","cards_retangulo":[{"id_card":1,"card":"Atividade1","tipo_card_retangulo":"RetanguloOcorrencia"},{"id_card":2,"card":"Atividade2","tipo_card_retangulo":"RetanguloOcorrencia"},{"id_card":3,"card":"Atividade3","tipo_card_retangulo":"RetanguloOcorrencia"}]}]}';
-    this.ObjDashboard = JSON.parse(json);
-    this.Grupos = this.ObjDashboard["grupos"];
-  },
-  /*beforeRouteEnter(to, from, next) {
-    //let login = JSON.parse(localStorage.getItem("login"));
-    const token = "";
-    if (!token) {
-      alert("Você não possue autorização!");
-      next("");
-    }
-    next();
-  },*/
-  setup() {
-    const login = computed({
-      get: () => $store.state.showcase.login
-    });
-    const $store = useStore();
-    const arrModels = computed({
-      get: () => $store.state.showcase.arrModels,
-      set: val => {
-        $store.commit("showcase/updateDrawerState", val);
-      }
-    });
-    const miniState = ref(false);
-    return {
-      login,
-      darkDialog: ref(false),
-      arrModels,
-      drawer: ref(false),
-      miniState,
-      drawerClick(e) {
-        if (miniState.value) {
-          miniState.value = false;
-          e.stopPropagation();
-        }
-      }
-    };
   },
   beforeRouteEnter(to, from, next) {
-    //let login = JSON.parse(localStorage.getItem("login"));
-    const token = "";
-    if (!token) {
+    alert("Você não possui autorização!");
+    let login = JSON.parse(localStorage.getItem("login"));
+    //const permissao = login.recursos.dashboard_bi;
+    if (!permissao) {
       alert("Você não possui autorização!");
       next("");
     }
     next();
+  },
+  created() {
+    let login = JSON.parse(localStorage.getItem("login"));
+    this.idColaboradorAtivo = login.id_colaborador;
+    this.idColaboradorRecursos = login.recursos;
+    this.ObjDashboard = GeLayoutDashBoard(login.recursos.dashboard_bi);
+    /*for (let i = 0; i < login.recursos.dashboard_bi.length; i++) {
+      let ObjDashboardTemp = GeLayoutDashBoard(login.recursos.dashboard_bi[i]);
+      for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
+        this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
+      }
+    }*/
+    this.msgCard = "limpar_conteudo";
+    this.AtualizarCardsGrupoAtual();
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   }
 });
 </script>
-
-<style>
-.ContainerCardRetangular {
-  width: 95%;
-}
-.btn-chip {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  border-radius: 15px;
-  margin: 5px;
-  background-color: #808080;
-  padding: 5px 8px;
-}
-
-@media only screen and (max-width: 632px) {
-}
-</style>

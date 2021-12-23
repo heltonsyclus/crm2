@@ -125,6 +125,15 @@
               class="q-mr-md"
             />
           </div>
+          <div class="flex items-center wrap" v-if="Aplicacao === 'Select'">
+            <q-select
+              v-model="model"
+              dense
+              :options="valoresRecurso"
+              label="Standard"
+            />
+            {{ this.valoresRecurso }}
+          </div>
         </div>
       </div>
     </q-tabs>
@@ -138,7 +147,13 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  props: ["ConteudoBtn", "ConteudoApp", "Aplicacao", "nomeMes"],
+  props: [
+    "ConteudoBtn",
+    "ConteudoApp",
+    "Aplicacao",
+    "nomeMes",
+    "valoresRecurso"
+  ],
   name: "BarraLayout",
   setup() {
     const $store = useStore();
@@ -169,7 +184,8 @@ export default defineComponent({
   data() {
     return {
       date: [],
-      Valor: []
+      Valor: [],
+      model: ""
     };
   },
   methods: {
