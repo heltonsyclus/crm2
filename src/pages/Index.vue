@@ -160,7 +160,6 @@ export default defineComponent({
     this.ObjDashboard = GeLayoutDashBoard(
       login.recursos.dashboard_area_trabalho.id_layout_dashboard
     );
-
     for (
       let i = 0;
       i < login.recursos.dashboard_area_trabalho.dashboard_complementar.length;
