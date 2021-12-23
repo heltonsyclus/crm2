@@ -12,7 +12,7 @@
     </div>
     <div class="fundo-syclus bg-blue-10">
       <q-form @submit="Logar">
-        <div style="width:70%;margin:100px auto;color:#fff">
+        <div style="width:70%;margin:170px auto;color:#fff">
           <h4>Login</h4>
           <q-input
             dark
