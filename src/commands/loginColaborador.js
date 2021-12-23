@@ -131,7 +131,7 @@ export function senhaLogin() {
       },
       {
         usuario: "henrique",
-        senha: "140290Syclus",
+        senha: "140290syclus",
         id_colaborador: 12,
         recursos: {
           dashboard_area_trabalho: {
@@ -251,8 +251,8 @@ export function senhaLogin() {
         token: "10821697"
       },
       {
-        usuario: "pedro",
-        senha: "pedrosa",
+        usuario: "pedrosantos",
+        senha: "phsshp091217",
         id_colaborador: 41,
         recursos: {
           dashboard_area_trabalho: {
@@ -284,7 +284,7 @@ export function senhaLogin() {
       },
       {
         usuario: "rodrigo",
-        senha: "Cradle66",
+        senha: "cradle66",
         id_colaborador: 58,
         recursos: {
           dashboard_area_trabalho: {
