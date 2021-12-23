@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="tela-login">
     <div class="fundo-syclus">
       <img
         src="../assets/syclus_login.png"
@@ -135,6 +135,9 @@ h4 {
   padding: 0;
   margin: 5px;
 }
+.tela-login {
+  display: flex;
+}
 /*.my-card-login {
   padding: 20px 0px;
   width: 100%;
@@ -148,5 +151,11 @@ h4 {
   padding-top: 20px;
   margin: 0 auto;
   text-align: center;
+}
+@media screen and (max-width: 350px) {
+  .tela-login {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
