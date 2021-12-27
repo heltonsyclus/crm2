@@ -1,6 +1,6 @@
 <template>
   <div class="tela-login">
-    <div class="fundo-syclus">
+    <div class="fundo-syclus" v-show="desktop">
       <img
         src="../assets/syclus_login.png"
         style="text-aligth:center;margin:0 auto;padding:20px 20px 0px"
@@ -13,7 +13,12 @@
     <div class="fundo-syclus bg-blue-10">
       <q-form @submit="Logar">
         <div style="width:70%;margin:170px auto;color:#fff">
-          <h4>Login</h4>
+          <div v-if="desktop === true">
+            <h4>Login</h4>
+          </div>
+          <div v-else>
+            <h4>Syclus</h4>
+          </div>
           <q-input
             dark
             v-model="vlogin"
@@ -69,7 +74,8 @@ export default {
     return {
       vlogin: "",
       password: "",
-      isPwd: true
+      isPwd: true,
+      desktop: true
     };
   },
   methods: {
@@ -112,7 +118,14 @@ export default {
       }
     },
     confirmacaoLogin() {
-      this.$router.push({ name: "cliente" });
+      this.$router.push({ name: "dashboard" });
+    },
+    handleResize() {
+      window.innerWidth;
+      if (window.innerWidth <= 827) {
+        console.log(window.innerWidth);
+        this.desktop = false;
+      }
     }
   },
   setup() {
@@ -126,6 +139,10 @@ export default {
     return {
       login
     };
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   }
 };
 </script>
@@ -138,24 +155,11 @@ h4 {
 .tela-login {
   display: flex;
 }
-/*.my-card-login {
-  padding: 20px 0px;
-  width: 100%;
-  width: 310px;
-  height: 200px;
- padding: 10px;
-}*/
 .fundo-syclus {
   width: 50%;
   height: 100vh;
   padding-top: 20px;
   margin: 0 auto;
   text-align: center;
-}
-@media screen and (max-width: 350px) {
-  .tela-login {
-    display: flex;
-    flex-direction: column;
-  }
 }
 </style>

@@ -11,6 +11,7 @@
         :key="ObjCard"
         class="row"
       >
+        <!-- {{ ObjCard.width }}-->
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
@@ -131,9 +132,7 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      // console.log(window.innerWidth);
-      if (window.innerWidth <= 926) {
-        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
+      /* if (window.innerWidth <= 926) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -142,7 +141,7 @@ export default defineComponent({
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
             "100%";
         }
-      }
+      }*/
     }
   },
   beforeRouteEnter(to, from, next) {

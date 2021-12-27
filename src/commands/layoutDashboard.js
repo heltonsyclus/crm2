@@ -872,8 +872,7 @@ function layoutDashBoard1() {
             card: "Atividades do dia",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
@@ -888,8 +887,7 @@ function layoutDashBoard1() {
             card: "Atividades Atrasadas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
@@ -904,8 +902,7 @@ function layoutDashBoard1() {
             card: "Atividades Futuras",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
@@ -922,7 +919,7 @@ function layoutDashBoard1() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
-            width: "47%",
+            width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyOcorrenciaPorTipoAtividade",

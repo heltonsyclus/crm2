@@ -2,6 +2,7 @@
 @mixin cards {
   width: 100%;
   width: 304px;
+  width: 304px;
   min-height: 200px;
   margin: 10px 2px;
 }
@@ -17,7 +18,8 @@ body {
   min-height: 140px;
 }
 .my-card-syclus {
-  min-width: 350px;
+  width: 100%;
+  min-width: 304px;
   min-height: 210px;
   margin: 10px 2px;
 }

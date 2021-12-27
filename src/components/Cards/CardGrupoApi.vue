@@ -5,13 +5,13 @@
     bordered
     :style="{ width: `${width}`, height: `${height}` }"
   >
+    <!--:style="{ width: `${width}`, height: `${height}` }"-->
     <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
       >
         {{ card }}
       </q-item-section>
-
       <q-btn
         v-if="btn_comando === 'btn-atualizar'"
         round
@@ -155,9 +155,9 @@ export default {
     transform: rotate(360deg);
   }
 }
-@media only screen and (max-width: 1320px) {
+/*@media only screen and (max-width: 1320px) {
   .my-card-syclus {
     width: 350px;
   }
-}
+}*/
 </style>

@@ -46,10 +46,9 @@
           }}</span>
           <q-btn round flat no-wrap>
             <q-avatar size="30px">
-              <img src="../assets/helton.png" />
+              <img :src="this.imgColaborador" />
             </q-avatar>
             <q-tooltip>Colaborador</q-tooltip>
-
             <q-menu>
               <q-list dense>
                 <!--     <q-item clickable class="GL__menu-link">
