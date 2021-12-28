@@ -282,7 +282,6 @@ export function bodyAtividadePendenteProjeto(pValor) {
   };
   return body;
 }
-
 //---projetos ativos
 export function bodyProjetoAtivo() {
   const body = {

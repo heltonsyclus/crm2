@@ -9,7 +9,7 @@
             <q-input
               v-model="nomeFantasia"
               dense
-              label="Digite o nome ou CNPJ"
+              label="Digite o nome do projeto"
               @keyup.enter="ProcurarProjeto()"
             >
               <template v-slot:prepend>
@@ -85,6 +85,7 @@
             class="column"
             style="font-style:italic;"
           >
+            {{ this.objProjeto }}
             <div style="width:100%">
               <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
                 Projeto.id_Projeto
@@ -150,59 +151,6 @@
           </div>
         </q-card-section>
       </q-card>
-
-      <div>
-        <q-card class="my-card" v-show="ProjetoAtivos">
-          <q-card-section>
-            <p style="font-weight:500;font-size:16px">Estatísticas</p>
-            <q-separator class="q-mb-sm" />
-            <div class="flex">
-              <q-card class="card-secundario">
-                <div>
-                  <p>Atividade pendentes</p>
-                  <span class="card-span">{{ "1" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p>Projetos ativos</p>
-                  <span class="card-span">{{ "1" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p>Últimos 30 dias</p>
-                  <span class="card-span">{{ "8" }}</span>
-                </div>
-              </q-card>
-            </div>
-            <div class="flex">
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:5px">Suporte</p>
-                  <span class="card-span">{{ "30" }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:10px">Segmento</p>
-                  <span class="card-span" style="font-size:13px">{{
-                    "Tecnológica"
-                  }}</span>
-                </div>
-              </q-card>
-              <q-card class="card-secundario">
-                <div>
-                  <p style="padding-bottom:5px">Regime</p>
-                  <span class="card-span" style="font-size:13px">{{
-                    "Simples nacional"
-                  }}</span>
-                </div>
-              </q-card>
-            </div>
-          </q-card-section>
-        </q-card>
-      </div>
     </div>
 
     <div class="col2">
@@ -266,12 +214,7 @@ export default defineComponent({
       dadosProjeto: null,
       exibeSelecaoProjeto: false,
       telaWidth: "",
-      msgCard: "",
-      bairro: "",
-      telefone: [],
-      arrayTelefone: [],
-      email: "",
-      btnVejaMais: false
+      msgCard: ""
     };
   },
   methods: {
@@ -318,9 +261,7 @@ export default defineComponent({
             });
             return false;
           }
-
           this.dadosProjeto = arrRetorno;
-          console.log(this.dadosProjeto);
           if (this.dadosProjeto.length <= 1) {
             this.dadosProjeto = this.dadosProjeto[0];
             this.carregarDadosProjeto();
@@ -332,25 +273,16 @@ export default defineComponent({
       this.nomeFantasia = null;
     },
     carregarDadosProjeto() {
-      if (this.dadosProjeto.id_Projeto === null) {
+      if (this.dadosProjeto.id_projeto === null) {
         return false;
       }
-      //Setando Projeto ativo
-      this.telefone = [];
-      this.ProjetoAtivo = true;
-      this.idProjetoAtivo = this.dadosProjeto.id_Projeto;
+      console.log(this.dadosProjeto.id_projeto);
 
-      //carregando dados Projeto
-      let body = bodyDadosProjeto(this.idProjetoAtivo);
-      this.$api.post("consultasql", body).then(res => {
+      let body = bodyDadosProjeto(this.dadosProjeto.id_projeto);
+      console.log(body);
+      /*this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
-        this.objProjeto = arrRetorno;
-        this.bairro = this.objProjeto[0]["bairro"].split(",");
-        this.email = this.objProjeto[0]["email"].split(";");
-        this.telefone = this.objProjeto[0]["telefone"].split(";");
-      });
-      this.AtualizarCardsGrupoAtual();
-      this.btnVejaMais = false;
+      });*/
     },
     selecionarProjeto(index) {
       this.exibeSelecaoProjeto = false;
