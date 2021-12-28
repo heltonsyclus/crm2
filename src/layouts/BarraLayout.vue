@@ -135,6 +135,21 @@
               :options="this.valoresRecurso"
             />
           </div>
+          <div
+            class="flex items-center wrap q-mr-md"
+            v-if="Aplicacao === 'pesquisaInput'"
+          >
+            <q-input
+              v-model="pesquisaInput"
+              :readonly="readonly"
+              dense
+              :disable="disable"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </div>
         </div>
       </div>
     </q-tabs>

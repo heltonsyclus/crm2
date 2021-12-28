@@ -4,13 +4,13 @@
       <div>
         <q-card class="my-card">
           <q-card-section>
-            <p style="font-weight:500;font-size:16px">Pesquisa de cliente</p>
+            <p style="font-weight:500;font-size:16px">Pesquisa de Projeto</p>
             <q-separator class="q-mb-sm" />
             <q-input
               v-model="nomeFantasia"
               dense
               label="Digite o nome ou CNPJ"
-              @keyup.enter="ProcurarCliente()"
+              @keyup.enter="ProcurarProjeto()"
             >
               <template v-slot:prepend>
                 <q-icon size="18px" name="search" />
@@ -27,13 +27,13 @@
               class="capitalize q-mb-md"
               color="primary"
               label="Buscar"
-              @click="ProcurarCliente()"
+              @click="ProcurarProjeto()"
             />
           </div>
         </q-card>
 
         <q-dialog
-          v-model="exibeSelecaoCliente"
+          v-model="exibeSelecaoProjeto"
           persistent
           transition-show="flip-down"
           transition-hide="flip-up"
@@ -42,18 +42,18 @@
             <q-card-section
               class="items-center flex justify-between items-center topo-fixo"
             >
-              <div class="text-h6 color-titulo">Selecione a cliente</div>
+              <div class="text-h6 color-titulo">Selecione a Projeto</div>
               <q-btn icon="close" flat round dense v-close-popup />
             </q-card-section>
             <div>
               <q-card-section
                 class="card-primary flex"
                 style="margin:0px 10px 5px"
-                v-for="(cliente, index) in this.dadosCliente"
-                :key="cliente"
-                @click="selecionarCliente(index)"
+                v-for="(Projeto, index) in this.dadosProjeto"
+                :key="Projeto"
+                @click="selecionarProjeto(index)"
               >
-                <p>{{ cliente.nome_fantasia }}</p>
+                <p>{{ Projeto.projeto }}</p>
               </q-card-section>
             </div>
           </q-card>
@@ -62,47 +62,47 @@
       <q-card
         class="my-card bg-light-blue-9"
         style="color:#fff"
-        v-show="clienteAtivo"
+        v-show="ProjetoAtivo"
       >
         <q-card-section>
           <div class="flex justify-between items-center">
-            <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
+            <p style=" font-size:16px;font-weight:700">Dados do Projeto</p>
             <q-btn
               round
               flat
               dense
               text-color="white"
               icon="autorenew"
-              @click.prevent="carregarDadosCliente"
+              @click.prevent="carregarDadosProjeto"
               style="margin-bottom:5px"
             >
             </q-btn>
           </div>
           <q-separator color="white" class="q-mb-sm" />
           <div
-            v-for="cliente in this.objCliente"
-            :key="cliente"
+            v-for="Projeto in this.objProjeto"
+            :key="Projeto"
             class="column"
             style="font-style:italic;"
           >
             <div style="width:100%">
               <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
-                cliente.id_cliente
+                Projeto.id_Projeto
               }}</span>
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="business" class="q-pr-sm" /><span>{{
-                cliente.nome_fantasia
+                Projeto.nome_fantasia
               }}</span>
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="business" class="q-pr-sm" /><span>
-                {{ cliente.razao_social }}
+                {{ Projeto.razao_social }}
               </span>
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="pin" class="q-pr-sm" />
-              <span>{{ cliente.cpf_cnpj }}</span>
+              <span>{{ Projeto.cpf_cnpj }}</span>
             </div>
             <div style="width:100%" v-if="this.telefone.length >= 1">
               <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
@@ -152,7 +152,7 @@
       </q-card>
 
       <div>
-        <q-card class="my-card" v-show="clienteAtivos">
+        <q-card class="my-card" v-show="ProjetoAtivos">
           <q-card-section>
             <p style="font-weight:500;font-size:16px">Estatísticas</p>
             <q-separator class="q-mb-sm" />
@@ -230,7 +230,7 @@
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
+          :idPrincipal="this.idProjetoAtivo"
           :msg="this.msgCard"
         />
       </div>
@@ -243,8 +243,8 @@ import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import {
-  bodyProcuraIdCliente,
-  bodyDadosCliente
+  bodyProcuraIdProjeto,
+  bodyDadosProjeto
 } from "src/boot/consultaSql.js";
 import { defineComponent } from "vue";
 import { computed } from "vue";
@@ -252,7 +252,7 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   components: { BarraLayout, CardGrupoApi },
-  name: "Cliente",
+  name: "Projeto",
   data() {
     return {
       ObjDashboard: [],
@@ -260,11 +260,11 @@ export default defineComponent({
       GrupoCards: [],
       GrupoCardsOpcionais: [],
       nomeFantasia: null,
-      idClienteAtivo: null,
-      clienteAtivo: false,
-      objCliente: [],
-      dadosCliente: null,
-      exibeSelecaoCliente: false,
+      idProjetoAtivo: null,
+      ProjetoAtivo: false,
+      objProjeto: [],
+      dadosProjeto: null,
+      exibeSelecaoProjeto: false,
       telaWidth: "",
       msgCard: "",
       bairro: "",
@@ -294,8 +294,8 @@ export default defineComponent({
         this.msgCard = "";
       }, 1000);
     },
-    ProcurarCliente() {
-      this.objCliente = "";
+    ProcurarProjeto() {
+      this.objProjeto = "";
       this.arrayTelefone = [];
       if (this.nomeFantasia === null) {
         this.$q.notify({
@@ -305,8 +305,8 @@ export default defineComponent({
           message: "Preencha os campos!"
         });
       } else {
-        this.clienteAtivo = false;
-        let body = bodyProcuraIdCliente(this.nomeFantasia.toUpperCase());
+        this.ProjetoAtivo = false;
+        let body = bodyProcuraIdProjeto(this.nomeFantasia.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
           if (arrRetorno.length <= 0) {
@@ -314,54 +314,52 @@ export default defineComponent({
               color: "red-5",
               textColor: "white",
               icon: "warning",
-              message: "Esse cliente não existe ou está inativo!"
+              message: "Esse Projeto não existe ou está inativo!"
             });
             return false;
           }
-          this.dadosCliente = arrRetorno;
-          if (this.dadosCliente.length <= 1) {
-            this.dadosCliente = this.dadosCliente[0];
-            this.carregarDadosCliente();
+
+          this.dadosProjeto = arrRetorno;
+          console.log(this.dadosProjeto);
+          if (this.dadosProjeto.length <= 1) {
+            this.dadosProjeto = this.dadosProjeto[0];
+            this.carregarDadosProjeto();
           } else {
-            this.exibeSelecaoCliente = true;
+            this.exibeSelecaoProjeto = true;
           }
         });
       }
       this.nomeFantasia = null;
     },
-    carregarDadosCliente() {
-      if (this.dadosCliente.id_cliente === null) {
+    carregarDadosProjeto() {
+      if (this.dadosProjeto.id_Projeto === null) {
         return false;
       }
-      //Setando cliente ativo
+      //Setando Projeto ativo
       this.telefone = [];
-      this.clienteAtivo = true;
-      this.idClienteAtivo = this.dadosCliente.id_cliente;
+      this.ProjetoAtivo = true;
+      this.idProjetoAtivo = this.dadosProjeto.id_Projeto;
 
-      //carregando dados Cliente
-      let body = bodyDadosCliente(this.idClienteAtivo);
+      //carregando dados Projeto
+      let body = bodyDadosProjeto(this.idProjetoAtivo);
       this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
-        this.objCliente = arrRetorno;
-        this.bairro = this.objCliente[0]["bairro"].split(",");
-        this.email = this.objCliente[0]["email"].split(";");
-        this.telefone = this.objCliente[0]["telefone"].split(";");
+        this.objProjeto = arrRetorno;
+        this.bairro = this.objProjeto[0]["bairro"].split(",");
+        this.email = this.objProjeto[0]["email"].split(";");
+        this.telefone = this.objProjeto[0]["telefone"].split(";");
       });
-
-      //atualizar conteudo dos cards do grupo/dashboard atual
       this.AtualizarCardsGrupoAtual();
       this.btnVejaMais = false;
     },
-    selecionarCliente(index) {
-      this.exibeSelecaoCliente = false;
-      this.dadosCliente = this.dadosCliente[index];
-      this.carregarDadosCliente();
+    selecionarProjeto(index) {
+      this.exibeSelecaoProjeto = false;
+      this.dadosProjeto = this.dadosProjeto[index];
+      this.carregarDadosProjeto();
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      // console.log(window.innerWidth);
       if (window.innerWidth <= 926) {
-        // this.ObjDashboard.grupos[this.IndexGrupoAtual].cards = "100%";
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -384,33 +382,31 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_cliente;
+    const permissao = login.recursos.dashboard_projeto;
     if (!permissao) {
-      next("Login");
+      alert("Você não possue autorização!");
+      next("");
     }
     next();
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.dashboard_cliente.id_layout_dashboard
+      login.recursos.dashboard_projeto.id_layout_dashboard
     );
-
     for (
       let i = 0;
-      i < login.recursos.dashboard_cliente.dashboard_complementar.length;
+      i < login.recursos.dashboard_projeto.dashboard_complementar.length;
       i++
     ) {
       let ObjDashboardTemp = GeLayoutDashBoard(
-        login.recursos.dashboard_cliente.dashboard_complementar[i]
+        login.recursos.dashboard_projeto.dashboard_complementar[i]
       );
 
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
         this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
       }
     }
-
-    //this.ObjDashboard = GeLayoutDashBoard(2);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();

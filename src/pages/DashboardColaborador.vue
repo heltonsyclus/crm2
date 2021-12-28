@@ -51,11 +51,11 @@
                 <q-card-section
                   class="card-primary flex"
                   style="margin:0px 10px 5px"
-                  v-for="(cliente, index) in this.dadosColaborador"
-                  :key="cliente"
-                  @click="selecionarCliente(index)"
+                  v-for="(colaborador, index) in this.dadosColaborador"
+                  :key="colaborador"
+                  @click="selecionarcolaborador(index)"
                 >
-                  <p>{{ cliente.colaborador }}</p>
+                  <p>{{ colaborador.colaborador }}</p>
                 </q-card-section>
               </div>
             </q-card>
@@ -65,11 +65,13 @@
         <q-card
           class="my-card bg-light-blue-9"
           style="color:#fff"
-          v-show="clienteAtivo"
+          v-show="colaboradorAtivo"
         >
           <q-card-section>
             <div class="flex justify-between items-center">
-              <p style=" font-size:16px;font-weight:700">Dados do cliente</p>
+              <p style=" font-size:16px;font-weight:700">
+                Dados do colaborador
+              </p>
               <q-btn
                 round
                 flat
@@ -142,7 +144,7 @@
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
             :link_item="ObjCard.link_item"
-            :idPrincipal="this.idClienteAtivo"
+            :idPrincipal="this.idcolaboradorAtivo"
             :msg="this.msgCard"
           />
           <CardGraficoApi
@@ -161,7 +163,7 @@
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
             :link_item="ObjCard.link_item"
-            :idPrincipal="this.idClienteAtivo"
+            :idPrincipal="this.idcolaboradorAtivo"
             :msg="this.msgCard"
           />
           <CardListaApi
@@ -180,7 +182,7 @@
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
             :link_item="ObjCard.link_item"
-            :idPrincipal="this.idClienteAtivo"
+            :idPrincipal="this.idcolaboradorAtivo"
             :msg="this.msgCard"
           />
         </div>
@@ -211,10 +213,10 @@ export default defineComponent({
       GrupoCardsOpcionais: [],
       nomeColaborador: null,
       exibeSelecaoColaborador: false,
-      clienteAtivo: false,
-      objCliente: [],
+      colaboradorAtivo: false,
+      objColaborador: [],
       dadosColaborador: [],
-      idClienteAtivo: null,
+      idcolaboradorAtivo: null,
       telaWidth: "",
       msgCard: "",
       teste: "row"
@@ -243,9 +245,9 @@ export default defineComponent({
           message: "Preencha os campos!"
         });
       } else {
-        this.clienteAtivo = false;
+        this.colaboradorAtivo = false;
         this.dadosColaborador = [];
-        this.idClienteAtivo = null;
+        this.idcolaboradorAtivo = null;
         this.msgCard = "limpar_conteudo";
         let body = bodyProcuraIdColaborador(this.nomeColaborador.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
@@ -293,12 +295,11 @@ export default defineComponent({
         return false;
       }
 
-      this.idClienteAtivo = this.dadosColaborador.id_colaborador;
-      this.clienteAtivo = true;
-      //atualizar conteudo dos cards do grupo/dashboard atual
+      this.idcolaboradorAtivo = this.dadosColaborador.id_colaborador;
+      this.colaboradorAtivo = true;
       this.AtualizarCardsGrupoAtual();
     },
-    selecionarCliente(index) {
+    selecionarcolaborador(index) {
       this.exibeSelecaoColaborador = false;
       this.dadosColaborador = this.dadosColaborador[index];
       this.carregardadosColaborador();

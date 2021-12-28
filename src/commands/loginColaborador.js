@@ -53,7 +53,24 @@ export function senhaLogin() {
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
           },
-          dashboard_bi: { permissao_layout_dashboard: [1, 2, 3, 4, 5] }
+          dashboard_projeto: {
+            id_layout_dashboard: 9,
+            dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 5,
+                dashboard: "layout 5",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 8,
+                dashboard: "layout 5",
+                dashboard_complementar: []
+              }
+            ]
+          }
         },
         img: require("../assets/comum.png"),
         token: "1086222297"
@@ -225,8 +242,8 @@ export function senhaLogin() {
         id_colaborador: 15,
         recursos: {
           dashboard_area_trabalho: {
-            id_layout_dashboard: 1,
-            dashboard_complementar: [4]
+            id_layout_dashboard: 4,
+            dashboard_complementar: [8]
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -236,6 +253,10 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_projeto: {
+            id_layout_dashboard: 9,
+            dashboard_complementar: []
           }
         },
         img: require("../assets/jully.png"),

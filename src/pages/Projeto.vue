@@ -30,7 +30,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
   components: { BarraLayout, CardBase },
-  name: "Projeto",
+  //name: "Projeto",
   data() {
     return {
       ObjDashboard: [],

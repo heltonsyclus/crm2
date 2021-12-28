@@ -95,6 +95,11 @@ export default defineComponent({
           text: "Colaborador"
         },
         {
+          icon: "fact_check",
+          rota: "/Projetos",
+          text: "Projetos"
+        },
+        {
           icon: "insert_chart_outlined",
           rota: "/BI",
           text: "BI"

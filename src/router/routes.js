@@ -8,7 +8,7 @@ const routes = [
       {
         path: "",
         name: "dashboard",
-        component: () => import("pages/Index.vue")
+        component: () => import("src/pages/DashboardPrincipal.vue")
       }
     ]
   },
@@ -56,7 +56,7 @@ const routes = [
       }
     ]
   },
-  {
+  /*{
     path: "/projeto",
     component: () => import("layouts/MainLayout.vue"),
     children: [
@@ -76,7 +76,7 @@ const routes = [
         component: () => import("pages/LayoutPesquisaProjeto.vue")
       }
     ]
-  },
+  },*/
   {
     path: "/ocorrencia",
     component: () => import("layouts/MainLayout.vue"),
@@ -97,7 +97,7 @@ const routes = [
       {
         path: "",
         name: "cliente",
-        component: () => import("pages/Cliente.vue")
+        component: () => import("src/pages/DashboardCliente.vue")
       }
     ]
   },
@@ -108,7 +108,7 @@ const routes = [
       {
         path: "",
         name: "agenda",
-        component: () => import("pages/Agenda.vue")
+        component: () => import("src/pages/DashboardAgenda.vue")
       }
     ]
   },
@@ -131,7 +131,7 @@ const routes = [
       {
         path: "",
         name: "colaborador",
-        component: () => import("pages/Colaborador.vue")
+        component: () => import("src/pages/DashboardColaborador.vue")
       }
     ]
   },
@@ -154,7 +154,19 @@ const routes = [
       {
         path: "",
         name: "bi",
-        component: () => import("pages/BI.vue")
+        component: () => import("src/pages/DashboardBI.vue")
+      }
+    ]
+  },
+  {
+    path: "/Projetos",
+    beforeEnter: Store.auth,
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "dashboardprojetos",
+        component: () => import("src/pages/DashboardProjeto.vue")
       }
     ]
   },

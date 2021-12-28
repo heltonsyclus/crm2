@@ -3,15 +3,17 @@
     <BarraLayout
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"
+      Aplicacao="Select"
+      :valoresRecurso="idColaboradorRecursos"
     />
 
     <div class="row">
+      {{ this.valorRecurso }}
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
         class="row"
       >
-        <!-- {{ ObjCard.width }}-->
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
@@ -87,15 +89,22 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   components: { BarraLayout, CardGrupoApi, CardListaApi, CardGraficoApi },
-  name: "dashboard",
+  name: "bi",
   setup() {
     const $store = useStore();
     const login = computed({
       get: () => $store.state.showcase.login
     });
+    const valorRecurso = computed({
+      get: () => $store.state.showcase.valorRecurso,
+      set: val => {
+        $store.commit("showcase/infRecursos", val);
+      }
+    });
     const fabPos = ref([18, 18]);
     const draggingFab = ref(false);
     return {
+      valorRecurso,
       login,
       fabPos,
       draggingFab,
@@ -115,12 +124,16 @@ export default defineComponent({
       Grupos: [],
       GrupoCards: [],
       GrupoCardsOpcionais: [],
-      idColaboradorAtivo: 0
+      idColaboradorAtivo: 0,
+      idColaboradorRecursos: [
+        "dashboard_area_trabalho",
+        "dashboard_cliente",
+        "dashboard_colaborador"
+      ]
     };
   },
   methods: {
     OnClickBarraLayout(IndexGrupo) {
-      console.log(IndexGrupo);
       this.IndexGrupoAtual = IndexGrupo;
       this.AtualizarCardsGrupoAtual();
     },
@@ -132,7 +145,7 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      /* if (window.innerWidth <= 926) {
+      if (window.innerWidth <= 926) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -141,37 +154,29 @@ export default defineComponent({
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
             "100%";
         }
-      }*/
+      }
+    },
+    CarregarDashboard(pIDashboard, pComplementar) {
+      this.ObjDashboard = GeLayoutDashBoard(pIDashboard);
+      if (pComplementar) {
+        for (let i = 0; i < pComplementar.length; i++) {
+          let ObjDashboardTemp = GeLayoutDashBoard(pComplementar[i]);
+          for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
+            this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
+          }
+        }
+      }
     }
   },
-  beforeRouteEnter(to, from, next) {
-    let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_area_trabalho;
-    if (!permissao) {
-      alert("Você não possui autorização!");
-      next("");
-    }
-    next();
-  },
+
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.idColaboradorAtivo = login.id_colaborador;
-    this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.dashboard_area_trabalho.id_layout_dashboard
+    this.CarregarDashboard(
+      login.recursos[this.valorRecurso].id_layout_dashboard,
+      login.recursos.dashboard_area_trabalho.dashboard_complementar
     );
-    for (
-      let i = 0;
-      i < login.recursos.dashboard_area_trabalho.dashboard_complementar.length;
-      i++
-    ) {
-      let ObjDashboardTemp = GeLayoutDashBoard(
-        login.recursos.dashboard_area_trabalho.dashboard_complementar[i]
-      );
 
-      for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
-        this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
-      }
-    }
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);

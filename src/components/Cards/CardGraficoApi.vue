@@ -101,23 +101,13 @@ export default {
       ObjConteudo: {},
       chartOptions: {
         xaxis: {
-          categories: [
-            "ADMINISTRATIVO",
-            "ANALISE TECNICA",
-            "COMERCIAL",
-            "DESENVOLVIMENTO",
-            "DIRETORIA",
-            "FINANCEIRO",
-            "GERAIS",
-            "PROJETOS",
-            "SUPORTE"
-          ]
+          categories: ["INÍCIO"]
         }
       },
       series: [
         {
           name: "Atividades",
-          data: []
+          data: ["0"]
         }
       ]
     };
@@ -298,10 +288,6 @@ export default {
 * {
   padding: 0;
   margin: 0;
-}
-.my-card-s {
-  width: 450px;
-  max-height: 80vh;
 }
 .margin-bot {
   margin-bottom: 3px;

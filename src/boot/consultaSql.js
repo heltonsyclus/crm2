@@ -52,7 +52,7 @@ export function montaBody(pInstrucaoSql, pFiltros) {
   return body;
 }
 
-//----------------------atividade ----------------------//
+//----------------------atividade----------------------//
 
 export function bodyAtividade(pFiltros) {
   let instrucao_sql =
@@ -253,5 +253,51 @@ export function bodyOcorrenciaPorMesAno(pFiltros) {
 export function bodyOcorrenciaPorSemana(pFiltros) {
   let instrucao_sql = `select extract(week from o.dt_ocorrencia) "id_sequencial", 'SEMANA '||extract(week from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(week from o.dt_ocorrencia), 'SEMANA '||extract(week from o.dt_ocorrencia) order by 1`;
   let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- projetos ----------------------//
+export function bodyProcuraIdProjeto(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select p.cd_projeto "id_projeto", p.ds_projeto "projeto", c.ds_cpf_cnpj "cpf_cnpj", p.ds_status "status" from projeto p left join cliente c on c.cd_cliente = p.cd_cliente where p.ds_status <> \'C\' and ((p.ds_projeto like ('%${pValor}%')) or (c.ds_cpf_cnpj like ('${pValor}%')))`
+  };
+  return body;
+}
+
+//Retorna dados do projeto pIdProjeto
+export function bodyDadosProjeto(pIdProjeto) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select p.cd_projeto \"id_cd_projeto\", p.ds_projeto \"projeto\", a.dt_previsao \"data_previsao\", c.ds_razao_social \"razao_social\", c.ds_fantasia \"nome_fantasia\", c.ds_cpf_cnpj \"cpf_cnpj\", ce.ds_endereco_completo \"endereco\", ce.ds_bairro \"bairro\", ce.ds_cidade \"cidade\", ce.ds_uf \"uf\", ce.ds_cep \"cep\", ct.ds_telefone \"telefone\", cm.ds_email \"email\" from left join cliente c on c.cd_cliente = p.cd_cliente left join proc_cliente_endereco(c.cd_cliente, 'R') ce on (1 = 1) left join proc_cliente_telefone(c.cd_cliente, '') ct on (1 = 1) left join proc_cliente_email(c.cd_cliente, '') cm on (1 = 1) where p.cd_projeto = ${pIdProjeto}`
+  };
+  return body;
+}
+
+//Retorna dados do projeto em execucao pIdProjeto
+export function bodyAtividadePendenteProjeto(pValor) {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql: `select a.cd_atividade \"id_atividade\", a.ds_atividade \"atividade\", a.dt_previsao \"data_previsao\" from atividade a where a.ds_status = 'P' and a. cd_responsavel = ${pValor}`
+  };
+  return body;
+}
+
+//---projetos ativos
+export function bodyProjetoAtivo() {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql:
+      'select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p where p.ds_status = \'A\''
+  };
+  return body;
+}
+//--Projetos finalizados
+export function bodyProjetoFinalizados() {
+  const body = {
+    tipo_retorno: "",
+    instrucao_sql:
+      'select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p where p.ds_status = \'F\''
+  };
   return body;
 }

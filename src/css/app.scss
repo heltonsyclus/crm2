@@ -19,7 +19,7 @@ body {
 }
 .my-card-syclus {
   width: 100%;
-  min-width: 304px;
+  min-width: 312px;
   min-height: 210px;
   margin: 10px 2px;
 }
@@ -32,20 +32,17 @@ body {
   height: 270px;
   min-height: 200px;
 }
-
 .my-card-s-500-304 {
   @include cards;
   min-height: 250px;
   max-height: 500px;
 }
-
 .my-card-s-310-380 {
   @include cards;
   min-height: 250px;
   height: 310px;
   width: 380px;
 }
-
 .my-card-pesquisa {
   @include cards;
   min-height: 250px;

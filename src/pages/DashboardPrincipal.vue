@@ -3,12 +3,9 @@
     <BarraLayout
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"
-      Aplicacao="Select"
-      :valoresRecurso="idColaboradorRecursos"
     />
 
     <div class="row">
-      <!--{{ this.valorRecurso }}-->
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
@@ -95,16 +92,9 @@ export default defineComponent({
     const login = computed({
       get: () => $store.state.showcase.login
     });
-    const valorRecurso = computed({
-      get: () => $store.state.showcase.valorRecurso,
-      set: val => {
-        $store.commit("showcase/infRecursos", val);
-      }
-    });
     const fabPos = ref([18, 18]);
     const draggingFab = ref(false);
     return {
-      valorRecurso,
       login,
       fabPos,
       draggingFab,
@@ -124,12 +114,7 @@ export default defineComponent({
       Grupos: [],
       GrupoCards: [],
       GrupoCardsOpcionais: [],
-      idColaboradorAtivo: 0,
-      idColaboradorRecursos: [
-        "dashboard_area_trabalho",
-        "dashboard_cliente",
-        "dashboard_colaborador"
-      ]
+      idColaboradorAtivo: 0
     };
   },
   methods: {
@@ -159,22 +144,18 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_bi;
+    const permissao = login.recursos.dashboard_area_trabalho;
     if (!permissao) {
       alert("Você não possui autorização!");
       next("");
     }
     next();
   },
-
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.idColaboradorAtivo = login.id_colaborador;
-    console.log(login.recursos[this.valorRecurso].id_layout_dashboard);
-    console.log(login.recursos[this.valorRecurso].dashboard_complementar);
-    console.log(login.recursos[this.valorRecurso].dashboard_complementar[0]);
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos[this.valorRecurso].id_layout_dashboard
+      login.recursos.dashboard_area_trabalho.id_layout_dashboard
     );
     for (
       let i = 0;
@@ -182,7 +163,7 @@ export default defineComponent({
       i++
     ) {
       let ObjDashboardTemp = GeLayoutDashBoard(
-        login.recursos[this.valorRecurso].dashboard_complementar[i]
+        login.recursos.dashboard_area_trabalho.dashboard_complementar[i]
       );
 
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
