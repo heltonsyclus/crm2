@@ -123,8 +123,10 @@ export default {
     handleResize() {
       window.innerWidth;
       if (window.innerWidth <= 827) {
-        console.log(window.innerWidth);
         this.desktop = false;
+      }
+      if (window.innerWidth >= 827) {
+        this.desktop = true;
       }
     }
   },
@@ -161,5 +163,10 @@ h4 {
   padding-top: 20px;
   margin: 0 auto;
   text-align: center;
+}
+@media only screen and (max-width: 827px) {
+  .fundo-syclus {
+    width: 100vh;
+  }
 }
 </style>
