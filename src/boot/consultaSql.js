@@ -269,8 +269,46 @@ export function bodyProcuraIdProjeto(pValor) {
 export function bodyDadosProjeto(pIdProjeto) {
   const body = {
     tipo_retorno: "",
-    instrucao_sql: `select p.cd_projeto \"id_cd_projeto\", p.ds_projeto \"projeto\", a.dt_previsao \"data_previsao\", c.ds_razao_social \"razao_social\", c.ds_fantasia \"nome_fantasia\", c.ds_cpf_cnpj \"cpf_cnpj\", ce.ds_endereco_completo \"endereco\", ce.ds_bairro \"bairro\", ce.ds_cidade \"cidade\", ce.ds_uf \"uf\", ce.ds_cep \"cep\", ct.ds_telefone \"telefone\", cm.ds_email \"email\" from left join cliente c on c.cd_cliente = p.cd_cliente left join proc_cliente_endereco(c.cd_cliente, 'R') ce on (1 = 1) left join proc_cliente_telefone(c.cd_cliente, '') ct on (1 = 1) left join proc_cliente_email(c.cd_cliente, '') cm on (1 = 1) where p.cd_projeto = ${pIdProjeto}`
+    instrucao_sql: `select p.cd_projeto \"id_projeto\", p.ds_projeto \"projeto\", p.dt_previsao \"data_previsao\", c.ds_razao_social \"razao_social\", c.ds_fantasia \"nome_fantasia\", c.ds_cpf_cnpj \"cpf_cnpj\", ce.ds_endereco_completo \"endereco\", ce.ds_bairro \"bairro\", ce.ds_cidade \"cidade\", ce.ds_uf \"uf\", ce.ds_cep \"cep\", ct.ds_telefone \"telefone\", cm.ds_email \"email\" from projeto p left join cliente c on c.cd_cliente = p.cd_cliente left join proc_cliente_endereco(c.cd_cliente, 'R') ce on (1 = 1) left join proc_cliente_telefone(c.cd_cliente, '') ct on (1 = 1) left join proc_cliente_email(c.cd_cliente, '') cm on (1 = 1) where p.cd_projeto = ${pIdProjeto}`
   };
+  return body;
+}
+
+export function bodyProjeto(pFiltros) {
+  let instrucao_sql =
+    'select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p <filtros> order by p.dt_previsao';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoPorTipoProjeto(pFiltros) {
+  let instrucao_sql =
+    'select tv.cd_tipo_projeto "id_tipo_projeto", tv.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto" from projeto p inner join tipo_projeto tv on tv.cd_tipo_projeto = p.cd_tipo_projeto <filtros> group by tv.cd_tipo_projeto, tv.ds_tipo_projeto order by tv.ds_tipo_projeto';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyProjetoPorTag(pFiltros) {
+  let instrucao_sql =
+    'select tg.cd_tag "id_tag", tg.ds_tag "tag", count(p.cd_projeto) "qtde_projeto" from projeto p inner join projeto_tag pg on pg.cd_projeto = p.cd_projeto inner join tag tg on tg.cd_tag = pg.cd_tag <filtros> group by tg.cd_tag, tg.ds_tag order by tg.ds_tag';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyProjetoPorResponsavel(pFiltros) {
+  let instrucao_sql =
+    'select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(p.cd_projeto) "qtde_projeto" from projeto p inner join colaborador cb on cb.cd_colaborador = p.cd_responsavel <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador';
+
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyProjetoPorCliente(pFiltros) {
+  let instrucao_sql =
+    'select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(p.cd_projeto) "qtde_projeto" from projeto p inner join cliente cl on cl.cd_cliente = p.cd_cliente <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia';
+  let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
 

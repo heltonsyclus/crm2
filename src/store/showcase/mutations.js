@@ -20,6 +20,3 @@ export const selectStatusAgenda = (state, payload) => {
 export const autenticacaoLogin = (state, payload) => {
   state.login = payload;
 };
-export const infRecursos = (state, payload) => {
-  state.valorRecurso = payload;
-};

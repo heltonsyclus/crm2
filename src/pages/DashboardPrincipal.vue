@@ -4,12 +4,12 @@
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"
     />
-
     <div class="row">
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
         class="row"
+        style="width:70vh"
       >
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"

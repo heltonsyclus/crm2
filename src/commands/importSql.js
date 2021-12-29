@@ -17,7 +17,12 @@ import {
   bodyOcorrenciaPorColaborador,
   bodyOcorrenciaPorData,
   bodyOcorrenciaPorMesAno,
-  bodyOcorrenciaPorSemana
+  bodyOcorrenciaPorSemana,
+  bodyProjeto,
+  bodyProjetoPorTipoProjeto,
+  bodyProjetoPorResponsavel,
+  bodyProjetoPorCliente,
+  bodyProjetoPorTag
 } from "src/boot/consultaSql.js";
 
 export default {
@@ -73,7 +78,8 @@ export default {
       if (
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
-        pNomeBody === "bodyAtividadeTag"
+        pNomeBody === "bodyAtividadeTag" ||
+        pNomeBody === "bodyProjeto"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
           "<id_principal>",
@@ -137,6 +143,21 @@ export default {
       }
       if (pNomeBody === "bodyOcorrenciaPorSemana") {
         return bodyOcorrenciaPorSemana(filtros);
+      }
+      if (pNomeBody === "bodyProjeto") {
+        return bodyProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorTipoProjeto") {
+        return bodyProjetoPorTipoProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorResponsavel") {
+        return bodyProjetoPorResponsavel(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorCliente") {
+        return bodyProjetoPorCliente(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorTag") {
+        return bodyProjetoPorTag(filtros);
       }
     },
 

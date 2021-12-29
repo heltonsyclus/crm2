@@ -2,6 +2,46 @@ export function senhaLogin() {
   const json = {
     login: [
       {
+        usuario: "usuario",
+        senha: "0",
+        id_colaborador: 1,
+        recursos: {
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: [4]
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: [6, 7]
+          },
+          dashboard_colaborador: {
+            id_layout_dashboard: 3,
+            dashboard_complementar: [],
+            permissao_colaborador: ["*"]
+          },
+          dashboard_projeto: {
+            id_layout_dashboard: 9,
+            dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 5,
+                dashboard: "layout 5",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 8,
+                dashboard: "layout 8",
+                dashboard_complementar: []
+              }
+            ]
+          }
+        },
+        img: require("../assets/comum.png"),
+        token: "1086222297"
+      },
+      {
         usuario: "abner",
         senha: "1= 210124",
         id_colaborador: 51,
@@ -37,7 +77,7 @@ export function senhaLogin() {
       },
       {
         usuario: "danilo",
-        senha: "0",
+        senha: "teste",
         id_colaborador: 4,
         recursos: {
           dashboard_area_trabalho: {
@@ -66,7 +106,7 @@ export function senhaLogin() {
               },
               {
                 id_layout_dashboard: 8,
-                dashboard: "layout 5",
+                dashboard: "layout 8",
                 dashboard_complementar: []
               }
             ]
@@ -242,8 +282,8 @@ export function senhaLogin() {
         id_colaborador: 15,
         recursos: {
           dashboard_area_trabalho: {
-            id_layout_dashboard: 4,
-            dashboard_complementar: [8]
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -257,6 +297,15 @@ export function senhaLogin() {
           dashboard_projeto: {
             id_layout_dashboard: 9,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 8,
+                dashboard: "layout 8",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/jully.png"),

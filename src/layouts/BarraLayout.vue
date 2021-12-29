@@ -130,25 +130,11 @@
             v-if="Aplicacao === 'Select'"
           >
             <q-select
-              v-model="this.valorRecurso"
+              v-model="valorModel"
               dense
               :options="this.valoresRecurso"
+              @blur="mudar(this.valoresRecurso)"
             />
-          </div>
-          <div
-            class="flex items-center wrap q-mr-md"
-            v-if="Aplicacao === 'pesquisaInput'"
-          >
-            <q-input
-              v-model="pesquisaInput"
-              :readonly="readonly"
-              dense
-              :disable="disable"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
           </div>
         </div>
       </div>
@@ -198,6 +184,7 @@ export default defineComponent({
       pesquisa: ref(false),
       ResultWorkflow: ref([]),
       darkDialog: ref(false),
+      valorModel: ref("Escolha o dashboard"),
       pesquisaInput: ref([]),
       pesquisaArray: ref([]),
       calendario: ref(["Mensal", "Semanal", "Diário"]),
@@ -211,6 +198,20 @@ export default defineComponent({
     };
   },
   methods: {
+    mudar(valoresRecurso) {
+      // console.log(valoresRecurso);
+      //  console.log(this.valorModel);
+      for (
+        let selectIndex = 0;
+        selectIndex < valoresRecurso.length;
+        selectIndex++
+      ) {
+        if (valoresRecurso[selectIndex] === this.valorModel) {
+          //alert([selectIndex]);
+          this.$emit("valorInputPesquisa", selectIndex);
+        }
+      }
+    },
     onclickGrupo(ValorIndex) {
       this.$emit("OnClick", ValorIndex);
       this.Valor = ValorIndex;

@@ -85,59 +85,24 @@
             class="column"
             style="font-style:italic;"
           >
-            {{ this.objProjeto }}
             <div style="width:100%">
               <q-icon size="18px" name="money" class="q-pr-sm" /><span>{{
-                Projeto.id_Projeto
+                Projeto.id_projeto
               }}</span>
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="business" class="q-pr-sm" /><span>{{
-                Projeto.nome_fantasia
+                Projeto.projeto
               }}</span>
             </div>
             <div style="width:100%">
-              <q-icon size="18px" name="business" class="q-pr-sm" /><span>
-                {{ Projeto.razao_social }}
+              <q-icon size="18px" name="event" class="q-pr-sm" /><span>
+                {{ this.datafiltro }}
               </span>
             </div>
             <div style="width:100%">
               <q-icon size="18px" name="pin" class="q-pr-sm" />
-              <span>{{ Projeto.cpf_cnpj }}</span>
-            </div>
-            <div style="width:100%" v-if="this.telefone.length >= 1">
-              <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-              <span>{{ this.telefone[0] }}</span>
-              <q-badge
-                color="purple"
-                @click.prevent="btnVmais()"
-                class="q-ml-sm"
-                style="cursor:pointer"
-              >
-                <q-icon name="visibility" color="white" />
-                Veja mais
-              </q-badge>
-              <div
-                v-show="btnVejaMais"
-                v-for="telefones in this.telefone"
-                :key="telefones"
-              >
-                <q-icon size="18px" name="phone_in_talk" class="q-pr-sm" />
-                <span>{{ telefones }}</span>
-              </div>
-            </div>
-
-            <div v-for="emails in this.email" :key="emails">
-              <q-icon size="18px" name="email" class="q-pr-sm" />
-              <span style="width:100%">{{ emails }}</span>
-            </div>
-            <div
-              style="width:100%"
-              v-for="bairros in this.bairro"
-              :key="bairros"
-            >
-              <q-icon size="18px" name="share_location" class="q-pr-sm" />
-              <span>{{ bairros }}</span>
+              <span>{{ Projeto.razao_social }}</span>
             </div>
             <div>
               <q-icon size="18px" name="done" class="q-pr-sm" />
@@ -211,6 +176,7 @@ export default defineComponent({
       idProjetoAtivo: null,
       ProjetoAtivo: false,
       objProjeto: [],
+      datafiltro: "",
       dadosProjeto: null,
       exibeSelecaoProjeto: false,
       telaWidth: "",
@@ -220,12 +186,6 @@ export default defineComponent({
   methods: {
     parar() {
       this.msgCard = null;
-    },
-    btnVmais() {
-      for (let i = 0; i < this.telefone.length; i++) {
-        this.arrayTelefone.unshift(this.telefone[i]);
-      }
-      this.btnVejaMais = !this.btnVejaMais;
     },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
@@ -239,7 +199,7 @@ export default defineComponent({
     },
     ProcurarProjeto() {
       this.objProjeto = "";
-      this.arrayTelefone = [];
+      this.datafiltro = "";
       if (this.nomeFantasia === null) {
         this.$q.notify({
           color: "red-5",
@@ -276,13 +236,18 @@ export default defineComponent({
       if (this.dadosProjeto.id_projeto === null) {
         return false;
       }
-      console.log(this.dadosProjeto.id_projeto);
-
       let body = bodyDadosProjeto(this.dadosProjeto.id_projeto);
-      console.log(body);
-      /*this.$api.post("consultasql", body).then(res => {
+      this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
-      });*/
+        this.objProjeto = arrRetorno;
+        let dataprojeto = this.objProjeto[0].data_previsao.substr(0, 10);
+        this.datafiltro = dataprojeto
+          .split("-")
+          .reverse()
+          .join("/");
+      });
+      this.ProjetoAtivo = true;
+      this.AtualizarCardsGrupoAtual();
     },
     selecionarProjeto(index) {
       this.exibeSelecaoProjeto = false;

@@ -121,6 +121,7 @@ export default {
   padding: 0;
   margin: 0;
 }
+
 .margin-bot {
   margin-bottom: 3px;
 }

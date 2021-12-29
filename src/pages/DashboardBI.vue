@@ -2,17 +2,17 @@
   <div class="col2">
     <BarraLayout
       @OnClick="OnClickBarraLayout"
+      @valorInputPesquisa="OnClickSelect"
       :ConteudoBtn="this.ObjDashboard['grupos']"
       Aplicacao="Select"
-      :valoresRecurso="idColaboradorRecursos"
+      :valoresRecurso="this.dashboardsColaboradorAtivo"
     />
-
     <div class="row">
-      {{ this.valorRecurso }}
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
         class="row"
+        style="width:100vh"
       >
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
@@ -95,16 +95,9 @@ export default defineComponent({
     const login = computed({
       get: () => $store.state.showcase.login
     });
-    const valorRecurso = computed({
-      get: () => $store.state.showcase.valorRecurso,
-      set: val => {
-        $store.commit("showcase/infRecursos", val);
-      }
-    });
     const fabPos = ref([18, 18]);
     const draggingFab = ref(false);
     return {
-      valorRecurso,
       login,
       fabPos,
       draggingFab,
@@ -125,14 +118,21 @@ export default defineComponent({
       GrupoCards: [],
       GrupoCardsOpcionais: [],
       idColaboradorAtivo: 0,
-      idColaboradorRecursos: [
-        "dashboard_area_trabalho",
-        "dashboard_cliente",
-        "dashboard_colaborador"
-      ]
+      dashboardsColaboradorAtivo: []
     };
   },
   methods: {
+    OnClickSelect(selectIndex) {
+      let login = JSON.parse(localStorage.getItem("login"));
+      let recursosBi = login.recursos.dashboard_bi.layout_dashboard;
+
+      this.CarregarDashboard(
+        recursosBi[selectIndex].id_layout_dashboard,
+        recursosBi[selectIndex].dashboard_complementar
+      );
+      this.msgCard = "limpar_conteudo";
+      this.AtualizarCardsGrupoAtual();
+    },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
       this.AtualizarCardsGrupoAtual();
@@ -168,15 +168,26 @@ export default defineComponent({
       }
     }
   },
-
+  beforeRouteEnter(to, from, next) {
+    let login = JSON.parse(localStorage.getItem("login"));
+    const permissao = login.recursos.dashboard_bi;
+    if (!permissao) {
+      alert("Você não possue autorização!");
+      next("");
+    }
+    next();
+  },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
+    let recursosBi = login.recursos.dashboard_bi.layout_dashboard;
+    for (let i = 0; i < recursosBi.length; i++) {
+      this.dashboardsColaboradorAtivo.push(recursosBi[i].dashboard);
+    }
     this.idColaboradorAtivo = login.id_colaborador;
     this.CarregarDashboard(
-      login.recursos[this.valorRecurso].id_layout_dashboard,
+      login.recursos.dashboard_area_trabalho.id_layout_dashboard,
       login.recursos.dashboard_area_trabalho.dashboard_complementar
     );
-
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);
