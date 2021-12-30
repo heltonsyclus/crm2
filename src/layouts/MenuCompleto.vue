@@ -1,6 +1,6 @@
 <template>
   <q-list class="my-card-m">
-    <div class="flex justify-end" style="padding:20px">
+    <div class="flex justify-start" style="padding:20px">
       <q-icon
         name="close"
         class="text-red"
@@ -113,12 +113,12 @@ export default {
   margin: 0;
 }
 .my-card-m {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   overflow: auto;
-  width: 304px;
-  height: 100vh;
+  width: 284px;
+  min-height: 100vh;
   background-color: rgb(248, 248, 248);
 }
 .hover:hover {
