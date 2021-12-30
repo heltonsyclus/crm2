@@ -37,7 +37,7 @@
         <apexchart type="scatter" :options="chartOptions" :series="series">
         </apexchart>
       </div>
-      <div v-if="sub_tipo === 'grafico_cores'">
+      <div v-if="sub_tipo === 'grafico_quantidade'">
         <apexchart type="heatmap" :options="chartOptions" :series="series">
         </apexchart>
       </div>
@@ -45,11 +45,10 @@
         <apexchart type="pie" :options="chartOptions" :series="series">
         </apexchart>
       </div>
-      <div v-if="sub_tipo === 'grafico_update'">
-        <button @click="mudarGrafico">Mudar</button>
+      <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
           type="bar"
-          :options="chartOptions2"
+          :options="chartOptions"
           :series="series"
         ></apexchart>
       </div>
@@ -101,7 +100,7 @@ export default {
       ObjConteudo: {},
       chartOptions: {
         xaxis: {
-          categories: ["INÍCIO"]
+          categories: ["0"]
         }
       },
       series: [
@@ -243,7 +242,7 @@ export default {
       this.ObjConteudo.grupos = [];
       (this.chartOptions = {
         xaxis: {
-          categories: ["INÍCIO"]
+          categories: ["0"]
         }
       }),
         (this.series = [

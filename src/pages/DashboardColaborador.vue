@@ -127,7 +127,7 @@
             .cards"
           :key="ObjCard"
           class="row"
-          style="width:70vh"
+          style="width:75vh"
         >
           <CardGrupoApi
             v-if="ObjCard.tipo_card === 'CardGrupoApi'"

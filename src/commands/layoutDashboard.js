@@ -1480,18 +1480,19 @@ function layoutDashBoard3() {
           },
           {
             id_card: 2,
-            card: "Tipo Atividade (semana)",
+            card: "Atividade atrasadas",
             ordem: 2,
             btn_comando: "btn-atualizar",
-            tipo_card: "CardListaApi",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
             width: "100%",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyOcorrenciaPorTipoAtividade",
+              body_grupo: "bodyAtividadePorTipoAtividade",
               filtro_sql_grupo:
-                "where o.ds_status in ('A', 'F') and (extract(week from o.dt_ocorrencia) = extract(week from current_date)) and (extract(year from o.dt_ocorrencia) = extract(year from current_date)) and o.cd_colaborador = <id_principal>",
-              body_item: "",
-              filtro_sql_item: ""
+                "where a.ds_status = 'P' and cast(a.dt_previsao as date) < current_date and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and cast(a.dt_previsao as date) < current_date and a.cd_responsavel = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
             }
           }
         ],
