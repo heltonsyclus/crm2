@@ -208,9 +208,9 @@ export default defineComponent({
   },
   methods: {
     limparToken() {
+      window.location.reload(true);
       window.localStorage.clear();
       this.login = [];
-      //this.$router.push({ name: "Login" });
     },
     handleResize() {
       if (window.innerWidth <= 800) {

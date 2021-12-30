@@ -241,6 +241,17 @@ export default {
     },
     limparConteudo() {
       this.ObjConteudo.grupos = [];
+      (this.chartOptions = {
+        xaxis: {
+          categories: ["INÍCIO"]
+        }
+      }),
+        (this.series = [
+          {
+            name: "Atividades",
+            data: ["0"]
+          }
+        ]);
     },
     formataCaptionGrupo(pQtde, pDuracao) {
       let texto = "";
