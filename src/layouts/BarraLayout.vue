@@ -224,6 +224,7 @@ export default defineComponent({
     validarValorRecurso() {
       if (this.valoresRecurso != null) {
         this.valorModel = this.valoresRecurso[0];
+        this.$emit("valorInputPesquisa", 0);
       }
     }
   },

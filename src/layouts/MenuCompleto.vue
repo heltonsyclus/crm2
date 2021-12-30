@@ -21,7 +21,7 @@
         <q-icon :name="list.icon" size="25px" />
       </q-item-section>
       <q-item-section>{{ list.text }}</q-item-section>
-      <q-icon name="expand_more" size="25px" />
+      <!-- <q-icon name="expand_more" size="25px" />-->
     </q-item>
   </q-list>
 </template>
