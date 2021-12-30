@@ -78,7 +78,7 @@ export function senhaLogin() {
       {
         usuario: "cledesson",
         senha: "cledesson321",
-        id_colaborador: 57,
+        id_colaborador: 2,
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,

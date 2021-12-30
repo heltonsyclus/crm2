@@ -12,12 +12,12 @@
     </div>
     <div class="fundo-syclus bg-blue-10">
       <q-form @submit="Logar">
-        <div style="width:70%;margin:170px auto;color:#fff">
-          <div v-if="desktop === true">
+        <div
+          style="width:70%;margin:170px auto;color:#fff"
+          v-if="desktop === true"
+        >
+          <div>
             <h4>Login</h4>
-          </div>
-          <div v-else>
-            <h4>Syclus</h4>
           </div>
           <q-input
             dark
@@ -57,6 +57,57 @@
               style="padding:8px 0"
               dense
               rounded
+            />
+          </div>
+        </div>
+        <div
+          style="width:70%;margin:170px auto;color:#fff;padding:20px;border-radius:8px"
+          class="bg-grey-1"
+          v-if="desktop === false"
+        >
+          <div>
+            <img
+              src="../assets/syclus_mobile.png"
+              style="text-aligth:center;margin:0 auto;padding:5px 0px 0px"
+            />
+          </div>
+          <q-input
+            v-model="vlogin"
+            dense
+            color="grey-9"
+            label-color="grey-9"
+            label="Login"
+            :rules="[val => (val && val.length > 0) || 'Preencha o campo!']"
+          />
+          <q-input
+            v-model="password"
+            dense
+            color="grey-9"
+            label-color="grey-9"
+            label="Password"
+            :type="isPwd ? 'password' : 'text'"
+            :rules="[
+              val => (val !== null && val !== '') || 'Preencha o campo!'
+            ]"
+          >
+            <template v-slot:append>
+              <q-icon
+                color="grey-9"
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+          <div>
+            <q-btn
+              color="primary full-width capitalize"
+              label="Logar"
+              type="submit"
+              style="padding:8px 0"
+              dense
+              rounded
+              unelevated
             />
           </div>
         </div>

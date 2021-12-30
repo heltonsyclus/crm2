@@ -43,7 +43,7 @@
           <span>Não possui grupos...</span>
         </div>
         <div
-          class="flex justify-between items-center q-my-none"
+          class="flex justify-between items-center q-my-none hover"
           style="padding:10px"
         >
           <p class="text-dark">
@@ -90,6 +90,9 @@ export default {
 }
 .pl {
   padding-left: 5px;
+}
+.hover:hover {
+  background-color: rgb(205, 205, 205);
 }
 .my-card-s {
   width: 450px;

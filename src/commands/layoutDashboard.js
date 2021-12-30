@@ -1028,7 +1028,7 @@ function layoutDashBoard2() {
             card: "Tag",
             ordem: 2,
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardListaApi",
             width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {

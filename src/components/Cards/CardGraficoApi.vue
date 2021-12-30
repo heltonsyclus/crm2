@@ -152,7 +152,6 @@ export default {
         "<id_principal>",
         this.idPrincipal
       );
-
       if (
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
@@ -211,10 +210,8 @@ export default {
         return bodyOcorrenciaPorData(filtros);
       }
     },
-
     atualizarConteudo() {
       this.limparConteudo();
-
       if (this.idPrincipal !== null) {
         let body = this.getBody(this.conteudo_card.body_grupo);
         if (body == null) {
