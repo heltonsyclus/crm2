@@ -76,6 +76,23 @@ export function senhaLogin() {
         token: "1086222297"
       },
       {
+        usuario: "cledesson",
+        senha: "cledesson321",
+        id_colaborador: 57,
+        recursos: {
+          dashboard_area_trabalho: {
+            id_layout_dashboard: 1,
+            dashboard_complementar: []
+          },
+          dashboard_cliente: {
+            id_layout_dashboard: 2,
+            dashboard_complementar: []
+          }
+        },
+        img: require("../assets/cledesson.png"),
+        token: "1086222297"
+      },
+      {
         usuario: "danilo",
         senha: "teste",
         id_colaborador: 4,
@@ -139,7 +156,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: []
+            dashboard_complementar: [8]
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -283,7 +300,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: []
+            dashboard_complementar: [8]
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,

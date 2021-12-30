@@ -184,7 +184,6 @@ export default defineComponent({
       pesquisa: ref(false),
       ResultWorkflow: ref([]),
       darkDialog: ref(false),
-      valorModel: ref("Escolha o dashboard"),
       pesquisaInput: ref([]),
       pesquisaArray: ref([]),
       calendario: ref(["Mensal", "Semanal", "Diário"]),
@@ -194,20 +193,18 @@ export default defineComponent({
   data() {
     return {
       date: [],
-      Valor: []
+      Valor: [],
+      valorModel: "item"
     };
   },
   methods: {
     mudar(valoresRecurso) {
-      // console.log(valoresRecurso);
-      //  console.log(this.valorModel);
       for (
         let selectIndex = 0;
         selectIndex < valoresRecurso.length;
         selectIndex++
       ) {
         if (valoresRecurso[selectIndex] === this.valorModel) {
-          //alert([selectIndex]);
           this.$emit("valorInputPesquisa", selectIndex);
         }
       }
@@ -222,6 +219,12 @@ export default defineComponent({
     InputValor() {
       this.$emit("valorInputPesquisa", this.pesquisaInput);
       this.$emit("valorSelectPesquisa", this.pesquisaSelect);
+    },
+
+    validarValorRecurso() {
+      if (this.valoresRecurso != null) {
+        this.valorModel = this.valoresRecurso[0];
+      }
     }
   },
   computed: {
@@ -233,6 +236,7 @@ export default defineComponent({
     const json =
       '{"etapas":[{"titulo_etapa":"Filtro","id_etapa":1,"qtde_etapa":2,"componente_tela":[{"tipo_componente":"input_data","placeholder":"Período inicial"},{"tipo_componente":"input_data","placeholder":"Período final"},{"tipo_componente":"selecao_padrao","placeholder":"Avaliar","modelo":["Emissão","Previsão","Finalização"]},{"tipo_componente":"selecao_padrao","placeholder":"Situação","modelo":["Inicial","Planejamento","Execução","Finalizado"]},{"tipo_componente":"selecao_padrao","placeholder":"Tags","modelo":["Syclus 1","Syclus 2","Fiscal"]},{"tipo_componente":"selecao_padrao","placeholder":"Colaborador","modelo":["Henrique","Helton","Danilo"]}]},{"titulo_etapa":"Avançados","id_etapa":2,"qtde_etapa":2,"componente_tela":[{"tipo_componente":"selecao_padrao","placeholder":"OP","modelo":["E","OU"]},{"tipo_componente":"selecao_padrao","placeholder":"Campo","modelo":["Situação"]},{"tipo_componente":"selecao_padrao","placeholder":"Critério","modelo":["Contendo"]},{"tipo_componente":"input_texto","placeholder":"Valor"}]}]}';
     this.ResultWorkflow = JSON.parse(json);
+    this.validarValorRecurso();
     this.tagsCard();
     this.onclickGrupo(0);
     return;
