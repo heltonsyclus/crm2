@@ -1,6 +1,6 @@
 <template>
   <q-list class="my-card-m">
-    <div class="flex justify-start" style="padding:20px">
+    <div class="flex justify-end" style="padding:20px">
       <q-icon
         name="close"
         class="text-red"
