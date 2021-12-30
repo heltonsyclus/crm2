@@ -100,13 +100,13 @@ export default {
       ObjConteudo: {},
       chartOptions: {
         xaxis: {
-          categories: ["0"]
+          categories: [""]
         }
       },
       series: [
         {
           name: "Atividades",
-          data: ["0"]
+          data: [""]
         }
       ]
     };
@@ -242,7 +242,7 @@ export default {
       this.ObjConteudo.grupos = [];
       (this.chartOptions = {
         xaxis: {
-          categories: ["0"]
+          categories: ["INÍCIO"]
         }
       }),
         (this.series = [
