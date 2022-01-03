@@ -12,7 +12,7 @@
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
         class="row"
-        style="width:100vh"
+        style="width:70vh"
       >
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"

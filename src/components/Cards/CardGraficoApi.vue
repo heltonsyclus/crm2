@@ -242,7 +242,7 @@ export default {
       this.ObjConteudo.grupos = [];
       (this.chartOptions = {
         xaxis: {
-          categories: ["INÍCIO"]
+          categories: ["ÁREAS"]
         }
       }),
         (this.series = [

@@ -126,7 +126,7 @@
           v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual]
             .cards"
           :key="ObjCard"
-          class="row"
+          class="row grupos"
           style="width:75vh"
         >
           <CardGrupoApi
@@ -440,6 +440,9 @@ p {
     width: 32%;
     height: 87px;
     padding: 12px 5px 0px 5px;
+  }
+  .grupos {
+    width: 100vh;
   }
 }
 </style>
