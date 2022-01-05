@@ -313,7 +313,7 @@
           <div>
             <q-btn
               round
-              unelevated 
+              unelevated
               size="12px"
               :color="ColorFinalizaAtv"
               icon="done_all"
@@ -322,7 +322,7 @@
             <q-btn
               dense
               rounded
-              unelevated 
+              unelevated
               color="primary"
               label="Enviar"
               style="margin-left:10px"
@@ -373,7 +373,6 @@
             />
           </div>
         </div>
-
         <div
           v-for="(inf, index) in AcoesPadrao"
           :key="index"

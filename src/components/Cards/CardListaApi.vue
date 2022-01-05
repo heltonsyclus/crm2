@@ -11,7 +11,6 @@
       >
         {{ card }}
       </q-item-section>
-
       <q-btn
         v-if="btn_comando === 'btn-atualizar'"
         round

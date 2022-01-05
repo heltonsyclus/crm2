@@ -5,7 +5,6 @@
     bordered
     :style="{ width: `${width}`, height: `${height}` }"
   >
-    <!--:style="{ width: `${width}`, height: `${height}` }"-->
     <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
@@ -62,7 +61,7 @@
                   <a
                     @click.prevent="abrirItem(indexGrupo, indexItem)"
                     class="q-pt-md pl text-class"
-                    style="max-width:260px"
+                    style="width:251px"
                   >
                     <strong class="capitalize">{{ itens.item }}</strong>
                   </a>

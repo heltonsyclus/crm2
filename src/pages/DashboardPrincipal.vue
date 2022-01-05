@@ -11,6 +11,7 @@
         class="row"
         style="width:70vh"
       >
+        <!-- {{ ObjCard.width }}-->
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
@@ -127,8 +128,10 @@ export default defineComponent({
       setTimeout(() => {
         this.msgCard = "";
       }, 1000);
+      //console.log("ATUALIZAR CARD");
     },
     handleResize() {
+      //console.log("rezise conteudo: " + this.msgCard);
       this.telaWidth = window.innerWidth;
       if (window.innerWidth <= 926) {
         for (

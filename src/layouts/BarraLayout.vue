@@ -136,6 +136,31 @@
               @blur="mudar(this.valoresRecurso)"
             />
           </div>
+          <!--  <div
+            class="flex items-center wrap q-mr-md"
+            v-if="Aplicacao === 'filtros'"
+          >
+            <q-select
+              class="q-mr-md"
+              v-model="tags[0]"
+              dense
+              :options="this.tags"
+              @blur="mudar(this.valoresRecurso)"
+            />
+            <q-select
+              v-model="tipo[0]"
+              dense
+              class="q-mr-md"
+              :options="this.tipo"
+              @blur="mudar(this.valoresRecurso)"
+            />
+            <q-select
+              v-model="colaborador[0]"
+              dense
+              :options="this.colaborador"
+              @blur="mudar(this.valoresRecurso)"
+            />
+          </div>-->
         </div>
       </div>
     </q-tabs>
@@ -183,7 +208,6 @@ export default defineComponent({
       valorRecurso,
       pesquisa: ref(false),
       ResultWorkflow: ref([]),
-      darkDialog: ref(false),
       pesquisaInput: ref([]),
       pesquisaArray: ref([]),
       calendario: ref(["Mensal", "Semanal", "Diário"]),
@@ -192,9 +216,17 @@ export default defineComponent({
   },
   data() {
     return {
-      date: [],
-      Valor: [],
-      valorModel: "item"
+      ValorIndx: [],
+      valorModel: "item",
+      tags: ["SYCLUS 1.0", "SYCLUS 2.0", "CRM"],
+      tipo: [
+        "ADMINISTRATIVO",
+        "ANALISE TECNICA",
+        "COBRANCA",
+        "COMERCIAL",
+        "DESENVOLVIMENTO"
+      ],
+      colaborador: ["ADELMO", "DANILO", "HENRIQUE", "HELTON"]
     };
   },
   methods: {
@@ -211,7 +243,7 @@ export default defineComponent({
     },
     onclickGrupo(ValorIndex) {
       this.$emit("OnClick", ValorIndex);
-      this.Valor = ValorIndex;
+      this.ValorIndx = ValorIndex;
     },
     tagsCard() {
       this.ResultWorkflow;
@@ -230,7 +262,7 @@ export default defineComponent({
   },
   computed: {
     Tab() {
-      return this.ConteudoBtn[this.Valor].grupo;
+      return this.ConteudoBtn[this.ValorIndx].grupo;
     }
   },
   created() {

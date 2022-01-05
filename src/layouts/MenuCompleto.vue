@@ -20,7 +20,7 @@
       <q-item-section avatar>
         <q-icon :name="list.icon" size="25px" />
       </q-item-section>
-      <q-item-section>{{ list.text }}</q-item-section>
+      <q-item-section style="font-weight:500">{{ list.text }}</q-item-section>
       <!-- <q-icon name="expand_more" size="25px" />-->
     </q-item>
   </q-list>

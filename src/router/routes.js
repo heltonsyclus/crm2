@@ -142,7 +142,7 @@ const routes = [
       {
         path: "",
         name: "notificacao",
-        component: () => import("pages/Notificacao.vue")
+        component: () => import("src/pages/DashboardNotificacao.vue")
       }
     ]
   },

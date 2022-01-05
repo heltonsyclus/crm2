@@ -391,7 +391,6 @@ export default defineComponent({
     this.ObjDashboard = GeLayoutDashBoard(
       login.recursos.dashboard_cliente.id_layout_dashboard
     );
-
     for (
       let i = 0;
       i < login.recursos.dashboard_cliente.dashboard_complementar.length;
@@ -400,7 +399,6 @@ export default defineComponent({
       let ObjDashboardTemp = GeLayoutDashBoard(
         login.recursos.dashboard_cliente.dashboard_complementar[i]
       );
-
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
         this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
       }

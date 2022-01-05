@@ -29,6 +29,12 @@ export function GeLayoutDashBoard(pIdLayout) {
     case 9:
       jLayout = layoutDashBoard9();
       break;
+    case 10:
+      jLayout = layoutDashBoard10();
+      break;
+    case 11:
+      jLayout = layoutDashBoard11();
+      break;
   }
 
   return jLayout;
@@ -36,7 +42,6 @@ export function GeLayoutDashBoard(pIdLayout) {
 
 //area trabalho - modelo
 function layoutDashBoard0() {
-  console.log("3> xx1");
   const json = {
     id_dashboard: 1,
     dashboard: "Dashboard Principal",
@@ -512,7 +517,7 @@ function layoutDashBoard0() {
           },
           {
             id_card: 23,
-            card: "Ultimas atividades",
+            card: "últimas atividades",
             ordem: 8,
             tipo_card: "Secao",
             sub_tipo: "secao-padrao"
@@ -586,7 +591,7 @@ function layoutDashBoard0() {
           },
           {
             id_card: 23,
-            card: "Ultimas atividades",
+            card: "últimas atividades",
             ordem: 8,
             icone: "drive_file_rename_outline",
             cor: "cyan-9"
@@ -1318,7 +1323,7 @@ function layoutDashBoard3() {
       },
       {
         id_grupo: 2,
-        grupo: "Ocorrencias",
+        grupo: "Ocorrências",
         icone: "assignment_turned_in",
         cards: [
           {
@@ -1497,13 +1502,50 @@ function layoutDashBoard3() {
           }
         ],
         cards_opcionais: []
+      },
+      {
+        id_grupo: 5,
+        grupo: "Tempo",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            id_card: 1,
+            card: "Workflow",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardListaApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorWorkflow",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            id_card: 2,
+            card: "últimas atividades(30 dias)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardListaApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyOcorrenciaPorTipoAtividade",
+              filtro_sql_grupo:
+                "where o.ds_status in ('A', 'F') and (extract(week from o.dt_ocorrencia) = extract(week from current_date)) and (extract(year from o.dt_ocorrencia) = extract(year from current_date)) and o.cd_colaborador = <id_principal>",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          }
+        ],
+        cards_opcionais: []
       }
     ]
   };
 
   return json;
 }
-
 //area trabalho - gestao area tecnica
 function layoutDashBoard4() {
   const json = {
@@ -1622,7 +1664,7 @@ function layoutDashBoard4() {
       },
       {
         id_grupo: 2,
-        grupo: "Ocorrencias",
+        grupo: "Ocorrências",
         icone: "assignment_turned_in",
         cards: [
           {
@@ -1696,7 +1738,6 @@ function layoutDashBoard4() {
 
   return json;
 }
-
 //area trabalho - danilo
 function layoutDashBoard5() {
   const json = {
@@ -1714,7 +1755,6 @@ function layoutDashBoard5() {
 
   return json;
 }
-
 //cliente - cobranca
 function layoutDashBoard6() {
   const json = {
@@ -1770,7 +1810,6 @@ function layoutDashBoard6() {
 
   return json;
 }
-
 //cliente - comercial
 function layoutDashBoard7() {
   const json = {
@@ -2003,7 +2042,6 @@ function layoutDashBoard8() {
 
   return json;
 }
-
 //area trabalho -gestao de projetos
 function layoutDashBoard9() {
   const json = {
@@ -2047,6 +2085,298 @@ function layoutDashBoard9() {
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
                 "where a.ds_status = 'F' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+            }
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
+  };
+
+  return json;
+}
+//notificacao-período
+function layoutDashBoard10() {
+  const json = {
+    id_dashboard: 1,
+    dashboard: "Notificacao-periodo",
+    grupos: [
+      {
+        id_grupo: 1,
+        grupo: "Hoje",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 2,
+        grupo: "Ontem",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo Ontem",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 3,
+        grupo: "última Semana",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo semana",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 3,
+        grupo: "última mês",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo mes",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
+  };
+
+  return json;
+}
+//notificacao-tipo
+function layoutDashBoard11() {
+  const json = {
+    id_dashboard: 1,
+    dashboard: "Notificacao-tipo",
+    grupos: [
+      {
+        id_grupo: 1,
+        grupo: "Administrativo",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo Administrativo",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 2,
+        grupo: "Analise Tecnica",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Analise Tecnica",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 3,
+        grupo: "Desenvolvimento",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePendenteProjeto",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+            }
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 3,
+        grupo: "Gerais",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePendenteProjeto",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
             }
           }
         ],
