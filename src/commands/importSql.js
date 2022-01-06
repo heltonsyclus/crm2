@@ -78,7 +78,6 @@ export default {
         "<id_principal>",
         this.idPrincipal
       );
-      console.log("GETBODY");
       if (
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
@@ -179,7 +178,6 @@ export default {
     },
 
     atualizarConteudo() {
-      console.log("ATUALIZAR");
       this.limparConteudo();
       if (this.idPrincipal !== null) {
         let body = this.getBody(this.conteudo_card.body_grupo);
@@ -239,12 +237,10 @@ export default {
   watch: {
     msg: {
       handler: function(newValue, oldValue) {
-        //console.log(newValue + " > " + oldValue);
         if (newValue === "limpar_conteudo") {
           this.limparConteudo();
         }
         if (newValue === "atualizar_conteudo") {
-          console.log("AÇÃO");
           this.atualizarConteudo();
         }
       },

@@ -1,5 +1,5 @@
 <template>
-  <div class="col2">
+  <div>
     <BarraLayout
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"

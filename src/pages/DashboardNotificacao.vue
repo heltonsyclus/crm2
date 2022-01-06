@@ -117,9 +117,7 @@ export default defineComponent({
     }
     this.ObjDashboard = GeLayoutDashBoard(recurso[0].id_layout_dashboard);
     this.msgCard = "limpar_conteudo";
-    this.notificacao = this.ObjDashboard.grupos[
-      this.IndexGrupoAtual
-    ].cards.length;
+    this.notificacao = this.ObjDashboard.grupos[0].cards.length;
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   }

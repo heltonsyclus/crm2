@@ -1603,7 +1603,7 @@ function layoutDashBoard4() {
           {
             id_card: 1,
             card: "Tipo Atividade",
-            ordem: 2,
+            ordem: 1,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "100%",
@@ -2843,9 +2843,8 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 63",
-              body_item: "",
-              filtro_sql_item: ""
-              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+              body_item: "bodyAtividade",
+              filtro_sql_item: `where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 63 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
             }
           },
           {
@@ -2859,9 +2858,8 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 64",
-              body_item: "",
-              filtro_sql_item: ""
-              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+              body_item: "bodyAtividade",
+              filtro_sql_item: `where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 64 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
             }
           }
         ],
@@ -2914,9 +2912,8 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65",
-              body_item: "",
-              filtro_sql_item: ""
-              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+              body_item: "bodyAtividade",
+              filtro_sql_item: `where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
             }
           }
         ]
@@ -2968,9 +2965,8 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67",
-              body_item: "",
-              filtro_sql_item: ""
-              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+              body_item: "bodyAtividade",
+              filtro_sql_item: `where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
             }
           }
         ]
@@ -3038,7 +3034,7 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorSituacao",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao in (69, 70, 106)",
-              body_item: "",
+              body_item: "bodyAtividade",
               filtro_sql_item:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = <id_grupo>"
             }
@@ -3054,9 +3050,8 @@ function layoutDashBoard12() {
               body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao in (69, 70, 106)",
-              body_item: "",
-              filtro_sql_item: ""
-              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+              body_item: "bodyAtividade",
+              filtro_sql_item: `where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao in (69, 70, 106) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
             }
           }
         ]
