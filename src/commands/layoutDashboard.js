@@ -868,7 +868,6 @@ function layoutDashBoard0() {
   };
   return json;
 }
-
 //area trabalho - padrao
 function layoutDashBoard1() {
   const json = {
@@ -948,7 +947,6 @@ function layoutDashBoard1() {
 
   return json;
 }
-
 //cliente - padrao
 function layoutDashBoard2() {
   const json = {
@@ -1210,7 +1208,6 @@ function layoutDashBoard2() {
 
   return json;
 }
-
 //colaborador - padrao
 function layoutDashBoard3() {
   const json = {
@@ -1337,7 +1334,7 @@ function layoutDashBoard3() {
           },
           {
             id_card: 1,
-            card: "Finalizadas (Ontem)",
+            card: "Finalizadas (7 dias atras)",
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -1346,10 +1343,10 @@ function layoutDashBoard3() {
             conteudo_card: {
               body_grupo: "bodyAtividadePorWorkflow",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date -1) and a.cd_responsavel = <id_principal>",
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) between (current_date -7) and (current_date -1) and a.cd_responsavel = <id_principal>",
               body_item: "bodyAtividade",
               filtro_sql_item:
-                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date -1) and a.cd_responsavel = <id_principal> and a.cd_workflow = <id_grupo>"
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) between (current_date -7) and (current_date -1) and a.cd_responsavel = <id_principal> and a.cd_workflow = <id_grupo>"
             }
           }
         ],
@@ -2137,6 +2134,164 @@ function layoutDashBoard10() {
     grupos: [
       {
         id_grupo: 1,
+        grupo: "Geral",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 1,
         grupo: "Hoje",
         icone: "event",
         cards: [
@@ -2320,6 +2475,164 @@ function layoutDashBoard11() {
     grupos: [
       {
         id_grupo: 1,
+        grupo: "Geral",
+        icone: "event",
+        cards: [
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "Texto representando uma ocorrência",
+                icon: "question_answer",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        id_grupo: 1,
         grupo: "Administrativo",
         icone: "event",
         cards: [
@@ -2396,14 +2709,20 @@ function layoutDashBoard11() {
             tipo_card: "CardNotificacaoApi",
             width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadePendenteProjeto",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
-              body_item: "bodyAtividadeCliente",
-              filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
-            }
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              }
+            ]
           }
         ],
         cards_opcionais: []
@@ -2420,14 +2739,20 @@ function layoutDashBoard11() {
             tipo_card: "CardNotificacaoApi",
             width: "100%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadePendenteProjeto",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal>",
-              body_item: "bodyAtividadeCliente",
-              filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.dt_previsao < current_date and ac.cd_cliente = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
-            }
+            conteudo_card: [
+              {
+                nomeUsuario: "usuario",
+                acao: "parou de executar a atividade.",
+                icon: "pause",
+                time: "Há 2 minutos"
+              },
+              {
+                nomeUsuario: "usuario",
+                acao: "alterou a previsão para: 25 de Janeiro de 2022.",
+                icon: "event",
+                time: "Há 2 minutos"
+              }
+            ]
           }
         ],
         cards_opcionais: []

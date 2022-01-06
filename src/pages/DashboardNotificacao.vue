@@ -5,6 +5,7 @@
     :ConteudoBtn="this.ObjDashboard['grupos']"
     Aplicacao="Select"
     :valoresRecurso="this.dashboardsColaboradorAtivo"
+    @abrirNotificacao="abriNotificacao"
   />
   <div class="column" style="width:100%">
     <CardNotificacaoApi
@@ -25,6 +26,7 @@
       :link_item="ObjCard.link_item"
       :idPrincipal="this.idcolaboradorAtivo"
       :msg="this.msgCard"
+      :abrirNotificacao="this.abrirNotificacao"
     />
   </div>
 </template>
@@ -45,7 +47,8 @@ export default defineComponent({
       IndexGrupoAtual: 0,
       Grupo: [],
       Grupos: [],
-      dashboardsColaboradorAtivo: []
+      dashboardsColaboradorAtivo: [],
+      abrirNotificacao: false
     };
   },
   methods: {
@@ -71,6 +74,9 @@ export default defineComponent({
             "100%";
         }
       }
+    },
+    abriNotificacao() {
+      this.abrirNotificacao = !this.abrirNotificacao;
     }
   },
   setup() {
@@ -78,8 +84,15 @@ export default defineComponent({
     const login = computed({
       get: () => $store.state.showcase.login
     });
+    const notificacao = computed({
+      get: () => $store.state.showcase.notificacao,
+      set: val => {
+        $store.commit("showcase/numeroNotificacao", val);
+      }
+    });
     return {
-      login
+      login,
+      notificacao
     };
   },
   computed: {
@@ -104,6 +117,9 @@ export default defineComponent({
     }
     this.ObjDashboard = GeLayoutDashBoard(recurso[0].id_layout_dashboard);
     this.msgCard = "limpar_conteudo";
+    this.notificacao = this.ObjDashboard.grupos[
+      this.IndexGrupoAtual
+    ].cards.length;
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   }

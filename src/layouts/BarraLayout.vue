@@ -134,33 +134,26 @@
               dense
               :options="this.valoresRecurso"
               @blur="mudar(this.valoresRecurso)"
+              class="q-mr-md"
             />
+            <q-btn
+              unelevated
+              round
+              color="primary"
+              icon="filter_list"
+              size="12px"
+            >
+              <q-menu show-if-above>
+                <q-list dense clickable>
+                  <q-item class="GL__menu-link">
+                    <q-item-section @click="$emit('abrirNotificacao')"
+                      >Abrir/Fechar</q-item-section
+                    >
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
           </div>
-          <!--  <div
-            class="flex items-center wrap q-mr-md"
-            v-if="Aplicacao === 'filtros'"
-          >
-            <q-select
-              class="q-mr-md"
-              v-model="tags[0]"
-              dense
-              :options="this.tags"
-              @blur="mudar(this.valoresRecurso)"
-            />
-            <q-select
-              v-model="tipo[0]"
-              dense
-              class="q-mr-md"
-              :options="this.tipo"
-              @blur="mudar(this.valoresRecurso)"
-            />
-            <q-select
-              v-model="colaborador[0]"
-              dense
-              :options="this.colaborador"
-              @blur="mudar(this.valoresRecurso)"
-            />
-          </div>-->
         </div>
       </div>
     </q-tabs>
@@ -181,6 +174,7 @@ export default defineComponent({
     "nomeMes",
     "valoresRecurso"
   ],
+  emits: ["abrirNotificacao"],
   name: "BarraLayout",
   setup() {
     const $store = useStore();

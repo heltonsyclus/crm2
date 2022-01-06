@@ -34,31 +34,34 @@
     </div>
     <div>
       <q-list bordered class="rounded-borders">
-        <q-expansion-item dense dense-toggle @click="abrirNotificacao()">
-          <!--   default-opened-->
+        {{ this.opened }}
+        <q-expansion-item dense dense-toggle :default-opened="this.opened">
           <template v-slot:header>
             <q-item-section>
               <div class="flex items-center">
-                <q-badge style="padding:5px 10px;margin:2px">
+                <q-badge style="padding:5px 10px;margin-right:2px">
                   <q-icon name="person" color="white" />
                   {{ "usuario" }}</q-badge
                 >
-                <q-badge style="padding:5px 10px;margin:2px" color="dark">
+                <q-badge style="padding:5px 10px;margin-right:2px" color="dark">
                   <q-icon name="description" color="white" />
                   {{ "Desenvolvimento" }}</q-badge
                 >
                 <q-badge
-                  style="padding:5px 10px;margin:2px"
+                  style="padding:5px 10px;margin-right:2px"
                   color="light-blue-10"
                 >
                   <q-icon name="local_offer" color="white" />
                   {{ "Syclus 2.0" }}</q-badge
                 >
-                <q-badge style="padding:5px 10px;margin:2px" color="red">
+                <q-badge style="padding:5px 10px;margin-right:2px" color="red">
                   <q-icon name="label_important" color="white" />
                   {{ "Planejamento" }}</q-badge
                 >
-                <q-badge style="padding:5px 10px;margin:2px" color="green">
+                <q-badge
+                  style="padding:5px 10px;margin-right:2px"
+                  color="green"
+                >
                   <q-icon name="corporate_fare" color="white" />
                   {{ "JM PAULINO" }}</q-badge
                 >
@@ -126,11 +129,13 @@ export default {
     "msg",
     "link_item",
     "width",
-    "height"
+    "height",
+    "abrirNotificacao"
   ],
   data() {
     return {
       telaOcorrencia: false,
+      opened: false,
       objNotificacao: [
         {
           nomeUsuario: "usuario",
@@ -160,34 +165,17 @@ export default {
     },
     marcaComoLido() {
       alert("finalizado");
-    },
-    abrirNotificacao() {
-      // alert("abrir");
-    },
-    formatarCronometro() {
-      setInterval(function() {
-        var _segundo = 1000;
-        var _minuto = _segundo * 60;
-        var _hora = _minuto * 60;
-        var _dia = _hora * 24;
-
-        var atual = new Date();
-        var fim = new Date("06/02/2017 18:00:00");
-
-        var diferenca = fim - atual;
-        console.log(diferenca);
-
-        var dias = Math.floor(diferenca / _dia);
-        var horas = Math.floor((diferenca % _dia) / _hora);
-        var minutos = Math.floor((diferenca % _hora) / _minuto);
-        var segundos = Math.floor((diferenca % _minuto) / _segundo);
-
-        document.getElementById("contador").innerHTML = dias + " dias, ";
-        document.getElementById("contador").innerHTML += horas + " horas, ";
-        document.getElementById("contador").innerHTML +=
-          minutos + " minutos e ";
-        document.getElementById("contador").innerHTML += segundos + " segundos";
-      }, 1000);
+    }
+  },
+  watch: {
+    abrirNotificacao: {
+      handler: function(valor) {
+        if (valor) {
+          this.opened = !this.opened;
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   created() {
@@ -196,5 +184,3 @@ export default {
   }
 };
 </script>
-
-<style scoped></style>
