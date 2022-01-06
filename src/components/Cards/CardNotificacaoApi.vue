@@ -34,12 +34,8 @@
     </div>
     <div>
       <q-list bordered class="rounded-borders">
-        <q-expansion-item
-          dense
-          dense-toggle
-          default-opened
-          @click="abrirNotificacao()"
-        >
+        <q-expansion-item dense dense-toggle @click="abrirNotificacao()">
+          <!--   default-opened-->
           <template v-slot:header>
             <q-item-section>
               <div class="flex items-center">

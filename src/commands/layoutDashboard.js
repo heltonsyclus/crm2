@@ -1317,6 +1317,40 @@ function layoutDashBoard3() {
               filtro_sql_item:
                 "where a.ds_status = 'P' and a.cd_responsavel = <id_principal> and a.cd_workflow = <id_grupo>"
             }
+          },
+          {
+            id_card: 1,
+            card: "Finalizadas (Hoje)",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorWorkflow",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date) and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date) and a.cd_responsavel = <id_principal> and a.cd_workflow = <id_grupo>"
+            }
+          },
+          {
+            id_card: 1,
+            card: "Finalizadas (Ontem)",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorWorkflow",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date -1) and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and cast(a.dt_previsao as date) = (current_date -1) and a.cd_responsavel = <id_principal> and a.cd_workflow = <id_grupo>"
+            }
           }
         ],
         cards_opcionais: []
@@ -2132,6 +2166,22 @@ function layoutDashBoard10() {
                 icon: "question_answer",
                 time: "Há 2 minutos"
               },
+              {
+                nomeUsuario: "usuario",
+                acao: "iniciou a execução da atividade.",
+                icon: "play_arrow",
+                time: "Há 2 minutos"
+              }
+            ]
+          },
+          {
+            id_card: 1,
+            card: "Exemplo aleatorio2",
+            ordem: 2,
+            tipo_card: "CardNotificacaoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: [
               {
                 nomeUsuario: "usuario",
                 acao: "iniciou a execução da atividade.",
