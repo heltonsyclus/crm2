@@ -8,7 +8,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4, 8]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -40,13 +40,8 @@ export function senhaLogin() {
           dashboard_bi: {
             layout_dashboard: [
               {
-                id_layout_dashboard: 5,
-                dashboard: "layout 5",
-                dashboard_complementar: []
-              },
-              {
-                id_layout_dashboard: 8,
-                dashboard: "layout 8",
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
                 dashboard_complementar: []
               }
             ]
@@ -113,7 +108,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4, 5]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -132,12 +127,12 @@ export function senhaLogin() {
             layout_dashboard: [
               {
                 id_layout_dashboard: 5,
-                dashboard: "layout 5",
+                dashboard: "Diretoria",
                 dashboard_complementar: []
               },
               {
-                id_layout_dashboard: 8,
-                dashboard: "layout 8",
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
                 dashboard_complementar: []
               }
             ]
@@ -175,6 +170,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -333,7 +337,12 @@ export function senhaLogin() {
             layout_dashboard: [
               {
                 id_layout_dashboard: 8,
-                dashboard: "layout 8",
+                dashboard: "Projetos",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
                 dashboard_complementar: []
               }
             ]
@@ -359,6 +368,15 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -376,6 +394,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),

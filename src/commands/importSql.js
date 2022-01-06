@@ -12,6 +12,10 @@ import {
   bodyAtividadePorTag,
   bodyAtividadePorResponsavel,
   bodyAtividadePorWorkflow,
+  bodyAtividadePorSituacao,
+  bodyAtividadePorData,
+  bodyAtividadePorMesAno,
+  bodyAtividadePorSemana,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorColaborador,
@@ -126,6 +130,19 @@ export default {
       if (pNomeBody === "bodyAtividadePorResponsavel") {
         return bodyAtividadePorResponsavel(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorSituacao") {
+        return bodyAtividadePorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorData") {
+        return bodyAtividadePorData(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorMesAno") {
+        return bodyAtividadePorMesAno(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorSemana") {
+        return bodyAtividadePorSemana(filtros);
+      }
+
       if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
         return bodyOcorrenciaPorTipoAtividade(filtros);
       }

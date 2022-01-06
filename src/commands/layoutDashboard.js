@@ -35,6 +35,18 @@ export function GeLayoutDashBoard(pIdLayout) {
     case 11:
       jLayout = layoutDashBoard11();
       break;
+    case 12:
+      jLayout = layoutDashBoard12();
+      break;
+    case 13:
+      jLayout = layoutDashBoard13();
+      break;
+    case 14:
+      jLayout = layoutDashBoard14();
+      break;
+    case 15:
+      jLayout = layoutDashBoard15();
+      break;
   }
 
   return jLayout;
@@ -2756,6 +2768,298 @@ function layoutDashBoard11() {
           }
         ],
         cards_opcionais: []
+      }
+    ]
+  };
+
+  return json;
+}
+//bi - desenvolvimento
+function layoutDashBoard12() {
+  const json = {
+    id_dashboard: 1,
+    dashboard: "bi - desenvolvimeto",
+    grupos: [
+      {
+        grupo: "Solicitações",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Sem Análise",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 63",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 63 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Em Análise",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 64",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 64 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Reprovadas",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 66",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 66 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Previsao (Sem Analise)",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 63",
+              body_item: "",
+              filtro_sql_item: ""
+              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+            }
+          },
+          {
+            card: "Previsao (Em Analise)",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 64",
+              body_item: "",
+              filtro_sql_item: ""
+              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+            }
+          }
+        ],
+        cards_opcionais: []
+      },
+      {
+        grupo: "Aprovadas",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Cliente",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Tag",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTag",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65 and ag.cd_tag = <id_grupo>"
+            }
+          },
+          {
+            card: "Previsao",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65",
+              body_item: "",
+              filtro_sql_item: ""
+              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 65 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+            }
+          }
+        ]
+      },
+      {
+        grupo: "Planejamento",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Cliente",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Tag",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTag",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and ag.cd_tag = <id_grupo>"
+            }
+          },
+          {
+            card: "Previsao",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67",
+              body_item: "",
+              filtro_sql_item: ""
+              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+            }
+          }
+        ]
+      },
+      {
+        grupo: "Execução",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Em Desenvolvimento",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 106",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 106 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Versão Beta",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 70",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 70 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Versão Final",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorCliente",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 69",
+              body_item: "bodyAtividadeCliente",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 69 and ac.cd_cliente = <id_grupo>"
+            }
+          },
+          {
+            card: "Por Situação",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao in (69, 70, 106)",
+              body_item: "",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = <id_grupo>"
+            }
+          },
+          {
+            card: "Previsao",
+            ordem: 2,
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "100%",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao in (69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
+              //"where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = 67 and cast(a.dt_previsao as date) = DATEADD(<id_grupo> day to CAST('01/01/1970' AS DATE))"
+            }
+          }
+        ]
       }
     ]
   };
