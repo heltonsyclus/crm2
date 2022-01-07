@@ -3,10 +3,12 @@
     <div class="fundo-syclus" v-show="desktop">
       <img
         src="../assets/syclus_login.png"
-        style="text-aligth:center;margin:30px auto;padding:20px 20px 0px"
+        style="text-aligth:center;margin:30px auto 0px auto;padding:20px 20px 0px"
       />
-      <div style="padding:5px 20px">
-        <h4>Controle todo o seu negócio em uma única plataforma.</h4>
+      <div style="padding:0px 20px">
+        <h4>
+          Controle todo o seu negócio em uma única plataforma.
+        </h4>
         <p style="font-size:18px">Gestão empresarial eficiente e completa.</p>
       </div>
     </div>

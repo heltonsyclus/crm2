@@ -468,6 +468,20 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/wagner.png"),

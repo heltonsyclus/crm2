@@ -88,9 +88,13 @@ export function bodyAtividadePorWorkflow(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorTag(pFiltros) {
   let instrucao_sql = `select tg.cd_tag "id_tag", tg.ds_tag "tag", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> group by tg.cd_tag, tg.ds_tag order by tg.ds_tag`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadePorGut(pFiltros) {
+  let instrucao_sql = `select a.vl_gut "id_gut", a.vl_gut "gut", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a <filtros> group by a.vl_gut order by a.vl_gut desc`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
@@ -100,7 +104,7 @@ export function bodyAtividadePorData(pFiltros) {
   return body;
 }
 export function bodyAtividadePorMesAno(pFiltros) {
-  let instrucao_sql = `select extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0') "id_sequencial", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a <filtros> group by extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0'), lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by 1 desc`;
+  let instrucao_sql = `select cast(extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0') as integer) "id_sequencial", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a <filtros> group by extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0'), lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by 1 desc`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
@@ -319,5 +323,22 @@ export function bodyProjetoFinalizados() {
     tipo_retorno: "",
     instrucao_sql: `select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p where p.ds_status = \'F\'`
   };
+  return body;
+}
+
+//---------------------- notificacao ----------------------//
+export function bodyNotificacao(pFiltros) {
+  let instrucao_sql = `select n.cd_notificacao, n.ds_notificacao, count(n.cd_notificacao) as qt_notificacao, sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), n.dt_notificacao)) "duracao", n.dt_notificacao as dt_notificacao from notificacao n inner join atividade a on a.cd_empresa = n.cd_empresa_atividade and n.cd_atividade = a.cd_atividade inner join colaborador cb on cb.cd_colaborador = n.cd_colaborador <filtros> group by a.cd_atividade, a.ds_atividade, tv.ds_tipo_atividade, cb.ds_colaborador order by 6 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyNotificacaoPorAtividade(pFiltros) {
+  let instrucao_sql = `select a.cd_atividade, a.ds_atividade, count(n.cd_notificacao) as qt_notificacao, tv.ds_tipo_atividade, cb.ds_colaborador as ds_responsavel, max(n.dt_notificacao) as dt_notificacao from notificacao n inner join atividade a on a.cd_empresa = n.cd_empresa_atividade and n.cd_atividade = a.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel inner join situacao st on st.cd_situacao = a.cd_situacao <filtros> group by a.cd_atividade, a.ds_atividade, tv.ds_tipo_atividade, cb.ds_colaborador order by 6 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyNotificacaoPorTipoAtividade(pFiltros) {
+  let instrucao_sql = `select ta.cd_tipo_atividade, ta.ds_tipo_atividade, count(n.cd_notificacao) as qt_notificacao from notificacao n inner join atividade a on a.cd_empresa = n.cd_empresa_atividade and n.cd_atividade = a.cd_atividade inner join tipo_atividade ta on ta.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by ta.cd_tipo_atividade, ta.ds_tipo_atividade order by 2`;
+  let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

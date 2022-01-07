@@ -13,6 +13,7 @@ import {
   bodyAtividadePorResponsavel,
   bodyAtividadePorWorkflow,
   bodyAtividadePorSituacao,
+  bodyAtividadePorGut,
   bodyAtividadePorData,
   bodyAtividadePorMesAno,
   bodyAtividadePorSemana,
@@ -26,7 +27,10 @@ import {
   bodyProjetoPorTipoProjeto,
   bodyProjetoPorResponsavel,
   bodyProjetoPorCliente,
-  bodyProjetoPorTag
+  bodyProjetoPorTag,
+  bodyNotificacao,
+  bodyNotificacaoPorAtividade,
+  bodyNotificacaoPorTipoAtividade
 } from "src/boot/consultaSql.js";
 
 export default {
@@ -82,7 +86,9 @@ export default {
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
         pNomeBody === "bodyAtividadeTag" ||
-        pNomeBody === "bodyProjeto"
+        pNomeBody === "bodyProjeto" ||
+        pNomeBody === "bodyNotificacao" ||
+        pNomeBody === "bodyNotificacaoPorAtividade"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
           "<id_principal>",
@@ -132,6 +138,9 @@ export default {
       if (pNomeBody === "bodyAtividadePorSituacao") {
         return bodyAtividadePorSituacao(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorGut") {
+        return bodyAtividadePorGut(filtros);
+      }
       if (pNomeBody === "bodyAtividadePorData") {
         return bodyAtividadePorData(filtros);
       }
@@ -174,6 +183,16 @@ export default {
       }
       if (pNomeBody === "bodyProjetoPorTag") {
         return bodyProjetoPorTag(filtros);
+      }
+
+      if (pNomeBody === "bodyNotificacao") {
+        return bodyNotificacao(filtros);
+      }
+      if (pNomeBody === "bodyNotificacaoPorAtividade") {
+        return bodyNotificacaoPorAtividade(filtros);
+      }
+      if (pNomeBody === "bodyNotificacaoPorTipoAtividade") {
+        return bodyNotificacaoPorTipoAtividade(filtros);
       }
     },
 

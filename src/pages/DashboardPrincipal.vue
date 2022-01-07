@@ -8,21 +8,18 @@
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
-        class="row"
-        style="width:70vh"
+        style="margin:5px;margin-bottom:5px;"
       >
-        <!-- {{ ObjCard.width }}-->
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px;"
           :id="ObjCard.id_card"
           :card="ObjCard.card"
           :ordem="ObjCard.ordem"
           cor_header="bg-primary"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
-          :width="ObjCard.width"
+          :style="{ width: `${ObjCard.width}` }"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
           :sub_tipo="ObjCard.sub_tipo"
@@ -34,10 +31,10 @@
         <CardGraficoApi
           v-if="ObjCard.tipo_card === 'CardGraficoApi'"
           class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px"
           :id="ObjCard.id_card"
           :card="ObjCard.card"
           :ordem="ObjCard.ordem"
+          :style="{ width: `${ObjCard.width}` }"
           cor_header="bg-primary"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
@@ -53,11 +50,11 @@
         <CardListaApi
           v-if="ObjCard.tipo_card === 'CardListaApi'"
           class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px"
           :id="ObjCard.id_card"
           :card="ObjCard.card"
           :ordem="ObjCard.ordem"
           cor_header="bg-primary"
+          :style="{ width: `${ObjCard.width}` }"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
           :width="ObjCard.width"
