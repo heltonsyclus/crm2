@@ -310,7 +310,7 @@ export default defineComponent({
           i++
         ) {
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "100%";
+            "93vh";
         }
       }
     }

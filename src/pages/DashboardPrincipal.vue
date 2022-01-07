@@ -72,11 +72,11 @@
 </template>
 
 <script>
-import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";

@@ -448,7 +448,7 @@ export function senhaLogin() {
             dashboard_complementar: []
           }
         },
-        img: require("../assets/comum.png"),
+        img: require("../assets/rodrigo.png"),
         token: "108321697"
       },
       {

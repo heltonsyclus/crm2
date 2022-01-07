@@ -4,7 +4,7 @@
       <div>
         <strong>Atividade: </strong>
         <a href="#" style="font-weight:600;font-size:15px">
-          {{ card }}
+          {{ card }}{{ formato_card }}
         </a>
       </div>
       <div class="flex justify-between ">
@@ -129,8 +129,7 @@ export default {
     "msg",
     "link_item",
     "width",
-    "height",
-    "abrirNotificacao"
+    "height"
   ],
   data() {
     return {

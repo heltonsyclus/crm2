@@ -34,8 +34,8 @@
 <script>
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardNotificacaoApi from "src/components/Cards/CardNotificacaoApi.vue";
-import { defineComponent } from "vue";
 import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
+import { defineComponent } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
@@ -54,6 +54,13 @@ export default defineComponent({
   methods: {
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
+      this.AtualizarCardsGrupoAtual();
+    },
+    AtualizarCardsGrupoAtual() {
+      this.msgCard = "atualizar_conteudo";
+      setTimeout(() => {
+        this.msgCard = "";
+      }, 1000);
     },
     OnClickSelect(selectIndex) {
       let login = JSON.parse(localStorage.getItem("login"));
