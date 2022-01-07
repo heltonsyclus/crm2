@@ -125,7 +125,6 @@ export default defineComponent({
       setTimeout(() => {
         this.msgCard = "";
       }, 1000);
-      //console.log("ATUALIZAR CARD");
     },
     handleResize() {
       //console.log("rezise conteudo: " + this.msgCard);
@@ -137,7 +136,7 @@ export default defineComponent({
           i++
         ) {
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "100%";
+            "93vh";
         }
       }
     }
