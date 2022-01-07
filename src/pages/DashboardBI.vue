@@ -147,8 +147,20 @@ export default defineComponent({
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
           i++
         ) {
-          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "100%";
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 20}px`;
+        }
+      }
+      if (window.innerWidth >= 926) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"];
         }
       }
     },
@@ -184,6 +196,7 @@ export default defineComponent({
       login.recursos.dashboard_area_trabalho.id_layout_dashboard,
       login.recursos.dashboard_area_trabalho.dashboard_complementar
     );
+    console.log(this.CarregarDashboard);
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);

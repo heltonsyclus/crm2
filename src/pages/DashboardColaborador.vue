@@ -309,8 +309,20 @@ export default defineComponent({
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
           i++
         ) {
-          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "93vh";
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 20}px`;
+        }
+      }
+      if (window.innerWidth >= 926) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"];
         }
       }
     }

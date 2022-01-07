@@ -232,6 +232,20 @@ export function senhaLogin() {
                 dashboard_complementar: []
               }
             ]
+          },
+          dashboard_notificacao: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 10,
+                dashboard: "Periodo",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 11,
+                dashboard: "Tipo",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/helton.png"),

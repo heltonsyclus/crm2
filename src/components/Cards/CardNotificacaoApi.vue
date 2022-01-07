@@ -1,10 +1,15 @@
 <template>
-  <q-card style="padding:10px">
+  <q-card
+    style="padding:10px;margin:5px"
+    :style="{ width: `${width}`, height: `${height}` }"
+    v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
+    :key="indexGrupo"
+  >
     <div class="flex justify-between items-center q-mb-sm">
       <div>
         <strong>Atividade: </strong>
         <a href="#" style="font-weight:600;font-size:15px">
-          {{ card }}{{ formato_card }}
+          {{ grupos.grupo }}
         </a>
       </div>
       <div class="flex justify-between ">
