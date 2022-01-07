@@ -128,7 +128,18 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      if (window.innerWidth <= 926) {
+      if (window.innerWidth <= 1006) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 80}px`;
+        }
+      }
+      if (window.innerWidth <= 797) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
@@ -139,7 +150,7 @@ export default defineComponent({
           ] = `${this.telaWidth - 20}px`;
         }
       }
-      if (window.innerWidth >= 926) {
+      if (window.innerWidth >= 797) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
