@@ -71,6 +71,8 @@ import {
   bodyAtividadePorCliente,
   bodyAtividadePorTag,
   bodyAtividadePorWorkflow,
+  bodyAtividadePorResponsavel,
+  bodyAtividadePorSituacao,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorData
@@ -154,7 +156,10 @@ export default {
       if (
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
-        pNomeBody === "bodyAtividadeTag"
+        pNomeBody === "bodyAtividadeTag" ||
+        pNomeBody === "bodyProjeto" ||
+        pNomeBody === "bodyNotificacao" ||
+        pNomeBody === "bodyNotificacaoPorAtividade"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
           "<id_principal>",
@@ -171,7 +176,6 @@ export default {
       if (pNomeBody === "bodyAtividadeTag") {
         return bodyAtividadeTag(filtros);
       }
-
       if (pNomeBody === "bodyAtividadeClientePorTipoAtividade") {
         return bodyAtividadeClientePorTipoAtividade(filtros);
       }
@@ -199,14 +203,66 @@ export default {
       if (pNomeBody === "bodyAtividadePorWorkflow") {
         return bodyAtividadePorWorkflow(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorResponsavel") {
+        return bodyAtividadePorResponsavel(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorSituacao") {
+        return bodyAtividadePorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorGut") {
+        return bodyAtividadePorGut(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorData") {
+        return bodyAtividadePorData(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorMesAno") {
+        return bodyAtividadePorMesAno(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorSemana") {
+        return bodyAtividadePorSemana(filtros);
+      }
+
       if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
         return bodyOcorrenciaPorTipoAtividade(filtros);
       }
       if (pNomeBody === "bodyOcorrenciaPorWorkflow") {
         return bodyOcorrenciaPorWorkflow(filtros);
       }
+      if (pNomeBody === "bodyOcorrenciaPorColaborador") {
+        return bodyOcorrenciaPorColaborador(filtros);
+      }
       if (pNomeBody === "bodyOcorrenciaPorData") {
         return bodyOcorrenciaPorData(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaPorMesAno") {
+        return bodyOcorrenciaPorMesAno(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaPorSemana") {
+        return bodyOcorrenciaPorSemana(filtros);
+      }
+      if (pNomeBody === "bodyProjeto") {
+        return bodyProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorTipoProjeto") {
+        return bodyProjetoPorTipoProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorResponsavel") {
+        return bodyProjetoPorResponsavel(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorCliente") {
+        return bodyProjetoPorCliente(filtros);
+      }
+      if (pNomeBody === "bodyProjetoPorTag") {
+        return bodyProjetoPorTag(filtros);
+      }
+      if (pNomeBody === "bodyNotificacao") {
+        return bodyNotificacao(filtros);
+      }
+      if (pNomeBody === "bodyNotificacaoPorAtividade") {
+        return bodyNotificacaoPorAtividade(filtros);
+      }
+      if (pNomeBody === "bodyNotificacaoPorTipoAtividade") {
+        return bodyNotificacaoPorTipoAtividade(filtros);
       }
     },
     atualizarConteudo() {

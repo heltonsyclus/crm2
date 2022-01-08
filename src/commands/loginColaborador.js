@@ -19,6 +19,11 @@ export function senhaLogin() {
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
           },
+          dashboard_tags: {
+            id_layout_dashboard: 13,
+            dashboard_complementar: [],
+            permissao_colaborador: ["*"]
+          },
           dashboard_projeto: {
             id_layout_dashboard: 9,
             dashboard_complementar: []
@@ -133,6 +138,16 @@ export function senhaLogin() {
               {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 13,
+                dashboard: "Area Tecnica (Gestao)",
                 dashboard_complementar: []
               }
             ]
@@ -258,7 +273,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -268,6 +283,25 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 13,
+                dashboard: "Area Tecnica (Gestao)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -280,7 +314,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -381,7 +415,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -472,7 +506,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [4]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -487,7 +521,12 @@ export function senhaLogin() {
             layout_dashboard: [
               {
                 id_layout_dashboard: 4,
-                dashboard: "Area Tecnica",
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 13,
+                dashboard: "Area Tecnica (Gestao)",
                 dashboard_complementar: []
               },
               {

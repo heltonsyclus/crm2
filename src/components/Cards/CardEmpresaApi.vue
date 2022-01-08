@@ -34,9 +34,9 @@
         </div>
         <div
           v-show="carregarText"
-          style="margin:0 auto;text-align:center;padding-top:80px;color:gray"
+          style="margin:0 auto;text-align:center;padding-top:20px;color:red"
         >
-          <span style="font-weight:500">Não possui grupos...</span>
+          <span>Não possui grupos...</span>
         </div>
         <q-list class="rounded-borders bg-grey-1 q-mb-md q-my-none margin-bot">
           <q-expansion-item
@@ -45,8 +45,9 @@
             v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
             :key="indexGrupo"
             @before-show="showItem(indexGrupo)"
-            :icon="grupos.icone"
+            icon="corporate_fare"
             :label="grupos.grupo"
+            header-class="text-deep-purple-10"
             :caption="this.formataCaptionGrupo(grupos.qtde, grupos.duracao)"
             :caption-lines="1"
           >

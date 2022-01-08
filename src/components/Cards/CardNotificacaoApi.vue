@@ -39,7 +39,6 @@
     </div>
     <div>
       <q-list bordered class="rounded-borders">
-        {{ this.opened }}
         <q-expansion-item dense dense-toggle :default-opened="this.opened">
           <template v-slot:header>
             <q-item-section>
@@ -50,7 +49,7 @@
                 >
                 <q-badge style="padding:5px 10px;margin-right:2px" color="dark">
                   <q-icon name="description" color="white" />
-                  {{ "Desenvolvimento" }}</q-badge
+                  {{ grupos.grupo }}</q-badge
                 >
                 <q-badge
                   style="padding:5px 10px;margin-right:2px"
@@ -75,7 +74,7 @@
                   text-color="white"
                   size="25px"
                   class="q-ml-sm"
-                  >{{ conteudo_card.length }}</q-avatar
+                  >{{ grupos.qtde }}</q-avatar
                 >
               </div>
             </q-item-section>

@@ -67,6 +67,24 @@
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+        <CardEmpresaApi
+          v-if="ObjCard.tipo_card === 'CardEmpresaApi'"
+          class="q-ma-xs"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :style="{ width: `${ObjCard.width}` }"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
+        />
       </div>
     </div>
   </div>
@@ -78,13 +96,20 @@ import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
+import CardEmpresaApi from "src/components/Cards/CardEmpresaApi.vue";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi, CardListaApi, CardGraficoApi },
+  components: {
+    BarraLayout,
+    CardGrupoApi,
+    CardListaApi,
+    CardGraficoApi,
+    CardEmpresaApi
+  },
   name: "bi",
   setup() {
     const $store = useStore();

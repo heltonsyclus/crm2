@@ -83,7 +83,12 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi, CardListaApi, CardGraficoApi },
+  components: {
+    BarraLayout,
+    CardGrupoApi,
+    CardListaApi,
+    CardGraficoApi
+  },
   name: "dashboard",
   setup() {
     const $store = useStore();

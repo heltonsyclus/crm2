@@ -37,21 +37,24 @@
         </div>
         <div
           v-show="carregarText"
-          style="margin:0 auto;text-align:center;padding-top:80px;color:gray"
+          style="margin:0 auto;text-align:center;padding-top:20px;color:red"
         >
-          <span style="font-weight:500">Não possui grupos...</span>
+          <span>Não possui grupos...</span>
         </div>
         <div
           class="flex justify-between items-center q-my-none hover"
           style="padding:10px"
         >
-          <p class="text-dark">
+          <a
+            class="text-dark"
+            @click.prevent="abrirItem(indexGrupo, indexItem)"
+          >
             {{ grupos.grupo }}
-          </p>
-          <p class="text-blue-grey-7" style="font-size:12.5px">
-            <q-icon name="av_timer" />
-            {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
-          </p>
+          </a>
+          <div class="text-blue-grey-7" style="font-size:12.5px">
+            <q-img :src="url" />
+            {{ this.formataCaptionGrupo(grupos.qtde) }}
+          </div>
         </div>
         <div style="width:95%;margin-left:15px">
           <q-separator />
@@ -76,7 +79,12 @@ export default {
     "link_item",
     "width",
     "height"
-  ]
+  ],
+  data() {
+    return {
+      url: "../assets/syclus.png"
+    };
+  }
 };
 </script>
 

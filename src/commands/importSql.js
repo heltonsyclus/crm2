@@ -206,6 +206,7 @@ export default {
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
+
           for (let i = 0; i < arrRetorno.length; i++) {
             let item = {
               id: Object.values(arrRetorno[i])[0],
