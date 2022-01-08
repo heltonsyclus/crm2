@@ -304,8 +304,18 @@ export function bodyProjetoPorResponsavel(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
+export function bodyProjetoPorSituacao(pFiltros) {
+  let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join situacao st on st.cd_situacao = p.cd_situacao inner <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 export function bodyProjetoPorCliente(pFiltros) {
   let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join cliente cl on cl.cd_cliente = p.cd_cliente <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoPorMesAno(pFiltros) {
+  let instrucao_sql = `select cast(extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0') as integer) "id_sequencial", lpad(extract(month from p.dt_previsao), 2, '0')||'/'||extract(year from p.dt_previsao) "data_previsao", count(p.cd_projeto) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p <filtros> group by extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0'), lpad(extract(month from p.dt_previsao), 2, '0')||'/'||extract(year from p.dt_previsao) order by 1 desc`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
@@ -318,6 +328,33 @@ export function bodyProjetoColaborador(pFiltros) {
 }
 export function bodyProjetoColaboradorPorTipoProjeto(pFiltros) {
   let instrucao_sql = `select tv.cd_tipo_projeto "id_tipo_projeto", tv.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join tipo_projeto tv on tv.cd_tipo_projeto = p.cd_tipo_projeto inner join projeto_colaborador pcb on pcb.cd_projeto = p.cd_projeto <filtros> group by tv.cd_tipo_projeto, tv.ds_tipo_projeto order by tv.ds_tipo_projeto`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoColaboradorPorSituacao(pFiltros) {
+  let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join situacao st on st.cd_situacao = p.cd_situacao inner join projeto_colaborador pcb on pcb.cd_projeto = p.cd_projeto <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- projeto tag ----------------------//
+export function bodyProjetoTag(pFiltros) {
+  let instrucao_sql = `select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p inner join projeto_tag ptg on ptg.cd_projeto = p.cd_projeto <filtros> order by p.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoTagPorTipoProjeto(pFiltros) {
+  let instrucao_sql = `select tv.cd_tipo_projeto "id_tipo_projeto", tv.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join tipo_projeto tv on tv.cd_tipo_projeto = p.cd_tipo_projeto inner join projeto_tag ptg on ptg.cd_projeto = p.cd_projeto <filtros> group by tv.cd_tipo_projeto, tv.ds_tipo_projeto order by tv.ds_tipo_projeto`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoTagPorSituacao(pFiltros) {
+  let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join situacao st on st.cd_situacao = p.cd_situacao inner join projeto_tag ptg on ptg.cd_projeto = p.cd_projeto <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoTagPorMesAno(pFiltros) {
+  let instrucao_sql = `select cast(extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0') as integer) "id_sequencial", lpad(extract(month from p.dt_previsao), 2, '0')||'/'||extract(year from p.dt_previsao) "data_previsao", count(p.cd_projeto) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join projeto_tag ptg on ptg.cd_projeto = p.cd_projeto <filtros> group by extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0'), lpad(extract(month from p.dt_previsao), 2, '0')||'/'||extract(year from p.dt_previsao) order by 1 desc`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

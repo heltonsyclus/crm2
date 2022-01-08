@@ -2659,6 +2659,21 @@ function layoutDashBoard12() {
               filtro_sql_item:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (4) and a.cd_situacao = <id_grupo>"
             }
+          },
+          {
+            card: "Projetos  Ativos",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "30vw",
+            link_item: "https://crm.syclus.com.br/projetos/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyProjetoPorTag",
+              filtro_sql_grupo:
+                "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and pg.cd_tag in (13, 15, 16, 110, 113, 183, 258)",
+              body_item: "bodyProjetoTag",
+              filtro_sql_item:
+                "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
+            }
           }
         ]
       },
@@ -3128,6 +3143,51 @@ function layoutDashBoard12() {
                 "where a.ds_status = 'F' and a.cd_tipo_atividade in (4) and cast(a.dt_previsao as date) >= (current_date -60)",
               body_item: "bodyAtividade",
               filtro_sql_item: `where a.ds_status = 'F' and a.cd_tipo_atividade in (4) and cast(a.dt_previsao as date) >= (current_date -60) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))`
+            }
+          }
+        ]
+      },
+      {
+        grupo: "Versões",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Syclus ERP 1.0",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            link_item: "https://crm.syclus.com.br/projetos/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyProjetoTagPorMesAno",
+              filtro_sql_grupo: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (15)`,
+              body_item: "bodyProjetoTag",
+              filtro_sql_item: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (15) and (extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0')) = <id_grupo>`
+            }
+          },
+          {
+            card: "Syclus API",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            link_item: "https://crm.syclus.com.br/projetos/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyProjetoTagPorMesAno",
+              filtro_sql_grupo: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (16)`,
+              body_item: "bodyProjetoTag",
+              filtro_sql_item: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (16) and (extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0')) = <id_grupo>`
+            }
+          },
+          {
+            card: "Syclus Tarefas",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            link_item: "https://crm.syclus.com.br/projetos/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyProjetoTagPorMesAno",
+              filtro_sql_grupo: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (183)`,
+              body_item: "bodyProjetoTag",
+              filtro_sql_item: `where p.ds_status in ('A', 'F') and p.cd_tipo_projeto in (12) and ptg.cd_tag in (183) and (extract(year from p.dt_previsao)||lpad(extract(month from p.dt_previsao), 2, '0')) = <id_grupo>`
             }
           }
         ]

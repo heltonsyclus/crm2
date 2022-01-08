@@ -149,6 +149,11 @@ export function senhaLogin() {
                 id_layout_dashboard: 13,
                 dashboard: "Area Tecnica (Gestao)",
                 dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 8,
+                dashboard: "Projetos (Gestao)",
+                dashboard_complementar: []
               }
             ]
           }
@@ -180,7 +185,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [8]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -188,6 +193,21 @@ export function senhaLogin() {
           },
           dashboard_bi: {
             layout_dashboard: [
+              {
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 13,
+                dashboard: "Area Tecnica (Gestao)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 8,
+                dashboard: "Projetos (Gestao)",
+                dashboard_complementar: []
+              },
               {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
@@ -297,6 +317,11 @@ export function senhaLogin() {
                 dashboard_complementar: []
               },
               {
+                id_layout_dashboard: 8,
+                dashboard: "Projetos (Gestao)",
+                dashboard_complementar: []
+              },
+              {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
                 dashboard_complementar: []
@@ -375,7 +400,7 @@ export function senhaLogin() {
         recursos: {
           dashboard_area_trabalho: {
             id_layout_dashboard: 1,
-            dashboard_complementar: [8]
+            dashboard_complementar: []
           },
           dashboard_cliente: {
             id_layout_dashboard: 2,
@@ -400,6 +425,16 @@ export function senhaLogin() {
               {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 13,
+                dashboard: "Area Tecnica (Gestao)",
                 dashboard_complementar: []
               }
             ]

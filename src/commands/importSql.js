@@ -28,10 +28,16 @@ import {
   bodyProjeto,
   bodyProjetoPorTipoProjeto,
   bodyProjetoPorResponsavel,
+  bodyProjetoPorSituacao,
   bodyProjetoPorCliente,
   bodyProjetoPorTag,
   bodyProjetoColaborador,
   bodyProjetoColaboradorPorTipoProjeto,
+  bodyProjetoColaboradorPorSituacao,
+  bodyProjetoTag,
+  bodyProjetoTagPorTipoProjeto,
+  bodyProjetoTagPorSituacao,
+  bodyProjetoTagPorMesAno,
   bodyNotificacao,
   bodyNotificacaoPorAtividade,
   bodyNotificacaoPorTipoAtividade
@@ -92,7 +98,7 @@ export default {
         pNomeBody === "bodyAtividadeTag" ||
         pNomeBody === "bodyAtividadeColaborador" ||
         pNomeBody === "bodyProjeto" ||
-        pNomeBody === "bodyProjetoColaborador" ||
+        pNomeBody === "bodyProjetoTag" ||
         pNomeBody === "bodyNotificacao" ||
         pNomeBody === "bodyNotificacaoPorAtividade"
       ) {
@@ -191,6 +197,9 @@ export default {
       if (pNomeBody === "bodyProjetoPorResponsavel") {
         return bodyProjetoPorResponsavel(filtros);
       }
+      if (pNomeBody === "bodyProjetoPorSituacao") {
+        return bodyProjetoPorSituacao(filtros);
+      }
       if (pNomeBody === "bodyProjetoPorCliente") {
         return bodyProjetoPorCliente(filtros);
       }
@@ -203,6 +212,22 @@ export default {
       }
       if (pNomeBody === "bodyProjetoColaboradorPorTipoProjeto") {
         return bodyProjetoColaboradorPorTipoProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoColaboradorPorSituacao") {
+        return bodyProjetoColaboradorPorSituacao(filtros);
+      }
+
+      if (pNomeBody === "bodyProjetoTag") {
+        return bodyProjetoTag(filtros);
+      }
+      if (pNomeBody === "bodyProjetoTagPorTipoProjeto") {
+        return bodyProjetoTagPorTipoProjeto(filtros);
+      }
+      if (pNomeBody === "bodyProjetoTagPorSituacao") {
+        return bodyProjetoTagPorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyProjetoTagPorMesAno") {
+        return bodyProjetoTagPorMesAno(filtros);
       }
 
       if (pNomeBody === "bodyNotificacao") {
