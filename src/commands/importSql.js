@@ -1,12 +1,5 @@
 import {
   bodyAtividade,
-  bodyAtividadeCliente,
-  bodyAtividadeTag,
-  bodyAtividadeClientePorTipoAtividade,
-  bodyAtividadeClientePorResponsavel,
-  bodyAtividadeClientePorTag,
-  bodyAtividadeClientePorSituacao,
-  bodyAtividadeClientePorWorkflow,
   bodyAtividadePorTipoAtividade,
   bodyAtividadePorCliente,
   bodyAtividadePorTag,
@@ -17,6 +10,15 @@ import {
   bodyAtividadePorData,
   bodyAtividadePorMesAno,
   bodyAtividadePorSemana,
+  bodyAtividadeCliente,
+  bodyAtividadeClientePorTipoAtividade,
+  bodyAtividadeClientePorResponsavel,
+  bodyAtividadeClientePorTag,
+  bodyAtividadeClientePorSituacao,
+  bodyAtividadeClientePorWorkflow,
+  bodyAtividadeColaborador,
+  bodyAtividadeColaboradorPorTipoAtividade,
+  bodyAtividadeTag,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorColaborador,
@@ -28,6 +30,8 @@ import {
   bodyProjetoPorResponsavel,
   bodyProjetoPorCliente,
   bodyProjetoPorTag,
+  bodyProjetoColaborador,
+  bodyProjetoColaboradorPorTipoProjeto,
   bodyNotificacao,
   bodyNotificacaoPorAtividade,
   bodyNotificacaoPorTipoAtividade
@@ -86,7 +90,9 @@ export default {
         pNomeBody === "bodyAtividade" ||
         pNomeBody === "bodyAtividadeCliente" ||
         pNomeBody === "bodyAtividadeTag" ||
+        pNomeBody === "bodyAtividadeColaborador" ||
         pNomeBody === "bodyProjeto" ||
+        pNomeBody === "bodyProjetoColaborador" ||
         pNomeBody === "bodyNotificacao" ||
         pNomeBody === "bodyNotificacaoPorAtividade"
       ) {
@@ -98,27 +104,6 @@ export default {
       filtros = filtros.replace("<id_grupo>", pIdGrupo);
       if (pNomeBody === "bodyAtividade") {
         return bodyAtividade(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeCliente") {
-        return bodyAtividadeCliente(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeTag") {
-        return bodyAtividadeTag(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeClientePorTipoAtividade") {
-        return bodyAtividadeClientePorTipoAtividade(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeClientePorResponsavel") {
-        return bodyAtividadeClientePorResponsavel(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeClientePorTag") {
-        return bodyAtividadeClientePorTag(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeClientePorSituacao") {
-        return bodyAtividadeClientePorSituacao(filtros);
-      }
-      if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
-        return bodyAtividadeClientePorWorkflow(filtros);
       }
       if (pNomeBody === "bodyAtividadePorTipoAtividade") {
         return bodyAtividadePorTipoAtividade(filtros);
@@ -150,6 +135,33 @@ export default {
       if (pNomeBody === "bodyAtividadePorSemana") {
         return bodyAtividadePorSemana(filtros);
       }
+      if (pNomeBody === "bodyAtividadeCliente") {
+        return bodyAtividadeCliente(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorTipoAtividade") {
+        return bodyAtividadeClientePorTipoAtividade(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorResponsavel") {
+        return bodyAtividadeClientePorResponsavel(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorTag") {
+        return bodyAtividadeClientePorTag(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorSituacao") {
+        return bodyAtividadeClientePorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
+        return bodyAtividadeClientePorWorkflow(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTag") {
+        return bodyAtividadeTag(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeColaborador") {
+        return bodyAtividadeColaborador(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeColaboradorPorTipoAtividade") {
+        return bodyAtividadeColaboradorPorTipoAtividade(filtros);
+      }
 
       if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
         return bodyOcorrenciaPorTipoAtividade(filtros);
@@ -169,6 +181,7 @@ export default {
       if (pNomeBody === "bodyOcorrenciaPorSemana") {
         return bodyOcorrenciaPorSemana(filtros);
       }
+
       if (pNomeBody === "bodyProjeto") {
         return bodyProjeto(filtros);
       }
@@ -183,6 +196,13 @@ export default {
       }
       if (pNomeBody === "bodyProjetoPorTag") {
         return bodyProjetoPorTag(filtros);
+      }
+
+      if (pNomeBody === "bodyProjetoColaborador") {
+        return bodyProjetoColaborador(filtros);
+      }
+      if (pNomeBody === "bodyProjetoColaboradorPorTipoProjeto") {
+        return bodyProjetoColaboradorPorTipoProjeto(filtros);
       }
 
       if (pNomeBody === "bodyNotificacao") {

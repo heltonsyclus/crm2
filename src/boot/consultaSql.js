@@ -159,6 +159,20 @@ export function bodyAtividadeClientePorTag(pFiltros) {
   return body;
 }
 
+//---------------------- atividade colaborador ----------------------//
+
+export function bodyAtividadeColaborador(pFiltros) {
+  let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_colaborador acb on acb.cd_empresa = a.cd_empresa and acb.cd_atividade = a.cd_atividade <filtros> order by a.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyAtividadeColaboradorPorTipoAtividade(pFiltros) {
+  let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join atividade_colaborador acb on acb.cd_empresa = a.cd_empresa and acb.cd_atividade = a.cd_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
 /* Atividade filtro por interessado */
 
 export function bodyAtividadeInteressado(pFiltros) {
@@ -252,7 +266,7 @@ export function bodyOcorrenciaPorSemana(pFiltros) {
   return body;
 }
 
-//---------------------- projetos ----------------------//
+//---------------------- projeto ----------------------//
 export function bodyProcuraIdProjeto(pValor) {
   const body = {
     tipo_retorno: "",
@@ -272,36 +286,43 @@ export function bodyDadosProjeto(pIdProjeto) {
 
 export function bodyProjeto(pFiltros) {
   let instrucao_sql = `select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p <filtros> order by p.dt_previsao`;
-
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyProjetoPorTipoProjeto(pFiltros) {
   let instrucao_sql = `select tv.cd_tipo_projeto "id_tipo_projeto", tv.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join tipo_projeto tv on tv.cd_tipo_projeto = p.cd_tipo_projeto <filtros> group by tv.cd_tipo_projeto, tv.ds_tipo_projeto order by tv.ds_tipo_projeto`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyProjetoPorTag(pFiltros) {
   let instrucao_sql = `select tg.cd_tag "id_tag", tg.ds_tag "tag", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join projeto_tag pg on pg.cd_projeto = p.cd_projeto inner join tag tg on tg.cd_tag = pg.cd_tag <filtros> group by tg.cd_tag, tg.ds_tag order by tg.ds_tag`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyProjetoPorResponsavel(pFiltros) {
   let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join colaborador cb on cb.cd_colaborador = p.cd_responsavel <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyProjetoPorCliente(pFiltros) {
   let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join cliente cl on cl.cd_cliente = p.cd_cliente <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
 
-//Retorna dados do projeto em execucao pIdProjeto
+//---------------------- projeto colaborador ----------------------//
+export function bodyProjetoColaborador(pFiltros) {
+  let instrucao_sql = `select p.cd_projeto "id_projeto", p.ds_projeto "projeto", p.dt_previsao "data_previsao" from projeto p inner join projeto_colaborador pcb on pcb.cd_projeto = p.cd_projeto <filtros> order by p.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyProjetoColaboradorPorTipoProjeto(pFiltros) {
+  let instrucao_sql = `select tv.cd_tipo_projeto "id_tipo_projeto", tv.ds_tipo_projeto "tipo_projeto", count(p.cd_projeto) "qtde_projeto", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), p.duracao)) "duracao" from projeto p inner join tipo_projeto tv on tv.cd_tipo_projeto = p.cd_tipo_projeto inner join projeto_colaborador pcb on pcb.cd_projeto = p.cd_projeto <filtros> group by tv.cd_tipo_projeto, tv.ds_tipo_projeto order by tv.ds_tipo_projeto`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- projeto atividade ----------------------//
 export function bodyAtividadePendenteProjeto(pValor) {
   const body = {
     tipo_retorno: "",

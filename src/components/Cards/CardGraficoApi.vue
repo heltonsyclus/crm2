@@ -275,6 +275,7 @@ export default {
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
+
           for (let i = 0; i < arrRetorno.length; i++) {
             this.carregarKnob = false;
             this.chartOptions.xaxis.categories.push(
@@ -296,17 +297,17 @@ export default {
     },
     limparConteudo() {
       this.ObjConteudo.grupos = [];
-      (this.chartOptions = {
+      this.chartOptions = {
         xaxis: {
-          categories: ["ÁREAS"]
+          categories: []
         }
-      }),
-        (this.series = [
-          {
-            name: "Atividades",
-            data: ["0"]
-          }
-        ]);
+      };
+      this.series = [
+        {
+          name: "",
+          data: []
+        }
+      ];
     },
     formataCaptionGrupo(pQtde, pDuracao) {
       let texto = "";

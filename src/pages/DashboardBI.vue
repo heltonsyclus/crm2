@@ -201,6 +201,7 @@ export default defineComponent({
       }
     },
     CarregarDashboard(pIDashboard, pComplementar) {
+      this.IndexGrupoAtual = 0;
       this.ObjDashboard = GeLayoutDashBoard(pIDashboard);
       if (pComplementar) {
         for (let i = 0; i < pComplementar.length; i++) {
