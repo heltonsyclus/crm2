@@ -556,13 +556,18 @@ export function senhaLogin() {
           dashboard_bi: {
             layout_dashboard: [
               {
-                id_layout_dashboard: 12,
-                dashboard: "Desenvolvimento",
+                id_layout_dashboard: 15,
+                dashboard: "Comercial",
                 dashboard_complementar: []
               },
               {
-                id_layout_dashboard: 15,
-                dashboard: "Comercial",
+                id_layout_dashboard: 4,
+                dashboard: "Area Tecnica (Corrente)",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
                 dashboard_complementar: []
               }
             ]
