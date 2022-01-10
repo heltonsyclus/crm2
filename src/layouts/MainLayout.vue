@@ -92,7 +92,6 @@
     <div v-if="menuMobile === false">
       <MenuFlutuante />
     </div>
-
     <div v-if="menuMobile === true">
       <q-drawer
         v-model="leftDrawerOpen"
@@ -223,8 +222,8 @@ export default defineComponent({
         this.menuDesktop = false;
         this.menuMobile = true;
         this.leftDrawerOpen = false;
-        let titulo = document.querySelector("#titulo");
-        titulo.classList.add("logo-texto-mobile");
+        /*let titulo = document.querySelector("#titulo");
+        titulo.classList.add("logo-texto-mobile");*/
       }
       if (window.innerWidth >= 800) {
         this.menuDesktop = true;

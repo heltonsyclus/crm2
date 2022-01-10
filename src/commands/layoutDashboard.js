@@ -1599,7 +1599,7 @@ function layoutDashBoard8() {
             id_card: 1,
             card: "Cliente",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/projetos/<id_item>",
             conteudo_card: {
@@ -2136,7 +2136,7 @@ function layoutDashBoard12() {
             card: "Previsão da Semana",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_pizza",
             width: "31vw",
             conteudo_card: {
               body_grupo: "bodyAtividadePorSituacao",
@@ -3096,7 +3096,7 @@ function layoutDashBoard14() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3132,7 +3132,7 @@ function layoutDashBoard14() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3168,7 +3168,7 @@ function layoutDashBoard14() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3204,7 +3204,7 @@ function layoutDashBoard14() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3240,7 +3240,7 @@ function layoutDashBoard14() {
           {
             card: "Finalizadas no Mês",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3337,7 +3337,7 @@ function layoutDashBoard15() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3373,7 +3373,7 @@ function layoutDashBoard15() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3409,7 +3409,7 @@ function layoutDashBoard15() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3445,7 +3445,7 @@ function layoutDashBoard15() {
           {
             card: "Clientes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -3481,7 +3481,7 @@ function layoutDashBoard15() {
           {
             card: "Finalizadas no Mês",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardEmpresaApi",
             width: "31vw",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {

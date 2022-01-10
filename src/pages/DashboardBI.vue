@@ -233,7 +233,6 @@ export default defineComponent({
       login.recursos.dashboard_area_trabalho.id_layout_dashboard,
       login.recursos.dashboard_area_trabalho.dashboard_complementar
     );
-    console.log(this.CarregarDashboard);
     this.msgCard = "limpar_conteudo";
     this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);

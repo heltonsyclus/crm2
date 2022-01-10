@@ -27,12 +27,6 @@
         <apexchart type="line" :options="chartOptions" :series="series">
         </apexchart>
       </div>
-      <div v-if="sub_tipo === 'grafico_padrao'">
-        <div>
-          <apexchart type="area" :options="chartOptions" :series="series">
-          </apexchart>
-        </div>
-      </div>
       <div v-if="sub_tipo === 'grafico_pontos'">
         <apexchart type="scatter" :options="chartOptions" :series="series">
         </apexchart>
@@ -42,8 +36,11 @@
         </apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_pizza'">
-        <apexchart type="pie" :options="chartOptions" :series="series">
-        </apexchart>
+        <apexchart
+          type="pie"
+          :options="chartPizza"
+          :series="itemsPizza"
+        ></apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
@@ -110,7 +107,53 @@ export default {
           name: "Atividades",
           data: [""]
         }
-      ]
+      ],
+      itemsPizza: [],
+      chartPizza: {
+        labels: []
+      }
+      /*series: [
+        {
+          data: [44, 55, 41, 64, 22, 43, 21]
+        },
+        {
+          data: [53, 32, 33, 52, 13, 44, 32]
+        }
+      ],
+      chartOptions: {
+        chart: {
+          type: "bar",
+          height: 430
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              position: "top"
+            }
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: "12px",
+            colors: ["#fff"]
+          }
+        },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ["#fff"]
+        },
+        tooltip: {
+          shared: true,
+          intersect: false
+        },
+        xaxis: {
+          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007]
+        }
+      }*/
     };
   },
   methods: {
@@ -135,7 +178,6 @@ export default {
       );
       this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
-
         for (let i = 0; i < arrRetorno.length; i++) {
           let item = {
             id: Object.values(arrRetorno[i])[0],
@@ -275,13 +317,23 @@ export default {
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
-
           for (let i = 0; i < arrRetorno.length; i++) {
             this.carregarKnob = false;
-            this.chartOptions.xaxis.categories.push(
-              Object.values(arrRetorno[i])[1]
-            );
-            this.series[0].data.push(Object.values(arrRetorno[i])[2]);
+            if (this.sub_tipo == "grafico_pizza") {
+              this.chartPizza.labels.push(Object.values(arrRetorno[i])[1]);
+              this.itemsPizza.push(Object.values(arrRetorno[i])[2]);
+            }
+            if (this.sub_tipo == "grafico_padrao_lateral") {
+              this.chartOptions.xaxis.categories.push(
+                Object.values(arrRetorno[i])[1]
+              );
+              this.series[0].data.push(Object.values(arrRetorno[i])[2]);
+            } else {
+              this.chartOptions.xaxis.categories.push(
+                Object.values(arrRetorno[i])[1]
+              );
+              this.series[0].data.push(Object.values(arrRetorno[i])[2]);
+            }
           }
           setTimeout(() => {
             arrRetorno == "";
