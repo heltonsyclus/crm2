@@ -4,7 +4,7 @@
       @OnClick="OnClickBarraLayout"
       @valorInputPesquisa="OnClickSelect"
       :ConteudoBtn="this.ObjDashboard['grupos']"
-      Aplicacao="Select"
+      Aplicacao="Select-filtro"
       :valoresRecurso="this.dashboardsColaboradorAtivo"
     />
     <div>

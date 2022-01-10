@@ -136,6 +136,18 @@
               @blur="mudar(this.valoresRecurso)"
               class="q-mr-md"
             />
+          </div>
+          <div
+            class="flex items-center wrap q-mr-md"
+            v-if="Aplicacao === 'Select-filtro'"
+          >
+            <q-select
+              v-model="valorModel"
+              dense
+              :options="this.valoresRecurso"
+              @blur="mudar(this.valoresRecurso)"
+              class="q-mr-md"
+            />
             <q-btn
               unelevated
               round
