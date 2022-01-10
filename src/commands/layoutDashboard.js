@@ -314,7 +314,7 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "98%",
+            width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -406,7 +406,7 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "98%",
+            width: "32%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -493,13 +493,10 @@ function layoutDashBoard2() {
         icone: "assignment_turned_in",
         cards: [
           {
-            id_card: 1,
             card: "Tipo Atividade (30 dias)",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "97%",
-            heigth: "600px",
+            width: "47%",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -516,7 +513,7 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "50%",
             heigth: "600px",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {

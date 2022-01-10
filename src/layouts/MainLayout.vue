@@ -230,8 +230,6 @@ export default defineComponent({
         this.menuDesktop = true;
         this.menuMobile = false;
         this.leftDrawerOpen = false;
-        let titulo = document.querySelector("#titulo");
-        titulo.classList.remove("logo-texto-mobile");
       }
     }
   },
