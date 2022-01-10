@@ -194,11 +194,6 @@ export default defineComponent({
           text: "Colaborador"
         },
         {
-          icon: "local_offer",
-          rota: "/Tags",
-          text: "Tags"
-        },
-        {
           icon: "fact_check",
           rota: "/Projetos",
           text: "Projetos"
