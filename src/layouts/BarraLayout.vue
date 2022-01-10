@@ -4,6 +4,9 @@
       <div class="barra">
         <div class="responsive-esquerda">
           <q-tab
+            no-caps
+            outside-arrows
+            mobile-arrows
             v-for="(btn, index) in ConteudoBtn"
             :key="index"
             :label="btn.grupo"

@@ -879,7 +879,7 @@ function layoutDashBoard3() {
             card: "Atividade atrasadas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_pizza",
             width: "35vw",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
