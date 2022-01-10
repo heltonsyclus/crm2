@@ -67,6 +67,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -84,6 +93,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -101,6 +119,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/cledesson.png"),
@@ -154,6 +181,16 @@ export function senhaLogin() {
                 id_layout_dashboard: 8,
                 dashboard: "Projetos (Gestao)",
                 dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 14,
+                dashboard: "Cobrança",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 15,
+                dashboard: "Comercial",
+                dashboard_complementar: []
               }
             ]
           }
@@ -173,6 +210,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -236,6 +282,15 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/fabricio.png"),
@@ -307,6 +362,11 @@ export function senhaLogin() {
           dashboard_bi: {
             layout_dashboard: [
               {
+                id_layout_dashboard: 14,
+                dashboard: "Cobrança",
+                dashboard_complementar: []
+              },
+              {
                 id_layout_dashboard: 4,
                 dashboard: "Area Tecnica (Corrente)",
                 dashboard_complementar: []
@@ -324,6 +384,11 @@ export function senhaLogin() {
               {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 15,
+                dashboard: "Comercial",
                 dashboard_complementar: []
               }
             ]
@@ -349,6 +414,15 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 14,
+                dashboard: "Cobrança",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/jpaulo.png"),
@@ -366,6 +440,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/jpedro.png"),
@@ -388,6 +471,15 @@ export function senhaLogin() {
             id_layout_dashboard: 3,
             dashboard_complementar: [],
             permissao_colaborador: ["*"]
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -467,6 +559,11 @@ export function senhaLogin() {
                 id_layout_dashboard: 12,
                 dashboard: "Desenvolvimento",
                 dashboard_complementar: []
+              },
+              {
+                id_layout_dashboard: 15,
+                dashboard: "Comercial",
+                dashboard_complementar: []
               }
             ]
           }
@@ -512,6 +609,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/comum.png"),
@@ -529,6 +635,15 @@ export function senhaLogin() {
           dashboard_cliente: {
             id_layout_dashboard: 2,
             dashboard_complementar: []
+          },
+          dashboard_bi: {
+            layout_dashboard: [
+              {
+                id_layout_dashboard: 12,
+                dashboard: "Desenvolvimento",
+                dashboard_complementar: []
+              }
+            ]
           }
         },
         img: require("../assets/rodrigo.png"),
