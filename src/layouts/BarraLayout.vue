@@ -290,6 +290,7 @@ export default defineComponent({
 }
 .responsive-esquerda {
   display: flex;
+  max-width: 100%;
 }
 @media only screen and (max-width: 632px) {
   .barra {

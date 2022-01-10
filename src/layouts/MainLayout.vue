@@ -10,8 +10,9 @@
           @click="$router.push({ name: 'dashboard' })"
         />
         <q-toolbar-title
-          class="text-weight-bold "
+          class="text-weight-bold logo-texto"
           style="cursor:pointer"
+          id="titulo"
           @click="$router.push({ name: 'dashboard' })"
         >
           Syclus CRM
@@ -222,11 +223,15 @@ export default defineComponent({
         this.menuDesktop = false;
         this.menuMobile = true;
         this.leftDrawerOpen = false;
+        let titulo = document.querySelector("#titulo");
+        titulo.classList.add("logo-texto-mobile");
       }
       if (window.innerWidth >= 800) {
         this.menuDesktop = true;
         this.menuMobile = false;
         this.leftDrawerOpen = false;
+        let titulo = document.querySelector("#titulo");
+        titulo.classList.remove("logo-texto-mobile");
       }
     }
   },
@@ -239,3 +244,12 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.logo-texto {
+  font-size: 22px;
+}
+.logo-texto-mobile {
+  font-size: 15px;
+}
+</style>
