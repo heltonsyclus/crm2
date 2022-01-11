@@ -12,7 +12,6 @@
         <q-toolbar-title
           class="text-weight-bold logo-texto"
           style="cursor:pointer"
-          id="titulo"
           @click="$router.push({ name: 'dashboard' })"
         >
           Syclus CRM
@@ -217,8 +216,6 @@ export default defineComponent({
         this.menuDesktop = false;
         this.menuMobile = true;
         this.leftDrawerOpen = false;
-        /*let titulo = document.querySelector("#titulo");
-        titulo.classList.add("logo-texto-mobile");*/
       }
       if (window.innerWidth >= 800) {
         this.menuDesktop = true;

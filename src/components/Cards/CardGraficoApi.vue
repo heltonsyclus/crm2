@@ -321,7 +321,7 @@ export default {
             this.carregarKnob = false;
             if (this.sub_tipo == "grafico_pizza") {
               this.chartPizza.labels.push(Object.values(arrRetorno[i])[1]);
-              this.itemsPizza.push(Object.values(arrRetorno[i])[2]);
+              this.itemsPizza.push(Object.values(arrRetorno[i])[3]);
             }
             if (this.sub_tipo == "grafico_padrao_lateral") {
               this.chartOptions.xaxis.categories.push(
