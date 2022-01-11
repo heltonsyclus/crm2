@@ -361,6 +361,10 @@ export default {
           data: []
         }
       ];
+      (this.itemsPizza = []),
+        (this.chartPizza = {
+          labels: []
+        });
     },
     formataCaptionGrupo(pQtde, pDuracao) {
       let texto = "";

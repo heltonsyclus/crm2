@@ -116,11 +116,13 @@
           </div>
           <div class="flex items-center wrap" v-if="Aplicacao === 'Agenda'">
             <q-select
+              filled
               v-model="calendarioEventos"
               dense
               class="q-mr-md"
               :options="statusEventos"
-            />
+            >
+            </q-select>
             <q-select
               v-model="calendarioAtual"
               dense

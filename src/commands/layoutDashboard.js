@@ -2002,7 +2002,8 @@ function layoutDashBoard10() {
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyNotificacao",
-              filtro_sql_grupo: "where n.ds_status = 'P'",
+              filtro_sql_grupo:
+                "where n.ds_status = 'P' and n.cd_colaborador = <id_principal>",
               body_item: "",
               filtro_sql_item: " "
             }
