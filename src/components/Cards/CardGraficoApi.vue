@@ -72,6 +72,7 @@ import {
   bodyAtividadePorSituacao,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
+  bodyOcorrenciaPorColaborador,
   bodyOcorrenciaPorData
 } from "src/boot/consultaSql.js";
 export default {
