@@ -115,7 +115,7 @@ function layoutDashBoard1() {
             conteudo_card: {
               body_grupo: "bodyOcorrenciaPorTipoAtividade",
               filtro_sql_grupo:
-                "where o.ds_status in ('A', 'F') and cast(o.dt_ocorrencia as date) = (current_date -1) and o.cd_colaborador = <id_principal>",
+                "where o.ds_status in ('A', 'F') and cast(o.dt_ocorrencia as date) = (current_date) and o.cd_colaborador = <id_principal>",
               body_item: "",
               filtro_sql_item: ""
             }
