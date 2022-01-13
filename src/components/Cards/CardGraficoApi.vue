@@ -24,20 +24,36 @@
     </q-item>
     <q-card-section class="corpo">
       <div v-if="sub_tipo === 'grafico_linha'">
-        <apexchart type="line" :options="chartOptions" :series="series">
+        <apexchart
+          height="200"
+          type="line"
+          :options="chartOptions"
+          :series="series"
+        >
         </apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_pontos'">
-        <apexchart type="scatter" :options="chartOptions" :series="series">
+        <apexchart
+          height="200"
+          type="scatter"
+          :options="chartOptions"
+          :series="series"
+        >
         </apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_quantidade'">
-        <apexchart type="heatmap" :options="chartOptions" :series="series">
+        <apexchart
+          height="200"
+          type="heatmap"
+          :options="chartOptions"
+          :series="series"
+        >
         </apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_pizza'">
         <apexchart
           type="pie"
+          height="200"
           :options="chartPizza"
           :series="itemsPizza"
         ></apexchart>
@@ -45,6 +61,7 @@
       <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
           type="bar"
+          height="200"
           :options="chartOptions"
           :series="series"
         ></apexchart>

@@ -130,7 +130,7 @@ export default {
 .corpo {
   padding: 0;
   margin: 0px auto;
-  max-height: 250px;
+  max-height: 200px;
   overflow: auto;
 }
 .text-class {

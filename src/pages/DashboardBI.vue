@@ -2,12 +2,17 @@
   <div class="col2">
     <BarraLayout
       @OnClick="OnClickBarraLayout"
-      @valorInputPesquisa="OnClickSelect"
       :ConteudoBtn="this.ObjDashboard['grupos']"
       Aplicacao="Select"
-      :valoresRecurso="this.dashboardsColaboradorAtivo"
+      @abrirPopUp="popUps"
     />
-    <div class="row">
+    <div class="row" @click="popUp = false">
+      <cardpopup
+        :objLayoutBI="this.dashboardsColaboradorAtivo"
+        class="tela-popup"
+        @valorIndexLayout="valorIndexLayouts"
+        v-show="popUp"
+      />
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
@@ -97,6 +102,7 @@ import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
 import CardEmpresaApi from "src/components/Cards/CardEmpresaApi.vue";
+import cardpopup from "app/src/components/Cards/Cardpopup.vue";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";
@@ -108,6 +114,7 @@ export default defineComponent({
     CardGrupoApi,
     CardListaApi,
     CardGraficoApi,
+    cardpopup,
     CardEmpresaApi
   },
   name: "bi",
@@ -116,9 +123,16 @@ export default defineComponent({
     const login = computed({
       get: () => $store.state.showcase.login
     });
+    const dashboardBInome = computed({
+      get: () => $store.state.showcase.dashboardBInome,
+      set: val => {
+        $store.commit("showcase/BInome", val);
+      }
+    });
     const fabPos = ref([18, 18]);
     const draggingFab = ref(false);
     return {
+      dashboardBInome,
       login,
       fabPos,
       draggingFab,
@@ -133,6 +147,7 @@ export default defineComponent({
   },
   data() {
     return {
+      popUp: false,
       ObjDashboard: [],
       IndexGrupoAtual: 0,
       Grupos: [],
@@ -143,13 +158,16 @@ export default defineComponent({
     };
   },
   methods: {
-    OnClickSelect(selectIndex) {
+    valorIndexLayouts(j, i) {
+      this.popUp = false;
+      let grupoBi = j;
+      let dashboardBi = i;
       let login = JSON.parse(localStorage.getItem("login"));
-      let recursosBi = login.recursos.dashboard_bi.layout_dashboard;
-
+      let recursosBi = login.recursos.dashboard_bi_x;
+      this.IndexGrupoAtual = 0;
       this.CarregarDashboard(
-        recursosBi[selectIndex].id_layout_dashboard,
-        recursosBi[selectIndex].dashboard_complementar
+        recursosBi[grupoBi].layout_dashboard[dashboardBi].id_layout_dashboard,
+        recursosBi[grupoBi].layout_dashboard[dashboardBi].dashboard_complementar
       );
       this.msgCard = "limpar_conteudo";
       this.AtualizarCardsGrupoAtual();
@@ -211,11 +229,14 @@ export default defineComponent({
           }
         }
       }
+    },
+    popUps() {
+      this.popUp = !this.popUp;
     }
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_bi;
+    const permissao = login.recursos.dashboard_bi_x;
     if (!permissao) {
       alert("Você não possue autorização!");
       next("");
@@ -224,19 +245,43 @@ export default defineComponent({
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
-    let recursosBi = login.recursos.dashboard_bi.layout_dashboard;
+    let recursosBi = login.recursos.dashboard_bi_x;
+    this.dashboardBInome =
+      recursosBi[0].grupo + " / " + recursosBi[0].layout_dashboard[0].dashboard;
+
     for (let i = 0; i < recursosBi.length; i++) {
-      this.dashboardsColaboradorAtivo.push(recursosBi[i].dashboard);
+      this.dashboardsColaboradorAtivo.push(recursosBi[i]);
     }
     this.idColaboradorAtivo = login.id_colaborador;
+
     this.CarregarDashboard(
-      login.recursos.dashboard_area_trabalho.id_layout_dashboard,
-      login.recursos.dashboard_area_trabalho.dashboard_complementar
+      recursosBi[0].layout_dashboard[0].id_layout_dashboard,
+      recursosBi[0].layout_dashboard[0].dashboard_complementar
     );
-    this.msgCard = "limpar_conteudo";
-    this.AtualizarCardsGrupoAtual();
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
+    this.msgCard = "limpar_conteudo";
+    this.AtualizarCardsGrupoAtual();
   }
 });
 </script>
+
+<style scoped>
+.tela-popup {
+  max-width: 380px;
+  padding: 0px 10px 15px 10px;
+  position: absolute;
+  z-index: 1;
+  right: 2%;
+  margin-left: -50px;
+  top: 14%;
+  box-shadow: 0 0 1em rgb(165, 165, 165);
+}
+@media only screen and (max-width: 1320px) {
+  .tela-popup {
+    width: 80%;
+    top: 9%;
+    right: 20%;
+  }
+}
+</style>

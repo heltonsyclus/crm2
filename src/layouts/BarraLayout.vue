@@ -16,6 +16,7 @@
             class="capitalize"
             @click.prevent="onclickGrupo(index)"
           />
+
           <div class="flex items-center" v-if="Aplicacao === 'Agenda'">
             <span
               class="capitalize q-ml-md text-blue-8"
@@ -34,7 +35,6 @@
             </q-btn>
           </div>
         </div>
-        <q-space />
         <div class="responsive-direita q-pt-xs">
           <div v-if="Aplicacao === 'AplicativosPadrao'">
             <q-btn flat dense>
@@ -130,20 +130,19 @@
               class="q-mr-md"
             />
           </div>
-          <div
-            class="flex items-center wrap q-mr-md"
-            v-if="Aplicacao === 'Select'"
-          >
-            <q-select
-              v-model="valorModel"
+          <div class="flex items-center q-mr-md" v-if="Aplicacao === 'Select'">
+            <p class="nome-bi">{{ this.dashboardBInome }}</p>
+            <q-btn
+              flat
+              round
               dense
-              :options="this.valoresRecurso"
-              @blur="mudar(this.valoresRecurso)"
-              class="q-mr-md"
+              icon="apps"
+              @click="$emit('abrirPopUp')"
+              style="margin-top:5px"
             />
           </div>
           <div
-            class="flex items-center wrap q-mr-md"
+            class="flex items-center q-mr-md"
             v-if="Aplicacao === 'Select-filtro'"
           >
             <q-select
@@ -160,15 +159,6 @@
               icon="filter_list"
               size="12px"
             >
-              <q-menu show-if-above>
-                <q-list dense clickable>
-                  <q-item class="GL__menu-link">
-                    <q-item-section @click="$emit('abrirNotificacao')"
-                      >Abrir/Fechar</q-item-section
-                    >
-                  </q-item>
-                </q-list>
-              </q-menu>
             </q-btn>
           </div>
         </div>
@@ -178,8 +168,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
@@ -191,7 +180,7 @@ export default defineComponent({
     "nomeMes",
     "valoresRecurso"
   ],
-  emits: ["abrirNotificacao"],
+  emits: ["abrirNotificacao", "abrirPopUp"],
   name: "BarraLayout",
   setup() {
     const $store = useStore();
@@ -213,7 +202,11 @@ export default defineComponent({
         $store.commit("showcase/infRecursos", val);
       }
     });
+    const dashboardBInome = computed({
+      get: () => $store.state.showcase.dashboardBInome
+    });
     return {
+      dashboardBInome,
       calendarioAtual,
       calendarioEventos,
       valorRecurso,
@@ -269,11 +262,25 @@ export default defineComponent({
         this.valorModel = this.valoresRecurso[0];
         this.$emit("valorInputPesquisa", 0);
       }
+    },
+    abrirPopUp() {
+      this.popUp = true;
     }
   },
   computed: {
     Tab() {
       return this.ConteudoBtn[this.ValorIndx].grupo;
+    }
+  },
+  watch: {
+    dashboardBInome: {
+      handler: function(newValue, oldValue) {
+        if (newValue) {
+          this.ValorIndx = 0;
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   created() {
@@ -290,12 +297,27 @@ export default defineComponent({
 
 <style scoped>
 .barra {
-  width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.nome-bi {
+  margin: 7px 5px 0px 0px;
+  color: rgb(233, 233, 233);
+  font-weight: 500;
+  padding: 2px 7px;
+  font-size: 13px;
+  border-radius: 10px;
+  color: #3f3f3f;
+  font-style: italic;
 }
 .responsive-esquerda {
   display: flex;
-  max-width: 100%;
+  flex-wrap: wrap;
+  width: 81%;
+}
+.hover:hover {
+  background-color: rgb(205, 205, 205);
 }
 @media only screen and (max-width: 632px) {
   .barra {
@@ -311,6 +333,11 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     padding-bottom: 10px;
+  }
+}
+@media only screen and (max-width: 1315px) {
+  .responsive-esquerda {
+    width: 100%;
   }
 }
 </style>

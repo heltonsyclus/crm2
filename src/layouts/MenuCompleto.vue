@@ -101,7 +101,7 @@ export default {
       this.grupos.splice(index, 1);
     },
     salvarGrupos() {
-      console.log(this.grupos);
+      // console.log(this.grupos);
     }
   }
 };

@@ -15,6 +15,7 @@
         style="margin:10px 0px 50px"
         @click="open('left')"
       />
+
       <q-dialog v-model="dialog" :position="position" persistent>
         <MenuCompleto @close="dialog = false" />
       </q-dialog>
@@ -31,6 +32,7 @@
       </q-item-section>
     </q-item>
   </q-drawer>
+
   <q-page-container>
     <router-view />
   </q-page-container>

@@ -49,21 +49,8 @@
               <img :src="this.imgColaborador" />
             </q-avatar>
             <q-tooltip>Colaborador</q-tooltip>
-            <q-menu>
+            <q-menu style="text-align:center">
               <q-list dense>
-                <!--     <q-item clickable class="GL__menu-link">
-                  <q-item-section @click="darkDialog = true"
-                    >Perfil</q-item-section
-                  >
-                  <q-dialog
-                    v-model="darkDialog"
-                    persistent
-                    transition-show="flip-down"
-                    transition-hide="flip-up"
-                  >
-                    <PerfilUsuario />
-                  </q-dialog>
-                </q-item>-->
                 <q-item
                   clickable
                   class="GL__menu-link"
@@ -72,6 +59,9 @@
                   <q-item-section @click.prevent="limparToken()"
                     >Sair</q-item-section
                   >
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>2.0.0.1</q-item-section>
                 </q-item>
               </q-list>
             </q-menu>
@@ -209,6 +199,7 @@ export default defineComponent({
     limparToken() {
       window.location.reload(true);
       window.localStorage.clear();
+      window.location.href = window.location.href;
       this.login = [];
     },
     handleResize() {
