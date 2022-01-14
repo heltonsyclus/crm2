@@ -316,6 +316,7 @@ export default defineComponent({
   flex-wrap: wrap;
   width: 81%;
 }
+
 .hover:hover {
   background-color: rgb(205, 205, 205);
 }
