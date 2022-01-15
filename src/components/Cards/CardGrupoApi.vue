@@ -3,7 +3,7 @@
     class="my-card-syclus"
     flat
     bordered
-    :style="{ width: `${width}`, height: `${height}` }"
+    :style="{ width: `${width}`, height: `${this.alturaCard}` }"
   >
     <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
@@ -21,7 +21,7 @@
       >
       </q-btn>
     </q-item>
-    <q-card-section class="corpo">
+    <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
       <div class="text-dark">
         <div class="spin" style="width:230px" v-show="carregarKnob">
           <q-knob
@@ -130,7 +130,7 @@ export default {
 .corpo {
   padding: 0;
   margin: 0px auto;
-  max-height: 200px;
+  height: 23vh;
   overflow: auto;
 }
 .text-class {

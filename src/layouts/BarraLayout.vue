@@ -298,6 +298,7 @@ export default defineComponent({
 <style scoped>
 .barra {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
 }

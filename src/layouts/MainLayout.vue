@@ -14,7 +14,7 @@
           style="cursor:pointer"
           @click="$router.push({ name: 'dashboard' })"
         >
-          Syclus CRM
+          Syclus 2.0
         </q-toolbar-title>
 
         <div class="q-gutter-sm row items-center no-wrap">
@@ -51,6 +51,11 @@
             <q-tooltip>Colaborador</q-tooltip>
             <q-menu style="text-align:center">
               <q-list dense>
+                <q-item clickable class="flex ">
+                  <q-item-section>Versão</q-item-section>
+                  <q-item-section>2.0.0.1</q-item-section>
+                </q-item>
+                <q-separator />
                 <q-item
                   clickable
                   class="GL__menu-link"
@@ -59,9 +64,6 @@
                   <q-item-section @click.prevent="limparToken()"
                     >Sair</q-item-section
                   >
-                </q-item>
-                <q-item clickable>
-                  <q-item-section>2.0.0.1</q-item-section>
                 </q-item>
               </q-list>
             </q-menu>

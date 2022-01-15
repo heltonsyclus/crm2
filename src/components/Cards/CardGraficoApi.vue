@@ -3,7 +3,7 @@
     class="my-card-syclus"
     flat
     bordered
-    :style="{ width: `${width}`, height: `${height}` }"
+    :style="{ width: `${width}`, height: `${this.alturaCard}` }"
   >
     <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
@@ -22,10 +22,10 @@
       >
       </q-btn>
     </q-item>
-    <q-card-section class="corpo">
+    <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
       <div v-if="sub_tipo === 'grafico_linha'">
         <apexchart
-          height="200"
+          height="220"
           type="line"
           :options="chartOptions"
           :series="series"
@@ -34,7 +34,7 @@
       </div>
       <div v-if="sub_tipo === 'grafico_pontos'">
         <apexchart
-          height="200"
+          height="220"
           type="scatter"
           :options="chartOptions"
           :series="series"
@@ -43,7 +43,7 @@
       </div>
       <div v-if="sub_tipo === 'grafico_quantidade'">
         <apexchart
-          height="200"
+          height="220"
           type="heatmap"
           :options="chartOptions"
           :series="series"
@@ -53,7 +53,7 @@
       <div v-if="sub_tipo === 'grafico_pizza'">
         <apexchart
           type="pie"
-          height="200"
+          height="215"
           :options="chartPizza"
           :series="itemsPizza"
         ></apexchart>
@@ -61,7 +61,7 @@
       <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
           type="bar"
-          height="200"
+          height="215"
           :options="chartOptions"
           :series="series"
         ></apexchart>
@@ -104,7 +104,8 @@ export default {
     "msg",
     "link_item",
     "width",
-    "height"
+    "height",
+    "coluna_totalizadora"
   ],
   components: {
     apexchart: VueApexCharts
@@ -130,48 +131,6 @@ export default {
       chartPizza: {
         labels: []
       }
-      /*series: [
-        {
-          data: [44, 55, 41, 64, 22, 43, 21]
-        },
-        {
-          data: [53, 32, 33, 52, 13, 44, 32]
-        }
-      ],
-      chartOptions: {
-        chart: {
-          type: "bar",
-          height: 430
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
-            }
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"]
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ["#fff"]
-        },
-        tooltip: {
-          shared: true,
-          intersect: false
-        },
-        xaxis: {
-          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007]
-        }
-      }*/
     };
   },
   methods: {
@@ -337,20 +296,28 @@ export default {
           let arrRetorno = res.data;
           for (let i = 0; i < arrRetorno.length; i++) {
             this.carregarKnob = false;
+            let index_coluna = 2;
+            if (this.coluna_totalizadora > 0) {
+              index_coluna = this.coluna_totalizadora - 1;
+            }
             if (this.sub_tipo == "grafico_pizza") {
               this.chartPizza.labels.push(Object.values(arrRetorno[i])[1]);
-              this.itemsPizza.push(Object.values(arrRetorno[i])[3]);
+              this.itemsPizza.push(Object.values(arrRetorno[i])[index_coluna]);
             }
             if (this.sub_tipo == "grafico_padrao_lateral") {
               this.chartOptions.xaxis.categories.push(
                 Object.values(arrRetorno[i])[1]
               );
-              this.series[0].data.push(Object.values(arrRetorno[i])[2]);
+              this.series[0].data.push(
+                Object.values(arrRetorno[i])[index_coluna]
+              );
             } else {
               this.chartOptions.xaxis.categories.push(
                 Object.values(arrRetorno[i])[1]
               );
-              this.series[0].data.push(Object.values(arrRetorno[i])[2]);
+              this.series[0].data.push(
+                Object.values(arrRetorno[i])[index_coluna]
+              );
             }
           }
           setTimeout(() => {
@@ -398,6 +365,10 @@ export default {
         }
       }
       return texto;
+    },
+    medidaCard() {
+      this.alturaCard = this.height + "vh";
+      this.alturaCorpo = this.height - 7 + "vh";
     }
   },
   computed: {
@@ -418,6 +389,9 @@ export default {
       deep: true,
       immediate: true
     }
+  },
+  created() {
+    this.medidaCard();
   }
 };
 </script>

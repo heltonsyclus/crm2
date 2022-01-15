@@ -46,6 +46,7 @@
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+
         <CardGraficoApi
           v-if="ObjCard.tipo_card === 'CardGraficoApi'"
           class="q-ma-xs"
@@ -58,6 +59,7 @@
           :style="{ width: `${ObjCard.width}` }"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
+          :coluna_totalizadora="ObjCard.coluna_totalizadora"
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"

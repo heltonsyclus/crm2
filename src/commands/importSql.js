@@ -49,7 +49,10 @@ export default {
       value: 71,
       carregarKnob: false,
       carregarText: false,
-      ObjConteudo: {}
+      ObjConteudo: {},
+      larguraCard: null,
+      alturaCard: null,
+      alturaCorpo: null
     };
   },
   methods: {
@@ -292,6 +295,10 @@ export default {
         }
       }
       return texto;
+    },
+    medidaCard() {
+      this.alturaCard = this.height + "vh";
+      this.alturaCorpo = this.height - 7 + "vh";
     }
   },
   computed: {
@@ -312,5 +319,8 @@ export default {
       deep: true,
       immediate: true
     }
+  },
+  created() {
+    this.medidaCard();
   }
 };

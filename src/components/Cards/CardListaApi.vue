@@ -3,7 +3,7 @@
     class="my-card-syclus"
     flat
     bordered
-    :style="{ width: `${width}`, height: `${height}` }"
+    :style="{ width: `${width}`, height: `${this.alturaCard}` }"
   >
     <q-item class="items-center topo-fixo" :class="cor_header" dense="dense">
       <q-item-section
@@ -21,40 +21,42 @@
       >
       </q-btn>
     </q-item>
-    <q-card-section class="corpo">
-      <div
-        v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
-        :key="indexGrupo"
-      >
-        <div class="spin" style="width:230px" v-show="carregarKnob">
-          <q-knob
-            v-model="value"
-            size="30px"
-            :thickness="0.4"
-            color="primary"
-            track-color="cyan-3"
-          />
-        </div>
+    <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
+      <div>
         <div
-          v-show="carregarText"
-          style="margin:0 auto;text-align:center;padding-top:80px;color:gray"
+          v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
+          :key="indexGrupo"
         >
-          <span style="font-weight:500">Não possui grupos...</span>
-        </div>
-        <div
-          class="flex justify-between items-center q-my-none hover"
-          style="padding:10px"
-        >
-          <p class="text-dark">
-            {{ grupos.grupo }}
-          </p>
-          <p class="text-blue-grey-7" style="font-size:12.5px">
-            <q-icon name="av_timer" />
-            {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
-          </p>
-        </div>
-        <div style="width:95%;margin-left:15px">
-          <q-separator />
+          <div class="spin" style="width:230px" v-show="carregarKnob">
+            <q-knob
+              v-model="value"
+              size="30px"
+              :thickness="0.4"
+              color="primary"
+              track-color="cyan-3"
+            />
+          </div>
+          <div
+            v-show="carregarText"
+            style="margin:0 auto;text-align:center;padding-top:80px;color:gray"
+          >
+            <span style="font-weight:500">Não possui grupos...</span>
+          </div>
+          <div
+            class="flex justify-between items-center q-my-none hover"
+            style="padding:10px"
+          >
+            <p class="text-dark">
+              {{ grupos.grupo }}
+            </p>
+            <p class="text-blue-grey-7" style="font-size:12.5px">
+              <q-icon name="av_timer" />
+              {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
+            </p>
+          </div>
+          <div style="width:95%;margin-left:15px">
+            <q-separator />
+          </div>
         </div>
       </div>
     </q-card-section>
@@ -93,9 +95,6 @@ export default {
 }
 .hover:hover {
   background-color: rgb(205, 205, 205);
-}
-.my-card-s {
-  width: 450px;
 }
 .corpo {
   padding: 0;

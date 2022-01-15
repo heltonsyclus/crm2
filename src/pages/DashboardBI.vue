@@ -6,18 +6,37 @@
       Aplicacao="Select"
       @abrirPopUp="popUps"
     />
-    <div class="row" @click="popUp = false">
-      <cardpopup
-        :objLayoutBI="this.dashboardsColaboradorAtivo"
-        class="tela-popup"
-        @valorIndexLayout="valorIndexLayouts"
-        v-show="popUp"
-      />
+    <!--   @mousemove="fecharPOpUp()"-->
+    <cardpopup
+      :objLayoutBI="this.dashboardsColaboradorAtivo"
+      class="tela-popup"
+      @valorIndexLayout="valorIndexLayouts"
+      v-show="popUp"
+    />
+    <div class="row">
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
         style="margin:5px;margin-bottom:5px;"
       >
+        <CardComparativoApi
+          v-if="ObjCard.tipo_card === 'CardComparativoApi'"
+          class="q-ma-xs"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :style="{ width: `${ObjCard.width}` }"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
+        />
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
@@ -36,6 +55,26 @@
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+
+        <CardEmpresaApi
+          v-if="ObjCard.tipo_card === 'CardEmpresaApi'"
+          class="q-ma-xs"
+          :id="ObjCard.id_card"
+          :card="ObjCard.card"
+          :ordem="ObjCard.ordem"
+          cor_header="bg-primary"
+          topo_fixo="topo_fixo"
+          :height="ObjCard.height"
+          :style="{ width: `${ObjCard.width}` }"
+          :btn_comando="ObjCard.btn_comando"
+          :tipo_card="ObjCard.tipo_card"
+          :sub_tipo="ObjCard.sub_tipo"
+          :conteudo_card="ObjCard.conteudo_card"
+          :link_item="ObjCard.link_item"
+          :idPrincipal="this.idColaboradorAtivo"
+          :msg="this.msgCard"
+        />
+
         <CardGraficoApi
           v-if="ObjCard.tipo_card === 'CardGraficoApi'"
           class="q-ma-xs"
@@ -48,12 +87,14 @@
           :style="{ width: `${ObjCard.width}` }"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
+          :coluna_totalizadora="ObjCard.coluna_totalizadora"
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
           :link_item="ObjCard.link_item"
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+
         <CardListaApi
           v-if="ObjCard.tipo_card === 'CardListaApi'"
           class="q-ma-xs"
@@ -61,27 +102,10 @@
           :card="ObjCard.card"
           :ordem="ObjCard.ordem"
           cor_header="bg-primary"
+          :style="{ width: `${ObjCard.width}` }"
           topo_fixo="topo_fixo"
           :height="ObjCard.height"
-          :style="{ width: `${ObjCard.width}` }"
-          :btn_comando="ObjCard.btn_comando"
-          :tipo_card="ObjCard.tipo_card"
-          :sub_tipo="ObjCard.sub_tipo"
-          :conteudo_card="ObjCard.conteudo_card"
-          :link_item="ObjCard.link_item"
-          :idPrincipal="this.idColaboradorAtivo"
-          :msg="this.msgCard"
-        />
-        <CardEmpresaApi
-          v-if="ObjCard.tipo_card === 'CardEmpresaApi'"
-          class="q-ma-xs"
-          :id="ObjCard.id_card"
-          :card="ObjCard.card"
-          :ordem="ObjCard.ordem"
-          cor_header="bg-primary"
-          topo_fixo="topo_fixo"
-          :height="ObjCard.height"
-          :style="{ width: `${ObjCard.width}` }"
+          :width="ObjCard.width"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
           :sub_tipo="ObjCard.sub_tipo"
@@ -232,6 +256,9 @@ export default defineComponent({
     },
     popUps() {
       this.popUp = !this.popUp;
+    },
+    fecharPOpUp() {
+      this.popUp = false;
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -272,15 +299,15 @@ export default defineComponent({
   padding: 0px 10px 15px 10px;
   position: absolute;
   z-index: 1;
-  right: 2%;
+  right: 1%;
   margin-left: -50px;
-  top: 14%;
+  top: 18%;
   box-shadow: 0 0 1em rgb(165, 165, 165);
 }
 @media only screen and (max-width: 1320px) {
   .tela-popup {
     width: 80%;
-    top: 9%;
+    top: 10%;
     right: 20%;
   }
 }
