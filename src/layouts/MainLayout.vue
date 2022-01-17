@@ -9,12 +9,12 @@
           style="cursor:pointer"
           @click="$router.push({ name: 'dashboard' })"
         />
-        <q-toolbar-title
-          class="text-weight-bold logo-texto"
-          style="cursor:pointer"
-          @click="$router.push({ name: 'dashboard' })"
-        >
-          Syclus 2.0
+        <q-toolbar-title class="text-weight-bold logo-texto">
+          <span
+            @click="$router.push({ name: 'dashboard' })"
+            style="cursor:pointer"
+            >Syclus 2.0</span
+          >
         </q-toolbar-title>
 
         <div class="q-gutter-sm row items-center no-wrap">
