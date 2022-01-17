@@ -218,9 +218,6 @@ export default defineComponent({
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
             "width"
           ] = `${this.telaWidth - 80}px`;
-          console.log(
-            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["height"]
-          );
         }
       }
       if (window.innerWidth <= 797) {
@@ -232,9 +229,6 @@ export default defineComponent({
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
             "width"
           ] = `${this.telaWidth - 20}px`;
-          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
-            "height"
-          ] = 70;
         }
       }
       if (window.innerWidth >= 797) {
@@ -246,9 +240,6 @@ export default defineComponent({
           this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
             "width"
           ] = this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"];
-          console.log(
-            this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["height"]
-          );
         }
       }
     },
