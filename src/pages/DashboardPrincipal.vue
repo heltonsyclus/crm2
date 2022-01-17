@@ -147,6 +147,7 @@ export default defineComponent({
       this.AtualizarCardsGrupoAtual();
     },
     AtualizarCardsGrupoAtual() {
+      this.handleResize();
       this.msgCard = "atualizar_conteudo";
       setTimeout(() => {
         this.msgCard = "";

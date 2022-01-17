@@ -251,6 +251,18 @@ export function senhaLogin() {
                   id_layout_dashboard: 14,
                   dashboard: "Cobrança",
                   dashboard_complementar: []
+                },
+                {
+                  icone: "paid",
+                  id_layout_dashboard: 19,
+                  dashboard: "Qualidade",
+                  dashboard_complementar: []
+                },
+                {
+                  icone: "paid",
+                  id_layout_dashboard: 20,
+                  dashboard: "Processos",
+                  dashboard_complementar: []
                 }
               ]
             },
@@ -514,6 +526,12 @@ export function senhaLogin() {
                   id_layout_dashboard: 14,
                   dashboard: "Cobrança",
                   dashboard_complementar: []
+                },
+                {
+                  icone: "paid",
+                  id_layout_dashboard: 19,
+                  dashboard: "Qualidade",
+                  dashboard_complementar: []
                 }
               ]
             },
@@ -674,13 +692,24 @@ export function senhaLogin() {
           },
           dashboard_bi_x: [
             {
+              grupo: "Administrativo",
+              icone: "code",
+              layout_dashboard: [
+                {
+                  icone: "code",
+                  id_layout_dashboard: 20,
+                  dashboard: "Processos",
+                  dashboard_complementar: []
+                }
+              ]
+            },
+            {
               grupo: "Desenvolvimento",
               icone: "code",
               layout_dashboard: [
                 {
                   icone: "code",
                   id_layout_dashboard: 12,
-
                   dashboard: "Padrão",
                   dashboard_complementar: []
                 }

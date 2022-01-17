@@ -5,15 +5,15 @@
       :ConteudoBtn="this.ObjDashboard['grupos']"
       Aplicacao="Select"
       @abrirPopUp="popUps"
+      @fecharPopUp="fecharPOpUp"
     />
-    <!--   @mousemove="fecharPOpUp()"-->
     <cardpopup
       :objLayoutBI="this.dashboardsColaboradorAtivo"
       class="tela-popup"
       @valorIndexLayout="valorIndexLayouts"
       v-show="popUp"
     />
-    <div class="row">
+    <div class="row" @click="fecharPOpUp()">
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"
         :key="ObjCard"
@@ -201,6 +201,7 @@ export default defineComponent({
       this.AtualizarCardsGrupoAtual();
     },
     AtualizarCardsGrupoAtual() {
+      this.handleResize();
       this.msgCard = "atualizar_conteudo";
       setTimeout(() => {
         this.msgCard = "";

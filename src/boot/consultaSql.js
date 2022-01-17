@@ -58,31 +58,26 @@ export function bodyAtividade(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorTipoAtividade(pFiltros) {
   let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorResponsavel(pFiltros) {
   let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorSituacao(pFiltros) {
   let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join situacao st on st.cd_situacao = a.cd_situacao <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorCliente(pFiltros) {
   let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade inner join cliente cl on cl.cd_cliente = ac.cd_cliente <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
 export function bodyAtividadePorWorkflow(pFiltros) {
   let instrucao_sql = `select wf.cd_workflow "id_workflow", wf.ds_workflow "workflow", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join workflow wf on wf.cd_workflow = a.cd_workflow <filtros> group by wf.cd_workflow, wf.ds_workflow order by wf.ds_workflow`;
   let body = montaBody(instrucao_sql, pFiltros);
@@ -117,6 +112,51 @@ export function bodyAtividadePorSemana(pFiltros) {
 //----------------------atividade tag ----------------------//
 export function bodyAtividadeTag(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> order by a.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorTipoAtividade(pFiltros) {
+  let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade order by tv.ds_tipo_atividade`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorResponsavel(pFiltros) {
+  let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorSituacao(pFiltros) {
+  let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join situacao st on st.cd_situacao = a.cd_situacao inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorCliente(pFiltros) {
+  let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_cliente ac on ac.cd_empresa = a.cd_empresa and ac.cd_atividade = a.cd_atividade inner join cliente cl on cl.cd_cliente = ac.cd_cliente inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by cl.cd_cliente, cl.ds_fantasia order by cl.ds_fantasia`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorWorkflow(pFiltros) {
+  let instrucao_sql = `select wf.cd_workflow "id_workflow", wf.ds_workflow "workflow", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join workflow wf on wf.cd_workflow = a.cd_workflow inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by wf.cd_workflow, wf.ds_workflow order by wf.ds_workflow`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorGut(pFiltros) {
+  let instrucao_sql = `select a.vl_gut "id_gut", a.vl_gut "gut", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by a.vl_gut order by a.vl_gut desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorData(pFiltros) {
+  let instrucao_sql = `select datediff(day, cast('01/01/1970' as date), a.dt_previsao) "id_sequencial", lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by datediff(day, cast('01/01/1970' as date), a.dt_previsao), lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by 1 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorMesAno(pFiltros) {
+  let instrucao_sql = `select cast(extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0') as integer) "id_sequencial", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by extract(year from a.dt_previsao)||lpad(extract(month from a.dt_previsao), 2, '0'), lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by 1 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeTagPorSemana(pFiltros) {
+  let instrucao_sql = `select extract(week from a.dt_previsao) "id_sequencial", 'SEMANA '||extract(week from a.dt_previsao) "data_ocorrencia", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by extract(week from a.dt_previsao), 'SEMANA '||extract(week from a.dt_previsao) order by 1 desc`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

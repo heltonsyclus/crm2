@@ -53,7 +53,7 @@
       <div v-if="sub_tipo === 'grafico_pizza'">
         <apexchart
           type="pie"
-          height="215"
+          height="200"
           :options="chartPizza"
           :series="itemsPizza"
         ></apexchart>
@@ -61,7 +61,7 @@
       <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
           type="bar"
-          height="215"
+          height="210"
           :options="chartOptions"
           :series="series"
         ></apexchart>

@@ -19,6 +19,15 @@ import {
   bodyAtividadeColaborador,
   bodyAtividadeColaboradorPorTipoAtividade,
   bodyAtividadeTag,
+  bodyAtividadeTagPorTipoAtividade,
+  bodyAtividadeTagPorCliente,
+  bodyAtividadeTagPorResponsavel,
+  bodyAtividadeTagPorWorkflow,
+  bodyAtividadeTagPorSituacao,
+  bodyAtividadeTagPorGut,
+  bodyAtividadeTagPorData,
+  bodyAtividadeTagPorMesAno,
+  bodyAtividadeTagPorSemana,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorColaborador,
@@ -165,6 +174,34 @@ export default {
       if (pNomeBody === "bodyAtividadeTag") {
         return bodyAtividadeTag(filtros);
       }
+      if (pNomeBody === "bodyAtividadeTagPorTipoAtividade") {
+        return bodyAtividadeTagPorTipoAtividade(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorCliente") {
+        return bodyAtividadeTagPorCliente(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorWorkflow") {
+        return bodyAtividadeTagPorWorkflow(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorResponsavel") {
+        return bodyAtividadeTagPorResponsavel(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorSituacao") {
+        return bodyAtividadeTagPorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorGut") {
+        return bodyAtividadeTagPorGut(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorData") {
+        return bodyAtividadeTagPorData(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorMesAno") {
+        return bodyAtividadeTagPorMesAno(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorSemana") {
+        return bodyAtividadeTagPorSemana(filtros);
+      }
+
       if (pNomeBody === "bodyAtividadeColaborador") {
         return bodyAtividadeColaborador(filtros);
       }
