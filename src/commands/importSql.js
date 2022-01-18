@@ -111,6 +111,7 @@ export default {
         pNomeBody === "bodyAtividadeColaborador" ||
         pNomeBody === "bodyProjeto" ||
         pNomeBody === "bodyProjetoTag" ||
+        pNomeBody === "bodyProjetoColaborador" ||
         pNomeBody === "bodyNotificacao" ||
         pNomeBody === "bodyNotificacaoPorAtividade"
       ) {
