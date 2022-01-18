@@ -4548,7 +4548,8 @@ function layoutDashBoard19() {
           {
             card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
             width: "62vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
@@ -4580,7 +4581,8 @@ function layoutDashBoard19() {
           {
             card: "Inconforme (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
             width: "62vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",

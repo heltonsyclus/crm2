@@ -67,9 +67,10 @@
         ></apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_barra_horizontal'">
+        {{ this.chartOptions }}
         <apexchart
           type="bar"
-          height="350"
+          height="210"
           :options="chartOptions"
           :series="series"
         ></apexchart>
@@ -176,12 +177,20 @@ export default {
       chartOptions: {
         xaxis: {
           categories: [""]
-        }
+        },
+        chart: { borderRadius: null, horizontal: null },
+        plotOptions: {
+          bar: {
+            borderRadius: null,
+            horizontal: null
+          }
+        },
+        dataLabels: { enabled: null }
       },
       series: [
         {
           name: "Atividades",
-          data: [""]
+          data: []
         }
       ],
       itemsPie: [],
@@ -496,10 +505,18 @@ export default {
               this.chartPie.labels.push(Object.values(arrRetorno[i])[1]);
               this.itemsPie.push(Object.values(arrRetorno[i])[index_coluna]);
             }
-            if (this.sub_tipo == "grafico_padrao_lateral") {
+            if (this.sub_tipo == "grafico_barra_horizontal") {
               this.chartOptions.xaxis.categories.push(
                 Object.values(arrRetorno[i])[1]
               );
+              this.chartOptions.chart.push({ type: "bar", height: 350 });
+              this.chartOptions.plotOptions.push({
+                bar: {
+                  borderRadius: 4,
+                  horizontal: true
+                }
+              });
+              this.chartOptions.dataLabels.push({ enabled: false });
               this.series[0].data.push(
                 Object.values(arrRetorno[i])[index_coluna]
               );
@@ -511,6 +528,7 @@ export default {
                 Object.values(arrRetorno[i])[index_coluna]
               );
             }
+            console.log(this.chartOptions.chart);
           }
           setTimeout(() => {
             arrRetorno == "";
