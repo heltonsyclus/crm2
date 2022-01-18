@@ -4530,10 +4530,27 @@ function layoutDashBoard19() {
         icone: "signal_cellular_alt",
         cards: [
           {
+            card: "Sem Classificacao (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+            }
+          },
+          {
             card: "Sem Classificacao",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "31vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4548,9 +4565,8 @@ function layoutDashBoard19() {
           {
             card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "62vw",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4563,10 +4579,27 @@ function layoutDashBoard19() {
             }
           },
           {
+            card: "Inconforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+            }
+          },
+          {
             card: "Inconforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "31vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4581,9 +4614,8 @@ function layoutDashBoard19() {
           {
             card: "Inconforme (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "62vw",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4596,10 +4628,25 @@ function layoutDashBoard19() {
             }
           },
           {
+            card: "Verificada (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
             card: "Verificada",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "31vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4614,9 +4661,8 @@ function layoutDashBoard19() {
           {
             card: "Verificada (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "62vw",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorResponsavel",
@@ -4627,10 +4673,25 @@ function layoutDashBoard19() {
             }
           },
           {
+            card: "Conforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 141 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
             card: "Conforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "31vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -4645,9 +4706,8 @@ function layoutDashBoard19() {
           {
             card: "Conforme (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "62vw",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorResponsavel",
