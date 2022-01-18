@@ -2439,7 +2439,22 @@ function layoutDashBoard12() {
             card: "Previsão da Semana",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_pizza",
+            sub_tipo: "grafico_donut",
+            width: "31vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Previsão da Semana",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -2480,6 +2495,21 @@ function layoutDashBoard12() {
               body_item: "bodyProjetoTag",
               filtro_sql_item:
                 "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
+            }
+          },
+          {
+            card: "Previsão da Semana",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo",
+            width: "94.5vw",
+            height: "45",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
             }
           }
         ]
@@ -4507,12 +4537,12 @@ function layoutDashBoard19() {
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
+              body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag not in (141, 140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividade",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and ag.cd_tag not in (141, 140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
           },
           {
@@ -4525,10 +4555,10 @@ function layoutDashBoard19() {
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag not in (141, 140) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and ag.cd_tag not in (141, 140) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {

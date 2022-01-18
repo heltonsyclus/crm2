@@ -54,8 +54,8 @@
         <apexchart
           type="pie"
           height="200"
-          :options="chartPizza"
-          :series="itemsPizza"
+          :options="chartPie"
+          :series="itemsPie"
         ></apexchart>
       </div>
       <div v-if="sub_tipo === 'grafico_barra'">
@@ -64,6 +64,30 @@
           height="210"
           :options="chartOptions"
           :series="series"
+        ></apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_barra_horizontal'">
+        <apexchart
+          type="bar"
+          height="350"
+          :options="chartOptions"
+          :series="series"
+        ></apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_donut'">
+        <apexchart
+          type="donut"
+          height="180"
+          :options="chartPie"
+          :series="itemsPie"
+        ></apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_comparativo'">
+        <apexchart
+          type="bar"
+          :options="chartOption"
+          :series="serie"
+          height="210"
         ></apexchart>
       </div>
     </q-card-section>
@@ -160,9 +184,76 @@ export default {
           data: [""]
         }
       ],
-      itemsPizza: [],
-      chartPizza: {
+      itemsPie: [],
+      chartPie: {
         labels: []
+      },
+      serie: [
+        {
+          name: "PRODUCT A",
+          data: [44, 55, 41, 67, 22, 43]
+        },
+        {
+          name: "PRODUCT B",
+          data: [13, 23, 20, 8, 13, 27]
+        },
+        {
+          name: "PRODUCT C",
+          data: [11, 17, 15, 15, 21, 14]
+        },
+        {
+          name: "PRODUCT D",
+          data: [21, 7, 25, 13, 22, 8]
+        }
+      ],
+      chartOption: {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              legend: {
+                position: "bottom",
+                offsetX: -10,
+                offsetY: 0
+              }
+            }
+          }
+        ],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            borderRadius: 10
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          categories: [
+            "01/01/2011 GMT",
+            "01/02/2011 GMT",
+            "01/03/2011 GMT",
+            "01/04/2011 GMT",
+            "01/05/2011 GMT",
+            "01/06/2011 GMT"
+          ]
+        },
+        legend: {
+          position: "right",
+          offsetY: 40
+        },
+        fill: {
+          opacity: 1
+        }
       }
     };
   },
@@ -398,9 +489,12 @@ export default {
             if (this.coluna_totalizadora > 0) {
               index_coluna = this.coluna_totalizadora - 1;
             }
-            if (this.sub_tipo == "grafico_pizza") {
-              this.chartPizza.labels.push(Object.values(arrRetorno[i])[1]);
-              this.itemsPizza.push(Object.values(arrRetorno[i])[index_coluna]);
+            if (
+              this.sub_tipo == "grafico_pizza" ||
+              this.sub_tipo == "grafico_donut"
+            ) {
+              this.chartPie.labels.push(Object.values(arrRetorno[i])[1]);
+              this.itemsPie.push(Object.values(arrRetorno[i])[index_coluna]);
             }
             if (this.sub_tipo == "grafico_padrao_lateral") {
               this.chartOptions.xaxis.categories.push(
@@ -443,8 +537,8 @@ export default {
           data: []
         }
       ];
-      (this.itemsPizza = []),
-        (this.chartPizza = {
+      (this.itemsPie = []),
+        (this.chartPie = {
           labels: []
         });
     },
@@ -529,11 +623,6 @@ export default {
 @keyframes spins {
   to {
     transform: rotate(360deg);
-  }
-}
-@media only screen and (max-width: 1320px) {
-  .my-card-syclus {
-    width: 350px;
   }
 }
 </style>
