@@ -66,6 +66,17 @@
           :height="alturaGrafico"
         ></apexchart>
       </div>
+      <div
+        v-if="sub_tipo === 'grafico_barra_horizontal'"
+        style="margin-right:30px"
+      >
+        <apexchart
+          type="bar"
+          :options="objGraficoBarraHorizontal"
+          :series="seriesGraficoBarraHorizontal"
+          :height="alturaGrafico"
+        ></apexchart>
+      </div>
       <div v-if="sub_tipo === 'grafico_donut'">
         <apexchart
           type="donut"
@@ -128,6 +139,26 @@ export default {
         }
       },
       seriesGraficoBarra: [
+        {
+          name: "Atividades",
+          data: []
+        }
+      ],
+      objGraficoBarraHorizontal: {
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: [""]
+        }
+      },
+      seriesGraficoBarraHorizontal: [
         {
           name: "Atividades",
           data: []
@@ -256,6 +287,16 @@ export default {
                 Object.values(arrRetorno[i])[1]
               );
               this.seriesGraficoBarra[0].data.push(
+                Object.values(arrRetorno[i])[index_coluna]
+              );
+            }
+          } else if (this.sub_tipo === "grafico_barra_horizontal") {
+            this.limparConteudoBarraHorizontal();
+            for (let i = 0; i < arrRetorno.length; i++) {
+              this.objGraficoBarraHorizontal.xaxis.categories.push(
+                Object.values(arrRetorno[i])[1]
+              );
+              this.seriesGraficoBarraHorizontal[0].data.push(
                 Object.values(arrRetorno[i])[index_coluna]
               );
             }
@@ -410,7 +451,24 @@ export default {
           labels: []
         });
     },
-    limparConteudoComparativo() {},
+    limparConteudoBarraHorizontal() {
+      this.objGraficoBarraHorizontal = {
+        xaxis: {
+          categories: []
+        }
+      };
+      this.seriesGraficoBarraHorizontal = [
+        {
+          name: "",
+          data: []
+        }
+      ];
+    },
+    limparConteudoComparativo() {
+      this.objGraficoCOmparativo.xaxis.categories.push({});
+      console.log(this.objGraficoCOmparativo.xaxis.categories);
+      this.seriesGraficoComparacao;
+    },
     limparConteudoComparativoLinha() {},
     medidaCard() {
       this.alturaCard = this.height + "vh";

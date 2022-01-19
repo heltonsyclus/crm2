@@ -309,7 +309,7 @@ function layoutDashBoard1() {
             card: "Atividades Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -324,7 +324,7 @@ function layoutDashBoard1() {
             card: "Distribuição do Tempo (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_pizza",
+            sub_tipo: "grafico_donut",
             coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
@@ -1033,7 +1033,7 @@ function layoutDashBoard4() {
             card: "Atividades Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -1118,7 +1118,7 @@ function layoutDashBoard4() {
             card: "Atividades Previstas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -1132,8 +1132,8 @@ function layoutDashBoard4() {
           {
             card: "Atividades Pendentes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            sub_tipo: "grafico_barra",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
@@ -1170,7 +1170,7 @@ function layoutDashBoard4() {
             card: "Atividades Previstas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -1348,7 +1348,7 @@ function layoutDashBoard4() {
             card: "Atividades Previstas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -1445,7 +1445,7 @@ function layoutDashBoard4() {
             card: "Atividades Previstas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -2483,6 +2483,21 @@ function layoutDashBoard12() {
             }
           }
           /*   {
+            card: "Previsão da Semana",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra_horizontal",
+            width: "94.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
             card: "Atividades Finalizadas suporte 2021",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
@@ -2495,7 +2510,7 @@ function layoutDashBoard12() {
               body_item: "",
               filtro_sql_item: ""
             }
-          },
+          } 
           {
             card: "Atividades Finalizadas suporte 2021",
             btn_comando: "btn-atualizar",
@@ -3094,7 +3109,7 @@ function layoutDashBoard13() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -3379,8 +3394,8 @@ function layoutDashBoard13() {
             card: "Atividades criadas no Mês (Total)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "31vw",
+            sub_tipo: "grafico_barra_horizontal",
+            width: "47vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadePorWorkflow",
@@ -3394,8 +3409,8 @@ function layoutDashBoard13() {
             card: "Atividades criadas no Mês (Pendente)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "31vw",
+            sub_tipo: "grafico_barra_horizontal",
+            width: "47vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadePorWorkflow",
@@ -3448,7 +3463,7 @@ function layoutDashBoard14() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -3686,8 +3701,8 @@ function layoutDashBoard15() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "31vw",
+            sub_tipo: "grafico_barra_horizontal",
+            width: "62.5vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadePorSituacao",
@@ -4153,7 +4168,7 @@ function layoutDashBoard17() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -4350,7 +4365,7 @@ function layoutDashBoard18() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -4754,23 +4769,6 @@ function layoutDashBoard19() {
             }
           },
           {
-            card: "Sem Classificacao grafico",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "94vw",
-            height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag not in (141, 140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
-              filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag not in (141, 140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
-            }
-          },
-          {
             card: "Inconforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -4800,23 +4798,6 @@ function layoutDashBoard19() {
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
                 "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (367) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
-            }
-          },
-          {
-            card: "Inconforme gráfico",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "94vw",
-            height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
-              filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
           }
         ]
