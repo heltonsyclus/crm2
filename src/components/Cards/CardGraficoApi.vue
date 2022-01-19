@@ -415,7 +415,7 @@ export default {
     medidaCard() {
       this.alturaCard = this.height + "vh";
       let altura = parseInt(this.height);
-      this.alturaGrafico = altura * 5.5 + "px";
+      this.alturaGrafico = altura * 5 + "px";
       this.alturaCorpo = this.height - 6 + "vh";
     }
   },
