@@ -25,7 +25,7 @@
     <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
       <div v-if="sub_tipo === 'grafico_linha'">
         <apexchart
-          height="220"
+          :height="alturaGrafico"
           type="line"
           :options="objGraficoBarra"
           :series="series"
@@ -34,7 +34,7 @@
       </div>
       <div v-if="sub_tipo === 'grafico_pontos'">
         <apexchart
-          height="220"
+          :height="alturaGrafico"
           type="scatter"
           :options="objGraficoBarra"
           :series="series"
@@ -43,7 +43,7 @@
       </div>
       <div v-if="sub_tipo === 'grafico_quantidade'">
         <apexchart
-          height="220"
+          :height="alturaGrafico"
           type="heatmap"
           :options="objGraficoBarra"
           :series="series"
@@ -53,7 +53,7 @@
       <div v-if="sub_tipo === 'grafico_pizza'">
         <apexchart
           type="pie"
-          height="200"
+          :height="alturaGrafico"
           :options="objGraficoPizza"
           :series="seriesGraficoPizza"
         ></apexchart>
@@ -61,33 +61,33 @@
       <div v-if="sub_tipo === 'grafico_barra'">
         <apexchart
           type="bar"
-          height="210"
           :options="objGraficoBarra"
           :series="seriesGraficoBarra"
+          :height="alturaGrafico"
         ></apexchart>
       </div>
-      <!--<div v-if="sub_tipo === 'grafico_barra_horizontal'">
-        <apexchart
-          type="bar"
-          height="210"
-          :options="objGraficoBarra"
-          :series="series"
-        ></apexchart>
-      </div>-->
       <div v-if="sub_tipo === 'grafico_donut'">
         <apexchart
           type="donut"
-          height="180"
           :options="objGraficoPizza"
           :series="seriesGraficoPizza"
+          :height="alturaGrafico"
         ></apexchart>
       </div>
-      <div v-if="sub_tipo === 'grafico_comparativo'">
+      <div v-if="sub_tipo === 'grafico_comparativo_barra'">
         <apexchart
           type="bar"
-          :options="chartOption"
-          :series="serie"
-          height="410"
+          :options="objGraficoCOmparativo"
+          :series="seriesGraficoComparacao"
+          :height="alturaGrafico"
+        ></apexchart>
+      </div>
+      <div v-if="sub_tipo === 'grafico_comparativo_linha'">
+        <apexchart
+          type="line"
+          :height="alturaGrafico"
+          :options="objGraficoComparacaoLinha"
+          :series="seriesGraficoComparacaoLinha"
         ></apexchart>
       </div>
     </q-card-section>
@@ -121,7 +121,7 @@ export default {
       value: 71,
       carregarKnob: false,
       carregarText: false,
-      ObjConteudo: {},
+      alturaGrafico: 0,
       objGraficoBarra: {
         xaxis: {
           categories: [""]
@@ -137,7 +137,7 @@ export default {
         labels: []
       },
       seriesGraficoPizza: [],
-      chartOption: {
+      objGraficoCOmparativo: {
         chart: {
           type: "bar",
           height: 350,
@@ -178,7 +178,58 @@ export default {
           opacity: 1
         }
       },
-      serie: []
+      seriesGraficoComparacao: [],
+      objGraficoComparacaoLinha: {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              legend: {
+                position: "bottom",
+                offsetX: -10,
+                offsetY: 0
+              }
+            }
+          }
+        ],
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          curve: "smooth"
+        },
+        markers: {
+          size: 1
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            borderRadius: 10
+          }
+        },
+        xaxis: {
+          categories: []
+        },
+        legend: {
+          position: "right",
+          offsetY: 40
+        },
+        fill: {
+          opacity: 1
+        }
+      },
+      seriesGraficoComparacaoLinha: []
     };
   },
   methods: {
@@ -219,47 +270,106 @@ export default {
                 Object.values(arrRetorno[i])[index_coluna]
               );
             }
-          } else if (this.sub_tipo == "grafico_comparativo") {
+          } else if (this.sub_tipo == "grafico_comparativo_barra") {
             this.limparConteudoComparativo();
             //Criando estrutura de cateorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
-              let idxCategoria = this.chartOption.xaxis.categories.indexOf(
+              let idxCategoria = this.objGraficoCOmparativo.xaxis.categories.indexOf(
                 Object.values(arrRetorno[i])[2]
               );
               if (idxCategoria < 0) {
-                this.chartOption.xaxis.categories.push(
+                this.objGraficoCOmparativo.xaxis.categories.push(
                   Object.values(arrRetorno[i])[2]
                 );
               }
-              let idxSerie = this.serie.find(
+              let idxSerie = this.seriesGraficoComparacao.find(
                 item => item.name === Object.values(arrRetorno[i])[1]
               );
               if (idxSerie === undefined) {
-                this.serie.push({
+                this.seriesGraficoComparacao.push({
                   name: Object.values(arrRetorno[i])[1],
                   data: []
                 });
               }
             }
-            this.chartOption.xaxis.categories.sort();
+            this.objGraficoCOmparativo.xaxis.categories.sort();
             //criando valores zerados
-            for (let i = 0; i < this.serie.length; i++) {
+            for (let i = 0; i < this.seriesGraficoComparacao.length; i++) {
               for (
                 let j = 0;
-                j < this.chartOption.xaxis.categories.length;
+                j < this.objGraficoCOmparativo.xaxis.categories.length;
                 j++
               ) {
-                this.serie[i].data.push(0);
+                this.seriesGraficoComparacao[i].data.push(0);
               }
             }
             //setando os valores
             for (let i = 0; i < arrRetorno.length; i++) {
-              let idxCategoria = this.chartOption.xaxis.categories.indexOf(
+              let idxCategoria = this.objGraficoCOmparativo.xaxis.categories.indexOf(
                 Object.values(arrRetorno[i])[2]
               );
-              for (let j = 0; j < this.serie.length; j++) {
-                if (this.serie[j].name === Object.values(arrRetorno[i])[1]) {
-                  this.serie[j].data.splice(
+              for (let j = 0; j < this.seriesGraficoComparacao.length; j++) {
+                if (
+                  this.seriesGraficoComparacao[j].name ===
+                  Object.values(arrRetorno[i])[1]
+                ) {
+                  this.seriesGraficoComparacao[j].data.splice(
+                    idxCategoria,
+                    1,
+                    Object.values(arrRetorno[i])[3]
+                  );
+                  break;
+                }
+              }
+            }
+          } else if (this.sub_tipo == "grafico_comparativo_linha") {
+            this.limparConteudoComparativoLinha();
+            //Criando estrutura de categorias e series
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxCategoria = this.objGraficoComparacaoLinha.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[2]
+              );
+              if (idxCategoria < 0) {
+                this.objGraficoComparacaoLinha.xaxis.categories.push(
+                  Object.values(arrRetorno[i])[2]
+                );
+              }
+              let idxSerie = this.seriesGraficoComparacaoLinha.find(
+                item => item.name === Object.values(arrRetorno[i])[1]
+              );
+              if (idxSerie === undefined) {
+                this.seriesGraficoComparacaoLinha.push({
+                  name: Object.values(arrRetorno[i])[1],
+                  data: []
+                });
+              }
+            }
+            this.objGraficoComparacaoLinha.xaxis.categories.sort();
+            //criando valores zerados
+            for (let i = 0; i < this.seriesGraficoComparacaoLinha.length; i++) {
+              for (
+                let j = 0;
+                j < this.objGraficoComparacaoLinha.xaxis.categories.length;
+                j++
+              ) {
+                this.seriesGraficoComparacaoLinha[i].data.push(0);
+              }
+            }
+            //setando os valores
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxCategoria = this.objGraficoComparacaoLinha.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[2]
+              );
+              for (
+                let j = 0;
+                j < this.seriesGraficoComparacaoLinha.length;
+                j++
+              ) {
+                if (
+                  this.seriesGraficoComparacaoLinha[j].name ===
+                  Object.values(arrRetorno[i])[1]
+                ) {
+                  this.seriesGraficoComparacaoLinha[j].data.splice(
                     idxCategoria,
                     1,
                     Object.values(arrRetorno[i])[3]
@@ -269,7 +379,6 @@ export default {
               }
             }
           }
-
           setTimeout(() => {
             arrRetorno == "";
           }, 2000);
@@ -302,9 +411,12 @@ export default {
         });
     },
     limparConteudoComparativo() {},
+    limparConteudoComparativoLinha() {},
     medidaCard() {
       this.alturaCard = this.height + "vh";
-      this.alturaCorpo = this.height - 7 + "vh";
+      let altura = parseInt(this.height);
+      this.alturaGrafico = altura * 5.5 + "px";
+      this.alturaCorpo = this.height - 6 + "vh";
     }
   },
   created() {
