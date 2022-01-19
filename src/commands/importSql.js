@@ -49,7 +49,8 @@ import {
   bodyProjetoTagPorMesAno,
   bodyNotificacao,
   bodyNotificacaoPorAtividade,
-  bodyNotificacaoPorTipoAtividade
+  bodyNotificacaoPorTipoAtividade,
+  bodyTeste
 } from "src/boot/consultaSql.js";
 
 export default {
@@ -113,7 +114,8 @@ export default {
         pNomeBody === "bodyProjetoTag" ||
         pNomeBody === "bodyProjetoColaborador" ||
         pNomeBody === "bodyNotificacao" ||
-        pNomeBody === "bodyNotificacaoPorAtividade"
+        pNomeBody === "bodyNotificacaoPorAtividade" ||
+        pNomeBody === "bodyTeste"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
           "<id_principal>",
@@ -121,6 +123,9 @@ export default {
         );
       }
       filtros = filtros.replace("<id_grupo>", pIdGrupo);
+      if (pNomeBody === "bodyTeste") {
+        return bodyTeste(filtros);
+      }
       if (pNomeBody === "bodyAtividade") {
         return bodyAtividade(filtros);
       }
@@ -336,7 +341,7 @@ export default {
     },
     medidaCard() {
       this.alturaCard = this.height + "vh";
-      this.alturaCorpo = this.height - 7.5 + "vh";
+      this.alturaCorpo = this.height - 6 + "vh";
     }
   },
   computed: {

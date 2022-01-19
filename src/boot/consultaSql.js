@@ -305,6 +305,13 @@ export function bodyOcorrenciaPorSemana(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
+export function bodyTeste(pFiltros) {
+  //let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
+  //let instrucao_sql = `select tv.cd_tipo_atividade \"id_tipo_atividade\", tv.ds_tipo_atividade \"tipo_atividade\", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by tv.cd_tipo_atividade, tv.ds_tipo_atividade, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by tv.ds_tipo_atividade`;
+  let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' and a.cd_tipo_atividade = 2 group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
 //---------------------- projeto ----------------------//
 export function bodyProcuraIdProjeto(pValor) {

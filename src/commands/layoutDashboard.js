@@ -2451,21 +2451,6 @@ function layoutDashBoard12() {
             }
           },
           {
-            card: "Previsão da Semana",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra_horizontal",
-            width: "31vw",
-            height: "40",
-            conteudo_card: {
-              body_grupo: "bodyAtividadePorSituacao",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
             card: "Situação",
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
@@ -2496,22 +2481,21 @@ function layoutDashBoard12() {
               filtro_sql_item:
                 "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
             }
-          },
-          {
-            card: "Previsão da Semana",
+          }
+          /* {
+            card: "Atividades Finalizadas 2021",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_comparativo",
             width: "94.5vw",
-            height: "45",
+            height: "80",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorSituacao",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_grupo: "bodyTeste",
+              filtro_sql_grupo: "",
               body_item: "",
               filtro_sql_item: ""
             }
-          }
+          }*/
         ]
       },
       {
@@ -4677,7 +4661,7 @@ function layoutDashBoard19() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_barra",
-            width: "94vw",
+            width: "62vw",
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorResponsavel",

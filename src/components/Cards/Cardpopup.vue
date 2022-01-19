@@ -48,7 +48,6 @@ export default {
   methods: {
     dashboardLayouts() {
       for (let i = 0; i < this.objLayoutBI.length; i++) {
-        this.objLayoutBI[i];
         this.objLayoutDashboard.push({
           grupo: this.objLayoutBI[i].grupo,
           layout: this.objLayoutBI[i].layout_dashboard
