@@ -293,7 +293,6 @@ export default {
         return bodyNotificacaoPorTipoAtividade(filtros);
       }
     },
-
     atualizarConteudo() {
       this.limparConteudo();
       if (this.idPrincipal !== null) {
@@ -349,12 +348,6 @@ export default {
     medidaCard() {
       this.alturaCard = this.height + "vh";
       this.alturaCorpo = this.height - 7 + "vh";
-    },
-    handleResize() {
-      console.log(window.innerWidth);
-      if (window.innerWidth <= 500) {
-        this.alturaCorpo = this.height - 10 + "vh";
-      }
     }
   },
   computed: {
@@ -377,8 +370,6 @@ export default {
     }
   },
   created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
     this.medidaCard();
   }
 };

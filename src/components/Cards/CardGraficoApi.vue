@@ -636,10 +636,17 @@ export default {
       let altura = parseInt(this.height);
       this.alturaGrafico = altura * 5.1 + "px";
       this.alturaCorpo = this.height - 6 + "vh";
+    },
+    handleResize() {
+      if (window.innerWidth <= 500) {
+        this.alturaGrafico = 180;
+      }
     }
   },
   created() {
     this.medidaCard();
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   }
 };
 </script>
