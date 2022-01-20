@@ -467,8 +467,13 @@ export function senhaLogin() {
                 {
                   icone: "code",
                   id_layout_dashboard: 12,
-
                   dashboard: "Padrão",
+                  dashboard_complementar: []
+                },
+                {
+                  icone: "code",
+                  id_layout_dashboard: 9999,
+                  dashboard: "Teste",
                   dashboard_complementar: []
                 }
               ]

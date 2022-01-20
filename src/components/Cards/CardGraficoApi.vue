@@ -97,8 +97,8 @@
       <div v-if="sub_tipo === 'grafico_comparativo_barra'">
         <apexchart
           type="bar"
-          :options="objGraficoCOmparativo"
-          :series="seriesGraficoComparacao"
+          :options="objGraficoComparativo"
+          :series="seriesGraficoComparativo"
           :height="alturaGrafico"
         ></apexchart>
       </div>
@@ -107,7 +107,7 @@
           type="line"
           :height="alturaGrafico"
           :options="objGraficoComparacaoLinha"
-          :series="seriesGraficoComparacaoLinha"
+          :series="seriesGraficoComparativoLinha"
         ></apexchart>
       </div>
       <div
@@ -118,7 +118,7 @@
           type="bar"
           :height="alturaGrafico"
           :options="objGraficoComparacaoIndicativo"
-          :series="seriesGraficoComparacaoIndicativo"
+          :series="seriesGraficoComparativoIndicativo"
         ></apexchart>
       </div>
     </q-card-section>
@@ -142,6 +142,8 @@ export default {
     "link_item",
     "width",
     "height",
+    "coluna_categoria",
+    "coluna_serie",
     "coluna_totalizadora"
   ],
   components: {
@@ -189,7 +191,7 @@ export default {
         labels: []
       },
       seriesGraficoPizza: [],
-      objGraficoCOmparativo: {
+      objGraficoComparativo: {
         chart: {
           type: "bar",
           height: 350,
@@ -230,7 +232,7 @@ export default {
           opacity: 1
         }
       },
-      seriesGraficoComparacao: [],
+      seriesGraficoComparativo: [],
       objGraficoComparacaoLinha: {
         chart: {
           type: "bar",
@@ -281,7 +283,7 @@ export default {
           opacity: 1
         }
       },
-      seriesGraficoComparacaoLinha: [],
+      seriesGraficoComparativoLinha: [],
       objGraficoComparacaoIndicativo: {
         chart: {
           type: "bar",
@@ -317,7 +319,7 @@ export default {
           offsetX: 40
         }
       },
-      seriesGraficoComparacaoIndicativo: [],
+      seriesGraficoComparativoIndicativo: [],
       objGraficoPolar: {
         chart: {
           type: "polarArea"
@@ -362,10 +364,20 @@ export default {
         this.$api.post("consultasql", body).then(res => {
           let arrRetorno = res.data;
           this.carregarKnob = false;
-          let index_coluna = 2;
-          if (this.coluna_totalizadora > 0) {
-            index_coluna = this.coluna_totalizadora - 1;
+          //index colunas
+          let index_coluna_serie = 0;
+          if (this.coluna_serie > 0) {
+            index_coluna_serie = this.coluna_serie - 1;
           }
+          let index_coluna_categoria = 1;
+          if (this.coluna_categoria > 0) {
+            index_coluna_categoria = this.coluna_categoria - 1;
+          }
+          let index_coluna_totalizadora = 2;
+          if (this.coluna_totalizadora > 0) {
+            index_coluna_totalizadora = this.coluna_totalizadora - 1;
+          }
+          //estrutura
           if (this.sub_tipo === "grafico_barra") {
             this.limparConteudoBarra();
             for (let i = 0; i < arrRetorno.length; i++) {
@@ -373,7 +385,7 @@ export default {
                 Object.values(arrRetorno[i])[1]
               );
               this.seriesGraficoBarra[0].data.push(
-                Object.values(arrRetorno[i])[index_coluna]
+                Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
           } else if (this.sub_tipo === "grafico_barra_horizontal") {
@@ -383,7 +395,7 @@ export default {
                 Object.values(arrRetorno[i])[1]
               );
               this.seriesGraficoBarraHorizontal[0].data.push(
-                Object.values(arrRetorno[i])[index_coluna]
+                Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
           } else if (
@@ -394,55 +406,56 @@ export default {
             for (let i = 0; i < arrRetorno.length; i++) {
               this.objGraficoPizza.labels.push(Object.values(arrRetorno[i])[1]);
               this.seriesGraficoPizza.push(
-                Object.values(arrRetorno[i])[index_coluna]
+                Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
           } else if (this.sub_tipo == "grafico_comparativo_barra") {
             //Criando estrutura de cateorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
-              let idxCategoria = this.objGraficoCOmparativo.xaxis.categories.indexOf(
-                Object.values(arrRetorno[i])[2]
+              let idxCategoria = this.objGraficoComparativo.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[index_coluna_categoria]
               );
               if (idxCategoria < 0) {
-                this.objGraficoCOmparativo.xaxis.categories.push(
-                  Object.values(arrRetorno[i])[2]
+                this.objGraficoComparativo.xaxis.categories.push(
+                  Object.values(arrRetorno[i])[index_coluna_categoria]
                 );
               }
-              let idxSerie = this.seriesGraficoComparacao.find(
-                item => item.name === Object.values(arrRetorno[i])[1]
+              let idxSerie = this.seriesGraficoComparativo.find(
+                item =>
+                  item.name === Object.values(arrRetorno[i])[index_coluna_serie]
               );
               if (idxSerie === undefined) {
-                this.seriesGraficoComparacao.push({
-                  name: Object.values(arrRetorno[i])[1],
+                this.seriesGraficoComparativo.push({
+                  name: Object.values(arrRetorno[i])[index_coluna_serie],
                   data: []
                 });
               }
             }
-            this.objGraficoCOmparativo.xaxis.categories.sort();
+            this.objGraficoComparativo.xaxis.categories.sort();
             //criando valores zerados
-            for (let i = 0; i < this.seriesGraficoComparacao.length; i++) {
+            for (let i = 0; i < this.seriesGraficoComparativo.length; i++) {
               for (
                 let j = 0;
-                j < this.objGraficoCOmparativo.xaxis.categories.length;
+                j < this.objGraficoComparativo.xaxis.categories.length;
                 j++
               ) {
-                this.seriesGraficoComparacao[i].data.push(0);
+                this.seriesGraficoComparativo[i].data.push(0);
               }
             }
             //setando os valores
             for (let i = 0; i < arrRetorno.length; i++) {
-              let idxCategoria = this.objGraficoCOmparativo.xaxis.categories.indexOf(
-                Object.values(arrRetorno[i])[2]
+              let idxCategoria = this.objGraficoComparativo.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[index_coluna_categoria]
               );
-              for (let j = 0; j < this.seriesGraficoComparacao.length; j++) {
+              for (let j = 0; j < this.seriesGraficoComparativo.length; j++) {
                 if (
-                  this.seriesGraficoComparacao[j].name ===
-                  Object.values(arrRetorno[i])[1]
+                  this.seriesGraficoComparativo[j].name ===
+                  Object.values(arrRetorno[i])[index_coluna_serie]
                 ) {
-                  this.seriesGraficoComparacao[j].data.splice(
+                  this.seriesGraficoComparativo[j].data.splice(
                     idxCategoria,
                     1,
-                    Object.values(arrRetorno[i])[3]
+                    Object.values(arrRetorno[i])[index_coluna_totalizadora]
                   );
                   break;
                 }
@@ -459,11 +472,11 @@ export default {
                   Object.values(arrRetorno[i])[2]
                 );
               }
-              let idxSerie = this.seriesGraficoComparacaoLinha.find(
+              let idxSerie = this.seriesGraficoComparativoLinha.find(
                 item => item.name === Object.values(arrRetorno[i])[1]
               );
               if (idxSerie === undefined) {
-                this.seriesGraficoComparacaoLinha.push({
+                this.seriesGraficoComparativoLinha.push({
                   name: Object.values(arrRetorno[i])[1],
                   data: []
                 });
@@ -471,13 +484,17 @@ export default {
             }
             this.objGraficoComparacaoLinha.xaxis.categories.sort();
             //criando valores zerados
-            for (let i = 0; i < this.seriesGraficoComparacaoLinha.length; i++) {
+            for (
+              let i = 0;
+              i < this.seriesGraficoComparativoLinha.length;
+              i++
+            ) {
               for (
                 let j = 0;
                 j < this.objGraficoComparacaoLinha.xaxis.categories.length;
                 j++
               ) {
-                this.seriesGraficoComparacaoLinha[i].data.push(0);
+                this.seriesGraficoComparativoLinha[i].data.push(0);
               }
             }
             //setando os valores
@@ -487,14 +504,14 @@ export default {
               );
               for (
                 let j = 0;
-                j < this.seriesGraficoComparacaoLinha.length;
+                j < this.seriesGraficoComparativoLinha.length;
                 j++
               ) {
                 if (
-                  this.seriesGraficoComparacaoLinha[j].name ===
+                  this.seriesGraficoComparativoLinha[j].name ===
                   Object.values(arrRetorno[i])[1]
                 ) {
-                  this.seriesGraficoComparacaoLinha[j].data.splice(
+                  this.seriesGraficoComparativoLinha[j].data.splice(
                     idxCategoria,
                     1,
                     Object.values(arrRetorno[i])[3]
@@ -514,11 +531,11 @@ export default {
                   Object.values(arrRetorno[i])[2]
                 );
               }
-              let idxSerie = this.seriesGraficoComparacaoIndicativo.find(
+              let idxSerie = this.seriesGraficoComparativoIndicativo.find(
                 item => item.name === Object.values(arrRetorno[i])[1]
               );
               if (idxSerie === undefined) {
-                this.seriesGraficoComparacaoIndicativo.push({
+                this.seriesGraficoComparativoIndicativo.push({
                   name: Object.values(arrRetorno[i])[1],
                   data: []
                 });
@@ -529,7 +546,7 @@ export default {
             //criando valores zerados
             for (
               let i = 0;
-              i < this.seriesGraficoComparacaoIndicativo.length;
+              i < this.seriesGraficoComparativoIndicativo.length;
               i++
             ) {
               for (
@@ -537,7 +554,7 @@ export default {
                 j < this.objGraficoComparacaoIndicativo.xaxis.categories.length;
                 j++
               ) {
-                this.seriesGraficoComparacaoIndicativo[i].data.push(0);
+                this.seriesGraficoComparativoIndicativo[i].data.push(0);
               }
             }
             //setando os valores
@@ -547,14 +564,14 @@ export default {
               );
               for (
                 let j = 0;
-                j < this.seriesGraficoComparacaoIndicativo.length;
+                j < this.seriesGraficoComparativoIndicativo.length;
                 j++
               ) {
                 if (
-                  this.seriesGraficoComparacaoIndicativo[j].name ===
+                  this.seriesGraficoComparativoIndicativo[j].name ===
                   Object.values(arrRetorno[i])[1]
                 ) {
-                  this.seriesGraficoComparacaoIndicativo[j].data.splice(
+                  this.seriesGraficoComparativoIndicativo[j].data.splice(
                     idxCategoria,
                     1,
                     Object.values(arrRetorno[i])[3]
@@ -567,7 +584,7 @@ export default {
             for (let i = 0; i < arrRetorno.length; i++) {
               this.objGraficoPolar.labels.push(Object.values(arrRetorno[i])[1]);
               this.seriesGraficoPolar.push(
-                Object.values(arrRetorno[i])[index_coluna]
+                Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
           }
@@ -616,30 +633,34 @@ export default {
       ];
     },
     limparConteudoComparativo() {
-      this.objGraficoCOmparativo.xaxis.categories = [];
-      this.seriesGraficoComparacao = [];
+      this.objGraficoComparativo.xaxis.categories = [];
+      this.seriesGraficoComparativo = [];
     },
     limparConteudoComparativoLinha() {
       this.objGraficoComparacaoLinha.xaxis.categories = [];
-      this.seriesGraficoComparacaoLinha = [];
+      this.seriesGraficoComparativoLinha = [];
     },
     limparConteudoComparativoIndicativo() {
       this.objGraficoComparacaoIndicativo.xaxis.categories = [];
-      this.seriesGraficoComparacaoIndicativo = [];
+      this.seriesGraficoComparativoIndicativo = [];
     },
     limparConteudoPolar() {
       this.objGraficoPolar.labels = [];
       this.seriesGraficoPolar = [];
     },
-    medidaCard() {
-      this.alturaCard = this.height + "vh";
-      let altura = parseInt(this.height);
-      this.alturaGrafico = altura * 5.1 + "px";
-      this.alturaCorpo = this.height - 6 + "vh";
-    },
+    medidaCard() {},
     handleResize() {
-      if (window.innerWidth <= 500) {
-        this.alturaGrafico = 180;
+      if (window.innerWidth >= 500) {
+        this.alturaCard = this.height + "vh";
+        let altura = parseInt(this.height);
+        this.alturaGrafico = altura * 5.1 + "px";
+        this.alturaCorpo = this.height - 6 + "vh";
+      }
+      if (window.innerWidth <= 600) {
+        this.alturaGrafico = 185;
+      }
+      if (window.innerWidth <= 300) {
+        this.alturaGrafico = 200;
       }
     }
   },
@@ -686,6 +707,12 @@ export default {
 @keyframes spins {
   to {
     transform: rotate(360deg);
+  }
+}
+/*my-card-syclus*/
+@media only screen and (max-width: 500px) {
+  .my-card-syclus {
+    min-height: 200px;
   }
 }
 </style>

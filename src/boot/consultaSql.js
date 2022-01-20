@@ -111,7 +111,7 @@ export function bodyAtividadePorSemana(pFiltros) {
 
 //----------------------atividade Comparativo----------------------//
 export function bodyAtividadePorTipoAtividadeStatus(pFiltros) {
-  let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade, a.ds_status order by tv.ds_tipo_atividade`;
+  let instrucao_sql = `select tv.ds_tipo_atividade "tipo_atividade", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.ds_tipo_atividade, a.ds_status order by tv.ds_tipo_atividade`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

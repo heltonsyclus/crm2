@@ -77,6 +77,9 @@ export function GeLayoutDashBoard(pIdLayout) {
     case 25:
       jLayout = layoutDashBoard25();
       break;
+    case 9999:
+      jLayout = layoutDashBoard9999();
+      break;
   }
 
   return jLayout;
@@ -96,6 +99,23 @@ function layoutDashBoard1() {
             card: "Planejamento",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "31vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTipoAtividadeStatus",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item:
+                "where a.ds_status in ('P', 'F') and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal>"
+            }
+          },
+          /* {
+            card: "Planejamento",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_donut",
             width: "31vw",
             height: "40",
@@ -106,7 +126,7 @@ function layoutDashBoard1() {
               body_item: "",
               filtro_sql_item: ""
             }
-          },
+          },*/
           {
             card: "Pendente",
             btn_comando: "btn-atualizar",
@@ -127,7 +147,7 @@ function layoutDashBoard1() {
             card: "Distribuição do Tempo",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra_horizontal",
+            sub_tipo: "grafico_pizza",
             coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
@@ -309,7 +329,7 @@ function layoutDashBoard1() {
             card: "Atividades Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_donut",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -325,7 +345,7 @@ function layoutDashBoard1() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
 
-            sub_tipo: "grafico_barra_horizontal",
+            sub_tipo: "grafico_pizza",
             coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
@@ -2440,7 +2460,7 @@ function layoutDashBoard12() {
             card: "Previsão da Semana",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_donut",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -2483,64 +2503,6 @@ function layoutDashBoard12() {
                 "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
             }
           }
-          /* {
-            card: "Previsão da Semana",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_polar",
-            coluna_totalizadora: 3,
-            width: "31vw",
-            height: "40",
-            conteudo_card: {
-              body_grupo: "bodyAtividadePorSituacao",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
-            card: "Suporte anual",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_comparativo_indicativo",
-            width: "62.5vw",
-            height: "80",
-            conteudo_card: {
-              body_grupo: "bodyTeste",
-              filtro_sql_grupo: "",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
-            card: "Atividades Finalizadas suporte 2021",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_comparativo_linha",
-            width: "94.5vw",
-            height: "100",
-            conteudo_card: {
-              body_grupo: "bodyTeste",
-              filtro_sql_grupo: "",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
-            card: "Atividades Finalizadas suporte 2021",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_comparativo_barra",
-            width: "94.5vw",
-            height: "100",
-            conteudo_card: {
-              body_grupo: "bodyTeste",
-              filtro_sql_grupo: "",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          }*/
         ]
       },
       {
@@ -5053,6 +5015,84 @@ function layoutDashBoard20() {
             }
           }
         ]
+      }
+    ]
+  };
+
+  return json;
+}
+
+//bi - teste
+function layoutDashBoard9999() {
+  const json = {
+    id_dashboard: 9999,
+    dashboard: "teste",
+    grupos: [
+      {
+        id_grupo: 1,
+        grupo: "teste",
+        icone: "event",
+        cards: [
+          {
+            card: "Previsão da Semana",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_polar",
+            coluna_totalizadora: 3,
+            width: "31vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Suporte anual",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_indicativo",
+            width: "62.5vw",
+            height: "80",
+            conteudo_card: {
+              body_grupo: "bodyTeste",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Atividades Finalizadas suporte 2021",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_linha",
+            width: "94.5vw",
+            height: "100",
+            conteudo_card: {
+              body_grupo: "bodyTeste",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Atividades Finalizadas suporte 2021",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            width: "94.5vw",
+            height: "100",
+            conteudo_card: {
+              body_grupo: "bodyTeste",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          }
+        ],
+        cards_opcionais: []
       }
     ]
   };

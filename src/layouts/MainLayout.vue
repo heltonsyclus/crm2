@@ -235,7 +235,7 @@ export default defineComponent({
 }
 @media (max-width: 500px) {
   .logo-texto {
-    font-size: 15px;
+    font-size: 17px;
   }
 }
 </style>

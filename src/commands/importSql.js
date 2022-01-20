@@ -162,7 +162,7 @@ export default {
         return bodyAtividadePorSemana(filtros);
       }
       if (pNomeBody === "bodyAtividadePorTipoAtividadeStatus") {
-        return bodyAtividadePorTipoAtividade(filtros);
+        return bodyAtividadePorTipoAtividadeStatus(filtros);
       }
 
       if (pNomeBody === "bodyAtividadeCliente") {
@@ -347,7 +347,7 @@ export default {
     },
     medidaCard() {
       this.alturaCard = this.height + "vh";
-      this.alturaCorpo = this.height - 8 + "vh";
+      this.alturaCorpo = this.height - 7.8 + "vh";
     }
   },
   computed: {

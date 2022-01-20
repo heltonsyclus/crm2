@@ -87,6 +87,8 @@
           :style="{ width: `${ObjCard.width}` }"
           :btn_comando="ObjCard.btn_comando"
           :tipo_card="ObjCard.tipo_card"
+          :coluna_categoria="ObjCard.coluna_categoria"
+          :coluna_serie="ObjCard.coluna_serie"
           :coluna_totalizadora="ObjCard.coluna_totalizadora"
           :sub_tipo="ObjCard.sub_tipo"
           :conteudo_card="ObjCard.conteudo_card"
