@@ -109,6 +109,13 @@ export function bodyAtividadePorSemana(pFiltros) {
   return body;
 }
 
+//----------------------atividade Comparativo----------------------//
+export function bodyAtividadePorTipoAtividadeStatus(pFiltros) {
+  let instrucao_sql = `select tv.cd_tipo_atividade "id_tipo_atividade", tv.ds_tipo_atividade "tipo_atividade", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by tv.cd_tipo_atividade, tv.ds_tipo_atividade, a.ds_status order by tv.ds_tipo_atividade`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
 //----------------------atividade tag ----------------------//
 export function bodyAtividadeTag(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> order by a.dt_previsao`;

@@ -85,6 +85,14 @@
           :height="alturaGrafico"
         ></apexchart>
       </div>
+      <div v-if="sub_tipo === 'grafico_polar'" style="margin-top:10px">
+        <apexchart
+          type="polarArea"
+          :options="objGraficoPolar"
+          :series="seriesGraficoPolar"
+          :height="alturaGrafico"
+        ></apexchart>
+      </div>
       <div v-if="sub_tipo === 'grafico_comparativo_barra'">
         <apexchart
           type="bar"
@@ -99,6 +107,17 @@
           :height="alturaGrafico"
           :options="objGraficoComparacaoLinha"
           :series="seriesGraficoComparacaoLinha"
+        ></apexchart>
+      </div>
+      <div
+        v-if="sub_tipo === 'grafico_comparativo_indicativo'"
+        style="margin-top:20px"
+      >
+        <apexchart
+          type="bar"
+          :height="alturaGrafico"
+          :options="objGraficoComparacaoIndicativo"
+          :series="seriesGraficoComparacaoIndicativo"
         ></apexchart>
       </div>
     </q-card-section>
@@ -260,7 +279,69 @@ export default {
           opacity: 1
         }
       },
-      seriesGraficoComparacaoLinha: []
+      seriesGraficoComparacaoLinha: [],
+      objGraficoComparacaoIndicativo: {
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          stackType: "100%"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true
+          }
+        },
+        stroke: {
+          width: 1,
+          colors: ["#fff"]
+        },
+        xaxis: {
+          categories: []
+        },
+        tooltip: {
+          y: {
+            formatter: function(val) {
+              return val + " Atividades";
+            }
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        legend: {
+          position: "top",
+          horizontalAlign: "left",
+          offsetX: 40
+        }
+      },
+      seriesGraficoComparacaoIndicativo: [],
+      objGraficoPolar: {
+        chart: {
+          type: "polarArea"
+        },
+        labels: [],
+        stroke: {
+          colors: ["#fff"]
+        },
+        fill: {
+          opacity: 0.8
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      },
+      seriesGraficoPolar: []
     };
   },
   methods: {
@@ -279,7 +360,6 @@ export default {
           if (this.coluna_totalizadora > 0) {
             index_coluna = this.coluna_totalizadora - 1;
           }
-
           if (this.sub_tipo === "grafico_barra") {
             this.limparConteudoBarra();
             for (let i = 0; i < arrRetorno.length; i++) {
@@ -419,6 +499,77 @@ export default {
                 }
               }
             }
+          } else if (this.sub_tipo == "grafico_comparativo_indicativo") {
+            this.limparConteudoComparativoIndicativo();
+            //Criando estrutura de categorias e series
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[2]
+              );
+              if (idxCategoria < 0) {
+                this.objGraficoComparacaoIndicativo.xaxis.categories.push(
+                  Object.values(arrRetorno[i])[2]
+                );
+              }
+              let idxSerie = this.seriesGraficoComparacaoIndicativo.find(
+                item => item.name === Object.values(arrRetorno[i])[1]
+              );
+              if (idxSerie === undefined) {
+                this.seriesGraficoComparacaoIndicativo.push({
+                  name: Object.values(arrRetorno[i])[1],
+                  data: []
+                });
+              }
+            }
+
+            this.objGraficoComparacaoIndicativo.xaxis.categories.sort();
+            //criando valores zerados
+            for (
+              let i = 0;
+              i < this.seriesGraficoComparacaoIndicativo.length;
+              i++
+            ) {
+              for (
+                let j = 0;
+                j < this.objGraficoComparacaoIndicativo.xaxis.categories.length;
+                j++
+              ) {
+                this.seriesGraficoComparacaoIndicativo[i].data.push(0);
+              }
+            }
+            //setando os valores
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[2]
+              );
+              for (
+                let j = 0;
+                j < this.seriesGraficoComparacaoIndicativo.length;
+                j++
+              ) {
+                if (
+                  this.seriesGraficoComparacaoIndicativo[j].name ===
+                  Object.values(arrRetorno[i])[1]
+                ) {
+                  this.seriesGraficoComparacaoIndicativo[j].data.splice(
+                    idxCategoria,
+                    1,
+                    Object.values(arrRetorno[i])[3]
+                  );
+                  break;
+                }
+              }
+            }
+          } else if (this.sub_tipo === "grafico_polar") {
+            this.limparConteudoBarraHorizontal();
+            for (let i = 0; i < arrRetorno.length; i++) {
+              this.objGraficoPolar.labels.push(Object.values(arrRetorno[i])[1]);
+              this.seriesGraficoPolar.push(Object.values(arrRetorno[i])[2]);
+              /*   this.seriesGraficoPolar.push({
+                name: Object.values(arrRetorno[i])[1],
+                data: Object.values(arrRetorno[i])[2]
+              });*/
+            }
           }
           setTimeout(() => {
             arrRetorno == "";
@@ -470,6 +621,7 @@ export default {
       this.seriesGraficoComparacao;
     },
     limparConteudoComparativoLinha() {},
+    limparConteudoComparativoIndicativo() {},
     medidaCard() {
       this.alturaCard = this.height + "vh";
       let altura = parseInt(this.height);

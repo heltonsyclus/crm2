@@ -112,7 +112,8 @@ export default {
     "link_item",
     "width",
     "height"
-  ]
+  ],
+  methods: {}
 };
 </script>
 

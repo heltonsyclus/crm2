@@ -10,6 +10,7 @@ import {
   bodyAtividadePorData,
   bodyAtividadePorMesAno,
   bodyAtividadePorSemana,
+  bodyAtividadePorTipoAtividadeStatus,
   bodyAtividadeCliente,
   bodyAtividadeClientePorTipoAtividade,
   bodyAtividadeClientePorResponsavel,
@@ -115,6 +116,7 @@ export default {
         pNomeBody === "bodyProjetoColaborador" ||
         pNomeBody === "bodyNotificacao" ||
         pNomeBody === "bodyNotificacaoPorAtividade" ||
+        pNomeBody === "bodyAtividadePorTipoAtividadeStatus" ||
         pNomeBody === "bodyTeste"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
@@ -159,6 +161,10 @@ export default {
       if (pNomeBody === "bodyAtividadePorSemana") {
         return bodyAtividadePorSemana(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorTipoAtividadeStatus") {
+        return bodyAtividadePorTipoAtividade(filtros);
+      }
+
       if (pNomeBody === "bodyAtividadeCliente") {
         return bodyAtividadeCliente(filtros);
       }

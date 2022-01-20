@@ -9,10 +9,11 @@
           style="cursor:pointer"
           @click="$router.push({ name: 'dashboard' })"
         />
-        <q-toolbar-title class="text-weight-bold logo-texto">
+        <q-toolbar-title class="text-weight-bold ">
           <span
             @click="$router.push({ name: 'dashboard' })"
             style="cursor:pointer"
+            class="logo-texto"
             >Syclus 2.0</span
           >
         </q-toolbar-title>
@@ -202,6 +203,7 @@ export default defineComponent({
       window.location.reload(true);
       window.localStorage.clear();
       window.location.href = window.location.href;
+      window.location.replace("https://sycluscrm-chi.vercel.app/#/Login");
       this.login = [];
     },
     handleResize() {
@@ -231,7 +233,9 @@ export default defineComponent({
 .logo-texto {
   font-size: 22px;
 }
-.logo-texto-mobile {
-  font-size: 15px;
+@media (max-width: 500px) {
+  .logo-texto {
+    font-size: 15px;
+  }
 }
 </style>

@@ -257,7 +257,6 @@ export default defineComponent({
       this.$emit("valorInputPesquisa", this.pesquisaInput);
       this.$emit("valorSelectPesquisa", this.pesquisaSelect);
     },
-
     validarValorRecurso() {
       if (this.valoresRecurso != null) {
         this.valorModel = this.valoresRecurso[0];
