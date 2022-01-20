@@ -156,7 +156,8 @@ export default {
       objGraficoBarra: {
         xaxis: {
           categories: [""]
-        }
+        },
+        colors: ["#2E01E3"]
       },
       seriesGraficoBarra: [
         {

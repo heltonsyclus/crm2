@@ -92,27 +92,11 @@ function layoutDashBoard1() {
         grupo: "Meu Dia",
         icone: "assignment_turned_in",
         cards: [
-          /*{
-            card: "Planejamento",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_comparativo_barra",
-            width: "31vw",
-            height: "40",
-            conteudo_card: {
-              body_grupo: "bodyAtividadePorTipoAtividadeStatus",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P', 'F') and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal>",
-              body_item: "",
-              filtro_sql_item:
-                "where a.ds_status in ('P', 'F') and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal>"
-            }
-          },*/
           {
             card: "Planejamento",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_donut",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -143,7 +127,7 @@ function layoutDashBoard1() {
             card: "Distribuição do Tempo",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_pizza",
+            sub_tipo: "grafico_barra_horizontal",
             coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
@@ -325,7 +309,7 @@ function layoutDashBoard1() {
             card: "Atividades Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra_horizontal",
+            sub_tipo: "grafico_donut",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -340,7 +324,8 @@ function layoutDashBoard1() {
             card: "Distribuição do Tempo (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_donut",
+
+            sub_tipo: "grafico_barra_horizontal",
             coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
@@ -4002,7 +3987,7 @@ function layoutDashBoard16() {
             card: "Atividades",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
+            sub_tipo: "grafico_barra_horizontal",
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -4064,7 +4049,7 @@ function layoutDashBoard16() {
           {
             card: "Previsão",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardEmpresaApi",
+            tipo_card: "CardGrupoApi",
             width: "31vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
