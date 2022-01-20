@@ -347,7 +347,7 @@ export default {
     },
     medidaCard() {
       this.alturaCard = this.height + "vh";
-      this.alturaCorpo = this.height - 7 + "vh";
+      this.alturaCorpo = this.height - 8 + "vh";
     }
   },
   computed: {
