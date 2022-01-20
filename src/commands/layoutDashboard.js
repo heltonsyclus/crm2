@@ -2482,8 +2482,8 @@ function layoutDashBoard12() {
               filtro_sql_item:
                 "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
             }
-          },
-          {
+          }
+          /* {
             card: "Previsão da Semana",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
@@ -2540,7 +2540,7 @@ function layoutDashBoard12() {
               body_item: "",
               filtro_sql_item: ""
             }
-          }
+          }*/
         ]
       },
       {
