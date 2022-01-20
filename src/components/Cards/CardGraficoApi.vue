@@ -9,7 +9,7 @@
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
       >
-        {{ card }} {{ this.alturaCard }}
+        {{ card }}
       </q-item-section>
 
       <q-btn
