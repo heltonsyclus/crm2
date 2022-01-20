@@ -353,7 +353,7 @@ export default {
     handleResize() {
       console.log(window.innerWidth);
       if (window.innerWidth <= 500) {
-        this.alturaCorpo = "100%";
+        this.alturaCorpo = this.height - 10 + "vh";
       }
     }
   },
