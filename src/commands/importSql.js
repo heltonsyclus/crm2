@@ -82,7 +82,6 @@ export default {
     },
     atualizarConteudoItens(pIndex) {
       this.limparConteudoItens(pIndex);
-      this.handleResize();
       let body = this.getBody(
         this.conteudo_card.body_item,
         this.ObjConteudo.grupos[pIndex].id
@@ -293,6 +292,7 @@ export default {
         return bodyNotificacaoPorTipoAtividade(filtros);
       }
     },
+
     atualizarConteudo() {
       this.limparConteudo();
       if (this.idPrincipal !== null) {
