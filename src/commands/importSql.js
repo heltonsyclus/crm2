@@ -82,6 +82,7 @@ export default {
     },
     atualizarConteudoItens(pIndex) {
       this.limparConteudoItens(pIndex);
+      this.handleResize();
       let body = this.getBody(
         this.conteudo_card.body_item,
         this.ObjConteudo.grupos[pIndex].id
@@ -348,6 +349,12 @@ export default {
     medidaCard() {
       this.alturaCard = this.height + "vh";
       this.alturaCorpo = this.height - 7 + "vh";
+    },
+    handleResize() {
+      console.log(window.innerWidth);
+      if (window.innerWidth <= 500) {
+        this.alturaCorpo = "100%";
+      }
     }
   },
   computed: {
@@ -370,6 +377,8 @@ export default {
     }
   },
   created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
     this.medidaCard();
   }
 };

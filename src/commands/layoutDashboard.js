@@ -2497,12 +2497,13 @@ function layoutDashBoard12() {
               filtro_sql_item:
                 "where p.ds_status = 'A' and p.cd_tipo_projeto in (12) and ptg.cd_tag = <id_grupo>"
             }
-          }
-          /* {
+          },
+          {
             card: "Previsão da Semana",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_polar",
+            coluna_totalizadora: 3,
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -2540,7 +2541,7 @@ function layoutDashBoard12() {
               body_item: "",
               filtro_sql_item: ""
             }
-          } 
+          },
           {
             card: "Atividades Finalizadas suporte 2021",
             btn_comando: "btn-atualizar",
@@ -2554,7 +2555,7 @@ function layoutDashBoard12() {
               body_item: "",
               filtro_sql_item: ""
             }
-          }*/
+          }
         ]
       },
       {

@@ -9,7 +9,7 @@
       <q-item-section
         style="height:40px;font-weight:700;color:White;padding-left:10px"
       >
-        {{ card }}
+        {{ card }} {{ this.alturaCard }}
       </q-item-section>
 
       <q-btn
@@ -23,6 +23,7 @@
       </q-btn>
     </q-item>
     <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
+      <!-- :style="{ height: `${this.alturaCorpo}` }"-->
       <div v-if="sub_tipo === 'grafico_linha'">
         <apexchart
           :height="alturaGrafico"
@@ -85,7 +86,7 @@
           :height="alturaGrafico"
         ></apexchart>
       </div>
-      <div v-if="sub_tipo === 'grafico_polar'" style="margin-top:10px">
+      <div v-if="sub_tipo === 'grafico_polar'" style="margin-top:5px">
         <apexchart
           type="polarArea"
           :options="objGraficoPolar"
@@ -111,7 +112,7 @@
       </div>
       <div
         v-if="sub_tipo === 'grafico_comparativo_indicativo'"
-        style="margin-top:20px"
+        style="margin-top:5px"
       >
         <apexchart
           type="bar"
@@ -325,7 +326,7 @@ export default {
           colors: ["#fff"]
         },
         fill: {
-          opacity: 0.8
+          opacity: 1
         },
         responsive: [
           {
@@ -347,6 +348,10 @@ export default {
   methods: {
     atualizarConteudo() {
       this.limparConteudo();
+      this.limparConteudoPolar();
+      this.limparConteudoComparativoLinha();
+      this.limparConteudoComparativoIndicativo();
+      this.limparConteudoComparativo();
       if (this.idPrincipal !== null) {
         let body = this.getBody(this.conteudo_card.body_grupo);
         if (body == null) {
@@ -392,7 +397,6 @@ export default {
               );
             }
           } else if (this.sub_tipo == "grafico_comparativo_barra") {
-            this.limparConteudoComparativo();
             //Criando estrutura de cateorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoCOmparativo.xaxis.categories.indexOf(
@@ -444,7 +448,6 @@ export default {
               }
             }
           } else if (this.sub_tipo == "grafico_comparativo_linha") {
-            this.limparConteudoComparativoLinha();
             //Criando estrutura de categorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoComparacaoLinha.xaxis.categories.indexOf(
@@ -500,7 +503,6 @@ export default {
               }
             }
           } else if (this.sub_tipo == "grafico_comparativo_indicativo") {
-            this.limparConteudoComparativoIndicativo();
             //Criando estrutura de categorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
@@ -561,14 +563,11 @@ export default {
               }
             }
           } else if (this.sub_tipo === "grafico_polar") {
-            this.limparConteudoBarraHorizontal();
             for (let i = 0; i < arrRetorno.length; i++) {
               this.objGraficoPolar.labels.push(Object.values(arrRetorno[i])[1]);
-              this.seriesGraficoPolar.push(Object.values(arrRetorno[i])[2]);
-              /*   this.seriesGraficoPolar.push({
-                name: Object.values(arrRetorno[i])[1],
-                data: Object.values(arrRetorno[i])[2]
-              });*/
+              this.seriesGraficoPolar.push(
+                Object.values(arrRetorno[i])[index_coluna]
+              );
             }
           }
           setTimeout(() => {
@@ -616,16 +615,25 @@ export default {
       ];
     },
     limparConteudoComparativo() {
-      this.objGraficoCOmparativo.xaxis.categories.push({});
-      console.log(this.objGraficoCOmparativo.xaxis.categories);
-      this.seriesGraficoComparacao;
+      this.objGraficoCOmparativo.xaxis.categories = [];
+      this.seriesGraficoComparacao = [];
     },
-    limparConteudoComparativoLinha() {},
-    limparConteudoComparativoIndicativo() {},
+    limparConteudoComparativoLinha() {
+      this.objGraficoComparacaoLinha.xaxis.categories = [];
+      this.seriesGraficoComparacaoLinha = [];
+    },
+    limparConteudoComparativoIndicativo() {
+      this.objGraficoComparacaoIndicativo.xaxis.categories = [];
+      this.seriesGraficoComparacaoIndicativo = [];
+    },
+    limparConteudoPolar() {
+      this.objGraficoPolar.labels = [];
+      this.seriesGraficoPolar = [];
+    },
     medidaCard() {
       this.alturaCard = this.height + "vh";
       let altura = parseInt(this.height);
-      this.alturaGrafico = altura * 5 + "px";
+      this.alturaGrafico = altura * 5.1 + "px";
       this.alturaCorpo = this.height - 6 + "vh";
     }
   },
@@ -648,7 +656,7 @@ export default {
 }
 .corpo {
   padding: 0;
-  margin: 0px auto;
+  margin: 0 auto;
 }
 .text-class {
   font-weight: 400;
