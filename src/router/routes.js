@@ -13,6 +13,17 @@ const routes = [
     ]
   },
   {
+    path: "/cliente-producao",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "/cliente-producao",
+        name: "cliente-producao",
+        component: () => import("src/pages/DashboardProducao.vue")
+      }
+    ]
+  },
+  {
     path: "/Login",
     component: () => import("layouts/LoginLayout.vue"),
     children: [
@@ -25,13 +36,13 @@ const routes = [
     ]
   },
   {
-    path: "/perfil-usuario",
-    component: () => import("src/layouts/PerfilUsuario.vue"),
+    path: "/Login-cliente",
+    component: () => import("layouts/LoginLayout.vue"),
     children: [
       {
         path: "",
-        name: "perfil-usuario",
-        component: () => import("src/layouts/PerfilUsuario.vue")
+        name: "login-cliente",
+        component: () => import("pages/LoginServiceCliente.vue")
       }
     ]
   },

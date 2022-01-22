@@ -10,6 +10,9 @@
         :key="ObjCard"
         style="margin:5px;margin-bottom:5px;"
       >
+        {{ arrRetornoGet }}
+        <br />
+        {{ (this.valorId = 2) }}
         <CardComparativoApi
           v-if="ObjCard.tipo_card === 'CardComparativoApi'"
           class="q-ma-xs"
@@ -68,6 +71,7 @@
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+
         <CardListaApi
           v-if="ObjCard.tipo_card === 'CardListaApi'"
           class="q-ma-xs"
@@ -112,7 +116,7 @@ export default defineComponent({
     CardGraficoApi,
     CardComparativoApi
   },
-  name: "dashboard",
+  name: "cliente-producao",
   setup() {
     const $store = useStore();
     const login = computed({
@@ -140,7 +144,9 @@ export default defineComponent({
       Grupos: [],
       GrupoCards: [],
       GrupoCardsOpcionais: [],
-      idColaboradorAtivo: 0
+      idColaboradorAtivo: 0,
+      arrRetornoGet: [],
+      valorId: null
     };
   },
   methods: {
@@ -156,6 +162,11 @@ export default defineComponent({
       }, 1000);
     },
     handleResize() {
+      //-----------teste
+      this.$apiServece.get(`/todos/${this.valorId}`).then(res => {
+        this.arrRetornoGet = res.data;
+      });
+      //-----------teste
       this.telaWidth = window.innerWidth;
       if (window.innerWidth <= 1006) {
         for (
@@ -194,9 +205,9 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_area_trabalho;
+    const permissao = login.recursos.dashboard_cliente_producao;
     if (!permissao) {
-      next("/Login");
+      next("/login-cliente");
     }
     next();
   },
@@ -204,15 +215,16 @@ export default defineComponent({
     let login = JSON.parse(localStorage.getItem("login"));
     this.idColaboradorAtivo = login.id_colaborador;
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.dashboard_area_trabalho.id_layout_dashboard
+      login.recursos.dashboard_cliente_producao.id_layout_dashboard
     );
     for (
       let i = 0;
-      i < login.recursos.dashboard_area_trabalho.dashboard_complementar.length;
+      i <
+      login.recursos.dashboard_cliente_producao.dashboard_complementar.length;
       i++
     ) {
       let ObjDashboardTemp = GeLayoutDashBoard(
-        login.recursos.dashboard_area_trabalho.dashboard_complementar[i]
+        login.recursos.dashboard_cliente_producao.dashboard_complementar[i]
       );
 
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {

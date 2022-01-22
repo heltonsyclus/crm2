@@ -77,6 +77,9 @@ export function GeLayoutDashBoard(pIdLayout) {
     case 25:
       jLayout = layoutDashBoard25();
       break;
+    case 26:
+      jLayout = layoutDashBoard26();
+      break;
     case 9999:
       jLayout = layoutDashBoard9999();
       break;
@@ -5021,7 +5024,58 @@ function layoutDashBoard20() {
 
   return json;
 }
+//producao - padrao
+function layoutDashBoard21() {
+  const json = {
+    id_dashboard: 21,
+    dashboard: "producao",
+    grupos: [
+      {
+        id_grupo: 1,
+        grupo: "producao",
+        icone: "precision_manufacturing",
+        cards: [
+          {
+            card: "Previsão da Semana",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_polar",
+            coluna_totalizadora: 3,
+            width: "31vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorSituacao",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and extract(week from dt_previsao) = extract(week from current_date) and a.cd_tipo_atividade in (4) and a.cd_situacao in (63, 64, 65, 66, 69, 70, 106)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Planejamento",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "31vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorTipoAtividadeStatus",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item:
+                "where a.ds_status in ('P', 'F') and cast(dt_previsao as date) = current_date and a.cd_responsavel = <id_principal>"
+            }
+          }
+        ],
+        cards_opcionais: []
+      }
+    ]
+  };
 
+  return json;
+}
 //bi - teste
 function layoutDashBoard9999() {
   const json = {

@@ -129,4 +129,9 @@ export default {
     width: 350px;
   }
 }
+@media only screen and (max-width: 500px) {
+  .my-card-syclus {
+    min-height: 200px;
+  }
+}
 </style>

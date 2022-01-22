@@ -58,6 +58,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "1086222297"
       },
@@ -89,6 +90,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "10328697"
       },
@@ -120,6 +122,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "1086222297"
       },
@@ -152,6 +155,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/cledesson.png"),
         token: "1086222297"
       },
@@ -292,6 +296,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "1086222297"
       },
@@ -324,6 +329,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "103218697"
       },
@@ -401,6 +407,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "13108697"
       },
@@ -438,6 +445,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/fabricio.png"),
         token: "108697"
       },
@@ -494,6 +502,7 @@ export function senhaLogin() {
             ]
           }
         },
+        rotas: "colaborador",
         img: require("../assets/helton.png"),
         token: "108697"
       },
@@ -600,6 +609,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "108697321"
       },
@@ -642,6 +652,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/jpaulo.png"),
         token: "108693217"
       },
@@ -674,6 +685,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/jpedro.png"),
         token: "10869227"
       },
@@ -722,6 +734,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "108693217"
       },
@@ -796,6 +809,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/jully.png"),
         token: "108632197"
       },
@@ -855,6 +869,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "10821697"
       },
@@ -887,6 +902,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "10863297"
       },
@@ -919,6 +935,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/comum.png"),
         token: "108697"
       },
@@ -951,6 +968,7 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/rodrigo.png"),
         token: "108321697"
       },
@@ -1010,7 +1028,22 @@ export function senhaLogin() {
             }
           ]
         },
+        rotas: "colaborador",
         img: require("../assets/wagner.png"),
+        token: "1321308697"
+      },
+      {
+        usuario: "techplast",
+        senha: "0",
+        id_colaborador: 54,
+        recursos: {
+          dashboard_cliente_producao: {
+            id_layout_dashboard: 21,
+            dashboard_complementar: []
+          }
+        },
+        rotas: "cliente",
+        img: require("../assets/clientes/techplast.png"),
         token: "1321308697"
       }
     ]

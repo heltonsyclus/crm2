@@ -383,7 +383,8 @@ export default defineComponent({
     let login = JSON.parse(localStorage.getItem("login"));
     const permissao = login.recursos.dashboard_cliente;
     if (!permissao) {
-      next("Login");
+      alert("Você não possue autorização!");
+      next("");
     }
     next();
   },

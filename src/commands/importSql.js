@@ -292,7 +292,6 @@ export default {
         return bodyNotificacaoPorTipoAtividade(filtros);
       }
     },
-
     atualizarConteudo() {
       this.limparConteudo();
       if (this.idPrincipal !== null) {

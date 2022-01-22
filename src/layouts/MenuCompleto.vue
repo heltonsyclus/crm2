@@ -27,82 +27,24 @@
 </template>
 <script>
 import { ref } from "vue";
+import { rotasMenu } from "app/src/commands/rotasMenu";
+
 export default {
   emits: ["close"],
+  mixins: [rotasMenu],
   setup() {
     return {
       active: ref(true),
       model: ref(""),
       grupos: ref([]),
       input: ref(false),
-      linksList: [
-        {
-          icon: "dashboard",
-          rota: "/",
-          text: "Dashboard"
-        },
-        /* {
-          icon: "description",
-          rota: "/atividade",
-          text: "Atividade"
-        },
-        {
-          icon: "assignment",
-          rota: "/Projeto",
-          text: "Projeto"
-        },*/
-        {
-          icon: "supervisor_account",
-          rota: "/Cliente",
-          text: "Cliente"
-        },
-        /* {
-          icon: "done_all",
-          rota: "/Ocorrencia",
-          text: "Ocorrência"
-        },
-        {
-          icon: "event",
-          rota: "/Agenda",
-          text: "Agenda"
-        },
-        {
-          icon: "account_tree",
-          rota: "/Workflow",
-          text: "Workflow"
-        },*/
-        {
-          icon: "engineering",
-          rota: "/Colaborador",
-          text: "Colaborador"
-        },
-        {
-          icon: "fact_check",
-          rota: "/Projetos",
-          text: "Projetos"
-        },
-        {
-          icon: "insert_chart_outlined",
-          rota: "/BI",
-          text: "BI"
-        }
-      ]
+      linksList: []
     };
   },
-  methods: {
-    adicionarGrupo() {
-      this.grupos.push({
-        model: this.model
-      });
-      this.input = false;
-      this.model = "";
-    },
-    remover(index) {
-      this.grupos.splice(index, 1);
-    },
-    salvarGrupos() {
-      // console.log(this.grupos);
-    }
+  created() {
+    let login = JSON.parse(localStorage.getItem("login"));
+    let rotas = login.rotas;
+    this.liberacaoRotas(rotas);
   }
 };
 </script>

@@ -7,11 +7,11 @@
           alt="Syclus"
           class="rotate-225"
           style="cursor:pointer"
-          @click="$router.push({ name: 'dashboard' })"
+          @click="onClickDashboard()"
         />
         <q-toolbar-title class="text-weight-bold ">
           <span
-            @click="$router.push({ name: 'dashboard' })"
+            @click="onClickDashboard()"
             style="cursor:pointer"
             class="logo-texto"
             >Syclus 2.0</span
@@ -42,6 +42,7 @@
           >
             <q-tooltip>Syclus Apps</q-tooltip>
           </q-btn>
+          <CardPopApp class="tela-popup" v-show="ModalpopUp" />
           <span style="font-weight:500" class="capitalize text-grey-8">{{
             this.nomeUsuario
           }}</span>
@@ -49,7 +50,7 @@
             <q-avatar size="30px">
               <img :src="this.imgColaborador" />
             </q-avatar>
-            <q-tooltip>Colaborador</q-tooltip>
+            <q-tooltip class="capitalize">{{ this.nomeUsuario }}</q-tooltip>
             <q-menu style="text-align:center">
               <q-list dense>
                 <q-item clickable class="flex ">
@@ -94,7 +95,7 @@
         <q-scroll-area class="fit">
           <q-list padding>
             <q-item
-              v-for="link in links1"
+              v-for="link in linksList"
               :key="link.text"
               :to="link.rota"
               v-ripple
@@ -119,13 +120,15 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-//import PerfilUsuario from "./PerfilUsuario.vue";
 import MenuFlutuante from "./MenuFlutuante.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { rotasMenu } from "app/src/commands/rotasMenu";
+import CardPopApp from "src/components/Cards/CardPopApp.vue";
 export default defineComponent({
-  components: { MenuFlutuante },
+  components: { MenuFlutuante, CardPopApp },
   name: "MainLayout",
+  mixins: [rotasMenu],
   setup() {
     const leftDrawerOpen = ref(false);
     function toggleLeftDrawer() {
@@ -137,6 +140,8 @@ export default defineComponent({
     });
 
     return {
+      rotas: ref(""),
+      ModalpopUp: ref(false),
       menuDesktop: ref(true),
       menuMobile: ref(false),
       nomeUsuario: ref(""),
@@ -144,58 +149,7 @@ export default defineComponent({
       notificacao,
       toggleLeftDrawer,
       leftDrawerOpen,
-      links1: [
-        {
-          icon: "dashboard",
-          rota: "/",
-          text: "Dashboard"
-        },
-        /* {
-          icon: "description",
-          rota: "/atividade",
-          text: "Atividade"
-        },
-        {
-          icon: "assignment",
-          rota: "/Projeto",
-          text: "Projeto"
-        },*/
-        {
-          icon: "supervisor_account",
-          rota: "/Cliente",
-          text: "Cliente"
-        },
-        /* {
-          icon: "done_all",
-          rota: "/Ocorrencia",
-          text: "Ocorrência"
-        },
-        {
-          icon: "event",
-          rota: "/Agenda",
-          text: "Agenda"
-        },
-        {
-          icon: "account_tree",
-          rota: "/Workflow",
-          text: "Workflow"
-        },*/
-        {
-          icon: "engineering",
-          rota: "/Colaborador",
-          text: "Colaborador"
-        },
-        {
-          icon: "fact_check",
-          rota: "/Projetos",
-          text: "Projetos"
-        },
-        {
-          icon: "insert_chart_outlined",
-          rota: "/BI",
-          text: "BI"
-        }
-      ]
+      linksList: []
     };
   },
   methods: {
@@ -203,8 +157,11 @@ export default defineComponent({
       window.location.reload(true);
       window.localStorage.clear();
       window.location.href = window.location.href;
-      window.location.replace("https://sycluscrm-chi.vercel.app/#/Login");
+      // window.location.replace("https://sycluscrm-chi.vercel.app/#/Login");
       this.login = [];
+    },
+    AbrirModalPop() {
+      this.ModalpopUp = !this.ModalpopUp;
     },
     handleResize() {
       if (window.innerWidth <= 800) {
@@ -217,10 +174,20 @@ export default defineComponent({
         this.menuMobile = false;
         this.leftDrawerOpen = false;
       }
+    },
+    onClickDashboard() {
+      if (this.rotas === "colaborador") {
+        this.$router.push({ name: "dashboard" });
+      }
+      if (this.rotas === "cliente") {
+        this.$router.push({ name: "cliente-producao" });
+      }
     }
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
+    this.rotas = login.rotas;
+    this.liberacaoRotas(this.rotas);
     this.nomeUsuario = login.usuario;
     this.imgColaborador = login.img;
     window.addEventListener("resize", this.handleResize);
@@ -232,6 +199,16 @@ export default defineComponent({
 <style scoped>
 .logo-texto {
   font-size: 22px;
+}
+.tela-popup {
+  max-width: 380px;
+  padding: 0px 10px 15px 10px;
+  position: absolute;
+  z-index: 1;
+  right: 1%;
+  margin-left: -50px;
+  top: 90%;
+  box-shadow: 0 0 1em rgb(165, 165, 165);
 }
 @media (max-width: 500px) {
   .logo-texto {

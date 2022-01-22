@@ -32,7 +32,6 @@
       </q-item-section>
     </q-item>
   </q-drawer>
-
   <q-page-container>
     <router-view />
   </q-page-container>
@@ -41,13 +40,15 @@
 <script>
 import { defineComponent, ref } from "vue";
 import MenuCompleto from "./MenuCompleto.vue";
+import { rotasMenu } from "app/src/commands/rotasMenu";
+
 export default defineComponent({
   name: "MenuFlutuante",
+  mixins: [rotasMenu],
   components: { MenuCompleto },
   setup() {
     const dialog = ref(false);
     const position = ref("top");
-
     return {
       dialog,
       position,
@@ -55,59 +56,13 @@ export default defineComponent({
         position.value = pos;
         dialog.value = true;
       },
-      linksList: [
-        {
-          icon: "dashboard",
-          rota: "/",
-          text: "Dashboard"
-        },
-        /* {
-          icon: "description",
-          rota: "/atividade",
-          text: "Atividade"
-        },
-        {
-          icon: "assignment",
-          rota: "/Projeto",
-          text: "Projeto"
-        },*/
-        {
-          icon: "supervisor_account",
-          rota: "/Cliente",
-          text: "Cliente"
-        },
-        /* {
-          icon: "done_all",
-          rota: "/Ocorrencia",
-          text: "Ocorrência"
-        },
-        {
-          icon: "event",
-          rota: "/Agenda",
-          text: "Agenda"
-        },
-        {
-          icon: "account_tree",
-          rota: "/Workflow",
-          text: "Workflow"
-        },*/
-        {
-          icon: "engineering",
-          rota: "/Colaborador",
-          text: "Colaborador"
-        },
-        {
-          icon: "fact_check",
-          rota: "/Projetos",
-          text: "Projetos"
-        },
-        {
-          icon: "insert_chart_outlined",
-          rota: "/BI",
-          text: "BI"
-        }
-      ]
+      linksList: []
     };
+  },
+  created() {
+    let login = JSON.parse(localStorage.getItem("login"));
+    let rotas = login.rotas;
+    this.liberacaoRotas(rotas);
   }
 });
 </script>
