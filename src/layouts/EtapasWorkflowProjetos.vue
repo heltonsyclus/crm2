@@ -77,7 +77,7 @@ export default {
     };
   },
   methods: {
-    adicionarGrupo() {
+    /*adicionarGrupo() {
       this.grupos.push({
         model: this.model
       });
@@ -89,7 +89,7 @@ export default {
     },
     salvarGrupos() {
       console.log(this.grupos);
-    }
+    }*/
   }
 };
 </script>

@@ -115,6 +115,11 @@ export function bodyAtividadePorTipoAtividadeStatus(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
+export function bodyAtividadePorWorkflowStatus(pFiltros) {
+  let instrucao_sql = `select wf.ds_workflow "ds_workflow", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join workflow wf on wf.cd_workflow = a.cd_workflow <filtros> group by wf.ds_workflow, a.ds_status order by wf.ds_workflow`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
 //----------------------atividade tag ----------------------//
 export function bodyAtividadeTag(pFiltros) {
@@ -164,6 +169,13 @@ export function bodyAtividadeTagPorMesAno(pFiltros) {
 }
 export function bodyAtividadeTagPorSemana(pFiltros) {
   let instrucao_sql = `select extract(week from a.dt_previsao) "id_sequencial", 'SEMANA '||extract(week from a.dt_previsao) "data_ocorrencia", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade <filtros> group by extract(week from a.dt_previsao), 'SEMANA '||extract(week from a.dt_previsao) order by 1 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//----------------------atividade Tag Comparativo----------------------//
+export function bodyAtividadeTagPorResponsavelTag(pFiltros) {
+  let instrucao_sql = `select cb.ds_colaborador "colaborador", tg.ds_tag "tag", count(a.cd_atividade) "qtde_atividade" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel inner join atividade_tag ag on ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade inner join tag tg on tg.cd_tag = ag.cd_tag <filtros> group by cb.ds_colaborador, tg.ds_tag order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

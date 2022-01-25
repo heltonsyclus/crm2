@@ -11,6 +11,7 @@ import {
   bodyAtividadePorMesAno,
   bodyAtividadePorSemana,
   bodyAtividadePorTipoAtividadeStatus,
+  bodyAtividadePorWorkflowStatus,
   bodyAtividadeCliente,
   bodyAtividadeClientePorTipoAtividade,
   bodyAtividadeClientePorResponsavel,
@@ -29,6 +30,7 @@ import {
   bodyAtividadeTagPorData,
   bodyAtividadeTagPorMesAno,
   bodyAtividadeTagPorSemana,
+  bodyAtividadeTagPorResponsavelTag,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorColaborador,
@@ -117,6 +119,8 @@ export default {
         pNomeBody === "bodyNotificacao" ||
         pNomeBody === "bodyNotificacaoPorAtividade" ||
         pNomeBody === "bodyAtividadePorTipoAtividadeStatus" ||
+        pNomeBody === "bodyAtividadePorWorkflowStatus" ||
+        pNomeBody === "bodyAtividadeTagPorResponsavelTag" ||
         pNomeBody === "bodyTeste"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
@@ -183,6 +187,10 @@ export default {
       if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
         return bodyAtividadeClientePorWorkflow(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
+        return bodyAtividadePorWorkflowStatus(filtros);
+      }
+
       if (pNomeBody === "bodyAtividadeTag") {
         return bodyAtividadeTag(filtros);
       }
@@ -212,6 +220,9 @@ export default {
       }
       if (pNomeBody === "bodyAtividadeTagPorSemana") {
         return bodyAtividadeTagPorSemana(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeTagPorResponsavelTag") {
+        return bodyAtividadeTagPorResponsavelTag(filtros);
       }
 
       if (pNomeBody === "bodyAtividadeColaborador") {

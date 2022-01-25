@@ -283,6 +283,22 @@ function layoutDashBoard1() {
               filtro_sql_item:
                 "where a.ds_status = 'P' and cast(dt_previsao as date) > current_date and a.cd_responsavel = <id_principal> and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
+          },
+          {
+            card: "Inconforme",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and ag.cd_tag = 140 and a.cd_responsavel = <id_principal>",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and ag.cd_tag = 140 and a.cd_responsavel = <id_principal> and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
           }
         ]
       },
@@ -347,7 +363,6 @@ function layoutDashBoard1() {
             card: "Distribuição do Tempo (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-
             sub_tipo: "grafico_pizza",
             coluna_totalizadora: 4,
             width: "31vw",
@@ -363,7 +378,9 @@ function layoutDashBoard1() {
           {
             card: "Ocorrências (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardListaApi",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            coluna_totalizadora: 4,
             width: "31vw",
             height: "40",
             conteudo_card: {
@@ -3372,33 +3389,43 @@ function layoutDashBoard13() {
         icone: "assignment_turned_in",
         cards: [
           {
-            card: "Atividades criadas no Mês (Total)",
+            card: "Atividades criadas no Mês",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra_horizontal",
-            width: "47vw",
-            height: "40",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "96vw",
+            height: "80",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorWorkflow",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P', 'F') and (extract(week from a.dt_emissao) = extract(week from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)",
+              body_grupo: "bodyAtividadePorWorkflowStatus",
+              filtro_sql_grupo: "",
               body_item: "",
-              filtro_sql_item: ""
+              filtro_sql_item:
+                "where a.ds_status in ('P', 'F') and (extract(month from a.dt_emissao) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
             }
-          },
+          }
+        ]
+      },
+      {
+        grupo: "Qualidade",
+        icone: "assignment_turned_in",
+        cards: [
           {
-            card: "Atividades criadas no Mês (Pendente)",
+            card: "Classificadas (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra_horizontal",
-            width: "47vw",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "94vw",
             height: "40",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorWorkflow",
-              filtro_sql_grupo:
-                "where a.ds_status in ('P') and (extract(week from a.dt_emissao) = extract(week from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)",
+              body_grupo: "bodyAtividadeTagPorResponsavelTag",
+              filtro_sql_grupo: "",
               body_item: "",
-              filtro_sql_item: ""
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
             }
           }
         ]
@@ -4524,6 +4551,23 @@ function layoutDashBoard19() {
         icone: "signal_cellular_alt",
         cards: [
           {
+            card: "Classificadas (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "94vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavelTag",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
+            }
+          },
+          {
             card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
@@ -4573,23 +4617,6 @@ function layoutDashBoard19() {
             }
           },
           {
-            card: "Inconforme (Mês Atual)",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "94vw",
-            height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorResponsavel",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
-              body_item: "bodyAtividadeTag",
-              filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
-            }
-          },
-          {
             card: "Inconforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -4622,21 +4649,6 @@ function layoutDashBoard19() {
             }
           },
           {
-            card: "Verificada (Mês Atual)",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "94vw",
-            height: "40",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorResponsavel",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
             card: "Verificada",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -4662,21 +4674,6 @@ function layoutDashBoard19() {
               body_grupo: "bodyAtividadeTagPorResponsavel",
               filtro_sql_grupo:
                 "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
-              body_item: "",
-              filtro_sql_item: ""
-            }
-          },
-          {
-            card: "Conforme (Mês Atual)",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_barra",
-            width: "94vw",
-            height: "40",
-            conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorResponsavel",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 2 and ag.cd_tag = 141 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "",
               filtro_sql_item: ""
             }
@@ -4718,6 +4715,40 @@ function layoutDashBoard19() {
         icone: "signal_cellular_alt",
         cards: [
           {
+            card: "Classificadas (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "94vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavelTag",
+              filtro_sql_grupo: "",
+              body_item: "",
+              filtro_sql_item:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
+            }
+          },
+          {
+            card: "Sem Classificacao (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+            }
+          },
+          {
             card: "Sem Classificacao",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
@@ -4725,28 +4756,28 @@ function layoutDashBoard19() {
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
+              body_grupo: "bodyAtividadePorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag not in (141, 140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividade",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag not in (141, 140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
           },
           {
-            card: "Conforme",
+            card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
+              body_grupo: "bodyAtividadeTagPorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (141) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (141) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
@@ -4759,10 +4790,26 @@ function layoutDashBoard19() {
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (140) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 140 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 140 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Inconforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
@@ -4775,80 +4822,219 @@ function layoutDashBoard19() {
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (367) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 367 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag in (367) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 367 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Verificada (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Conforme",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 141 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 141 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Conforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 3 and ag.cd_tag = 141 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
             }
           }
         ]
       },
+
       {
         grupo: "Comercial",
         icone: "signal_cellular_alt",
         cards: [
           {
-            card: "Sem Classificacao",
+            card: "Classificadas (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "45vw",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "94vw",
             height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag not in (141, 140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
+              body_grupo: "bodyAtividadeTagPorResponsavelTag",
+              filtro_sql_grupo: "",
+              body_item: "",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag not in (141, 140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
             }
           },
           {
-            card: "Conforme",
+            card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "45vw",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
+              body_grupo: "bodyAtividadeTagPorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (141) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (141) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+            }
+          },
+          {
+            card: "Sem Classificacao",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Sem Classificacao (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
             card: "Inconforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "45vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (140) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 140 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 140 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Inconforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
             card: "Verificada",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "45vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (367) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 367 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag in (367) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 367 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Verificada (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Conforme",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 141 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 141 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Conforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 1 and ag.cd_tag = 141 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
             }
           }
         ]
@@ -4858,67 +5044,161 @@ function layoutDashBoard19() {
         icone: "signal_cellular_alt",
         cards: [
           {
-            card: "Sem Classificacao",
+            card: "Classificadas (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "45vw",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "94vw",
             height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
-              filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag not in (141, 140) and a.dt_previsao >= current_date -30",
-              body_item: "bodyAtividadeTag",
+              body_grupo: "bodyAtividadeTagPorResponsavelTag",
+              filtro_sql_grupo: "",
+              body_item: "",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag not in (141, 140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
             }
           },
           {
-            card: "Conforme",
+            card: "Sem Classificacao (Mês Atual)",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "45vw",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_barra",
+            width: "94vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeTagPorData",
+              body_grupo: "bodyAtividadeTagPorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (141) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (141) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
+            }
+          },
+          {
+            card: "Sem Classificacao",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Sem Classificacao (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and (select count(ag.cd_tag) from atividade_tag ag where ag.cd_empresa = a.cd_empresa and ag.cd_atividade = a.cd_atividade and ag.cd_tag in (141, 140, 367)) = 0 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
             card: "Inconforme",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "45vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (140) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 140 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (140) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 140 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Inconforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 140 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date) and a.cd_responsavel = <id_grupo>"
             }
           },
           {
             card: "Verificada",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "45vw",
+            width: "46.5vw",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorData",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (367) and a.dt_previsao >= current_date -30",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 367 and a.dt_previsao >= current_date -30",
               body_item: "bodyAtividadeTag",
               filtro_sql_item:
-                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag in (367) and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 367 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Verificada (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 367 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
+            }
+          },
+          {
+            card: "Conforme",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 141 and a.dt_previsao >= current_date -30",
+              body_item: "bodyAtividadeTag",
+              filtro_sql_item:
+                "where a.ds_status ='F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 141 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          },
+          {
+            card: "Conforme (Mês Atual)",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "46.5vw",
+            height: "40",
+            conteudo_card: {
+              body_grupo: "bodyAtividadeTagPorResponsavel",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ag.cd_tag = 141 and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
+              body_item: "",
+              filtro_sql_item: ""
             }
           }
         ]

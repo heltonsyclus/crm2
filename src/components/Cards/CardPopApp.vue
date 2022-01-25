@@ -1,19 +1,23 @@
 <template>
   <q-card class="card-popup">
     <div style="margin-top:10px">
-      <span>App</span>
       <div class="flex">
         <div
           class="fundo-card"
-          v-for="(objServices, i) in service"
+          v-for="(objAplicativos, i) in Aplicativos"
           :key="i"
-          @click="abrirService(objServices.rota)"
+          @click="abrirAplicativos(objAplicativos.rota)"
         >
-          <q-icon :name="objServices.icon" size="28px" style="margin-top:7px" />
-          <p>{{ objServices.app }}</p>
+          <div class="conteudo">
+            <q-icon
+              :name="objAplicativos.icon"
+              size="28px"
+              style="margin-top:10px"
+            />
+            <p>{{ objAplicativos.app }}</p>
+          </div>
         </div>
       </div>
-      <q-separator style="margin-top:5px" />
     </div>
   </q-card>
 </template>
@@ -22,19 +26,53 @@
 export default {
   setup() {
     return {
-      service: [
-        {
-          app: "Syclus Cliente",
-          icon: "business",
-          rota: "/login-cliente"
-        }
-      ]
+      Aplicativos: []
     };
   },
   methods: {
-    abrirService(objServices) {
-      this.$router.push(objServices);
+    abrirAplicativos(objAplicativos) {
+      this.$router.push(objAplicativos);
+    },
+    mostrarAplicativos() {
+      let login = JSON.parse(localStorage.getItem("login"));
+      for (let i = 0; i < login.aplicativos.length; i++) {
+        login.aplicativos[i].aplicativo;
+        if (login.aplicativos[i].aplicativo === "CRM") {
+          this.Aplicativos.push({
+            app: "CRM",
+            icon: "maps_home_work",
+            rota: "/dashboard"
+          });
+        } else if (login.aplicativos[i].aplicativo === "Produção") {
+          this.Aplicativos.push({
+            app: "Produção",
+            icon: "precision_manufacturing",
+            rota: "/login-cliente"
+          });
+        } else if (login.aplicativos[i].aplicativo === "Base de conhecimento") {
+          this.Aplicativos.push({
+            app: "Base de conhecimento",
+            icon: "tungsten",
+            rota: "/login-cliente"
+          });
+        } else if (login.aplicativos[i].aplicativo === "Vendas") {
+          this.Aplicativos.push({
+            app: "Vendas",
+            icon: "point_of_sale",
+            rota: "/login-cliente"
+          });
+        } else if (login.aplicativos[i].aplicativo === "BI") {
+          this.Aplicativos.push({
+            app: "BI",
+            icon: "point_of_sale",
+            rota: "/login-cliente"
+          });
+        }
+      }
     }
+  },
+  created() {
+    this.mostrarAplicativos();
   }
 };
 </script>
@@ -51,14 +89,12 @@ export default {
   margin: 0px auto;
   overflow: auto;
 }
-
 .fundo-card {
-  padding: 5px;
   text-align: center;
-  margin: 2px 2px;
+  margin: 5px 1px 0px 1px;
   background-color: rgb(20, 109, 224);
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 85px;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -67,11 +103,17 @@ export default {
   background-color: rgb(80, 224, 123);
   color: #fff;
 }
+.conteudo {
+  position: relative;
+  top: 45%;
+  transform: translateY(-50%);
+}
 span {
   color: rgb(99, 99, 99);
   font-weight: 500;
 }
 p {
-  font-size: 12px;
+  padding-top: 2px;
+  font-size: 11px;
 }
 </style>

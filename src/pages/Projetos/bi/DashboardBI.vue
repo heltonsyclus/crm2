@@ -189,7 +189,7 @@ export default defineComponent({
       let grupoBi = j;
       let dashboardBi = i;
       let login = JSON.parse(localStorage.getItem("login"));
-      let recursosBi = login.recursos.dashboard_bi_x;
+      let recursosBi = login.aplicativos[0].recursos.dashboard_bi_x;
       this.IndexGrupoAtual = 0;
       this.CarregarDashboard(
         recursosBi[grupoBi].layout_dashboard[dashboardBi].id_layout_dashboard,
@@ -266,7 +266,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_bi_x;
+    const permissao = login.aplicativos[0].recursos.dashboard_bi_x;
     if (!permissao) {
       alert("Você não possue autorização!");
       next("");
@@ -275,7 +275,7 @@ export default defineComponent({
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
-    let recursosBi = login.recursos.dashboard_bi_x;
+    let recursosBi = login.aplicativos[0].recursos.dashboard_bi_x;
     this.dashboardBInome =
       recursosBi[0].grupo + " / " + recursosBi[0].layout_dashboard[0].dashboard;
 

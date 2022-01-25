@@ -234,14 +234,12 @@ export default defineComponent({
     },
 
     onToday() {
-      console.log(this.$refs.calendar.moveToToday());
+      // console.log(this.$refs.calendar.moveToToday());
     },
     onPrev() {
-      console.log(this.$refs.calendar.prev());
+      //  console.log(this.$refs.calendar.prev());
     },
-    onNext() {
-      console.log(this.$refs.calendar.next());
-    },
+    onNext() {},
 
     onMoved(data) {
       var meses = [
@@ -301,7 +299,7 @@ export default defineComponent({
     retornoArrayAgenda(arrayAgenda) {
       this.objArrayAgenda = arrayAgenda;
       this.objArrayAgenda.date = this.dataPesquisada;
-      this.events=this.objArrayAgenda;
+      this.events = this.objArrayAgenda;
     },
     onClickTime(data) {
       // console.log(data);

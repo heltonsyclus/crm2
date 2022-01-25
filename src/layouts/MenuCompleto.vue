@@ -43,8 +43,11 @@ export default {
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
-    let rotas = login.rotas;
-    this.liberacaoRotas(rotas);
+    for (let i = 0; i < login.aplicativos.length; i++) {
+      let rotas = login.aplicativos[i].recursos;
+      this.liberacaoRotas(rotas);
+      break;
+    }
   }
 };
 </script>

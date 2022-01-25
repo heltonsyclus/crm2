@@ -1,14 +1,25 @@
 import Store from "app/src/commands/autenticacao";
 
 const routes = [
-  {
+  /* {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
         path: "",
+        name: "inicial",
+        component: () => import("src/pages/DashboardInicial.vue")
+      }
+    ]
+  },*/
+  {
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "/",
         name: "dashboard",
-        component: () => import("src/pages/DashboardPrincipal.vue")
+        component: () => import("src/pages/Projetos/crm/DashboardPrincipal.vue")
       }
     ]
   },
@@ -19,7 +30,8 @@ const routes = [
       {
         path: "/cliente-producao",
         name: "cliente-producao",
-        component: () => import("src/pages/DashboardProducao.vue")
+        component: () =>
+          import("src/pages/Projetos/producao/DashboardProducao.vue")
       }
     ]
   },
@@ -27,44 +39,7 @@ const routes = [
     path: "/Login",
     component: () => import("layouts/LoginLayout.vue"),
     children: [
-      { path: "", name: "Login", component: () => import("pages/Login.vue") },
-      {
-        path: "/problema-login",
-        name: "ProblemaLogin",
-        component: () => import("pages/ProblemaLogin.vue")
-      }
-    ]
-  },
-  {
-    path: "/Login-cliente",
-    component: () => import("layouts/LoginLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "login-cliente",
-        component: () => import("pages/LoginServiceCliente.vue")
-      }
-    ]
-  },
-  {
-    path: "/atividade",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "/atividade",
-        name: "atividade",
-        component: () => import("pages/Atividade.vue")
-      },
-      {
-        path: "/atividades",
-        name: "atividades",
-        component: () => import("pages/LayoutAtividade.vue")
-      },
-      {
-        path: "/pesquisa-atividade",
-        name: "pesquisa-atividade",
-        component: () => import("src/pages/LayoutPesquisaAtividade.vue")
-      }
+      { path: "", name: "Login", component: () => import("pages/Login.vue") }
     ]
   },
   /*{
@@ -88,17 +63,6 @@ const routes = [
       }
     ]
   },*/
-  {
-    path: "/ocorrencia",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "ocorrencia",
-        component: () => import("pages/Ocorrencia.vue")
-      }
-    ]
-  },
 
   {
     path: "/cliente",
@@ -108,29 +72,7 @@ const routes = [
       {
         path: "",
         name: "cliente",
-        component: () => import("src/pages/DashboardCliente.vue")
-      }
-    ]
-  },
-  {
-    path: "/agenda",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "agenda",
-        component: () => import("src/pages/DashboardAgenda.vue")
-      }
-    ]
-  },
-  {
-    path: "/workflow",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "workflow",
-        component: () => import("pages/WorkFlow.vue")
+        component: () => import("src/pages/Projetos/crm/DashboardCliente.vue")
       }
     ]
   },
@@ -142,7 +84,8 @@ const routes = [
       {
         path: "",
         name: "colaborador",
-        component: () => import("src/pages/DashboardColaborador.vue")
+        component: () =>
+          import("src/pages/Projetos/crm/DashboardColaborador.vue")
       }
     ]
   },
@@ -153,7 +96,8 @@ const routes = [
       {
         path: "",
         name: "notificacao",
-        component: () => import("src/pages/DashboardNotificacao.vue")
+        component: () =>
+          import("src/pages/Projetos/crm/DashboardNotificacao.vue")
       }
     ]
   },
@@ -165,7 +109,7 @@ const routes = [
       {
         path: "",
         name: "bi",
-        component: () => import("src/pages/DashboardBI.vue")
+        component: () => import("src/pages/Projetos/bi/DashboardBI.vue")
       }
     ]
   },
@@ -177,7 +121,7 @@ const routes = [
       {
         path: "",
         name: "dashboardprojetos",
-        component: () => import("src/pages/DashboardProjeto.vue")
+        component: () => import("src/pages/Projetos/crm/DashboardProjeto.vue")
       }
     ]
   },

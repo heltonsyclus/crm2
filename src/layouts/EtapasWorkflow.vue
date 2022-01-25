@@ -127,7 +127,7 @@ export default {
     onSubmit() {
       if (this.accept !== true) {
         this.matrizModels[this.etapaAtual] = this.arrModels;
-        console.log(this.matrizModels[1]);
+
         this.etapaAtual++;
         if (this.matrizModels.length > this.etapaAtual) {
           this.arrModels = this.matrizModels[this.etapaAtual];

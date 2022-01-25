@@ -17,7 +17,6 @@
             />
           </q-tabs>
         </div>
-
         <div class="flex items-center" v-if="Aplicacao === 'Agenda'">
           <span
             class="capitalize q-ml-md text-blue-8"

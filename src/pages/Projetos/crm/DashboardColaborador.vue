@@ -283,11 +283,13 @@ export default defineComponent({
       let permissao = false;
       let login = JSON.parse(localStorage.getItem("login"));
       permissao =
-        login.recursos.dashboard_colaborador.permissao_colaborador[0] === "*";
+        login.aplicativos[0].recursos.dashboard_colaborador
+          .permissao_colaborador[0] === "*";
       if (!permissao) {
         permissao =
           pIdColaborador in
-          login.recursos.dashboard_colaborador.permissao_colaborador;
+          login.aplicativos[0].recursos.dashboard_colaborador
+            .permissao_colaborador;
       }
       return permissao;
     },
@@ -353,7 +355,7 @@ export default defineComponent({
   },
   beforeRouteEnter(to, from, next) {
     let login = JSON.parse(localStorage.getItem("login"));
-    const permissao = login.recursos.dashboard_colaborador;
+    const permissao = login.aplicativos[0].recursos.dashboard_colaborador;
     if (!permissao) {
       alert("Você não possui autorização!");
       next("");
@@ -363,23 +365,25 @@ export default defineComponent({
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     this.ObjDashboard = GeLayoutDashBoard(
-      login.recursos.dashboard_colaborador.id_layout_dashboard
+      login.aplicativos[0].recursos.dashboard_colaborador.id_layout_dashboard
     );
 
     for (
       let i = 0;
-      i < login.recursos.dashboard_colaborador.dashboard_complementar.length;
+      i <
+      login.aplicativos[0].recursos.dashboard_colaborador.dashboard_complementar
+        .length;
       i++
     ) {
       let ObjDashboardTemp = GeLayoutDashBoard(
-        login.recursos.dashboard_colaborador.dashboard_complementar[i]
+        login.aplicativos[0].recursos.dashboard_colaborador
+          .dashboard_complementar[i]
       );
 
       for (let j = 0; j < ObjDashboardTemp.grupos.length; j++) {
         this.ObjDashboard.grupos.push(ObjDashboardTemp.grupos[j]);
       }
     }
-    console.log(this.telaWidth);
     this.msgCard = "limpar_conteudo";
     window.addEventListener("resize", this.handleResize);
     this.handleResize();

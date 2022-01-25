@@ -56,13 +56,31 @@ export default defineComponent({
         position.value = pos;
         dialog.value = true;
       },
-      linksList: []
+      linksList: [],
+      esconderMenu: ref(true)
     };
   },
+  /*watch: {
+    $route: {
+      handler: function(newValue, oldValue) {
+        if (newValue.fullPath === "/") {
+          this.esconderMenu = false;
+        }
+        if (newValue.fullPath != "/") {
+          this.esconderMenu = true;
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },*/
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
-    let rotas = login.rotas;
-    this.liberacaoRotas(rotas);
+    for (let i = 0; i < login.aplicativos.length; i++) {
+      let rotas = login.aplicativos[i].recursos;
+      this.liberacaoRotas(rotas);
+      break;
+    }
   }
 });
 </script>
