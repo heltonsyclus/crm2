@@ -8,6 +8,7 @@ export function bodyProcuraIdCliente(pValor) {
   return body;
 }
 //Retorna dados do cliente por IdCliente
+/*
 export function bodyCliente(pIdCliente) {
   const body = {
     tipo_retorno: "",
@@ -16,7 +17,7 @@ export function bodyCliente(pIdCliente) {
 
   return body;
 }
-
+*/
 //Retorna dados do cliente pIdCliente
 export function bodyDadosCliente(pIdCliente) {
   const body = {
@@ -51,8 +52,26 @@ export function montaBody(pInstrucaoSql, pFiltros) {
   return body;
 }
 
-//----------------------atividade----------------------//
+//---------------------- cliente ----------------------//
+export function bodyCliente(pFiltros) {
+  let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", cl.dt_cadastro "data_cadastro" from cliente cl <filtros> order by cl.dt_cadastro`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyClientePorTag(pFiltros) {
+  let instrucao_sql = `select tg.cd_tag "id_tag", tg.ds_tag "tag", count(cl.cd_cliente) "qtde_cliente" from cliente cl inner join cliente_tag cg on cg.cd_cliente = cl.cd_cliente inner join tag tg on tg.cd_tag = cg.cd_tag <filtros> group by tg.cd_tag, tg.ds_tag order by tg.ds_tag`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
+//---------------------- cliente Tag ----------------------//
+export function bodyClienteTag(pFiltros) {
+  let instrucao_sql = `select cl.cd_cliente "id_cliente", cl.ds_fantasia "cliente", cl.dt_cadastro "data_cadastro" from cliente cl inner join cliente_tag cg on cg.cd_cliente = cl.cd_cliente inner join tag tg on tg.cd_tag = cg.cd_tag <filtros> order by cl.dt_cadastro`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- atividade ----------------------//
 export function bodyAtividade(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao`;
   let body = montaBody(instrucao_sql, pFiltros);
@@ -70,6 +89,11 @@ export function bodyAtividadePorResponsavel(pFiltros) {
 }
 export function bodyAtividadePorSituacao(pFiltros) {
   let instrucao_sql = `select st.cd_situacao "id_situacao", st.ds_situacao "situacao", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join situacao st on st.cd_situacao = a.cd_situacao <filtros> group by st.cd_situacao, st.ds_situacao order by st.ds_situacao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadePorPrioridade(pFiltros) {
+  let instrucao_sql = `select pr.cd_prioridade "id_prioridade", pr.ds_prioridade "prioridade", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join prioridade pr on pr.cd_prioridade = a.cd_prioridade <filtros> group by pr.cd_prioridade, pr.ds_prioridade order by pr.ds_prioridade`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

@@ -6,6 +6,7 @@ import {
   bodyAtividadePorResponsavel,
   bodyAtividadePorWorkflow,
   bodyAtividadePorSituacao,
+  bodyAtividadePorPrioridade,
   bodyAtividadePorGut,
   bodyAtividadePorProjeto,
   bodyAtividadePorData,
@@ -56,6 +57,9 @@ import {
   bodyNotificacao,
   bodyNotificacaoPorAtividade,
   bodyNotificacaoPorTipoAtividade,
+  bodyCliente,
+  bodyClientePorTag,
+  bodyClienteTag,
   bodyTeste
 } from "src/boot/consultaSql.js";
 
@@ -148,6 +152,9 @@ export default {
       }
       if (pNomeBody === "bodyAtividadePorSituacao") {
         return bodyAtividadePorSituacao(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorPrioridade") {
+        return bodyAtividadePorPrioridade(filtros);
       }
       if (pNomeBody === "bodyAtividadePorGut") {
         return bodyAtividadePorGut(filtros);
@@ -306,6 +313,16 @@ export default {
       }
       if (pNomeBody === "bodyNotificacaoPorTipoAtividade") {
         return bodyNotificacaoPorTipoAtividade(filtros);
+      }
+
+      if (pNomeBody === "bodyCliente") {
+        return bodyCliente(filtros);
+      }
+      if (pNomeBody === "bodyClientePorTag") {
+        return bodyClientePorTag(filtros);
+      }
+      if (pNomeBody === "bodyClienteTag") {
+        return bodyClienteTag(filtros);
       }
     },
     getBodyAntigo(pNomeBody, pIdGrupo) {

@@ -360,6 +360,12 @@ export function senhaLogin() {
                       id_layout_dashboard: 16,
                       dashboard: "Padrão",
                       dashboard_complementar: []
+                    },
+                    {
+                      icone: "work",
+                      id_layout_dashboard: 23,
+                      dashboard: "clientes",
+                      dashboard_complementar: []
                     }
                   ]
                 }
@@ -440,6 +446,12 @@ export function senhaLogin() {
                       icone: "work",
                       id_layout_dashboard: 16,
                       dashboard: "Padrão",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "work",
+                      id_layout_dashboard: 23,
+                      dashboard: "Clientes",
                       dashboard_complementar: []
                     }
                   ]
