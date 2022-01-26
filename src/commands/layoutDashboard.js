@@ -3711,10 +3711,10 @@ function layoutDashBoard13() {
             height: "80",
             conteudo_card: {
               body_grupo: "bodyAtividadePorWorkflowStatus",
-              filtro_sql_grupo: "",
+              filtro_sql_grupo:
+                "where a.ds_status in ('P', 'F') and (extract(month from a.dt_emissao) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)",
               body_item: "",
-              filtro_sql_item:
-                "where a.ds_status in ('P', 'F') and (extract(month from a.dt_emissao) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
+              filtro_sql_item: ""
             }
           }
         ]
@@ -3734,10 +3734,10 @@ function layoutDashBoard13() {
             height: "40",
             conteudo_card: {
               body_grupo: "bodyAtividadeTagPorResponsavelTag",
-              filtro_sql_grupo: "",
+              filtro_sql_grupo:
+                "where a.ds_status = 'F' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)",
               body_item: "",
-              filtro_sql_item:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and ag.cd_tag in (140, 141, 367) and extract(month from a.dt_previsao) = extract(month from current_date) and extract(year from a.dt_previsao) = extract(year from current_date)"
+              filtro_sql_item: ""
             }
           }
         ]
