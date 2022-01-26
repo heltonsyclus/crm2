@@ -93,6 +93,11 @@ export function bodyAtividadePorGut(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
+export function bodyAtividadePorProjeto(pFiltros) {
+  let instrucao_sql = `select pj.cd_projeto "id_projeto", pj.ds_projeto "projeto", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_vinculo av on av.cd_empresa = a.cd_empresa and av.cd_atividade = a.cd_atividade inner join projeto pj on pj.cd_projeto = av.cd_projeto <filtros> group by pj.cd_projeto, pj.ds_projeto order by pj.ds_projeto`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 export function bodyAtividadePorData(pFiltros) {
   let instrucao_sql = `select datediff(day, cast('01/01/1970' as date), a.dt_previsao) "id_sequencial", lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", count(a.cd_atividade) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a <filtros> group by datediff(day, cast('01/01/1970' as date), a.dt_previsao), lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by 1 desc`;
   let body = montaBody(instrucao_sql, pFiltros);
@@ -232,6 +237,8 @@ export function bodyAtividadeColaboradorPorTipoAtividade(pFiltros) {
   return body;
 }
 
+//---------------------- atividade Projeto ----------------------//
+
 /* Atividade filtro por interessado */
 
 export function bodyAtividadeInteressado(pFiltros) {
@@ -290,7 +297,19 @@ export function bodyFinalizadoColaborador(pValor) {
 }
 //----------------------ocorrencia ----------------------//
 export function bodyOcorrencia(pFiltros) {
+  let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.qt_colaborador_ativo "qtde", sum(DATEDIFF(MINUTE, o.dt_ocorrencia, current_timestamp)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by a.cd_atividade, a.ds_atividade, a.qt_colaborador_ativo order by a.ds_atividade`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+/*
+export function bodyOcorrencia(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a <filtros> order by a.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+*/
+export function bodyOcorrenciaPorAtividade(pFiltros) {
+  let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by a.cd_atividade, a.ds_atividade order by a.ds_atividade`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
@@ -321,13 +340,6 @@ export function bodyOcorrenciaPorMesAno(pFiltros) {
 }
 export function bodyOcorrenciaPorSemana(pFiltros) {
   let instrucao_sql = `select extract(week from o.dt_ocorrencia) "id_sequencial", 'SEMANA '||extract(week from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(week from o.dt_ocorrencia), 'SEMANA '||extract(week from o.dt_ocorrencia) order by 1 desc`;
-  let body = montaBody(instrucao_sql, pFiltros);
-  return body;
-}
-export function bodyTeste(pFiltros) {
-  //let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
-  //let instrucao_sql = `select tv.cd_tipo_atividade \"id_tipo_atividade\", tv.ds_tipo_atividade \"tipo_atividade\", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by tv.cd_tipo_atividade, tv.ds_tipo_atividade, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by tv.ds_tipo_atividade`;
-  let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' and a.cd_tipo_atividade = 2 group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
@@ -463,6 +475,15 @@ export function bodyNotificacaoPorAtividade(pFiltros) {
 }
 export function bodyNotificacaoPorTipoAtividade(pFiltros) {
   let instrucao_sql = `select ta.cd_tipo_atividade, ta.ds_tipo_atividade, count(n.cd_notificacao) as qt_notificacao from notificacao n inner join atividade a on a.cd_empresa = n.cd_empresa_atividade and n.cd_atividade = a.cd_atividade inner join tipo_atividade ta on ta.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by ta.cd_tipo_atividade, ta.ds_tipo_atividade order by 2`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- teste ----------------------//
+export function bodyTeste(pFiltros) {
+  //let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
+  //let instrucao_sql = `select tv.cd_tipo_atividade \"id_tipo_atividade\", tv.ds_tipo_atividade \"tipo_atividade\", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' group by tv.cd_tipo_atividade, tv.ds_tipo_atividade, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by tv.ds_tipo_atividade`;
+  let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) \"mesano\", count(a.cd_atividade) \"qtde_atividade\" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel where a.ds_status in ('P', 'F') and a.dt_previsao between '01/01/2021' and '12/31/2021' and a.cd_tipo_atividade = 2 group by cb.cd_colaborador, cb.ds_colaborador, lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

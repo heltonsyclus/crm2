@@ -104,6 +104,18 @@ export function senhaLogin() {
               },
               dashboard_bi_x: [
                 {
+                  grupo: "Projetos",
+                  icone: "code",
+                  layout_dashboard: [
+                    {
+                      icone: "code",
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    }
+                  ]
+                },
+                {
                   grupo: "Desenvolvimento",
                   icone: "code",
                   layout_dashboard: [
@@ -229,7 +241,7 @@ export function senhaLogin() {
                 permissao_colaborador: ["*"]
               },
               dashboard_projeto: {
-                id_layout_dashboard: 9,
+                id_layout_dashboard: 8,
                 dashboard_complementar: []
               },
               dashboard_bi_x: [
@@ -285,7 +297,13 @@ export function senhaLogin() {
                   layout_dashboard: [
                     {
                       icone: "description",
-                      id_layout_dashboard: 8,
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
                       dashboard: "Gestão",
                       dashboard_complementar: []
                     }
@@ -454,7 +472,13 @@ export function senhaLogin() {
                   layout_dashboard: [
                     {
                       icone: "description",
-                      id_layout_dashboard: 8,
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
                       dashboard: "Gestão",
                       dashboard_complementar: []
                     }
@@ -505,6 +529,17 @@ export function senhaLogin() {
                 permissao_colaborador: ["*"]
               },
               dashboard_bi_x: [
+                {
+                  grupo: "Projetos",
+                  layout_dashboard: [
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    }
+                  ]
+                },
                 {
                   grupo: "Desenvolvimento",
                   icone: "code",
@@ -662,7 +697,13 @@ export function senhaLogin() {
                   layout_dashboard: [
                     {
                       icone: "description",
-                      id_layout_dashboard: 8,
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
                       dashboard: "Gestão",
                       dashboard_complementar: []
                     }
@@ -863,6 +904,23 @@ export function senhaLogin() {
                       dashboard_complementar: []
                     }
                   ]
+                },
+                {
+                  grupo: "Projetos",
+                  layout_dashboard: [
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
+                      dashboard: "Gestão",
+                      dashboard_complementar: []
+                    }
+                  ]
                 }
               ]
             }
@@ -897,10 +955,27 @@ export function senhaLogin() {
                 permissao_colaborador: ["*"]
               },
               dashboard_projeto: {
-                id_layout_dashboard: 9,
+                id_layout_dashboard: 8,
                 dashboard_complementar: []
               },
               dashboard_bi_x: [
+                {
+                  grupo: "Projetos",
+                  layout_dashboard: [
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
+                      dashboard: "Gestão",
+                      dashboard_complementar: []
+                    }
+                  ]
+                },
                 {
                   grupo: "Área Técnica",
                   layout_dashboard: [
@@ -920,17 +995,6 @@ export function senhaLogin() {
                       id_layout_dashboard: 18,
                       dashboard: "Formação",
                       icone: "construction",
-                      dashboard_complementar: []
-                    }
-                  ]
-                },
-                {
-                  grupo: "Projetos",
-                  layout_dashboard: [
-                    {
-                      icone: "description",
-                      id_layout_dashboard: 8,
-                      dashboard: "Gestão",
                       dashboard_complementar: []
                     }
                   ]
@@ -1011,6 +1075,23 @@ export function senhaLogin() {
                       icone: "work",
                       id_layout_dashboard: 15,
                       dashboard: "Padrão",
+                      dashboard_complementar: []
+                    }
+                  ]
+                },
+                {
+                  grupo: "Projetos",
+                  layout_dashboard: [
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 9,
+                      dashboard: "Corrente",
+                      dashboard_complementar: []
+                    },
+                    {
+                      icone: "description",
+                      id_layout_dashboard: 22,
+                      dashboard: "Gestão",
                       dashboard_complementar: []
                     }
                   ]

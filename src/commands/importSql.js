@@ -7,6 +7,7 @@ import {
   bodyAtividadePorWorkflow,
   bodyAtividadePorSituacao,
   bodyAtividadePorGut,
+  bodyAtividadePorProjeto,
   bodyAtividadePorData,
   bodyAtividadePorMesAno,
   bodyAtividadePorSemana,
@@ -31,6 +32,8 @@ import {
   bodyAtividadeTagPorMesAno,
   bodyAtividadeTagPorSemana,
   bodyAtividadeTagPorResponsavelTag,
+  bodyOcorrencia,
+  bodyOcorrenciaPorAtividade,
   bodyOcorrenciaPorTipoAtividade,
   bodyOcorrenciaPorWorkflow,
   bodyOcorrenciaPorColaborador,
@@ -70,10 +73,18 @@ export default {
   },
   methods: {
     getUrlItem(pIndexGrupo, pIndexItem) {
+      let url = this.link_item;
+      url = url.replace("<id_grupo>", this.ObjConteudo.grupos[pIndexGrupo].id);
+      url = url.replace(
+        "<id_item>",
+        this.ObjConteudo.grupos[pIndexGrupo].itens[pIndexItem].id
+      );
+      /*
       let url = this.link_item.replace(
         "<id_item>",
         this.ObjConteudo.grupos[pIndexGrupo].itens[pIndexItem].id
       );
+      */
       return url;
     },
     abrirItem(pIndexGrupo, pIndexItem) {
@@ -121,6 +132,7 @@ export default {
         pNomeBody === "bodyAtividadePorTipoAtividadeStatus" ||
         pNomeBody === "bodyAtividadePorWorkflowStatus" ||
         pNomeBody === "bodyAtividadeTagPorResponsavelTag" ||
+        pNomeBody === "bodyOcorrencia" ||
         pNomeBody === "bodyTeste"
       ) {
         filtros = this.conteudo_card.filtro_sql_item.replace(
@@ -155,6 +167,9 @@ export default {
       }
       if (pNomeBody === "bodyAtividadePorGut") {
         return bodyAtividadePorGut(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorProjeto") {
+        return bodyAtividadePorProjeto(filtros);
       }
       if (pNomeBody === "bodyAtividadePorData") {
         return bodyAtividadePorData(filtros);
@@ -232,6 +247,12 @@ export default {
         return bodyAtividadeColaboradorPorTipoAtividade(filtros);
       }
 
+      if (pNomeBody === "bodyOcorrencia") {
+        return bodyOcorrencia(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaPorAtividade") {
+        return bodyOcorrenciaPorAtividade(filtros);
+      }
       if (pNomeBody === "bodyOcorrenciaPorTipoAtividade") {
         return bodyOcorrenciaPorTipoAtividade(filtros);
       }

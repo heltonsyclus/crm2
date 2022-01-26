@@ -4,7 +4,7 @@ export const rotasMenu = {
       if (rotas.dashboard_area_trabalho) {
         this.linksList.push({
           icon: "dashboard",
-          rota: "/dashboard",
+          rota: "/",
           text: "Dashboard"
         });
       }
