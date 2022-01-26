@@ -326,6 +326,7 @@ export function bodyOcorrenciaPorWorkflow(pFiltros) {
 export function bodyOcorrenciaPorColaborador(pFiltros) {
   let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join colaborador cb on cb.cd_colaborador = o.cd_colaborador <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
   let body = montaBody(instrucao_sql, pFiltros);
+  console.log("x -> " + pFiltros);
   return body;
 }
 export function bodyOcorrenciaPorData(pFiltros) {
