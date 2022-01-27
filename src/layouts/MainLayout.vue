@@ -7,11 +7,11 @@
           alt="Syclus"
           class="rotate-225"
           style="cursor:pointer"
-          @click="onClickDashboard()"
+          @click="$router.push({ name: 'dashboard' })"
         />
         <q-toolbar-title class="text-weight-bold ">
           <span
-            @click="onClickDashboard()"
+            @click="$router.push({ name: 'dashboard' })"
             style="cursor:pointer"
             class="logo-texto"
             >Syclus 2.0</span
@@ -92,6 +92,7 @@
         class="bg-grey-2"
         :width="240"
       >
+        {{ this.liberacaoRotas(this.rotas) }}
         <q-scroll-area class="fit">
           <q-list padding>
             <q-item
@@ -174,20 +175,15 @@ export default defineComponent({
         this.menuMobile = false;
         this.leftDrawerOpen = false;
       }
-    },
-    onClickDashboard() {
-      if (this.rotas === "colaborador") {
-        this.$router.push({ name: "dashboard" });
-      }
-      if (this.rotas === "cliente") {
-        this.$router.push({ name: "cliente-producao" });
-      }
     }
   },
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
-    this.rotas = login.rotas;
-    this.liberacaoRotas(this.rotas);
+    for (let i = 0; i < login.aplicativos.length; i++) {
+      let rotas = login.aplicativos[i].recursos;
+      this.liberacaoRotas(rotas);
+      break;
+    }
     this.nomeUsuario = login.usuario;
     this.imgColaborador = login.img;
     window.addEventListener("resize", this.handleResize);

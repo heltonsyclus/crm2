@@ -2114,6 +2114,11 @@
   "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001255.tgz"
   "version" "1.0.30001255"
 
+"cardtestes@^1.0.0":
+  "integrity" "sha512-SlTeKBVcGUjDJqzIxbNFI011R8/PTtoQ2RUrnkgvQpeF52LRn2+5ySDINW4GcCidtEy9uTePXhirjvWx/mSmPQ=="
+  "resolved" "https://registry.npmjs.org/cardtestes/-/cardtestes-1.0.0.tgz"
+  "version" "1.0.0"
+
 "chalk@^2.0.0":
   "integrity" "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
   "resolved" "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
@@ -6598,7 +6603,7 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
-"vue@^3.0.0", "vue@^3.0.2", "vue@> 3.0.0", "vue@3.2.4":
+"vue@^3.0.0", "vue@^3.0.2", "vue@^3.0.5", "vue@> 3.0.0", "vue@3.2.4":
   "integrity" "sha512-rNCFmoewm8IwmTK0nj3ysKq53iRpNEFKoBJ4inar6tIh7Oj7juubS39RI8UI+VE7x+Cs2z6PBsadtZu7z2qppg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.4.tgz"
   "version" "3.2.4"

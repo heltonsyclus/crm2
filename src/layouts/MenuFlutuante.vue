@@ -60,20 +60,6 @@ export default defineComponent({
       esconderMenu: ref(true)
     };
   },
-  /*watch: {
-    $route: {
-      handler: function(newValue, oldValue) {
-        if (newValue.fullPath === "/") {
-          this.esconderMenu = false;
-        }
-        if (newValue.fullPath != "/") {
-          this.esconderMenu = true;
-        }
-      },
-      deep: true,
-      immediate: true
-    }
-  },*/
   created() {
     let login = JSON.parse(localStorage.getItem("login"));
     for (let i = 0; i < login.aplicativos.length; i++) {

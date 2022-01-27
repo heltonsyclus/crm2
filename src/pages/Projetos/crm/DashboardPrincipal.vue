@@ -28,6 +28,7 @@
           :idPrincipal="this.idColaboradorAtivo"
           :msg="this.msgCard"
         />
+
         <CardGrupoApi
           v-if="ObjCard.tipo_card === 'CardGrupoApi'"
           class="q-ma-xs"
