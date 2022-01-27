@@ -4,7 +4,6 @@
       @OnClick="OnClickBarraLayout"
       :ConteudoBtn="this.ObjDashboard['grupos']"
     />
-
     <div class="row">
       <div
         v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual].cards"

@@ -2006,11 +2006,6 @@
     "escalade" "^3.1.1"
     "node-releases" "^1.1.75"
 
-"btnsyclus@^1.0.0":
-  "integrity" "sha512-jbaDug+y5e9Ofp8f3GScazm3Let8MUKvG36NLWqZbvUwtvrpHxD6I+huui8ZUy1lDW0/by5QIJiG81jKMEyLdg=="
-  "resolved" "https://registry.npmjs.org/btnsyclus/-/btnsyclus-1.0.0.tgz"
-  "version" "1.0.0"
-
 "buffer-alloc-unsafe@^1.1.0":
   "integrity" "sha512-TEM2iMIEQdJ2yjPJoSIsldnleVaAk1oW3DBVUykyOLsEsFmEc9kn+SFFPz+gl54KQNxlDnAwCXosOS9Okx2xAg=="
   "resolved" "https://registry.npmjs.org/buffer-alloc-unsafe/-/buffer-alloc-unsafe-1.1.0.tgz"
@@ -6603,7 +6598,7 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
-"vue@^3.0.0", "vue@^3.0.2", "vue@^3.0.5", "vue@> 3.0.0", "vue@3.2.4":
+"vue@^3.0.0", "vue@^3.0.2", "vue@> 3.0.0", "vue@3.2.4":
   "integrity" "sha512-rNCFmoewm8IwmTK0nj3ysKq53iRpNEFKoBJ4inar6tIh7Oj7juubS39RI8UI+VE7x+Cs2z6PBsadtZu7z2qppg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.4.tgz"
   "version" "3.2.4"
