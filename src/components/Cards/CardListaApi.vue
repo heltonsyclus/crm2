@@ -24,8 +24,8 @@
     <q-card-section class="corpo" :style="{ height: `${this.alturaCorpo}` }">
       <div>
         <div
-          v-for="(grupos, indexGrupo) in this.ObjConteudo.grupos"
-          :key="indexGrupo"
+          v-for="(itens, indexitem) in this.ObjConteudo.itens"
+          :key="indexitem"
         >
           <div class="spin" style="width:230px" v-show="carregarKnob">
             <q-knob
@@ -40,18 +40,19 @@
             v-show="carregarText"
             style="margin:0 auto;text-align:center;padding-top:80px;color:gray"
           >
-            <span style="font-weight:500">Não possui grupos...</span>
+            <span style="font-weight:500">Não possui itens...</span>
           </div>
           <div
             class="flex justify-between items-center q-my-none hover"
             style="padding:10px"
           >
-            <p class="text-dark">
-              {{ grupos.grupo }}
-            </p>
+            <a @click.prevent="abrirItem(indexitem)" class="cursor">
+              {{ itens.descricao }}
+            </a>
+
             <p class="text-blue-grey-7" style="font-size:12.5px">
               <q-icon name="av_timer" />
-              {{ this.formataCaptionGrupo(grupos.qtde, grupos.duracao) }}
+              {{ this.formataCaptionItem(itens.qtde, itens.duracao) }}
             </p>
           </div>
           <div style="width:95%;margin-left:15px">
@@ -64,9 +65,9 @@
 </template>
 
 <script>
-import importSql from "app/src/commands/importSql";
+import controllerCardApi from "app/src/commands/controllerCardApi";
 export default {
-  mixins: [importSql],
+  mixins: [controllerCardApi],
   props: [
     "idPrincipal",
     "conteudo_card",
@@ -75,7 +76,7 @@ export default {
     "cor_header",
     "formato_card",
     "msg",
-    "link_item",
+    "link",
     "width",
     "height"
   ]
@@ -95,6 +96,11 @@ export default {
 }
 .hover:hover {
   background-color: rgb(205, 205, 205);
+}
+.cursor {
+  cursor: pointer;
+  color: rgb(19, 100, 175);
+  font-weight: 500;
 }
 .corpo {
   padding: 0;

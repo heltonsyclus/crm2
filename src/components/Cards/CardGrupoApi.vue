@@ -98,9 +98,9 @@
 </template>
 
 <script>
-import importSql from "app/src/commands/importSql";
+import controllerCardGrupoApi from "app/src/commands/controllerCardGrupoApi";
 export default {
-  mixins: [importSql],
+  mixins: [controllerCardGrupoApi],
   props: [
     "idPrincipal",
     "conteudo_card",
@@ -110,10 +110,10 @@ export default {
     "formato_card",
     "msg",
     "link_item",
+    "link_grupo",
     "width",
     "height"
-  ],
-  methods: {}
+  ]
 };
 </script>
 
