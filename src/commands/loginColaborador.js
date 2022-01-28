@@ -1219,6 +1219,18 @@ export function senhaLogin() {
               },
               dashboard_bi_x: [
                 {
+                  grupo: "Contas",
+                  icone: "work",
+                  layout_dashboard: [
+                    {
+                      icone: "work",
+                      id_layout_dashboard: 16,
+                      dashboard: "Padrão",
+                      dashboard_complementar: []
+                    }
+                  ]
+                },
+                {
                   grupo: "Desenvolvimento",
                   icone: "code",
                   layout_dashboard: [
