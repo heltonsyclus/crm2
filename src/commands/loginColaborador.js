@@ -13,7 +13,7 @@ export function senhaLogin() {
             base_url_api: "https://api.syclus.com.br",
             recursos: {
               dashboard_area_trabalho: {
-                id_layout_dashboard: 1,
+                id_layout_dashboard: 9999,
                 dashboard_complementar: []
               },
 
@@ -47,15 +47,15 @@ export function senhaLogin() {
                   layout_dashboard: [
                     {
                       icone: "code",
-                      id_layout_dashboard: 12,
-
-                      dashboard: "Padrão",
+                      id_layout_dashboard: 9999,
+                      dashboard: "Teste",
                       dashboard_complementar: []
                     },
                     {
                       icone: "code",
-                      id_layout_dashboard: 9999,
-                      dashboard: "Teste",
+                      id_layout_dashboard: 12,
+
+                      dashboard: "Padrão",
                       dashboard_complementar: []
                     }
                   ]

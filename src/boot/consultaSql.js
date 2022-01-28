@@ -149,6 +149,17 @@ export function bodyAtividadePorWorkflowStatus(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
+export function bodyAtividadePorResponsavelStatus(pFiltros) {
+  let instrucao_sql = `select cb.ds_colaborador "colaborador", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel <filtros> group by cb.ds_colaborador, a.ds_status order by 1,2`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+export function bodyAtividadePorTipoAtividadeColaboradorPrevisao(pFiltros) {
+  let instrucao_sql = `select tv.ds_tipo_atividade "tipo_atividade", cb.ds_colaborador "colaborador", cast(a.dt_previsao as date) "previsao", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel <filtros> group by tv.ds_tipo_atividade, cb.ds_colaborador, cast(a.dt_previsao as date) order by 1,2,3`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
 //----------------------atividade tag ----------------------//
 export function bodyAtividadeTag(pFiltros) {

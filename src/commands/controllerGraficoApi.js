@@ -201,7 +201,34 @@ export default {
           }
         ]
       },
-      seriesGraficoPolar: []
+      seriesGraficoPolar: [],
+      objGraficoLinhaDoTempo: {
+        chart: {
+          height: 450,
+          type: "rangeBar"
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            barHeight: "80%"
+          }
+        },
+        xaxis: {
+          type: "datetime"
+        },
+        stroke: {
+          width: 1
+        },
+        fill: {
+          type: "solid",
+          opacity: 0.6
+        },
+        legend: {
+          position: "top",
+          horizontalAlign: "left"
+        }
+      },
+      seriesGraficoLinhaDoTempo: []
     };
   },
   methods: {
@@ -211,21 +238,23 @@ export default {
       this.limparConteudoComparativoLinha();
       this.limparConteudoComparativoIndicativo();
       this.limparConteudoComparativo();
+      this.limparConteudoLinhaTempo();
       if (this.idPrincipal !== null) {
         let body = "";
         body = this.getBody(this.conteudo_card.body);
         if (body === undefined) {
           body = this.getBody(this.conteudo_card.body_grupo);
         }
-
         if (body == null) {
           return false;
         }
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
+          console.log(res.data);
           let arrRetorno = res.data;
           this.carregarKnob = false;
           //index colunas
+
           let index_coluna_serie = 0;
           if (this.coluna_serie > 0) {
             index_coluna_serie = this.coluna_serie - 1;
@@ -260,8 +289,8 @@ export default {
               );
             }
           } else if (
-            this.sub_tipo == "grafico_pizza" ||
-            this.sub_tipo == "grafico_donut"
+            this.sub_tipo === "grafico_pizza" ||
+            this.sub_tipo === "grafico_donut"
           ) {
             this.limparConteudoPizza();
             for (let i = 0; i < arrRetorno.length; i++) {
@@ -270,7 +299,7 @@ export default {
                 Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
-          } else if (this.sub_tipo == "grafico_comparativo_barra") {
+          } else if (this.sub_tipo === "grafico_comparativo_barra") {
             //Criando estrutura de cateorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoComparativo.xaxis.categories.indexOf(
@@ -322,7 +351,7 @@ export default {
                 }
               }
             }
-          } else if (this.sub_tipo == "grafico_comparativo_linha") {
+          } else if (this.sub_tipo === "grafico_comparativo_linha") {
             //Criando estrutura de categorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoComparacaoLinha.xaxis.categories.indexOf(
@@ -381,7 +410,7 @@ export default {
                 }
               }
             }
-          } else if (this.sub_tipo == "grafico_comparativo_indicativo") {
+          } else if (this.sub_tipo === "grafico_comparativo_indicativo") {
             //Criando estrutura de categorias e series
             for (let i = 0; i < arrRetorno.length; i++) {
               let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
@@ -448,6 +477,84 @@ export default {
                 Object.values(arrRetorno[i])[index_coluna_totalizadora]
               );
             }
+          } else if (this.sub_tipo === "grafico_linha_tempo") {
+            //Criando estrutura de categorias e series
+
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxSerie = this.seriesGraficoLinhaDoTempo.find(
+                item => item.name === Object.values(arrRetorno[i])[1]
+              );
+              let x1 = arrRetorno[i].colaborador;
+              let x2 = arrRetorno[i].tipo_atividade;
+
+              if (idxSerie === undefined) {
+                this.seriesGraficoLinhaDoTempo.push({
+                  name: x1,
+                  data: [
+                    {
+                      x: "qui",
+                      y: [
+                        new Date("2019-03-10").getTime(),
+                        new Date("2019-03-17").getTime()
+                      ]
+                    },
+                    {
+                      x: "sex",
+                      y: [
+                        new Date("2019-03-05").getTime(),
+                        new Date("2019-03-09").getTime()
+                      ],
+                      goals: [
+                        {
+                          name: "Break",
+                          value: new Date("2019-03-07").getTime(),
+                          strokeColor: "#CD2F2A"
+                        }
+                      ]
+                    }
+                  ]
+                });
+              }
+            }
+
+            this.objGraficoComparacaoIndicativo.xaxis.categories.sort();
+            //criando valores zerados
+            for (
+              let i = 0;
+              i < this.seriesGraficoComparativoIndicativo.length;
+              i++
+            ) {
+              for (
+                let j = 0;
+                j < this.objGraficoComparacaoIndicativo.xaxis.categories.length;
+                j++
+              ) {
+                this.seriesGraficoComparativoIndicativo[i].data.push(0);
+              }
+            }
+            //setando os valores
+            for (let i = 0; i < arrRetorno.length; i++) {
+              let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
+                Object.values(arrRetorno[i])[2]
+              );
+              for (
+                let j = 0;
+                j < this.seriesGraficoComparativoIndicativo.length;
+                j++
+              ) {
+                if (
+                  this.seriesGraficoComparativoIndicativo[j].name ===
+                  Object.values(arrRetorno[i])[1]
+                ) {
+                  this.seriesGraficoComparativoIndicativo[j].data.splice(
+                    idxCategoria,
+                    1,
+                    Object.values(arrRetorno[i])[3]
+                  );
+                  break;
+                }
+              }
+            }
           }
           setTimeout(() => {
             arrRetorno == "";
@@ -492,6 +599,9 @@ export default {
           data: []
         }
       ];
+    },
+    limparConteudoLinhaTempo() {
+      this.seriesGraficoLinhaDoTempo = [];
     },
     limparConteudoComparativo() {
       this.objGraficoComparativo.xaxis.categories = [];

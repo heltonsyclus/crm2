@@ -14,6 +14,8 @@ import {
   bodyAtividadePorSemana,
   bodyAtividadePorTipoAtividadeStatus,
   bodyAtividadePorWorkflowStatus,
+  bodyAtividadePorResponsavelStatus,
+  bodyAtividadePorTipoAtividadeColaboradorPrevisao,
   bodyAtividadeCliente,
   bodyAtividadeClientePorTipoAtividade,
   bodyAtividadeClientePorResponsavel,
@@ -167,6 +169,15 @@ export default {
       if (pNomeBody === "bodyAtividadePorTipoAtividadeStatus") {
         return bodyAtividadePorTipoAtividadeStatus(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorResponsavelStatus") {
+        return bodyAtividadePorResponsavelStatus(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
+        return bodyAtividadePorWorkflowStatus(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorTipoAtividadeColaboradorPrevisao") {
+        return bodyAtividadePorTipoAtividadeColaboradorPrevisao(filtros);
+      }
 
       if (pNomeBody === "bodyAtividadeCliente") {
         return bodyAtividadeCliente(filtros);
@@ -185,9 +196,6 @@ export default {
       }
       if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
         return bodyAtividadeClientePorWorkflow(filtros);
-      }
-      if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
-        return bodyAtividadePorWorkflowStatus(filtros);
       }
 
       if (pNomeBody === "bodyAtividadeTag") {

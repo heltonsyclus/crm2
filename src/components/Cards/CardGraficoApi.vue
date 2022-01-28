@@ -120,6 +120,14 @@
           :series="seriesGraficoComparativoIndicativo"
         ></apexchart>
       </div>
+      <div v-if="sub_tipo === 'grafico_linha_tempo'" style="margin-top:5px">
+        <apexchart
+          type="rangeBar"
+          :height="alturaGrafico"
+          :options="objGraficoLinhaDoTempo"
+          :series="seriesGraficoLinhaDoTempo"
+        ></apexchart>
+      </div>
     </q-card-section>
   </q-card>
 </template>
