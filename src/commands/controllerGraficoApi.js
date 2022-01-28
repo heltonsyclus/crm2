@@ -212,7 +212,12 @@ export default {
       this.limparConteudoComparativoIndicativo();
       this.limparConteudoComparativo();
       if (this.idPrincipal !== null) {
-        let body = this.getBody(this.conteudo_card.body_grupo);
+        let body = "";
+        body = this.getBody(this.conteudo_card.body);
+        if (body === undefined) {
+          body = this.getBody(this.conteudo_card.body_grupo);
+        }
+
         if (body == null) {
           return false;
         }
