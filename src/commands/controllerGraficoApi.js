@@ -215,6 +215,14 @@ export default {
         },
         xaxis: {
           type: "datetime"
+          //tickInterval: 200
+          //tickPixelInterval: 3600 * 1000
+          //maxZoom: 20 * 1000
+          /*labels: {
+            formatter: function(value, timestamp) {
+              return new Date(timestamp).getHours(); // The formatter function overrides format property
+            }
+          }*/
         },
         stroke: {
           width: 1
@@ -250,6 +258,7 @@ export default {
         }
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
+          console.log(">>" + JSON.stringify(res.data));
           let arrRetorno = res.data;
           this.carregarKnob = false;
           //index colunas
@@ -478,95 +487,31 @@ export default {
             }
           } else if (this.sub_tipo === "grafico_linha_tempo") {
             //Criando estrutura de categorias e series
-
             for (let i = 0; i < arrRetorno.length; i++) {
-              let idxSerie = this.seriesGraficoLinhaDoTempo.find(
-                item => item.name === Object.values(arrRetorno[i])[1]
-              );
               let xSerie = Object.values(arrRetorno[i])[0];
               let xCategoria = Object.values(arrRetorno[i])[1];
-              let xDataInicial = Object.values(arrRetorno[i])[2].substr(0, 10);
-              let xDataFinal = Object.values(arrRetorno[i])[3];
+              let xInicio = Object.values(arrRetorno[i])[2];
+              let xFim = Object.values(arrRetorno[i])[3];
 
-              if (idxSerie === undefined) {
-                this.seriesGraficoLinhaDoTempo.push(
-                  {
-                    name: xCategoria,
-                    data: [
-                      {
-                        x: xSerie,
-                        y: [
-                          new Date("2022-01-25").getTime(),
-                          new Date(
-                            Object.values(arrRetorno[i])[2].substr(0, 10)
-                          ).getTime()
-                        ]
-                      },
-                      {
-                        x: xSerie,
-                        y: [
-                          new Date("2022-01-25").getTime(),
-                          new Date("2022-01-27").getTime()
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    name: xCategoria,
-                    data: [
-                      {
-                        x: xSerie,
-                        y: [
-                          new Date("2022-01-26").getTime(),
-                          new Date(
-                            Object.values(arrRetorno[i])[2].substr(0, 10)
-                          ).getTime()
-                        ]
-                      }
-                    ]
-                  }
-                );
-              }
-            }
-
-            this.objGraficoComparacaoIndicativo.xaxis.categories.sort();
-            //criando valores zerados
-            for (
-              let i = 0;
-              i < this.seriesGraficoComparativoIndicativo.length;
-              i++
-            ) {
-              for (
-                let j = 0;
-                j < this.objGraficoComparacaoIndicativo.xaxis.categories.length;
-                j++
-              ) {
-                this.seriesGraficoComparativoIndicativo[i].data.push(0);
-              }
-            }
-            //setando os valores
-            for (let i = 0; i < arrRetorno.length; i++) {
-              let idxCategoria = this.objGraficoComparacaoIndicativo.xaxis.categories.indexOf(
-                Object.values(arrRetorno[i])[2]
+              let idxSerie = this.seriesGraficoLinhaDoTempo.findIndex(
+                item => item.name === xSerie
               );
-              for (
-                let j = 0;
-                j < this.seriesGraficoComparativoIndicativo.length;
-                j++
-              ) {
-                if (
-                  this.seriesGraficoComparativoIndicativo[j].name ===
-                  Object.values(arrRetorno[i])[1]
-                ) {
-                  this.seriesGraficoComparativoIndicativo[j].data.splice(
-                    idxCategoria,
-                    1,
-                    Object.values(arrRetorno[i])[3]
-                  );
-                  break;
-                }
+              if (idxSerie < 0) {
+                idxSerie =
+                  this.seriesGraficoLinhaDoTempo.push({
+                    name: xSerie,
+                    data: []
+                  }) - 1;
               }
+
+              this.seriesGraficoLinhaDoTempo[idxSerie].data.push({
+                x: xCategoria,
+                y: [new Date(xInicio).getTime(), new Date(xFim).getTime()]
+              });
             }
+            console.log(
+              ">>>>>> " + JSON.stringify(this.seriesGraficoLinhaDoTempo)
+            );
           }
           setTimeout(() => {
             arrRetorno == "";

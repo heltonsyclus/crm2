@@ -43,6 +43,7 @@ import {
   bodyOcorrenciaPorData,
   bodyOcorrenciaPorMesAno,
   bodyOcorrenciaPorSemana,
+  bodyOcorrenciaColaboradorTipoAtividadePeriodo,
   bodyProjeto,
   bodyProjetoPorTipoProjeto,
   bodyProjetoPorResponsavel,
@@ -262,6 +263,9 @@ export default {
       }
       if (pNomeBody === "bodyOcorrenciaPorSemana") {
         return bodyOcorrenciaPorSemana(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaColaboradorTipoAtividadePeriodo") {
+        return bodyOcorrenciaColaboradorTipoAtividadePeriodo(filtros);
       }
 
       if (pNomeBody === "bodyProjeto") {

@@ -330,7 +330,7 @@ export function bodyFinalizadoColaborador(pValor) {
   };
   return body;
 }
-//----------------------ocorrencia ----------------------//
+//---------------------- ocorrencia ----------------------//
 export function bodyOcorrencia(pFiltros) {
   let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.qt_colaborador_ativo "qtde", sum(DATEDIFF(MINUTE, o.dt_ocorrencia, current_timestamp)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by a.cd_atividade, a.ds_atividade, a.qt_colaborador_ativo order by a.ds_atividade`;
   let body = montaBody(instrucao_sql, pFiltros);
@@ -375,6 +375,14 @@ export function bodyOcorrenciaPorMesAno(pFiltros) {
 }
 export function bodyOcorrenciaPorSemana(pFiltros) {
   let instrucao_sql = `select extract(week from o.dt_ocorrencia) "id_sequencial", 'SEMANA '||extract(week from o.dt_ocorrencia) "data_ocorrencia", count(o.cd_ocorrencia) "qtde", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), O.DURACAO)) "duracao" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade <filtros> group by extract(week from o.dt_ocorrencia), 'SEMANA '||extract(week from o.dt_ocorrencia) order by 1 desc`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+
+//---------------------- ocorrencia lista ----------------------//
+export function bodyOcorrenciaColaboradorTipoAtividadePeriodo(pFiltros) {
+  let instrucao_sql = `select cb.ds_colaborador \"colaborador\", tv.ds_tipo_atividade \"tipo_atividade\", dateadd(minute, - datediff(minute, cast('01/01/1970 00:00:00' as timestamp), o.duracao) - 180, o.dt_ocorrencia) \"data inicial\", dateadd(-3 hour to o.dt_ocorrencia) \"data_final\" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join colaborador cb on cb.cd_colaborador = o.cd_colaborador <filtros> order by 1, 2, 3`;
+  //let instrucao_sql = `select cb.ds_colaborador \"colaborador\", tv.ds_tipo_atividade \"tipo_atividade\", dateadd(minute, - datediff(minute, cast('01/01/1970 00:00:00' as timestamp), o.duracao), o.dt_ocorrencia) \"data inicial\", o.dt_ocorrencia \"data_final\" from atividade_ocorrencia o inner join atividade a on a.cd_empresa = o.cd_empresa and a.cd_atividade = o.cd_atividade inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join colaborador cb on cb.cd_colaborador = o.cd_colaborador <filtros> order by 1, 2, 3`;
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }

@@ -501,6 +501,27 @@ function layoutDashBoard1() {
             }
           }
         ]
+      },
+      {
+        grupo: "Tempo",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            card: "Linha do Tempo",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_linha_tempo",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "95vw",
+            height: "80",
+            conteudo_card: {
+              body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
+              filtro_sql:
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and o.cd_colaborador = <id_principal>"
+            }
+          }
+        ]
       }
     ]
   };
@@ -768,7 +789,6 @@ function layoutDashBoard3() {
     dashboard: "Colaborador",
     grupos: [
       {
-        id_grupo: 1,
         grupo: "Atividades",
         icone: "assignment_turned_in",
         cards: [
@@ -935,7 +955,6 @@ function layoutDashBoard3() {
         cards_opcionais: []
       },
       {
-        id_grupo: 2,
         grupo: "Ocorrências",
         icone: "assignment_turned_in",
         cards: [
@@ -1045,7 +1064,6 @@ function layoutDashBoard3() {
         ]
       },
       {
-        id_grupo: 2,
         grupo: "Projetos",
         icone: "assignment_turned_in",
         cards: [
@@ -1068,7 +1086,6 @@ function layoutDashBoard3() {
         cards_opcionais: []
       },
       {
-        id_grupo: 4,
         grupo: "Gráficos",
         icone: "assignment_turned_in",
         cards: [
@@ -1105,12 +1122,10 @@ function layoutDashBoard3() {
         cards_opcionais: []
       },
       {
-        id_grupo: 5,
-        grupo: "Tempo",
+        grupo: "Estatísticas",
         icone: "assignment_turned_in",
         cards: [
           {
-            id_card: 1,
             card: "Workflow",
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
@@ -1123,7 +1138,6 @@ function layoutDashBoard3() {
             }
           },
           {
-            id_card: 2,
             card: "últimas atividades(30 dias)",
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
@@ -6635,7 +6649,7 @@ function layoutDashBoard9999() {
         icone: "assignment_turned_in",
         cards: [
           {
-            card: "Planejamento",
+            card: "Linha do Tempo",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_linha_tempo",
@@ -6644,9 +6658,9 @@ function layoutDashBoard9999() {
             width: "95vw",
             height: "80",
             conteudo_card: {
-              body: "bodyAtividadePorTipoAtividadeColaboradorPrevisao",
+              body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
               filtro_sql:
-                "where a.ds_status in ('P', 'F') and cast(dt_previsao as date) = current_date and a.cd_responsavel = 47"
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and o.cd_colaborador in (47)"
             }
           }
         ]
