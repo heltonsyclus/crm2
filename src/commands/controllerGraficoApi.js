@@ -277,7 +277,7 @@ export default {
           }
           //estrutura
           if (this.sub_tipo === "grafico_barra") {
-            this.limparConteudoBarra();
+            //this.limparConteudoBarra();
             for (let i = 0; i < arrRetorno.length; i++) {
               this.objGraficoBarra.xaxis.categories.push(
                 Object.values(arrRetorno[i])[1]
@@ -509,9 +509,7 @@ export default {
                 y: [new Date(xInicio).getTime(), new Date(xFim).getTime()]
               });
             }
-            console.log(
-              ">>>>>> " + JSON.stringify(this.seriesGraficoLinhaDoTempo)
-            );
+            //console.log(">>>>>> " + JSON.stringify(this.seriesGraficoLinhaDoTempo));
           }
           setTimeout(() => {
             arrRetorno == "";

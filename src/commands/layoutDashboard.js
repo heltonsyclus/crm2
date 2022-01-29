@@ -513,7 +513,7 @@ function layoutDashBoard1() {
             sub_tipo: "grafico_linha_tempo",
             coluna_serie: 2,
             coluna_categoria: 1,
-            width: "95vw",
+            width: "94vw",
             height: "80",
             conteudo_card: {
               body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
