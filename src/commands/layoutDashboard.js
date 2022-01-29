@@ -3715,9 +3715,7 @@ function layoutDashBoard13() {
             }
           },
           {
-            id_card: 1,
             card: "Workflow",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
@@ -3733,9 +3731,7 @@ function layoutDashBoard13() {
             }
           },
           {
-            id_card: 1,
             card: "Responsável",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
@@ -3751,9 +3747,7 @@ function layoutDashBoard13() {
             }
           },
           {
-            id_card: 1,
             card: "Tag",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
@@ -3769,9 +3763,7 @@ function layoutDashBoard13() {
             }
           },
           {
-            id_card: 1,
             card: "Cliente",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
@@ -3785,6 +3777,22 @@ function layoutDashBoard13() {
               filtro_sql_item:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and a.dt_previsao <= current_date and ac.cd_cliente = <id_grupo>"
             }
+          },
+          {
+            card: "Prioridade",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            height: "40",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorPrioridade",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and a.dt_previsao <= current_date",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and a.dt_previsao <= current_date and a.cd_prioridade = <id_grupo>"
+            }
           }
         ],
         cards_opcionais: []
@@ -3794,9 +3802,7 @@ function layoutDashBoard13() {
         icone: "assignment_turned_in",
         cards: [
           {
-            id_card: 1,
             card: "Colaborador (hoje)",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "31vw",

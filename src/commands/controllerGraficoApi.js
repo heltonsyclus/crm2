@@ -250,7 +250,6 @@ export default {
         }
         this.carregarKnob = true;
         this.$api.post("consultasql", body).then(res => {
-          console.log(res.data);
           let arrRetorno = res.data;
           this.carregarKnob = false;
           //index colunas
@@ -484,36 +483,49 @@ export default {
               let idxSerie = this.seriesGraficoLinhaDoTempo.find(
                 item => item.name === Object.values(arrRetorno[i])[1]
               );
-              let x1 = arrRetorno[i].colaborador;
-              let x2 = arrRetorno[i].tipo_atividade;
+              let xSerie = Object.values(arrRetorno[i])[0];
+              let xCategoria = Object.values(arrRetorno[i])[1];
+              let xDataInicial = Object.values(arrRetorno[i])[2].substr(0, 10);
+              let xDataFinal = Object.values(arrRetorno[i])[3];
 
               if (idxSerie === undefined) {
-                this.seriesGraficoLinhaDoTempo.push({
-                  name: x1,
-                  data: [
-                    {
-                      x: "qui",
-                      y: [
-                        new Date("2019-03-10").getTime(),
-                        new Date("2019-03-17").getTime()
-                      ]
-                    },
-                    {
-                      x: "sex",
-                      y: [
-                        new Date("2019-03-05").getTime(),
-                        new Date("2019-03-09").getTime()
-                      ],
-                      goals: [
-                        {
-                          name: "Break",
-                          value: new Date("2019-03-07").getTime(),
-                          strokeColor: "#CD2F2A"
-                        }
-                      ]
-                    }
-                  ]
-                });
+                this.seriesGraficoLinhaDoTempo.push(
+                  {
+                    name: xCategoria,
+                    data: [
+                      {
+                        x: xSerie,
+                        y: [
+                          new Date("2022-01-25").getTime(),
+                          new Date(
+                            Object.values(arrRetorno[i])[2].substr(0, 10)
+                          ).getTime()
+                        ]
+                      },
+                      {
+                        x: xSerie,
+                        y: [
+                          new Date("2022-01-25").getTime(),
+                          new Date("2022-01-27").getTime()
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    name: xCategoria,
+                    data: [
+                      {
+                        x: xSerie,
+                        y: [
+                          new Date("2022-01-26").getTime(),
+                          new Date(
+                            Object.values(arrRetorno[i])[2].substr(0, 10)
+                          ).getTime()
+                        ]
+                      }
+                    ]
+                  }
+                );
               }
             }
 
