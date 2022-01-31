@@ -197,6 +197,8 @@
 import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
+import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
+import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import {
   bodyProcuraIdProjeto,
   bodyDadosProjeto
@@ -206,7 +208,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi },
+  components: { BarraLayout, CardGrupoApi, CardGraficoApi, CardListaApi },
   name: "Projeto",
   data() {
     return {
@@ -234,6 +236,7 @@ export default defineComponent({
       this.AtualizarCardsGrupoAtual();
     },
     AtualizarCardsGrupoAtual() {
+      this.handleResize();
       this.msgCard = "atualizar_conteudo";
       setTimeout(() => {
         this.msgCard = "";
@@ -251,9 +254,9 @@ export default defineComponent({
         });
       } else {
         this.ProjetoAtivo = false;
+        this.idProjetoAtivo = null;
         let body = bodyProcuraIdProjeto(this.nomeFantasia.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
-          console.log(res.data);
           let arrRetorno = res.data;
           if (arrRetorno.length <= 0) {
             this.$q.notify({
@@ -279,11 +282,11 @@ export default defineComponent({
       if (this.dadosProjeto.id_projeto === null) {
         return false;
       }
+      this.idProjetoAtivo = this.dadosProjeto.id_projeto;
       let body = bodyDadosProjeto(this.dadosProjeto.id_projeto);
       this.$api.post("consultasql", body).then(res => {
-        console.log(res.data);
+        this.AtualizarCardsGrupoAtual();
         let arrRetorno = res.data;
-        this.idProjetoAtivo = arrRetorno[0].id_projeto;
         this.objProjeto = arrRetorno;
         let dataprojeto = this.objProjeto[0].data_previsao.substr(0, 10);
         this.datafiltro = dataprojeto
@@ -301,14 +304,37 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      if (window.innerWidth <= 926) {
+      if (window.innerWidth <= 1006) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
           i++
         ) {
-          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "100%";
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 80}px`;
+        }
+      }
+      if (window.innerWidth <= 797) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 20}px`;
+        }
+      }
+      if (window.innerWidth >= 1006) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"];
         }
       }
     }

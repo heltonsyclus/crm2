@@ -266,7 +266,6 @@ export default defineComponent({
             alert("Sem permissão!");
             return false;
           }
-
           this.dadosColaborador = arrRetorno;
           if (this.dadosColaborador.length <= 1) {
             this.dadosColaborador = this.dadosColaborador[0];
