@@ -247,7 +247,7 @@ export default {
       this.limparConteudo();
       this.limparConteudoComparativoBarra();
       if (this.idPrincipal !== null) {
-        //  console.log("x0>" + new Date());
+        console.log("x0>" + new Date());
         let body = "";
         body = this.getBody(this.conteudo_card.body);
         if (body === undefined) {
@@ -273,7 +273,7 @@ export default {
             this.index_coluna_totalizadora = this.coluna_totalizadora - 1;
           }
 
-          //console.log("x1>" + new Date());
+          console.log("x1>" + new Date());
 
           //estrutura
           switch (this.sub_tipo) {
@@ -305,7 +305,7 @@ export default {
               this.montarConteudoGraficoPolar(arrRetorno);
               break;
           }
-          //console.log("x3>" + new Date());
+          console.log("x3>" + new Date());
 
           //final
           setTimeout(() => {
@@ -318,7 +318,7 @@ export default {
             this.carregarText = false;
           }
 
-          //console.log("x4>" + new Date());
+          console.log("x4>" + new Date());
         });
       }
     },
