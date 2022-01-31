@@ -278,6 +278,16 @@ export function bodyAtividadeColaboradorPorTipoAtividade(pFiltros) {
 }
 
 //---------------------- atividade Projeto ----------------------//
+export function bodyAtividadeProjeto(pFiltros) {
+  let instrucao_sql = `select a.cd_atividade "id_atividade", a.ds_atividade "atividade", a.dt_previsao "data_previsao" from atividade a inner join atividade_vinculo av on av.cd_empresa = a.cd_empresa and av.cd_atividade = a.cd_atividade inner join projeto pj on pj.cd_projeto = av.cd_projeto <filtros> order by a.dt_previsao`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadeProjetoPorResponsavel(pFiltros) {
+  let instrucao_sql = `select cb.cd_colaborador "id_colaborador", cb.ds_colaborador "colaborador", count(a.cd_atividade) "qtde_atividade", sum(DATEDIFF(MINUTE, CAST('01/01/1970 00:00:00' AS TIMESTAMP), a.duracao)) "duracao" from atividade a inner join atividade_vinculo av on av.cd_empresa = a.cd_empresa and av.cd_atividade = a.cd_atividade inner join projeto pj on pj.cd_projeto = av.cd_projeto inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel <filtros> group by cb.cd_colaborador, cb.ds_colaborador order by cb.ds_colaborador`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 
 /* Atividade filtro por interessado */
 
@@ -405,7 +415,7 @@ export function bodyProcuraIdProjeto(pValor) {
 export function bodyDadosProjeto(pIdProjeto) {
   const body = {
     tipo_retorno: "",
-    instrucao_sql: `select p.cd_projeto \"id_projeto\", p.ds_projeto \"projeto\", p.dt_previsao \"data_previsao\", c.ds_razao_social \"razao_social\", c.ds_fantasia \"nome_fantasia\", c.ds_cpf_cnpj \"cpf_cnpj\", ce.ds_endereco_completo \"endereco\", ce.ds_bairro \"bairro\", ce.ds_cidade \"cidade\", ce.ds_uf \"uf\", ce.ds_cep \"cep\", ct.ds_telefone \"telefone\", cm.ds_email \"email\" from projeto p left join cliente c on c.cd_cliente = p.cd_cliente left join proc_cliente_endereco(c.cd_cliente, 'R') ce on (1 = 1) left join proc_cliente_telefone(c.cd_cliente, '') ct on (1 = 1) left join proc_cliente_email(c.cd_cliente, '') cm on (1 = 1) where p.cd_projeto = ${pIdProjeto}`
+    instrucao_sql: `select p.cd_projeto \"id_projeto\", p.ds_projeto \"projeto\", p.dt_previsao \"data_previsao\", cb.ds_colaborador \"responsavel\", cl.ds_razao_social \"razao_social\", cl.ds_fantasia \"nome_fantasia\", cl.ds_cpf_cnpj \"cpf_cnpj\", ce.ds_endereco_completo \"endereco\", ce.ds_bairro \"bairro\", ce.ds_cidade \"cidade\", ce.ds_uf \"uf\", ce.ds_cep \"cep\", ct.ds_telefone \"telefone\", cm.ds_email \"email\" from projeto p inner join colaborador cb on cb.cd_colaborador = p.cd_responsavel left join cliente cl on cl.cd_cliente = p.cd_cliente left join proc_cliente_endereco(cl.cd_cliente, 'R') ce on (1 = 1) left join proc_cliente_telefone(cl.cd_cliente, '') ct on (1 = 1) left join proc_cliente_email(cl.cd_cliente, '') cm on (1 = 1) where p.cd_projeto = ${pIdProjeto}`
   };
   return body;
 }

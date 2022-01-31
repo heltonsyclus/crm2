@@ -183,7 +183,7 @@
             :tipo_card="ObjCard.tipo_card"
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
-            :link_item="ObjCard.link_item"
+            :link="ObjCard.link"
             :idPrincipal="this.idProjetoAtivo"
             :msg="this.msgCard"
           />
@@ -253,6 +253,7 @@ export default defineComponent({
         this.ProjetoAtivo = false;
         let body = bodyProcuraIdProjeto(this.nomeFantasia.toUpperCase());
         this.$api.post("consultasql", body).then(res => {
+          console.log(res.data);
           let arrRetorno = res.data;
           if (arrRetorno.length <= 0) {
             this.$q.notify({
@@ -280,6 +281,7 @@ export default defineComponent({
       }
       let body = bodyDadosProjeto(this.dadosProjeto.id_projeto);
       this.$api.post("consultasql", body).then(res => {
+        console.log(res.data);
         let arrRetorno = res.data;
         this.idProjetoAtivo = arrRetorno[0].id_projeto;
         this.objProjeto = arrRetorno;

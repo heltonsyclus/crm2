@@ -270,7 +270,7 @@
             :tipo_card="ObjCard.tipo_card"
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
-            :link_item="ObjCard.link_item"
+            :link="ObjCard.link"
             :idPrincipal="this.idClienteAtivo"
             :msg="this.msgCard"
           />

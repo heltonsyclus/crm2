@@ -229,7 +229,7 @@ export function senhaLogin() {
             recursos: {
               dashboard_area_trabalho: {
                 id_layout_dashboard: 1,
-                dashboard_complementar: []
+                dashboard_complementar: [9999]
               },
               dashboard_cliente: {
                 id_layout_dashboard: 2,
@@ -586,7 +586,7 @@ export function senhaLogin() {
             recursos: {
               dashboard_area_trabalho: {
                 id_layout_dashboard: 1,
-                dashboard_complementar: []
+                dashboard_complementar: [9999]
               },
               dashboard_cliente: {
                 id_layout_dashboard: 2,

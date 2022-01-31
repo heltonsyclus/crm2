@@ -22,6 +22,8 @@ import {
   bodyAtividadeClientePorTag,
   bodyAtividadeClientePorSituacao,
   bodyAtividadeClientePorWorkflow,
+  bodyAtividadeClientePorData,
+  bodyAtividadeClientePorMesAno,
   bodyAtividadeColaborador,
   bodyAtividadeColaboradorPorTipoAtividade,
   bodyAtividadeTag,
@@ -35,6 +37,8 @@ import {
   bodyAtividadeTagPorMesAno,
   bodyAtividadeTagPorSemana,
   bodyAtividadeTagPorResponsavelTag,
+  bodyAtividadeProjeto,
+  bodyAtividadeProjetoPorResponsavel,
   bodyOcorrencia,
   bodyOcorrenciaPorAtividade,
   bodyOcorrenciaPorTipoAtividade,
@@ -171,6 +175,12 @@ export default {
       if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
         return bodyAtividadeClientePorWorkflow(filtros);
       }
+      if (pNomeBody === "bodyAtividadeClientePorData") {
+        return bodyAtividadeClientePorData(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorMesAno") {
+        return bodyAtividadeClientePorMesAno(filtros);
+      }
 
       if (pNomeBody === "bodyAtividadeTag") {
         return bodyAtividadeTag(filtros);
@@ -211,6 +221,13 @@ export default {
       }
       if (pNomeBody === "bodyAtividadeColaboradorPorTipoAtividade") {
         return bodyAtividadeColaboradorPorTipoAtividade(filtros);
+      }
+
+      if (pNomeBody === "bodyAtividadeProjeto") {
+        return bodyAtividadeProjeto(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeProjetoPorResponsavel") {
+        return bodyAtividadeProjetoPorResponsavel(filtros);
       }
 
       if (pNomeBody === "bodyOcorrencia") {

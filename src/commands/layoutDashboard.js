@@ -502,27 +502,6 @@ function layoutDashBoard1() {
           }
         ]
       }
-      /* {
-        grupo: "Tempo",
-        icone: "assignment_turned_in",
-        cards: [
-          {
-            card: "Linha do Tempo",
-            btn_comando: "btn-atualizar",
-            tipo_card: "CardGraficoApi",
-            sub_tipo: "grafico_linha_tempo",
-            coluna_serie: 2,
-            coluna_categoria: 1,
-            width: "94vw",
-            height: "80",
-            conteudo_card: {
-              body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
-              filtro_sql:
-                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and o.cd_colaborador = <id_principal>"
-            }
-          }
-        ]
-      }*/
     ]
   };
 
@@ -2084,7 +2063,7 @@ function layoutDashBoard6() {
             tipo_card: "CardListaApi",
             width: "23vw",
             height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyAtividadeCliente",
               filtro_sql:
@@ -2183,12 +2162,12 @@ function layoutDashBoard8() {
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorProjeto",
+              body_grupo: "bodyAtividadeProjetoPorResponsavel",
               filtro_sql_grupo:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 4 and pj.cd_projeto = <id_principal>",
               body_item: "bodyAtividadeProjeto",
               filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade = 4 and pj.cd_projeto = <id_principal> and a.cd_situacao = <id_grupo>"
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 4 and pj.cd_projeto = <id_principal> and a.cd_responsavel = <id_grupo>"
             }
           },
           {
@@ -2199,12 +2178,12 @@ function layoutDashBoard8() {
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorProjeto",
+              body_grupo: "bodyAtividadeProjetoPorResponsavel",
               filtro_sql_grupo:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and and pj.cd_projeto = <id_principal>",
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and pj.cd_projeto = <id_principal>",
               body_item: "bodyAtividadeProjeto",
               filtro_sql_item:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 4 and pj.cd_projeto = <id_principal> and a.cd_responsavel = <id_grupo>"
             }
           }
         ]
@@ -6643,7 +6622,7 @@ function layoutDashBoard9999() {
     dashboard: "layout dashboard 9999",
     grupos: [
       {
-        grupo: "Meu Dia",
+        grupo: "Teste",
         icone: "assignment_turned_in",
         cards: [
           {
@@ -6653,12 +6632,12 @@ function layoutDashBoard9999() {
             sub_tipo: "grafico_linha_tempo",
             coluna_serie: 2,
             coluna_categoria: 1,
-            width: "95vw",
+            width: "94vw",
             height: "80",
             conteudo_card: {
               body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
               filtro_sql:
-                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and o.cd_colaborador in (47)"
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and o.cd_colaborador = <id_principal>"
             }
           }
         ]
