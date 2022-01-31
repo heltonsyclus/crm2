@@ -81,6 +81,6 @@ export default {
         }
       );
     }
-    console.log(this.aplicativos);
+    // console.log(this.aplicativos);
   }
 };

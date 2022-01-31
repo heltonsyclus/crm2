@@ -76,21 +76,7 @@ export default {
       input: ref(false)
     };
   },
-  methods: {
-    /*  adicionarGrupo() {
-      this.grupos.push({
-        model: this.model
-      });
-      this.input = false;
-      this.model = "";
-    },
-    remover(index) {
-      this.grupos.splice(index, 1);
-    },
-    salvarGrupos() {
-      console.log(this.grupos);
-    }*/
-  }
+  methods: {}
 };
 </script>
 

@@ -65,37 +65,10 @@ import {
   bodyClienteTag,
   bodyTeste
 } from "src/boot/consultaSql.js";
-import { callWithAsyncErrorHandling } from "vue";
 export default {
   methods: {
-    /*
-    getBody(pNomeBody, pIdGrupo, pFiltros) {
-      let filtros = "";
-      if (!pFiltros) {
-        filtros = pFiltros;
-      }
-      if (pIdGrupo > 0) {
-        filtros = filtros.replace("<id_grupo>", pIdGrupo);
-      }
-      console.log(">" + pNomeBody + " > " + pIdGrupo + " > " + pFiltros);
-      return this.montaBody(pNomeBody, filtros);
-    },
-    */
     getBody(pNomeBody, pIdGrupo) {
       let filtros = "";
-      /*
-                if (pIdGrupo > 0) {
-              filtros = this.conteudo_card.filtro_sql_item.replace(
-                "<id_principal>",
-                this.idPrincipal
-              );
-            } else {
-              filtros = this.conteudo_card.filtro_sql_grupo.replace(
-                "<id_principal>",
-                this.idPrincipal
-              );
-            }
-            filtros = filtros.replace("<id_grupo>", pIdGrupo);*/
 
       if (this.conteudo_card.filtro_sql !== undefined) {
         filtros = this.conteudo_card.filtro_sql;

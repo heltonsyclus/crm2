@@ -531,18 +531,15 @@ function layoutDashBoard1() {
 //cliente - padrao
 function layoutDashBoard2() {
   const json = {
-    id_dashboard: 1,
+    id_dashboard: 2,
     dashboard: "Cliente",
     grupos: [
       {
-        id_grupo: 1,
         grupo: "Area Tecnica",
         icone: "assignment_turned_in",
         cards: [
           {
-            id_card: 1,
             card: "Tipo Atividade",
-            ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "32%",
@@ -785,7 +782,7 @@ function layoutDashBoard2() {
 //colaborador - padrao
 function layoutDashBoard3() {
   const json = {
-    id_dashboard: 1,
+    id_dashboard: 3,
     dashboard: "Colaborador",
     grupos: [
       {
@@ -2079,17 +2076,14 @@ function layoutDashBoard6() {
           {
             card: "Pendentes",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
+            tipo_card: "CardListaApi",
             width: "47%",
             heigth: "600px",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeClientePorSituacao",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>",
-              body_item: "bodyAtividadeCliente",
-              filtro_sql_item:
-                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+              body: "bodyAtividadeClientePorSituacao",
+              filtro_sql:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>"
             }
           },
           {
@@ -2100,12 +2094,12 @@ function layoutDashBoard6() {
             heigth: "600px",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body_grupo: "bodyAtividadeClientePorSituacao",
+              body_grupo: "bodyAtividadeClientePorData",
               filtro_sql_grupo:
                 "where a.ds_status = 'F' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>",
               body_item: "bodyAtividadeCliente",
               filtro_sql_item:
-                "where a.ds_status = 'F' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal> and a.cd_situacao = <id_grupo>"
+                "where a.ds_status = 'F' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal> and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
           }
         ],

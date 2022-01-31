@@ -98,7 +98,7 @@ export default defineComponent({
         days: 1,
         time: "08:11",
         allDay: true,
-        bgcolor: "orange",
+        bgcolor: "orange"
       },
       {
         id: 2,
@@ -189,7 +189,7 @@ export default defineComponent({
       nomeMes.value = meses[data.month - 1];
     }
     function onChange(data) {
-      console.log("onChange", data);
+      // console.log("onChange", data);
     }
     function onClickDate(data) {
       cardEvento.value = true;
@@ -228,10 +228,10 @@ export default defineComponent({
     }
 
     function retornoArrayAgenda(arrayAgenda) {
-      console.log(arrayAgenda);
+      //console.log(arrayAgenda);
       arrayAgenda.start = getCurrentDay(arrayDia.value);
       arrayAgenda.end = getCurrentDay(arrayDia.value);
-      console.log(arrayAgenda.start);
+      // console.log(arrayAgenda.start);
       //events.value.push(objArrayAgenda.value);
     }
 

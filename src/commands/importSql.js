@@ -354,7 +354,7 @@ export default {
       this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
         for (let i = 0; i < arrRetorno.length; i++) {
-          console.log(arrRetorno[i]);
+          // console.log(arrRetorno[i]);
           let item = {
             id: Object.values(arrRetorno[i])[0],
             item: Object.values(arrRetorno[i])[1]

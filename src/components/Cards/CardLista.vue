@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     getUrlItem(index) {
-      console.log(this.ObjConteudo.grupos[0].itens[index].id);
       let url = this.link_item.replace(
         "<id_item>",
         this.ObjConteudo.grupos[0].itens[index].id
