@@ -501,8 +501,8 @@ function layoutDashBoard1() {
             }
           }
         ]
-      },
-      {
+      }
+      /* {
         grupo: "Tempo",
         icone: "assignment_turned_in",
         cards: [
@@ -522,7 +522,7 @@ function layoutDashBoard1() {
             }
           }
         ]
-      }
+      }*/
     ]
   };
 
@@ -542,7 +542,8 @@ function layoutDashBoard2() {
             card: "Tipo Atividade",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -559,7 +560,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorResponsavel",
@@ -576,7 +578,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorSituacao",
@@ -593,7 +596,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorWorkflow",
@@ -610,7 +614,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyAtividadeClientePorTag",
@@ -632,7 +637,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorTipoAtividade",
@@ -649,7 +655,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorResponsavel",
@@ -666,7 +673,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorSituacao",
@@ -683,7 +691,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorWorkflow",
@@ -700,7 +709,8 @@ function layoutDashBoard2() {
             ordem: 2,
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
-            width: "32%",
+            width: "23vw",
+            height: "40",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyAtividadeClientePorTag",
@@ -795,7 +805,6 @@ function layoutDashBoard3() {
             tipo_card: "CardGrupoApi",
             width: "23vw",
             height: "40",
-            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
@@ -812,7 +821,6 @@ function layoutDashBoard3() {
             tipo_card: "CardGrupoApi",
             width: "23vw",
             height: "40",
-            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTipoAtividade",
@@ -828,7 +836,6 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "23vw",
-            height: "40",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -848,7 +855,6 @@ function layoutDashBoard3() {
             tipo_card: "CardGrupoApi",
             width: "23vw",
             height: "40",
-            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorCliente",
@@ -867,7 +873,6 @@ function layoutDashBoard3() {
             tipo_card: "CardGrupoApi",
             width: "23vw",
             height: "40",
-            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorTag",
@@ -885,7 +890,6 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "23vw",
-            height: "40",
             height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
@@ -1093,7 +1097,8 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_barra",
-            width: "35vw",
+            width: "70vw",
+            height: "40",
             conteudo_card: {
               body: "bodyOcorrenciaPorTipoAtividade",
               filtro_sql:
@@ -1105,14 +1110,12 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGraficoApi",
             sub_tipo: "grafico_pizza",
-            width: "35vw",
+            width: "70vw",
+            height: "40",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorTipoAtividade",
-              filtro_sql_grupo:
-                "where a.ds_status = 'P' and cast(a.dt_previsao as date) < current_date and a.cd_responsavel = <id_principal>",
-              body_item: "bodyAtividade",
-              filtro_sql_item:
-                "where a.ds_status = 'P' and cast(a.dt_previsao as date) < current_date and a.cd_responsavel = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+              body: "bodyAtividadePorTipoAtividade",
+              filtro_sql:
+                "where a.ds_status = 'P' and cast(a.dt_previsao as date) < current_date and a.cd_responsavel = <id_principal>"
             }
           }
         ],
@@ -1127,6 +1130,7 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "35vw",
+            height: "40",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyAtividadePorWorkflow",
@@ -1139,6 +1143,7 @@ function layoutDashBoard3() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "35vw",
+            height: "40",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyOcorrenciaPorTipoAtividade",
@@ -2077,11 +2082,11 @@ function layoutDashBoard6() {
             card: "Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body: "bodyAtividadeClientePorSituacao",
+              body: "bodyAtividadeCliente",
               filtro_sql:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and ac.cd_cliente = <id_principal>"
             }
@@ -2090,8 +2095,8 @@ function layoutDashBoard6() {
             card: "Finalizadas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorData",
@@ -2124,8 +2129,8 @@ function layoutDashBoard7() {
             card: "Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorSituacao",
@@ -2140,8 +2145,8 @@ function layoutDashBoard7() {
             card: "Finalizadas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadeClientePorSituacao",
@@ -2174,8 +2179,8 @@ function layoutDashBoard8() {
             card: "Pendentes",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorProjeto",
@@ -2190,8 +2195,8 @@ function layoutDashBoard8() {
             card: "Finalizadas",
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
-            width: "47%",
-            heigth: "600px",
+            width: "23vw",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorProjeto",
@@ -6631,7 +6636,6 @@ function layoutDashBoard23() {
 
   return json;
 }
-
 //bi - teste
 function layoutDashBoard9999() {
   const json = {

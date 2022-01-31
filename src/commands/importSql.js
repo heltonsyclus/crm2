@@ -20,6 +20,8 @@ import {
   bodyAtividadeClientePorTag,
   bodyAtividadeClientePorSituacao,
   bodyAtividadeClientePorWorkflow,
+  bodyAtividadeClientePorData,
+  bodyAtividadeClientePorMesAno,
   bodyAtividadeColaborador,
   bodyAtividadeColaboradorPorTipoAtividade,
   bodyAtividadeTag,
@@ -139,6 +141,9 @@ export default {
       if (pNomeBody === "bodyAtividadePorTipoAtividadeStatus") {
         return bodyAtividadePorTipoAtividadeStatus(filtros);
       }
+      if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
+        return bodyAtividadePorWorkflowStatus(filtros);
+      }
 
       if (pNomeBody === "bodyAtividadeCliente") {
         return bodyAtividadeCliente(filtros);
@@ -158,8 +163,11 @@ export default {
       if (pNomeBody === "bodyAtividadeClientePorWorkflow") {
         return bodyAtividadeClientePorWorkflow(filtros);
       }
-      if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
-        return bodyAtividadePorWorkflowStatus(filtros);
+      if (pNomeBody === "bodyAtividadeClientePorData") {
+        return bodyAtividadeClientePorData(filtros);
+      }
+      if (pNomeBody === "bodyAtividadeClientePorMesAno") {
+        return bodyAtividadeClientePorMesAno(filtros);
       }
 
       if (pNomeBody === "bodyAtividadeTag") {

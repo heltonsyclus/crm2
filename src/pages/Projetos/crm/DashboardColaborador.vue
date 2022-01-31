@@ -164,7 +164,7 @@
             :sub_tipo="ObjCard.sub_tipo"
             :conteudo_card="ObjCard.conteudo_card"
             :link_item="ObjCard.link_item"
-            :idPrincipal="this.idColaboradorAtivo"
+            :idPrincipal="this.idcolaboradorAtivo"
             :msg="this.msgCard"
           />
           <CardListaApi
@@ -218,8 +218,7 @@ export default defineComponent({
       dadosColaborador: [],
       idcolaboradorAtivo: null,
       telaWidth: "",
-      msgCard: "",
-      teste: "row"
+      msgCard: ""
     };
   },
   methods: {

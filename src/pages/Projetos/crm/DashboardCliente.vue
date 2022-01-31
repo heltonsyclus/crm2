@@ -211,47 +211,91 @@
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
       <div class="row">
-        <CardGrupoApi
-          class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px"
-          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-            this.IndexGrupoAtual
-          ].cards"
-          :key="index"
-          :id="ObjCard.id_card"
-          :card="ObjCard.card"
-          :ordem="ObjCard.ordem"
-          cor_header="bg-primary"
-          topo_fixo="topo_fixo"
-          :width="ObjCard.width"
-          :height="ObjCard.height"
-          :btn_comando="ObjCard.btn_comando"
-          :tipo_card="ObjCard.tipo_card"
-          :sub_tipo="ObjCard.sub_tipo"
-          :conteudo_card="ObjCard.conteudo_card"
-          :link_item="ObjCard.link_item"
-          :idPrincipal="this.idClienteAtivo"
-          :msg="this.msgCard"
-        />
+        <div
+          v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual]
+            .cards"
+          :key="ObjCard"
+          style="margin:5px;margin-bottom:5px;"
+        >
+          <CardGrupoApi
+            v-if="ObjCard.tipo_card === 'CardGrupoApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+          <CardGraficoApi
+            v-if="ObjCard.tipo_card === 'CardGraficoApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :coluna_categoria="ObjCard.coluna_categoria"
+            :coluna_serie="ObjCard.coluna_serie"
+            :coluna_totalizadora="ObjCard.coluna_totalizadora"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+          <CardListaApi
+            v-if="ObjCard.tipo_card === 'CardListaApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idClienteAtivo"
+            :msg="this.msgCard"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import BarraLayout from "src/layouts/BarraLayout.vue";
 import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
+import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
+import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import {
   bodyProcuraIdCliente,
   bodyDadosCliente
 } from "src/boot/consultaSql.js";
+import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import { defineComponent } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  components: { BarraLayout, CardGrupoApi },
+  components: { BarraLayout, CardGrupoApi, CardGraficoApi, CardListaApi },
   name: "Cliente",
   data() {
     return {
@@ -259,14 +303,15 @@ export default defineComponent({
       IndexGrupoAtual: 0,
       GrupoCards: [],
       GrupoCardsOpcionais: [],
+      idcolaboradorAtivo: null,
+      telaWidth: "",
+      msgCard: "",
       nomeFantasia: null,
       idClienteAtivo: null,
       clienteAtivo: false,
       objCliente: [],
       dadosCliente: null,
       exibeSelecaoCliente: false,
-      telaWidth: "",
-      msgCard: "",
       bairro: "",
       telefone: [],
       arrayTelefone: [],
@@ -278,12 +323,6 @@ export default defineComponent({
     parar() {
       this.msgCard = null;
     },
-    btnVmais() {
-      for (let i = 0; i < this.telefone.length; i++) {
-        this.arrayTelefone.unshift(this.telefone[i]);
-      }
-      this.btnVejaMais = !this.btnVejaMais;
-    },
     OnClickBarraLayout(IndexGrupo) {
       this.IndexGrupoAtual = IndexGrupo;
       this.AtualizarCardsGrupoAtual();
@@ -294,6 +333,12 @@ export default defineComponent({
       setTimeout(() => {
         this.msgCard = "";
       }, 1000);
+    },
+    btnVmais() {
+      for (let i = 0; i < this.telefone.length; i++) {
+        this.arrayTelefone.unshift(this.telefone[i]);
+      }
+      this.btnVejaMais = !this.btnVejaMais;
     },
     ProcurarCliente() {
       this.objCliente = "";
@@ -358,14 +403,37 @@ export default defineComponent({
     },
     handleResize() {
       this.telaWidth = window.innerWidth;
-      if (window.innerWidth <= 926) {
+      if (window.innerWidth <= 1006) {
         for (
           let i = 0;
           i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
           i++
         ) {
-          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"] =
-            "100%";
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 80}px`;
+        }
+      }
+      if (window.innerWidth <= 797) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = `${this.telaWidth - 20}px`;
+        }
+      }
+      if (window.innerWidth >= 1006) {
+        for (
+          let i = 0;
+          i < this.ObjDashboard.grupos[this.IndexGrupoAtual].cards.length;
+          i++
+        ) {
+          this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i][
+            "width"
+          ] = this.ObjDashboard.grupos[this.IndexGrupoAtual].cards[i]["width"];
         }
       }
     }
@@ -493,6 +561,9 @@ p {
     width: 32%;
     height: 87px;
     padding: 12px 5px 0px 5px;
+  }
+  .grupos {
+    width: 100vh;
   }
 }
 </style>

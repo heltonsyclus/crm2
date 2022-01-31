@@ -124,28 +124,70 @@
         :ConteudoBtn="this.ObjDashboard['grupos']"
       />
       <div class="row">
-        <CardGrupoApi
-          class="q-ma-xs"
-          style="margin:5px;margin-bottom:5px"
-          v-for="(ObjCard, index) in this.ObjDashboard.grupos[
-            this.IndexGrupoAtual
-          ].cards"
-          :key="index"
-          :id="ObjCard.id_card"
-          :card="ObjCard.card"
-          :ordem="ObjCard.ordem"
-          cor_header="bg-primary"
-          topo_fixo="topo_fixo"
-          :width="ObjCard.width"
-          :height="ObjCard.height"
-          :btn_comando="ObjCard.btn_comando"
-          :tipo_card="ObjCard.tipo_card"
-          :sub_tipo="ObjCard.sub_tipo"
-          :conteudo_card="ObjCard.conteudo_card"
-          :link_item="ObjCard.link_item"
-          :idPrincipal="this.idProjetoAtivo"
-          :msg="this.msgCard"
-        />
+        <div
+          v-for="ObjCard in this.ObjDashboard.grupos[this.IndexGrupoAtual]
+            .cards"
+          :key="ObjCard"
+          style="margin:5px;margin-bottom:5px;"
+        >
+          <CardGrupoApi
+            v-if="ObjCard.tipo_card === 'CardGrupoApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idProjetoAtivo"
+            :msg="this.msgCard"
+          />
+          <CardGraficoApi
+            v-if="ObjCard.tipo_card === 'CardGraficoApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :coluna_categoria="ObjCard.coluna_categoria"
+            :coluna_serie="ObjCard.coluna_serie"
+            :coluna_totalizadora="ObjCard.coluna_totalizadora"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idProjetoAtivo"
+            :msg="this.msgCard"
+          />
+          <CardListaApi
+            v-if="ObjCard.tipo_card === 'CardListaApi'"
+            class="q-ma-xs"
+            :id="ObjCard.id_card"
+            :card="ObjCard.card"
+            :ordem="ObjCard.ordem"
+            cor_header="bg-primary"
+            topo_fixo="topo_fixo"
+            :height="ObjCard.height"
+            :style="{ width: `${ObjCard.width}` }"
+            :btn_comando="ObjCard.btn_comando"
+            :tipo_card="ObjCard.tipo_card"
+            :sub_tipo="ObjCard.sub_tipo"
+            :conteudo_card="ObjCard.conteudo_card"
+            :link_item="ObjCard.link_item"
+            :idPrincipal="this.idProjetoAtivo"
+            :msg="this.msgCard"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -239,6 +281,7 @@ export default defineComponent({
       let body = bodyDadosProjeto(this.dadosProjeto.id_projeto);
       this.$api.post("consultasql", body).then(res => {
         let arrRetorno = res.data;
+        this.idProjetoAtivo = arrRetorno[0].id_projeto;
         this.objProjeto = arrRetorno;
         let dataprojeto = this.objProjeto[0].data_previsao.substr(0, 10);
         this.datafiltro = dataprojeto
