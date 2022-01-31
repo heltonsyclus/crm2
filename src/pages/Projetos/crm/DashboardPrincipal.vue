@@ -100,6 +100,7 @@ import CardGrupoApi from "src/components/Cards/CardGrupoApi.vue";
 import CardListaApi from "src/components/Cards/CardListaApi.vue";
 import CardGraficoApi from "src/components/Cards/CardGraficoApi.vue";
 import CardComparativoApi from "src/components/Cards/CardComparativoApi.vue";
+import dashboardColaborador from "src/commands/dashboardColaborador.js";
 import { GeLayoutDashBoard } from "src/commands/layoutDashboard.js";
 import { defineComponent } from "vue";
 import { ref } from "vue";
@@ -107,6 +108,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
+  mixins: [dashboardColaborador],
   components: {
     BarraLayout,
     CardGrupoApi,
