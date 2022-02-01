@@ -47,12 +47,6 @@ export function senhaLogin() {
                   layout_dashboard: [
                     {
                       icone: "code",
-                      id_layout_dashboard: 9999,
-                      dashboard: "Teste",
-                      dashboard_complementar: []
-                    },
-                    {
-                      icone: "code",
                       id_layout_dashboard: 12,
 
                       dashboard: "Padrão",
@@ -229,7 +223,7 @@ export function senhaLogin() {
             recursos: {
               dashboard_area_trabalho: {
                 id_layout_dashboard: 1,
-                dashboard_complementar: [9999]
+                dashboard_complementar: []
               },
               dashboard_cliente: {
                 id_layout_dashboard: 2,
@@ -586,7 +580,7 @@ export function senhaLogin() {
             recursos: {
               dashboard_area_trabalho: {
                 id_layout_dashboard: 1,
-                dashboard_complementar: [9999]
+                dashboard_complementar: []
               },
               dashboard_cliente: {
                 id_layout_dashboard: 2,
