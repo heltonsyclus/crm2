@@ -15,6 +15,8 @@ import {
   bodyAtividadePorTipoAtividadeStatus,
   bodyAtividadePorWorkflowStatus,
   bodyAtividadePorResponsavelStatus,
+  bodyAtividadePorDataStatus,
+  bodyAtividadePorMesAnoStatus,
   bodyAtividadePorTipoAtividadeColaboradorPrevisao,
   bodyAtividadeCliente,
   bodyAtividadeClientePorTipoAtividade,
@@ -152,6 +154,12 @@ export default {
       }
       if (pNomeBody === "bodyAtividadePorWorkflowStatus") {
         return bodyAtividadePorWorkflowStatus(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorDataStatus") {
+        return bodyAtividadePorDataStatus(filtros);
+      }
+      if (pNomeBody === "bodyAtividadePorMesAnoStatus") {
+        return bodyAtividadePorMesAnoStatus(filtros);
       }
       if (pNomeBody === "bodyAtividadePorTipoAtividadeColaboradorPrevisao") {
         return bodyAtividadePorTipoAtividadeColaboradorPrevisao(filtros);

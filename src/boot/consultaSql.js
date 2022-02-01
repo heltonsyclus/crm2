@@ -154,7 +154,16 @@ export function bodyAtividadePorResponsavelStatus(pFiltros) {
   let body = montaBody(instrucao_sql, pFiltros);
   return body;
 }
-
+export function bodyAtividadePorDataStatus(pFiltros) {
+  let instrucao_sql = `select lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by lpad(extract(day from a.dt_previsao), 2, '0')||'/'||lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao), a.ds_status order by 1`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
+export function bodyAtividadePorMesAnoStatus(pFiltros) {
+  let instrucao_sql = `select lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao) "data_previsao", a.ds_status "status", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade <filtros> group by lpad(extract(month from a.dt_previsao), 2, '0')||'/'||extract(year from a.dt_previsao), a.ds_status order by 1, 2`;
+  let body = montaBody(instrucao_sql, pFiltros);
+  return body;
+}
 export function bodyAtividadePorTipoAtividadeColaboradorPrevisao(pFiltros) {
   let instrucao_sql = `select tv.ds_tipo_atividade "tipo_atividade", cb.ds_colaborador "colaborador", cast(a.dt_previsao as date) "previsao", count(a.cd_atividade) "qtde_atividade" from atividade a inner join tipo_atividade tv on tv.cd_tipo_atividade = a.cd_tipo_atividade inner join colaborador cb on cb.cd_colaborador = a.cd_responsavel <filtros> group by tv.ds_tipo_atividade, cb.ds_colaborador, cast(a.dt_previsao as date) order by 1,2,3`;
   let body = montaBody(instrucao_sql, pFiltros);
