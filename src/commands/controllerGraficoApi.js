@@ -605,9 +605,9 @@ export default {
       }
       if (window.innerWidth <= 600) {
         this.alturaGrafico = 185;
-      }
-      if (window.innerWidth <= 300) {
-        this.alturaGrafico = 200;
+        let altura = parseInt(this.height);
+        this.alturaGrafico = altura * 5.1 + "px";
+        this.alturaCorpo = this.height - 6 + "vh";
       }
     }
   },

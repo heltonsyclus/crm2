@@ -83,20 +83,15 @@ export default {
       this.abrirUrl(this.getUrlItem(pIndexItem));
     },
     handleResize() {
-      console.log(window.innerWidth);
       if (window.innerWidth >= 500) {
         this.alturaCard = this.height + "vh";
         this.alturaCorpo = this.height - 7.8 + "vh";
-        console.log("maior" + this.alturaCard);
-        console.log(this.alturaCorpo);
       }
 
       if (window.innerWidth <= 410) {
         this.alturaCard = this.height + "vh";
         let altura = parseInt(this.height);
         this.alturaCorpo = altura + 20 + "vh";
-        console.log(this.alturaCard);
-        console.log("menor" + this.alturaCorpo);
       }
     }
   },

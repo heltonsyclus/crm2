@@ -109,7 +109,6 @@ export default {
       window.open(this.getUrlGrupo(pIndexGrupo), "_blank");
     },
     showItem(pIndex) {
-      //this.abrirGrupo(pIndex);
       this.atualizarConteudoItens(pIndex);
     },
     medidaCard() {

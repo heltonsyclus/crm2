@@ -118,7 +118,7 @@ function layoutDashBoard1() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "31vw",
-            height: "70",
+            height: "40",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyAtividade",
@@ -133,7 +133,7 @@ function layoutDashBoard1() {
             sub_tipo: "grafico_pizza",
             coluna_totalizadora: 4,
             width: "31vw",
-            height: "70",
+            height: "40",
             conteudo_card: {
               body: "bodyOcorrenciaPorTipoAtividade",
               filtro_sql:
@@ -179,7 +179,7 @@ function layoutDashBoard1() {
             sub_tipo: "grafico_barra",
             coluna_totalizadora: 4,
             width: "31vw",
-            height: "70",
+            height: "100",
             conteudo_card: {
               body: "bodyOcorrenciaPorData",
               filtro_sql:
@@ -192,7 +192,7 @@ function layoutDashBoard1() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "94.6vw",
-            height: "70",
+            height: "40",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyNotificacaoPorTipoAtividade",
@@ -217,7 +217,7 @@ function layoutDashBoard1() {
             sub_tipo: "grafico_barra_horizontal",
             coluna_totalizadora: 3,
             width: "31vw",
-            height: "80",
+            height: "70",
             conteudo_card: {
               body: "bodyOcorrenciaPorTipoAtividade",
               filtro_sql: "where o.ds_status = 'P' and o.cd_tipo_ocorrencia = 1"
@@ -514,7 +514,7 @@ function layoutDashBoard1() {
             coluna_serie: 2,
             coluna_categoria: 1,
             width: "94vw",
-            height: "50",
+            height: "80",
             conteudo_card: {
               body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
               filtro_sql:
