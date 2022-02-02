@@ -606,7 +606,7 @@ export default {
       if (window.innerWidth <= 600) {
         this.alturaGrafico = 185;
         let altura = parseInt(this.height);
-        this.alturaCard = this.height + "vh";
+        this.alturaCard = this.height * 6 + "px";
         this.alturaGrafico = altura * 5.1 + "px";
         this.alturaCorpo = this.height - 6 + "vh";
       }

@@ -106,7 +106,7 @@ function layoutDashBoard1() {
             coluna_serie: 2,
             coluna_categoria: 1,
             width: "31vw",
-            height: "70",
+            height: "50",
             conteudo_card: {
               body: "bodyAtividadePorTipoAtividadeStatus",
               filtro_sql:
