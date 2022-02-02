@@ -3998,23 +3998,22 @@ function layoutDashBoard13() {
         ]
       },
       {
-        grupo: "Acompanhamentos",
+        grupo: "Tempo",
         icone: "assignment_turned_in",
         cards: [
           {
-            card: "Atividades Sem Workflow (90 dias)",
+            card: "Linha do Tempo",
             btn_comando: "btn-atualizar",
-            tipo_card: "CardGrupoApi",
-            width: "31vw",
-            height: "40",
-            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_linha_tempo",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "95vw",
+            height: "80",
             conteudo_card: {
-              body_grupo: "bodyAtividadePorTipoAtividade",
-              filtro_sql_grupo:
-                "where a.ds_status <> 'C' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and a.cd_workflow is null and cast(a.dt_previsao as date) >= (current_date -90)",
-              body_item: "bodyAtividade",
-              filtro_sql_item:
-                "where a.ds_status <> 'C' and a.cd_tipo_atividade in (2,15,18,19,20,27,28) and a.cd_workflow is null and cast(a.dt_previsao as date) >= (current_date -90) and a.cd_tipo_atividade = <id_grupo>"
+              body: "bodyOcorrenciaColaboradorWorkflowPeriodo",
+              filtro_sql:
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
             }
           }
         ]
@@ -6459,6 +6458,27 @@ function layoutDashBoard22() {
         icone: "signal_cellular_alt",
         cards: [],
         cards_opcionais: []
+      },
+      {
+        grupo: "Tempo",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            card: "Linha do Tempo",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_linha_tempo",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "95vw",
+            height: "80",
+            conteudo_card: {
+              body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
+              filtro_sql:
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) = current_date and a.cd_tipo_atividade = 3"
+            }
+          }
+        ]
       },
       {
         grupo: "Legado",

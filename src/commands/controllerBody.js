@@ -50,6 +50,7 @@ import {
   bodyOcorrenciaPorMesAno,
   bodyOcorrenciaPorSemana,
   bodyOcorrenciaColaboradorTipoAtividadePeriodo,
+  bodyOcorrenciaColaboradorWorkflowPeriodo,
   bodyProjeto,
   bodyProjetoPorTipoProjeto,
   bodyProjetoPorResponsavel,
@@ -264,6 +265,9 @@ export default {
       }
       if (pNomeBody === "bodyOcorrenciaColaboradorTipoAtividadePeriodo") {
         return bodyOcorrenciaColaboradorTipoAtividadePeriodo(filtros);
+      }
+      if (pNomeBody === "bodyOcorrenciaColaboradorWorkflowPeriodo") {
+        return bodyOcorrenciaColaboradorWorkflowPeriodo(filtros);
       }
 
       if (pNomeBody === "bodyProjeto") {
