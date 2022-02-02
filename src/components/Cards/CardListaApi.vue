@@ -105,7 +105,7 @@ export default {
 .corpo {
   padding: 0;
   margin: 0px auto;
-  max-height: 200px;
+  height: 200px;
   overflow: auto;
 }
 .text-class {
@@ -135,9 +135,9 @@ export default {
     width: 350px;
   }
 }
-@media only screen and (max-width: 500px) {
+/*@media only screen and (max-width: 500px) {
   .my-card-syclus {
     min-height: 200px;
   }
-}
+}*/
 </style>

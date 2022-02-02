@@ -218,14 +218,6 @@ export default {
         },
         xaxis: {
           type: "datetime"
-          //tickInterval: 200
-          //tickPixelInterval: 3600 * 1000
-          //maxZoom: 20 * 1000
-          /*labels: {
-            formatter: function(value, timestamp) {
-              return new Date(timestamp).getHours(); // The formatter function overrides format property
-            }
-          }*/
         },
         stroke: {
           width: 1
@@ -244,11 +236,9 @@ export default {
   },
   methods: {
     atualizarConteudo() {
-      console.log("x00>" + new Date());
       this.limparConteudo();
       this.limparConteudoComparativoBarra();
       if (this.idPrincipal !== null) {
-        console.log("x10>" + new Date());
         let body = "";
         body = this.getBody(this.conteudo_card.body);
         if (body === undefined) {
@@ -273,8 +263,6 @@ export default {
           if (this.coluna_totalizadora > 0) {
             this.index_coluna_totalizadora = this.coluna_totalizadora - 1;
           }
-
-          console.log("x20>" + new Date());
 
           //estrutura
           switch (this.sub_tipo) {
@@ -306,7 +294,6 @@ export default {
               this.montarConteudoGraficoPolar(arrRetorno);
               break;
           }
-          console.log("x30>" + new Date());
 
           //final
           setTimeout(() => {
@@ -318,8 +305,6 @@ export default {
           } else {
             this.carregarText = false;
           }
-
-          console.log("x40>" + new Date());
         });
       }
     },
@@ -611,7 +596,6 @@ export default {
       this.objGraficoPolar.labels = [];
       this.seriesGraficoPolar = [];
     },
-    medidaCard() {},
     handleResize() {
       if (window.innerWidth >= 500) {
         this.alturaCard = this.height + "vh";
@@ -628,7 +612,6 @@ export default {
     }
   },
   created() {
-    this.medidaCard();
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
   }
