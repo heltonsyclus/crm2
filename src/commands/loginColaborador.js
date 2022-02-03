@@ -8,6 +8,11 @@ export function senhaLogin() {
         id_aplicativo_inicial: 0,
         aplicativos: [
           {
+            id_aplicativo: 0,
+            aplicativo: "Boas vindas",
+            base_url_api: "https://api.syclus.com.br"
+          },
+          {
             id_aplicativo: 1,
             aplicativo: "CRM",
             base_url_api: "https://api.syclus.com.br",

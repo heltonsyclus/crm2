@@ -1165,7 +1165,7 @@ function layoutDashBoard3() {
             sub_tipo: "grafico_linha_tempo",
             coluna_serie: 2,
             coluna_categoria: 1,
-            width: "64vw",
+            width: "72vw",
             height: "80",
             conteudo_card: {
               body: "bodyOcorrenciaColaboradorTipoAtividadePeriodo",
@@ -1175,6 +1175,27 @@ function layoutDashBoard3() {
           }
         ]
       }
+      /*{
+        grupo: "Tempo2",
+        icone: "assignment_turned_in",
+        cards: [
+          {
+            card: "Linha do Tempo",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_linha_tempo",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "72vw",
+            height: "80",
+            conteudo_card: {
+              body: "bodyOcorrenciaTipoAtividadeDataPeriodo",
+              filtro_sql:
+                "where o.ds_status = 'F' and extract(minute from o.duracao) > 0 and cast(o.dt_ocorrencia as date) >= (current_date - 2) and o.cd_colaborador = <id_principal>"
+            }
+          }
+        ]
+      }*/
     ]
   };
 
@@ -4088,10 +4109,10 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "62vw",
-            height: "40",
+            height: "80",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body: "bodyAtividadePorCliente",
+              body: "bodyAtividade",
               filtro_sql:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 85"
             }
@@ -4101,7 +4122,7 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
-            height: "40",
+            height: "80",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorData",
@@ -4123,10 +4144,10 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "62vw",
-            height: "40",
+            height: "80",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body: "bodyAtividadePorCliente",
+              body: "bodyAtividade",
               filtro_sql:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 111"
             }
@@ -4136,7 +4157,7 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
-            height: "40",
+            height: "80",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorData",
@@ -4158,10 +4179,10 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "62vw",
-            height: "40",
+            height: "80",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body: "bodyAtividadePorCliente",
+              body: "bodyAtividade",
               filtro_sql:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 86"
             }
@@ -4171,7 +4192,7 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
-            height: "40",
+            height: "80",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorData",
@@ -4193,10 +4214,10 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "62vw",
-            height: "40",
+            height: "80",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
-              body: "bodyAtividadePorCliente",
+              body: "bodyAtividade",
               filtro_sql:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 87"
             }
@@ -4206,7 +4227,7 @@ function layoutDashBoard14() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
-            height: "40",
+            height: "80",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyAtividadePorData",
@@ -4215,6 +4236,41 @@ function layoutDashBoard14() {
               body_item: "bodyAtividade",
               filtro_sql_item:
                 "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 87 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
+            }
+          }
+        ]
+      },
+      {
+        grupo: "Suspenso",
+        icone: "signal_cellular_alt",
+        cards: [
+          {
+            card: "Clientes",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardListaApi",
+            width: "62vw",
+            height: "80",
+            link: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body: "bodyAtividade",
+              filtro_sql:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 112"
+            }
+          },
+          {
+            card: "Previsão",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGrupoApi",
+            width: "31vw",
+            height: "80",
+            link_item: "https://crm.syclus.com.br/atividades/<id_item>",
+            conteudo_card: {
+              body_grupo: "bodyAtividadePorData",
+              filtro_sql_grupo:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 112",
+              body_item: "bodyAtividade",
+              filtro_sql_item:
+                "where a.ds_status = 'P' and a.cd_tipo_atividade = 6 and a.cd_situacao = 112 and cast(a.dt_previsao as date) = dateadd(day, <id_grupo>, cast('01/01/1970' as date))"
             }
           }
         ]

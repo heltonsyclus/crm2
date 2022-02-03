@@ -1,5 +1,6 @@
 import VueApexCharts from "vue3-apexcharts";
 import controllerCardApi from "app/src/commands/controllerCardApi";
+import { date } from "quasar";
 export default {
   mixins: [controllerCardApi],
   components: {
@@ -214,21 +215,44 @@ export default {
           bar: {
             horizontal: true,
             barHeight: "80%"
+            /*  distributed: true,
+            dataLabels: {
+              hideOverflowingLabels: false
+            }*/
           }
         },
         xaxis: {
           type: "datetime"
         },
+        /*--fechar barra lateral esquerdo
+         yaxis: {
+          show: false
+        },*/
+        /*--linha margem 
         stroke: {
-          width: 1
-        },
+          width: 0
+        },*/
         fill: {
           type: "solid",
-          opacity: 0.6
+          opacity: 0.7
         },
         legend: {
           position: "top",
           horizontalAlign: "left"
+        },
+
+        dataLabels: {
+          enabled: true,
+          formatter: function(val) {
+            //var label = opts.w.globals.labels[opts.dataPointIndex];
+            //return label;
+            //var teste = val + opts;
+            //return teste;
+            //var label = opts.w.globals.labels[0];
+            //var a = val[1];
+            var teste = (val[1] - val[0]) / 60 / 1000;
+            return teste;
+          }
         }
       },
       seriesGraficoLinhaDoTempo: []
@@ -323,6 +347,7 @@ export default {
       this.limparConteudoLinhaTempo();
       //Criando estrutura de categorias e series
       for (let i = 0; i < pConteudo.length; i++) {
+        console.log(pConteudo[i]);
         let xSerie = Object.values(pConteudo[i])[0];
         let xCategoria = Object.values(pConteudo[i])[1];
         let xInicio = Object.values(pConteudo[i])[2];
@@ -343,8 +368,8 @@ export default {
           x: xCategoria,
           y: [new Date(xInicio).getTime(), new Date(xFim).getTime()]
         });
+        console.log(this.seriesGraficoLinhaDoTempo[0].data[i].y);
       }
-      //console.log(">>>>>> " + JSON.stringify(this.seriesGraficoLinhaDoTempo));
     },
     montarConteudoBarraHorizontal(pConteudo) {
       this.limparConteudoBarraHorizontal();
