@@ -179,7 +179,7 @@ function layoutDashBoard1() {
             sub_tipo: "grafico_barra",
             coluna_totalizadora: 4,
             width: "31vw",
-            height: "100",
+            height: "40",
             conteudo_card: {
               body: "bodyOcorrenciaPorData",
               filtro_sql:
