@@ -228,7 +228,7 @@ function layoutDashBoard1() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardListaApi",
             width: "31vw",
-            height: "40",
+            height: "70",
             link: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body: "bodyOcorrenciaPorAtividade",
@@ -240,7 +240,7 @@ function layoutDashBoard1() {
             btn_comando: "btn-atualizar",
             tipo_card: "CardGrupoApi",
             width: "31vw",
-            height: "40",
+            height: "70",
             link_item: "https://crm.syclus.com.br/atividades/<id_item>",
             conteudo_card: {
               body_grupo: "bodyOcorrenciaPorColaborador",
@@ -348,10 +348,10 @@ function layoutDashBoard1() {
             conteudo_card: {
               body_grupo: "bodyAtividadeColaboradorPorTipoAtividade",
               filtro_sql_grupo:
-                "where a.ds_status = 'P' and cast(a.dt_previsao as date) > current_date and acb.cd_colaborador = <id_principal>",
+                "where a.ds_status = 'P' and acb.cd_colaborador = <id_principal>",
               body_item: "bodyAtividadeColaborador",
               filtro_sql_item:
-                "where a.ds_status = 'P' and cast(a.dt_previsao as date) > current_date and acb.cd_colaborador = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
+                "where a.ds_status = 'P' and acb.cd_colaborador = <id_principal> and a.cd_tipo_atividade = <id_grupo>"
             }
           },
           {
@@ -2093,7 +2093,7 @@ function layoutDashBoard4() {
 
   return json;
 }
-//area trabalho - danilo
+//bi - diretoria
 function layoutDashBoard5() {
   const json = {
     id_dashboard: 5,
@@ -3993,6 +3993,36 @@ function layoutDashBoard13() {
               body: "bodyAtividadePorWorkflowStatus",
               filtro_sql:
                 "where a.ds_status in ('P', 'F') and (extract(month from a.dt_emissao) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
+            }
+          },
+          {
+            card: "Atividades criadas no Mês",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "96vw",
+            height: "80",
+            conteudo_card: {
+              body: "bodyAtividadePorDataStatus",
+              filtro_sql:
+                "where a.ds_status in ('P', 'F') and (extract(month from a.dt_emissao) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
+            }
+          },
+          {
+            card: "Ocorrências no Mês",
+            btn_comando: "btn-atualizar",
+            tipo_card: "CardGraficoApi",
+            sub_tipo: "grafico_comparativo_barra",
+            coluna_serie: 2,
+            coluna_categoria: 1,
+            width: "96vw",
+            height: "80",
+            conteudo_card: {
+              body: "bodyOcorrenciaPorWorkflowData",
+              filtro_sql:
+                "where o.ds_status in ('P', 'F') and (extract(month from o.dt_ocorrencia) = extract(month from current_date)) and (extract(year from a.dt_emissao) = extract(year from current_date)) and a.cd_tipo_atividade in (2,15,18,19,20,27,28)"
             }
           }
         ]
